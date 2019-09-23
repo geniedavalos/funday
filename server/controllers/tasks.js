@@ -1,12 +1,12 @@
 const mongoose = require('mongoose');
 const Task = mongoose.model('Tasks')
 module.exports = {
-  all: (req, res) => {
+  index: (_req, res) => {
     Task.find({})
       .then(tasks => res.json(tasks))
       .catch(err => res.json(err))
   },
-  getOneById: (req, res) => {
+  show: (req, res) => {
     Task.findOne({ _id : req.params.id })
       .then(data => res.json(data))
       .catch(err => res.json(err))
@@ -22,7 +22,7 @@ module.exports = {
       .then(data =>res.json(data))
       .catch(err => res.json(err));
   },
-  delete: (req, res) => {
+  destroy: (req, res) => {
     Task.findOneAndDelete({ _id : req.params.id })
       .then((data) => res.json(data))
       .catch(err => res.json(err))
