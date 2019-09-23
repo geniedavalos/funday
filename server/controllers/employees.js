@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
-const Employee = mongoose.model('Employee')
+const Employee = mongoose.model('Employee');
+const jwt = require('jsonwebtoken');
 module.exports = {
     index: async (_req, res) => {
         try {
@@ -18,8 +19,7 @@ module.exports = {
             .catch(err => res.json(err));
     },
     create: (req, res) => {
-        const employee = new Employee(req.body);
-        employee.save()
+        Employee.create(req.body)
             .then((data) => {
                 res.json({newEmployee: data});
             })
