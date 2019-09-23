@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Employee = mongoose.model('Employee')
 module.exports = {
-    index: async (req, res) => {
+    index: async (_req, res) => {
         try {
             const employees = await Employee.find().sort('type');
             res.json({employees: employees});
