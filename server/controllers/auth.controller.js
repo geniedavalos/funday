@@ -1,4 +1,5 @@
 const Employee = require('mongoose').model('Employee');
+const jwt = require('jsonwebtoken');
 
 module.exports = {
   login(req, res) {
@@ -36,16 +37,10 @@ module.exports = {
     console.log('Logging out!');
   }
 }
-function completeLogin(request, response, employee) {
+function completeLogin(req, res, employee) {
   console.log('completing login', employee);
+  const token = jwt.sign({id: employee._id}, req.app.get('secretKey'), { expiresIn: '1h' });
   employee = employee.toObject();
-
   delete employee.password;
-
-  request.session.user = employee;
-
-  response.cookie('userID', employee._id);
-  response.cookie('expiration', Date.now() + 86400 * 1000);
-
-  response.json(employee);
+  res.json({status: 'success', message: 'Logged in', data: { employee: employee, token: token }});
 }
