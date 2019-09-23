@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Employee = mongoose.model('Employee')
 module.exports = {
-    all: async (req, res) => {
+    index: async (req, res) => {
         try {
             const employees = await Employee.find().sort('type');
             res.json({employees: employees});
@@ -10,8 +10,8 @@ module.exports = {
             res.json(err);
         }
     },
-    getOneById: (req, res) => {
-        Employee.findById({ _id : req.params.id })
+    show: (req, res) => {
+        Employee.findById(req.params.id)
             .then((data) => {
                 res.json({employee: data})
             })
@@ -26,13 +26,13 @@ module.exports = {
             .catch(err => res.json(err));
     },
     update: (req, res) => {
-        Employee.updateOne({ _id : req.params.id }, { runValidators: true, context: 'query' }, req.body)
+        Employee.findOneAndUpdate({ _id : req.params.id }, { runValidators: true, context: 'query' }, req.body)
             .then((data) => {
                 res.json({updatedEmployee: data});
             })
             .catch(err => res.json(err));
     },
-    delete: (req, res) => {
+    destroy: (req, res) => {
         Employee.findOneAndDelete({ _id : req.params.id })
             .then((data) => {
                 res.json(data);
