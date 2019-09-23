@@ -1,4 +1,3 @@
-import {EmployeeSchema} from '../models/employee'
 const uniqueValidator = require('mongoose-unique-validator');
 const mongoose = require('mongoose');
 const ProjectSchema = new mongoose.Schema({
@@ -24,7 +23,7 @@ const ProjectSchema = new mongoose.Schema({
         type: Boolean,
     },
     projectLead: { type: mongoose.Schema.Types.ObjectId, ref : 'Employee' },
-    teamMembers: [EmployeeSchema]
+    teamMembers: [{ type: mongoose.Schema.Types.ObjectId, ref : 'Employee' }]
 }, {timestamps: true });
 ProjectSchema.plugin(uniqueValidator, { message: 'Project {PATH} must be unique.'});
 mongoose.model('Project', ProjectSchema);

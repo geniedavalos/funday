@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const uniqueValidator = require('mongoose-unique-validator');
-import { isEmail } from 'validator';
-export const EmployeeSchema = new mongoose.Schema({
+const isEmail = require('validator');
+const EmployeeSchema = new mongoose.Schema({
     first_name: { type: String, minlength: [2, 'First name must be at least 2 characters.']},
     last_name: { type: String, minlength: [2, 'Last name must be at least 2 characters.']},
     email: {
@@ -17,3 +17,4 @@ export const EmployeeSchema = new mongoose.Schema({
 }, {timestamps: true });
 EmployeeSchema.plugin(uniqueValidator, { message: 'Employee {PATH} must be unique.'});
 mongoose.model('Employee', EmployeeSchema);
+
