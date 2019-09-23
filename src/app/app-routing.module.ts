@@ -76,15 +76,15 @@ const routes: Routes = [
       },
       {
         path: 'new',
-        component: fromProjects.EmployeeNewComponent,
+        component: fromEmployees.EmployeeNewComponent,
       },
       {
         path: ':id',
-        component: fromProjects.EmployeeDetailsComponent,
+        component: fromEmployees.EmployeeDetailsComponent,
       },
       {
         path: ':id/edit',
-        component: fromProjects.EmployeeEditComponent
+        component: fromEmployees.EmployeeEditComponent
       }
     ],
   },
