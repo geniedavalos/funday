@@ -23,7 +23,7 @@ const ProjectSchema = new mongoose.Schema({
     isComplete:{
         type: Boolean,
     },
-    projectLead: employee.EmployeeSchema,
+    projectLead: { type: mongoose.Schema.Types.ObjectId, ref : 'Employee' },
     teamMembers: [employee.EmployeeSchema]
 }, {timestamps: true });
 ProjectSchema.plugin(uniqueValidator, { message: 'Project {PATH} must be unique.'});
