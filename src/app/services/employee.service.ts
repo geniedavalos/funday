@@ -9,7 +9,7 @@ import { Employee } from '../models/employee';
   providedIn: 'root',
 })
 export class EmployeeService {
-  private readonly base = '/employees';
+  private readonly base = '/api/employees';
 
   constructor(private readonly http: HttpClient) {}
 

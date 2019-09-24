@@ -10,7 +10,7 @@ import {Router} from '@angular/router';
 export class EmployeeNewComponent implements OnInit {
   duplicatedError: any;
   errorsMessage: any;
-  employee = new Employee();
+  employee: any = {}; //new Employee();
 
   constructor(
     private readonly employeeService: EmployeeService,

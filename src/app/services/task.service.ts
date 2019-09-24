@@ -9,7 +9,7 @@ import { Task } from '../models';
   providedIn: 'root',
 })
 export class TaskService {
-  private readonly base = '/tasks';
+  private readonly base = '/api/tasks';
 
   constructor(private readonly http: HttpClient) {}
 

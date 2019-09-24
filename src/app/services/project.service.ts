@@ -9,7 +9,7 @@ import { Project } from '../models';
   providedIn: 'root',
 })
 export class ProjectService {
-  private readonly base = '/projects';
+  private readonly base = '/api/projects';
 
   constructor(private readonly http: HttpClient) {}
 

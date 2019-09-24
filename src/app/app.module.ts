@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -17,7 +18,7 @@ import { TaskNewComponent } from './tasks/task-new/task-new.component';
 import { TaskEditComponent } from './tasks/task-edit/task-edit.component';
 import { EmployeeLogInComponent } from './employees/employee-log-in/employee-log-in.component';
 import {FormsModule} from '@angular/forms';
-
+import * as fromResolvers from './resolvers';
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,9 +39,14 @@ import {FormsModule} from '@angular/forms';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule,
   ],
-  providers: [],
+  providers: [
+    fromResolvers.EmployeeResolver,
+    fromResolvers.ProjectResolver,
+    fromResolvers.TaskResolver
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
