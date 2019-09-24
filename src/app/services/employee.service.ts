@@ -29,9 +29,9 @@ export class EmployeeService {
     return this.http.post<Employee>(this.base, employee);
   }
 
-  destroyEmployee(id: string): Observable<Employee> {
-    return this.http.delete<Employee>(`${this.base}/${id}`);
-  }
+  // destroyEmployee(id: string): Observable<Employee> {
+  //   return this.http.delete<Employee>(`${this.base}/${id}`);
+  // }
 
   Login(employee: { email: string; password: string }): Observable<Employee> {
     return this.http.post<Employee>(`${this.base}/login`, employee);
