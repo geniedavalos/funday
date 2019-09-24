@@ -12,4 +12,8 @@ export class EmployeeLogInComponent implements OnInit {
   ngOnInit() {
   }
 
+
+  Login(event: Event) {
+
+  }
 }

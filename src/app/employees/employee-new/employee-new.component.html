@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <div class="registration">
   <h2>Registration</h2>
-  <form (submit)="CreateUser($event)" #userForm ='ngForm'>
+  <form (submit)="Createemployee($event)" #employeeForm ='ngForm'>
     <div class="form-group">
       <div>
         <p class="errorMessage">{{duplicatedError}}</p>
@@ -11,7 +11,7 @@
              type="text"
              class="form-control"
              id="name"
-             [(ngModel)]="user.first_name"
+             [(ngModel)]="employee.first_name"
              #first_name="ngModel"
              placeholder="First Name"
              minlength="3"
@@ -37,7 +37,7 @@
              type="text"
              class="form-control"
              id="type"
-             [(ngModel)]="user.last_name"
+             [(ngModel)]="employee.last_name"
              #last_name="ngModel"
              placeholder="Last Name"
              minlength="3"
@@ -62,7 +62,7 @@
              type="text"
              class="form-control"
              id="description"
-             [(ngModel)]="user.email"
+             [(ngModel)]="employee.email"
              #email="ngModel"
              pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
              placeholder="Email"
@@ -87,7 +87,7 @@
              type="text"
              class="form-control"
              id="password"
-             [(ngModel)]="user.password"
+             [(ngModel)]="employee.password"
              #password="ngModel"
              placeholder="Password"
              minlength="8"
@@ -106,7 +106,7 @@
         <p class="errorMessage">{{errorsMessage?.password.message}}</p>
       </div>
     </div>
-    <button class="btn btn-primary" [disabled]="userForm.invalid">Register</button>
+    <button class="btn btn-primary" [disabled]="employeeForm.invalid">Register</button>
     <button class="btn btn-danger" [routerLink] = "['']">Cancel</button>
   </form>
 </div>

@@ -1,1 +1,53 @@
-<p>employee-log-in works!</p>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<div class="registration">
+  <h2>Registration</h2>
+  <form (submit)="Login($event)" #employeeForm ='ngForm'>
+    <div>
+      <label>Email : </label>
+      <input name="email"
+             type="text"
+             class="form-control"
+             id="description"
+             [(ngModel)]="email"
+             #email="ngModel"
+             placeholder="Email"
+             required
+      />
+      <div *ngIf="(email.touched || email.dirty) && email.errors">
+        <div *ngIf="email?.errors?.required" class="alert alert-danger">
+          Email cannot be empty
+        </div>
+        <div *ngIf="email?.errors?.invalid" class="alert alert-danger">
+          Email must be valid
+          {{ email?.errors?.valid}} characters
+        </div>
+      </div>
+    </div>
+    <div>
+      <label>Password : </label>
+      <input name="password"
+             type="text"
+             class="form-control"
+             id="password"
+             [(ngModel)]="password"
+             #password="ngModel"
+             placeholder="Password"
+             minlength="8"
+             required
+      />
+      <div *ngIf="(password.touched || password.dirty) && password.errors">
+        <div *ngIf="password?.errors?.required" class="alert alert-danger">
+          Password cannot be empty
+        </div>
+      </div>
+<!--
+          <div>-->
+<!--        <p class="errorMessage">{{errorsMessage?.password.message}}</p>-->
+<!--      </div>-->
+    </div>
+    <button class="btn btn-primary" [disabled]="employeeForm.invalid">Register</button>
+    <button class="btn btn-danger" [routerLink] = "['']">Cancel</button>
+  </form>
+</div>
+
+
