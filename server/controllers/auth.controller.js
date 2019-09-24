@@ -2,6 +2,11 @@ const Employee = require('mongoose').model('Employee');
 const jwt = require('jsonwebtoken');
 
 module.exports = {
+  /**
+   * Receives and validates login requests
+   * @param {Request} req Request instance
+   * @param {Response} res Response instance
+   */
   login(req, res) {
     console.log('Logging in', req.body);
     const { email, password } = req.body;
@@ -21,6 +26,11 @@ module.exports = {
           });
       })
   },
+  /**
+   * Receives and validates registration requests
+   * @param {Request} req Request instance
+   * @param {Response} res Response instance
+   */
   register(req, res) {
     console.log('Registration:',req.body);
     Employee.create(req.body)
@@ -33,10 +43,21 @@ module.exports = {
         res.json(errors);
       });
   },
+  /**
+   * TODO: Performs JWT logout
+   * @param {Request} req Request instance
+   * @param {Response} res Response instance
+   */
   logout(req, res) {
     console.log('Logging out!');
   }
 }
+/**
+ * Performs login operations after successful validation, generating JWT token
+ * @param {Request} req Client request instance
+ * @param {Response} res Server response instance
+ * @param {Employee} employee Employee instance
+ */
 function completeLogin(req, res, employee) {
   console.log('completing login', employee);
   const token = jwt.sign({id: employee._id}, req.app.get('secretKey'), { expiresIn: '1h' });
