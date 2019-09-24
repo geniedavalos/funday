@@ -21,7 +21,7 @@ export class EmployeeLogInComponent implements OnInit {
 
 
   Login(event: Event) {
-    this.employeeService.Login(this.employeeLogin).subscribe(result =>{
+    this.employeeService.login(this.employeeLogin).subscribe(result =>{
       console.log(result);
     })
   }
