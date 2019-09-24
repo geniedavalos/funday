@@ -21,9 +21,9 @@ export class EmployeeService {
     return this.http.get<Employee>(`${this.base}/${id}`);
   }
 
-  updateEmployee(employee: Employee): Observable<Employee> {
-    return this.http.put<Employee>(`${this.base}/${employee._id}`, employee);
-  }
+  // updateEmployee(employee: Employee): Observable<Employee> {
+  //   return this.http.put<Employee>(`${this.base}/${employee._id}`, employee);
+  // }
 
   createEmployee(employee: Employee): Observable<Employee> {
     return this.http.post<Employee>(this.base, employee);
@@ -31,5 +31,9 @@ export class EmployeeService {
 
   destroyEmployee(id: string): Observable<Employee> {
     return this.http.delete<Employee>(`${this.base}/${id}`);
+  }
+
+  Login(employee: { email: string; password: string }): Observable<Employee> {
+    return this.http.post<Employee>(`${this.base}/login`, employee);
   }
 }

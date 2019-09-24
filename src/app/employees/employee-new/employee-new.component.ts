@@ -10,7 +10,7 @@ import {Router} from '@angular/router';
 export class EmployeeNewComponent implements OnInit {
   duplicatedError: any;
   errorsMessage: any;
-  employee: any = {}; //new Employee();
+  employee = new Employee();
 
   constructor(
     private readonly employeeService: EmployeeService,
@@ -20,11 +20,10 @@ export class EmployeeNewComponent implements OnInit {
   ngOnInit() {
   }
 
-  CreateUser(event: Event) {
-
-  }
-
   Createemployee(event: Event) {
-
+    event.preventDefault();
+    this.employeeService.createEmployee(this.employee).subscribe(result =>{
+      console.log(result);
+    });
   }
 }

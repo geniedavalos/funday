@@ -64,7 +64,7 @@
              id="description"
              [(ngModel)]="employee.email"
              #email="ngModel"
-             pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
+             email
              placeholder="Email"
              required
       />
@@ -72,7 +72,7 @@
         <div *ngIf="email?.errors?.required" class="alert alert-danger">
           Email cannot be empty
         </div>
-        <div *ngIf="email?.errors?.invalid" class="alert alert-danger">
+        <div *ngIf="email?.errors?.email" class="alert alert-danger">
           Email must be valid
           {{ email?.errors?.valid}} characters
         </div>

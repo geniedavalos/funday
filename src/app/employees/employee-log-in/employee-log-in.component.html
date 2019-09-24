@@ -1,15 +1,16 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <div class="registration">
   <h2>Registration</h2>
-  <form (submit)="Login($event)" #employeeForm ='ngForm'>
+  <form (submit)="Login($event)" #employeeLoginForm ='ngForm'>
     <div>
       <label>Email : </label>
       <input name="email"
              type="text"
              class="form-control"
-             id="description"
-             [(ngModel)]="email"
+             id="email"
+             [(ngModel)]="employeeLogin.email"
              #email="ngModel"
+             email
              placeholder="Email"
              required
       />
@@ -18,7 +19,7 @@
           Email cannot be empty
         </div>
         <div *ngIf="email?.errors?.invalid" class="alert alert-danger">
-          Email must be valid
+         Please enter the valid email
           {{ email?.errors?.valid}} characters
         </div>
       </div>
@@ -29,10 +30,9 @@
              type="text"
              class="form-control"
              id="password"
-             [(ngModel)]="password"
+             [(ngModel)]="employeeLogin.password"
              #password="ngModel"
              placeholder="Password"
-             minlength="8"
              required
       />
       <div *ngIf="(password.touched || password.dirty) && password.errors">
@@ -40,12 +40,8 @@
           Password cannot be empty
         </div>
       </div>
-<!--
-          <div>-->
-<!--        <p class="errorMessage">{{errorsMessage?.password.message}}</p>-->
-<!--      </div>-->
     </div>
-    <button class="btn btn-primary" [disabled]="employeeForm.invalid">Register</button>
+    <button class="btn btn-primary" [disabled]="employeeLoginForm.invalid">Register</button>
     <button class="btn btn-danger" [routerLink] = "['']">Cancel</button>
   </form>
 </div>

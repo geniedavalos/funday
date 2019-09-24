@@ -14,3 +14,4 @@ export * from './employee-details/employee-details.component';
 export * from './employee-list/employee-list.component';
 export * from './employee-new/employee-new.component';
 export * from './employee-edit/employee-edit.component';
+export * from './employee-log-in/employee-log-in.component';

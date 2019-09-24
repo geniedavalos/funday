@@ -79,6 +79,10 @@ const routes: Routes = [
         component: fromEmployees.EmployeeNewComponent,
       },
       {
+        path: 'login',
+        component: fromEmployees.EmployeeLogInComponent
+      },
+      {
         path: ':id',
         component: fromEmployees.EmployeeDetailsComponent,
       },
