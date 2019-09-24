@@ -5,8 +5,9 @@ const Project = require('./project');
 const CompanySchema = new mongoose.Schema({
     name: {
         type: String,
-        minlength: [3, 'Company name must be at least 2 characters long.'],
+        minlength: [2, 'Company name must be at least 2 characters long.'],
         required: [true, "Please provide a company name."],
+        trim: true,
         unique: true
     },
     owner: { type: Employee },
