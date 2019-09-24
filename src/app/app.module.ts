@@ -9,13 +9,15 @@ import * as fromEmployees from './employees';
 import * as fromResolvers from './resolvers';
 import * as fromProjects from './projects';
 import * as fromTasks from './tasks';
+import * as fromCompanies from './companies';
 
 @NgModule({
   declarations: [
     AppComponent,
     ...fromEmployees.components,
     ...fromProjects.components,
-    ...fromTasks.components
+    ...fromTasks.components,
+    ...fromCompanies.components,
   ],
   imports: [
     BrowserModule,
