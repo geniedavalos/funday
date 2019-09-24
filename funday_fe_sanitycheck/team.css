@@ -3,8 +3,6 @@ body, section {
 }
 
 /* Header */
-
-
 nav {
   padding: 2%;
   margin: 2%;
@@ -19,7 +17,7 @@ nav {
 }
 
 #home:hover, #home:active {
-  color: purple;
+  color: rgb(180, 39, 180);
 }
 
 #team:hover, #team:active {
@@ -33,7 +31,6 @@ nav {
 .btn-outline-info {
   padding: 5px 15px;
 }
-
 
 #img-section {
   background: url("https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1952&q=80");
@@ -49,7 +46,7 @@ nav {
   /* position: absolute; */
   width: 100%;
   min-height: 400px;
-  background: rgba(0,0,0,0.8); 
+  background: rgba(0, 0, 0, 0.8);
 }
 
 #img-section .home-inner {
@@ -65,7 +62,7 @@ nav {
 }
 
 .purple {
-  color: rgb(87, 20, 122);
+  color: rgb(164, 85, 207);
 }
 
 .pink {
@@ -132,6 +129,7 @@ nav {
   background-color: rgb(29, 163, 29);
   color: white;
   border-radius: 8px;
+  font-size: 1.4rem;
 }
 
 .hire {
@@ -140,6 +138,7 @@ nav {
   background-color: rgb(20, 108, 143);
   color: white;
   border-radius: 8px;
+  font-size: 1.4rem;
 }
 
 .guide {
@@ -148,6 +147,7 @@ nav {
   background-color: rgb(87, 20, 122);
   color: white;
   border-radius: 8px;
+  font-size: 1.4rem;
 }
 
 .video {
@@ -225,3 +225,17 @@ footer .map a {
 .real-footer {
   padding: 2%;
 }
+
+
+.purpleh:hover {
+  color: rgb(87, 20, 122);
+}
+
+.greenh:hover {
+  color: green;
+}
+
+.blueh:hover {
+  color: rgb(20, 108, 143);
+}
+
