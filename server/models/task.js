@@ -22,5 +22,4 @@ const TaskSchema = new mongoose.Schema({
 }, {timestamps: true });
 TaskSchema.plugin(uniqueValidator, { message: 'Task must be unique within a project'});
 mongoose.model('Task', TaskSchema);
-// module.exports = TaskSchema;
-// module.exports = mongoose.model('Task', TaskSchema);
+module.exports = TaskSchema;

@@ -25,7 +25,9 @@ const ProjectSchema = new mongoose.Schema({
     },
     projectLead: { type: mongoose.Schema.Types.ObjectId, ref : 'Employee' },
     teamMembers: [{ type: mongoose.Schema.Types.ObjectId, ref : 'Employee' }],
-    tasks: [{ type: mongoose.Schema.Types.ObjectId, ref : 'Task' }]
+    // tasks: [{ type: mongoose.Schema.Types.ObjectId, ref : 'Task' }],
+    tasks: [Task]
 }, {timestamps: true });
 ProjectSchema.plugin(uniqueValidator, { message: 'Project {PATH} must be unique.'});
 mongoose.model('Project', ProjectSchema);
+module.exports = ProjectSchema;

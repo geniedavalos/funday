@@ -43,4 +43,5 @@ EmployeeSchema.statics.validatePassword = function(candidate, hashed) {
 };
 
 mongoose.model('Employee', EmployeeSchema);
+module.exports = EmployeeSchema;
 
