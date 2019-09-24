@@ -1,40 +1,21 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
+import {FormsModule} from '@angular/forms';
+import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { EmployeeListComponent } from './employees/employee-list/employee-list.component';
-import { EmployeeDetailsComponent } from './employees/employee-details/employee-details.component';
-import { EmployeeNewComponent } from './employees/employee-new/employee-new.component';
-import { EmployeeLogInComponent } from './employees/employee-log-in/employee-log-in.component';
-import { EmployeeEditComponent } from './employees/employee-edit/employee-edit.component';
-import { ProjectListComponent } from './projects/project-list/project-list.component';
-import { ProjectDetailsComponent } from './projects/project-details/project-details.component';
-import { ProjectNewComponent } from './projects/project-new/project-new.component';
-import { ProjectEditComponent } from './projects/project-edit/project-edit.component';
-import { TaskListComponent } from './tasks/task-list/task-list.component';
-import { TaskDetailsComponent } from './tasks/task-details/task-details.component';
-import { TaskNewComponent } from './tasks/task-new/task-new.component';
-import { TaskEditComponent } from './tasks/task-edit/task-edit.component';
-import {FormsModule} from '@angular/forms';
+import * as fromEmployees from './employees';
 import * as fromResolvers from './resolvers';
+import * as fromProjects from './projects';
+import * as fromTasks from './tasks';
+
 @NgModule({
   declarations: [
     AppComponent,
-    EmployeeListComponent,
-    EmployeeDetailsComponent,
-    EmployeeNewComponent,
-    EmployeeEditComponent,
-    ProjectListComponent,
-    ProjectDetailsComponent,
-    ProjectNewComponent,
-    ProjectEditComponent,
-    TaskListComponent,
-    TaskDetailsComponent,
-    TaskNewComponent,
-    TaskEditComponent,
-    EmployeeLogInComponent
+    ...fromEmployees.components,
+    ...fromProjects.components,
+    ...fromTasks.components
   ],
   imports: [
     BrowserModule,
