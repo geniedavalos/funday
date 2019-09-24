@@ -16,6 +16,7 @@ import { TaskDetailsComponent } from './tasks/task-details/task-details.componen
 import { TaskNewComponent } from './tasks/task-new/task-new.component';
 import { TaskEditComponent } from './tasks/task-edit/task-edit.component';
 import { EmployeeLogInComponent } from './employees/employee-log-in/employee-log-in.component';
+import {FormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { EmployeeLogInComponent } from './employees/employee-log-in/employee-log
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
