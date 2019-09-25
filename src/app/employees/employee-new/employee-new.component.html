@@ -113,9 +113,10 @@
       <input [(ngModel)]="newCompany.name" name="name" type="text" class="form-control" placeholder="Company"/>
     </div>
     <div  *ngIf="!isNewCompany">
+      <h5>{{ selectedCompany|json }}</h5>
       <label>Company : </label>
-      <select class="form-control">
-        <option *ngFor="let company of companies.companies" value="{{company.name}}">{{company.name}}</option>
+      <select [(ngModel)]="selectedCompanyID" name="selectedCompanyID" class="form-control">
+        <option *ngFor="let company of companies" value="{{company._id}}">{{company.name}}</option>
       </select>
     </div>
     <button class="btn btn-primary" *ngIf="employeeForm.valid">Register</button>

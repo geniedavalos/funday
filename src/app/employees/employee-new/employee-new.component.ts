@@ -15,7 +15,7 @@ export class EmployeeNewComponent implements OnInit {
   duplicatedError: any;
   errorsMessage: any;
   isNewCompany : boolean ;
-  selectedCompany : Company;
+  selectedCompanyID : string;
   employee = new Employee();
   newCompany : Company;
   companies: Company[] ;
@@ -34,21 +34,27 @@ export class EmployeeNewComponent implements OnInit {
 
   createEmployee(event: Event) {
     event.preventDefault();
-    this.employeeService.createEmployee(this.employee).subscribe(newEmployee =>{
-      console.log("LOGGING NEW EMPLOYEE",newEmployee);
-      if (this.isNewCompany) {
-        this.newCompany.owner = newEmployee;
-        this.companyService.createCompany(this.newCompany).subscribe(createdCompany => {
-          console.log(createdCompany);
+    if (this.isNewCompany) {
+      this.newCompany.owner = this.employee;
+      this.companyService.createCompany(this.newCompany).subscribe(createdCompany => {
+        console.log(createdCompany);
+      })
+    }
+    else {
+      this.employeeService.createEmployee(this.employee).subscribe(newEmployee =>{
+        console.log("LOGGING NEW EMPLOYEE", newEmployee);
+        console.log(this.selectedCompanyID);
+        this.companyService.getCompany(this.selectedCompanyID).subscribe(company => {
+          const currentCompany = company;
+          console.log("logging new employee", newEmployee);
+          // currentCompany.employees.push(newEmployee);
+          // console.log("pushed into company", currentCompany)
+          this.companyService.addEmployee(currentCompany, newEmployee).subscribe(updatedCompany => {
+            console.log("Logging 'updated' company...", updatedCompany);
+          })
         })
-      }
-      else {
-        this.selectedCompany.employees.push(newEmployee);
-        this.companyService.updateCompany(this.selectedCompany).subscribe(updatedCompany => {
-          console.log(updatedCompany);
-        })
-      }
-    });
+      });
+    }
   }
   getAllCompanies() {
     this.companyService.getCompanies().subscribe(companies => {
@@ -59,6 +65,12 @@ export class EmployeeNewComponent implements OnInit {
         this.companies = companies;
       }
     });
+  }
+
+  addEmployee(){
+    this.companyService.addEmployee().subscribe(data => {
+      console.log(data)
+    })
   }
 
   changeCompanyInput() {

@@ -4,7 +4,7 @@ module.exports = {
     index: async (_req, res) => {
         try {
             const companies = await Company.find().sort('type');
-            res.json({Companies: companies});
+            res.json(companies);
         }
         catch (err) {
             res.json(err);
@@ -13,7 +13,7 @@ module.exports = {
     show: (req, res) => {
         Company.findById(req.params.id)
             .then((data) => {
-                res.json({Company: data})
+                res.json(data)
             })
             .catch(err => res.json(err));
     },
@@ -22,16 +22,26 @@ module.exports = {
         Company.create(req.body)
             .then((data) => {
                 console.log("Logging new company data", data)
-                res.json({newCompany: data});
+                res.json(data);
             })
             .catch(err => res.json(err));
     },
     update: (req, res) => {
-        Company.findOneAndUpdate({ _id : req.params.id }, { runValidators: true, context: 'query' }, req.body)
+        console.log("Inside updateOne function.  Logging req.body...", req.body)
+        Company.updateOne({ _id : req.params.id }, { runValidators: true, context: 'query' }, )
             .then((data) => {
-                res.json({updatedCompany: data});
+                res.json(data);
             })
             .catch(err => res.json(err));
+    },
+    addEmployee: (req, res) => {
+        console.log("inside addEmployee function. logging req.body...", req.body)
+        Company.updateOne({_id : req.params.id}, {$push : req.body})
+        .then(data => {
+            console.log("Logging data after 'pushing' employee into company", data);
+            res.json(data);
+        })
+        .catch(err => res.json(err));
     },
     destroy: (req, res) => {
         Company.findOneAndDelete({ _id : req.params.id })
