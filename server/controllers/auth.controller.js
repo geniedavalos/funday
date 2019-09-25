@@ -48,6 +48,7 @@ module.exports = {
           res.json(err);
         }
         newCompany.owner = owner;
+        newCompany.employees.push(owner);
         Company.findByIdAndUpdate(newCompany._id, newCompany)
           .then(async data => {
             console.log(data);
