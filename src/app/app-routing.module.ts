@@ -6,7 +6,7 @@ import { NgModule } from '@angular/core';
 import { EmployeeResolver } from './resolvers';
 // import { ProjectResolver } from './resolvers';
 // import { TaskResolver } from './resolvers';
-
+import { SocketComponent } from './socket/socket.component';
 import * as fromEmployees from './employees';
 import * as fromDashboard from './dashboard';
 import * as fromSiteInfo from './site-info';
@@ -20,12 +20,16 @@ const enableTracing = false && !environment.production;
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'socket',
     pathMatch: 'full',
   },
   {
     path: 'home',
     component: fromHome.HomeComponent,
+  },
+  {
+    path: 'socket',
+    component: SocketComponent,
   },
   {
     path: 'devTeam',

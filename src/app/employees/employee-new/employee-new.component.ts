@@ -15,18 +15,22 @@ import { AuthService } from '../../services/auth.service';
 export class EmployeeNewComponent implements OnInit {
   duplicatedError: any;
   errorsMessage: any;
-  isNewCompany : boolean ;
-  selectedCompanyID : string;
+  isNewCompany: boolean;
+  selectedCompanyID: string;
   employee = new Employee();
-  newCompany : Company;
-  companies: Company[] ;
+  newCompany: Company;
+  companies: Company[];
+  private ConfirmPassword: string;
+  private isMatch: boolean = false;
+
 
   constructor(
     private readonly authService: AuthService,
     private readonly employeeService: EmployeeService,
     private readonly companyService: CompanyService,
     private readonly router: Router
-  ) { }
+  ) {
+  }
 
   ngOnInit() {
     this.newCompany = new Company();
@@ -47,6 +51,7 @@ export class EmployeeNewComponent implements OnInit {
       });
     }
   }
+
   getAllCompanies() {
     this.companyService.getCompanies().subscribe(companies => {
       if (companies.length === 0) {
@@ -62,5 +67,13 @@ export class EmployeeNewComponent implements OnInit {
     console.log(this.isNewCompany);
     this.isNewCompany = (!this.isNewCompany);
     console.log(this.isNewCompany);
+
+  }
+
+  MustMatch() {
+    if (this.employee.password === this.ConfirmPassword) {
+      this.isMatch = true;
+      return this.isMatch;
+    }
   }
 }
