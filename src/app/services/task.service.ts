@@ -32,4 +32,12 @@ export class TaskService {
   destroyTask(id: string): Observable<Task> {
     return this.http.delete<Task>(`${this.base}/${id}`);
   }
+
+  addTeamMember(task: Task, employeeID: string): Observable<Task> {
+    return this.http.put<Task>(`${this.base}/${task._id}/addTeamMember`, employeeID)
+  }
+
+  removeTeamMember(task: Task, employeeID: string): Observable<Task> {
+    return this.http.put<Task>(`${this.base}/${task._id}/removeTeamMember`, employeeID)
+  }
 }
