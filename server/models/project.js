@@ -6,7 +6,7 @@ const ProjectSchema = new mongoose.Schema({
         type: String,
         minlength: [3, 'Project name must be at least 3 characters long.'],
         required: [true, "Please provide a project title."],
-        unique: true
+        //unique: true
     },
     description: {
         type: String,
