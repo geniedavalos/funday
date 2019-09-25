@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import {Router} from '@angular/router';
 import {Employee} from '../../models/employee';
 import { EmployeeService } from '../../services/employee.service';
-import {Router} from '@angular/router';
 import {CompanyService} from '../../services/company.service';
 import {Company} from '../../models/company';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-employee-new',
@@ -21,6 +22,7 @@ export class EmployeeNewComponent implements OnInit {
   companies: Company[] ;
 
   constructor(
+    private readonly authService: AuthService,
     private readonly employeeService: EmployeeService,
     private readonly companyService: CompanyService,
     private readonly router: Router
@@ -36,26 +38,20 @@ export class EmployeeNewComponent implements OnInit {
     event.preventDefault();
     if (this.isNewCompany) {
       this.newCompany.owner = this.employee;
-      this.companyService.createCompany(this.newCompany).subscribe(createdCompany => {
+      this.authService.newCompanyRegister(this.newCompany).subscribe(createdCompany => {
         console.log(createdCompany);
-      })
-    }
-    else {
-      this.employeeService.createEmployee(this.employee).subscribe(newEmployee =>{
-        this.companyService.getCompany(this.selectedCompanyID).subscribe(company => {
-          const currentCompany = company;
-          this.companyService.addEmployee(currentCompany, newEmployee).subscribe(updatedCompany => {
-          })
-        })
+      });
+    } else {
+      this.authService.joinCompanyRegister(this.selectedCompanyID, this.employee).subscribe(data => {
+        console.log(data);
       });
     }
   }
   getAllCompanies() {
     this.companyService.getCompanies().subscribe(companies => {
-      if (companies.length == 0){
+      if (companies.length === 0) {
         this.companies = [];
-      }
-      else {
+      } else {
         this.companies = companies;
       }
     });
