@@ -31,13 +31,11 @@ export class ManagerDashboardComponent implements OnInit {
     }
     console.log('Ids are: ' + this.addedIds);
     console.log('Names are: ' + this.addedTeamMembers);
-
   }
 
   onSubmit() {
     console.log('Inside onSubmit() for form');
-    console.log('Submitting: ' + this.newProject.title + ', ' + this.newProject.description);
-
+    console.log('Submitting: ' + this.newProject.title + ', ' + this.newProject.description + ', ' + this.newProject.dueDate);
   }
 
 }

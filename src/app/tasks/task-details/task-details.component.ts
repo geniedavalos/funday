@@ -19,7 +19,7 @@ export class TaskDetailsComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe((params: Params) => {
-      this.id = params.get('id');
+      this.id = params.get('taskId');
       this.getTask(this.id);
     });
   }

@@ -11,7 +11,7 @@ export class DashboardComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.isManager = false;
+    this.isManager = true;
   }
 
 }
