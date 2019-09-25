@@ -21,7 +21,12 @@ export class EmployeeLogInComponent implements OnInit {
 
 
   Login(event: Event) {
+<<<<<<< HEAD
     this.employeeService.login(this.employeeLogin).subscribe(result =>{
+=======
+    event.preventDefault();
+    this.employeeService.Login(this.employeeLogin).subscribe(result =>{
+>>>>>>> phatBranch
       console.log(result);
     })
   }
