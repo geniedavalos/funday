@@ -27,7 +27,7 @@ export class EmployeeNewComponent implements OnInit {
     this.GetAllCompany();
   }
 
-  Createemployee(event: Event) {
+  createEmployee(event: Event) {
     event.preventDefault();
     this.employeeService.createEmployee(this.employee).subscribe(result =>{
       console.log(result);
