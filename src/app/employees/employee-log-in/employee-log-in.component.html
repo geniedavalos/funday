@@ -1,48 +1,153 @@
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-<div class="login">
-  <h2>Employee Login</h2>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Funday.com - Team Management Platform</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="style1.css">
+</head>
+
+<body>
+<div class="container">
+  <nav class="navbar navbar-expand-lg navbar-light bg-white">
+    <a class="navbar-brand" href="/index.html">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Twemoji_1f60e.svg/768px-Twemoji_1f60e.svg.png" width="30" height="30" class="d-inline-block align-top" alt="">
+      <strong>Funday</strong><span>.com</span></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" id="home" href="/index.html">Home</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" id="cases" href="/cases.html">Use Cases</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" id="team" href="/team.html">Our Team</a>
+        </li>
+
+        <li class="nav-item">
+          <div id="lrbtn"><a class="nav-link" id="start" href="/start.html"><button type="button" class="btn btn-sm btn-outline-info">Start</button></a></div>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+
   <form (submit)="Login($event)" #employeeLoginForm ='ngForm'>
-    <div>
-      <label>Email : </label>
-      <input name="email"
-             type="text"
-             class="form-control"
-             id="email"
-             [(ngModel)]="employeeLogin.email"
-             #email="ngModel"
-             email
-             placeholder="Email"
-             required
-      />
-      <div *ngIf="(email.touched || email.dirty) && email.errors">
-        <div *ngIf="email?.errors?.required" class="alert alert-danger">
-          Email cannot be empty
-        </div>
-        <div *ngIf="email?.errors?.email" class="alert alert-danger">
-         Please enter the valid email
+    <div class="row justify-content-center">
+      <div class="col-lg-6 col-sm-8">
+        <div class="card">
+          <div class="card-header bg-primary text-white text-center">
+            <h4>Login</h4>
+          </div>
+          <div class="card-body">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1"><i class="fa fa-envelope" aria-hidden="true"></i></span>
+              </div>
+              <input type="email" class="form-control" placeholder="Email" aria-label="Email" aria-describedby="basic-addon1"
+                     name="email"
+                     id="email"
+                     [(ngModel)]="employeeLogin.email"
+                     #email="ngModel"
+                     email
+                     placeholder="Email"
+                     required
+              >
+            </div>
+
+            <small *ngIf="(email.touched || email.dirty) && email.errors">
+              <div *ngIf="email?.errors?.required" class="alert alert-danger">
+                Email cannot be empty
+              </div>
+              <div *ngIf="email?.errors?.email" class="alert alert-danger">
+                Please enter the valid email
+              </div>
+            </small>
+
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon2"><i class="fa fa-key" aria-hidden="true"></i></span>
+              </div>
+              <input type="password" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="basic-addon2"
+                     name="password"
+                     id="password"
+                     [(ngModel)]="employeeLogin.password"
+                     #password="ngModel"
+                     placeholder="Password"
+                     required
+              >
+            </div>
+
+            <div *ngIf="(password.touched || password.dirty) && password.errors">
+              <div *ngIf="password?.errors?.required" class="alert alert-danger">
+                Password cannot be empty
+              </div>
+            </div>
+
+            <div class="block">
+              <button href="#" class="btn btn-primary text-center my-3" [disabled]="employeeLoginForm.invalid">Sign In</button>
+              <button class="btn btn-danger" [routerLink] = "['']">Cancel</button>
+
+              <br>
+              <small>Not Registered? Sign up <a [routerLink]="['register']"> here</a></small>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-    <div>
-      <label>Password : </label>
-      <input name="password"
-             type="text"
-             class="form-control"
-             id="password"
-             [(ngModel)]="employeeLogin.password"
-             #password="ngModel"
-             placeholder="Password"
-             required
-      />
-      <div *ngIf="(password.touched || password.dirty) && password.errors">
-        <div *ngIf="password?.errors?.required" class="alert alert-danger">
-          Password cannot be empty
-        </div>
-      </div>
-    </div>
-    <button class="btn btn-primary" [disabled]="employeeLoginForm.invalid">Login</button>
-    <button class="btn btn-danger" [routerLink] = "['']">Cancel</button>
   </form>
+
+  <footer>
+    <div class="row map justify-content-center">
+      <div class="col-lg-4 col-sm-6">
+        <p><a href="/index.html"><strong>Our product</strong></a></p>
+        <p><a href="#" class="purpleh">Product</a></p>
+        <p><a href="#" class="purpleh">Pricing</a></p>
+      </div>
+
+      <div class="col-lg-4 col-sm-6">
+        <p><a href="/cases.html"><Strong>Use cases</Strong></a></p>
+        <p><a href="#" class="greenh">Product Management</a></p>
+        <p><a href="#" class="greenh">All Use Cases</a></p>
+      </div>
+
+
+      <div class="col-lg-3 col-sm-6">
+        <p><a href="/team.html"><Strong>Our Team</Strong></a></p>
+        <p><a href="#" class="blueh">About Us</a></p>
+        <p><a href="#" class="blueh">Contact Us</a></p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-6 col-sm-12 real-footer text-center">Made with <i class="fa fa-coffee" aria-hidden="true"></i> & <i class="fa fa-heart" aria-hidden="true"></i><br>
+        All Rights Reserved © funday.com</div>
+      <div class="col-lg-6 col-sm-12 real-footer justify-content-center">
+        <div class="row social justify-content-center">
+          <a href="https://www.facebook.com" class="fa fa-facebook" target="_blank"></a>
+          <a href="https://www.twitter.com" class="fa fa-twitter" target="_blank"></a>
+          <a href="https://www.youtube.com" class="fa fa-youtube" target="_blank"></a>
+          <a href="https://www.skype.com" class="fa fa-skype" target="_blank"></a>
+        </div>
+      </div>
+    </div>
+  </footer>
 </div>
 
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
 
+</html>

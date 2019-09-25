@@ -21,6 +21,7 @@ export class EmployeeLogInComponent implements OnInit {
 
 
   Login(event: Event) {
+    event.preventDefault();
     this.employeeService.Login(this.employeeLogin).subscribe(result =>{
       console.log(result);
     })

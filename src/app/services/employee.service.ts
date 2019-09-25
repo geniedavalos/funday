@@ -34,6 +34,7 @@ export class EmployeeService {
   }
 
   Login(employee: { email: string; password: string }): Observable<Employee> {
-    return this.http.post<Employee>(`${this.base}/login`, employee);
+    console.log(employee)
+     return this.http.post<Employee>(`${this.base}/login`, employee);
   }
 }
