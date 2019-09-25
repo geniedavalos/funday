@@ -1,0 +1,8 @@
+<p>socket works!</p>
+<form (submit)="sendMessage($event)">
+  <input name="message">
+  <button>submit</button>
+</form>
+<div >
+  <p *ngFor="let msg of chatMessage">{{msg.user}} {{msg.msg}}</p>
+</div>

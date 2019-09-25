@@ -11,12 +11,13 @@ import { SiteInfoComponent } from './site-info/site-info.component';
 import { DashboardComponent } from './dashboard/dashboard/dashboard.component';
 import { ManagerDashboardComponent } from './dashboard/manager-dashboard/manager-dashboard.component';
 import { EmployeeDashboardComponent } from './dashboard/employee-dashboard/employee-dashboard.component';
-
+import { SocketComponent } from './socket/socket.component';
 import * as fromEmployees from './employees';
 import * as fromResolvers from './resolvers';
 import * as fromProjects from './projects';
 import * as fromTasks from './tasks';
 import * as fromCompanies from './companies';
+
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import * as fromCompanies from './companies';
     SiteInfoComponent,
     DashboardComponent,
     EmployeeDashboardComponent,
-    ManagerDashboardComponent
+    ManagerDashboardComponent,
+    SocketComponent
   ],
   imports: [
     BrowserModule,
