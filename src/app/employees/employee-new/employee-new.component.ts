@@ -16,7 +16,7 @@ export class EmployeeNewComponent implements OnInit {
   duplicatedError: any;
   errorsMessage: any;
   isNewCompany: boolean;
-  selectedCompanyID: string;
+  selectedCompanyID: string = "";
   employee = new Employee();
   newCompany: Company;
   companies: Company[];
@@ -40,14 +40,16 @@ export class EmployeeNewComponent implements OnInit {
 
   createEmployee(event: Event) {
     event.preventDefault();
-    if (this.isNewCompany) {
+    if (this.selectedCompanyID == "createNew") {
       this.newCompany.owner = this.employee;
       this.authService.newCompanyRegister(this.newCompany).subscribe(createdCompany => {
         console.log(createdCompany);
+        this.router.navigateByUrl('/home')
       });
     } else {
       this.authService.joinCompanyRegister(this.selectedCompanyID, this.employee).subscribe(data => {
         console.log(data);
+        this.router.navigateByUrl('/home')
       });
     }
   }
