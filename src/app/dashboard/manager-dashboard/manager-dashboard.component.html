@@ -83,16 +83,19 @@
               <div class="modal-content">
                   <div class="modal-header">
                       <h3 class="modal-title text-center">Add A Project</h3>
+                      <p>{{ newProject | json }}</p>
                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
                       </button>
                   </div>
                   <div class="modal-body">
                       <form>
-                          <label for='projectTitle'>Title:</label>
-                          <input type='text' class='form-control' name='projectTitle'>
-                          <label for='projectDescription'>Description:</label>
-                          <textarea class='form-control' name='projectDescription'></textarea>
+                          <label for='title'>Title:</label>
+                          <input type='text' class='form-control' name='title' [(ngModel)]='newProject.title'>
+                          <label for='description'>Description:</label>
+                          <textarea class='form-control' name='description' [(ngModel)]='newProject.description'></textarea>
+                          <label for='dueDate'>Due Date: </label>
+                          <input type='date' class='form-control' name='date'[(ngModel)]='newProject.dueDate'>
                           <label for='projectDept'>Department:</label>
                           <select class='form-control' name='projectDept'>
                               <option>Marketing</option>
@@ -100,18 +103,26 @@
                               <option>Engineering</option>
                           </select>
                           <label for='projectTeam'>Team:</label>
-                          <select multiple class='form-control' name='projectTeam'>
-                              <option>Justin</option>
-                              <option>David</option>
-                              <option>Jane</option>
-                              <option>Jill</option>
-                              <option>Austin</option>
-                              <option>Bob</option>
-                          </select>
+                          <form>
+                            <select multiple class='form-control' id='teamNames' name='member' [(ngModel)]='newMember'>
+                                <option value='id:1-Justin'>Justin</option>
+                                <option value='id:2-David'>David</option>
+                                <option value='id:3-Jane'>Jane</option>
+                                <option value='id:4-Jill'>Jill</option>
+                                <option value='id:5-Austin'>Austin</option>
+                                <option value='id:6-Bob'>Bob</option>
+                            </select>
+                            <div class='row'>
+                              <button (click)='onAdd()' class='btn btn-primary mt-3 mx-auto'>Add Team Member</button>
+                            </div>
+                          </form>
+                          <div class='addedMembers mt-3'>
+                            <span *ngFor='let member of addedTeamMembers' class='badge badge-success mx-1'>{{ member }}</span>
+                          </div>
                       </form>
                   </div>
                   <div class="modal-footer justify-content-center">
-                      <button type="button" class="btn btn-primary">Add</button>
+                      <button (click)='onSubmit()' type="button" class="btn btn-primary">Add</button>
                   </div>
               </div>
           </div>
