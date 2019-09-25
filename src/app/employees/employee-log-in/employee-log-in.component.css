@@ -1,0 +1,8 @@
+.login h2{
+  text-align: center;
+}
+.login form{
+  width : 500px;
+  height:auto;
+  margin : 0 auto;
+}

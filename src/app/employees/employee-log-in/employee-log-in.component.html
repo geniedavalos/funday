@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-<div class="registration">
-  <h2>Registration</h2>
+<div class="login">
+  <h2>Employee Login</h2>
   <form (submit)="Login($event)" #employeeLoginForm ='ngForm'>
     <div>
       <label>Email : </label>
@@ -18,9 +18,8 @@
         <div *ngIf="email?.errors?.required" class="alert alert-danger">
           Email cannot be empty
         </div>
-        <div *ngIf="email?.errors?.invalid" class="alert alert-danger">
+        <div *ngIf="email?.errors?.email" class="alert alert-danger">
          Please enter the valid email
-          {{ email?.errors?.valid}} characters
         </div>
       </div>
     </div>
@@ -41,7 +40,7 @@
         </div>
       </div>
     </div>
-    <button class="btn btn-primary" [disabled]="employeeLoginForm.invalid">Register</button>
+    <button class="btn btn-primary" [disabled]="employeeLoginForm.invalid">Login</button>
     <button class="btn btn-danger" [routerLink] = "['']">Cancel</button>
   </form>
 </div>

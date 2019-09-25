@@ -1,8 +1,8 @@
 import { Component, OnInit, Output, EventEmitter} from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ProjectService } from 'src/app/services';
-import { Project } from 'src/app/models';
+import { ProjectService } from 'src/app/services/project.service';
+import { Project } from 'src/app/models/project';
 
 @Component({
   selector: 'app-project-new',
