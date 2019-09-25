@@ -12,16 +12,14 @@ module.exports = {
    */
   login: (req, res) => {
     console.log('Logging in', req.body);
-    const { email, password } = req.body;
-
-    Employee.findOne({ email })
+    Employee.findOne({ email: req.body.email })
       .then(employee => {
-        return Employee.validatePassword(password, user.password)
+        bcrypt.compare(req.body.password, employee.password)
           .then(isValid => {
             if(!isValid) {
               throw new Error();
             }
-            completeLogin(req, res, employee)
+            res.json(completeLogin(req, res, employee))
           })
           .catch(err => {
             console.log(err);

@@ -42,14 +42,16 @@ export class EmployeeNewComponent implements OnInit {
     event.preventDefault();
     if (this.selectedCompanyID == "createNew") {
       this.newCompany.owner = this.employee;
-      this.authService.newCompanyRegister(this.newCompany).subscribe(createdCompany => {
-        console.log(createdCompany);
-        this.router.navigateByUrl('/home')
+      this.authService.newCompanyRegister(this.newCompany).subscribe(result => {
+        if(result["status"] == "success"){
+          this.router.navigateByUrl('/dashboard')
+        }
       });
     } else {
-      this.authService.joinCompanyRegister(this.selectedCompanyID, this.employee).subscribe(data => {
-        console.log(data);
-        this.router.navigateByUrl('/home')
+      this.authService.joinCompanyRegister(this.selectedCompanyID, this.employee).subscribe(result => {
+        if(result["status"] == "success"){
+          this.router.navigateByUrl('/dashboard')
+        }
       });
     }
   }

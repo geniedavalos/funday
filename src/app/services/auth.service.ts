@@ -18,7 +18,7 @@ export class AuthService {
   joinCompanyRegister(companyID: string, employee: Employee): Observable<Company> {
     return this.http.post<Company>(`${this.base}/register/${companyID}`, employee);
   }
-  login(email: string, password: string) {
-    return this.http.post(`${this.base}/login`, {email, password});
+  login(login : Object) {
+    return this.http.post(`${this.base}/login`, login);
   }
 }
