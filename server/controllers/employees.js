@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 const Employee = mongoose.model('Employee');
 const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
+
 module.exports = {
     index: async (_req, res) => {
         try {
@@ -19,17 +21,20 @@ module.exports = {
             .catch(err => res.json(err));
     },
     create: (req, res) => {
-        console.log("inside create");
-        console.log(req.body);
-        Employee.create(req.body)
+        bcrypt.hash(req.body.password, 10)
+        .then(hashedPassword => {
+            const employee = new Employee(req.body);
+            employee.password = hashedPassword;
+            employee.save()
             .then((newEmployee) => {
-                console.log("logging data", newEmployee)
+                console.log("Logging new employee: ", newEmployee)
                 res.json(newEmployee);
             })
             .catch(err => {
                 console.log(err);
                 res.json(err)
             });
+        })
     },
     update: (req, res) => {
         Employee.findOneAndUpdate({ _id : req.params.id }, { runValidators: true, context: 'query' }, req.body)
