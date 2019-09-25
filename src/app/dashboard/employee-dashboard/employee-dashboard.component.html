@@ -108,11 +108,11 @@
                   <div class="modal-body">
                       <form>
                           <label for='noteDescription'>Note:</label>
-                          <textarea type='text' rows='4' class='form-control' name='noteDescription'></textarea>
+                          <textarea type='text' rows='4' class='form-control' name='noteDescription' [(ngModel)]='noteDescription'></textarea>
                       </form>
                   </div>
                   <div class="modal-footer justify-content-center">
-                      <button type="button" class="btn btn-primary">Add</button>
+                      <button (click)='onSubmit(theId)' type="button" class="btn btn-primary">Add</button>
                   </div>
               </div>
           </div>
