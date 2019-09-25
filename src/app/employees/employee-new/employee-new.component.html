@@ -2,7 +2,8 @@
 
 <div class="registration">
   <h2>Registration</h2>
-  <form (submit)="Createemployee($event)" #employeeForm ='ngForm'>
+  <h5>{{ employee|json }}</h5>
+  <form (submit)="createEmployee($event)" #employeeForm ='ngForm'>
     <div class="form-group">
       <div>
         <p class="errorMessage">{{duplicatedError}}</p>
@@ -12,49 +13,49 @@
              type="text"
              class="form-control"
              id="name"
-             [(ngModel)]="employee.first_name"
-             #first_name="ngModel"
+             [(ngModel)]="employee.firstName"
+             #firstName="ngModel"
              placeholder="First Name"
              minlength="3"
              required
       />
-      <div *ngIf="(first_name.touched || first_name.dirty) && first_name.errors">
-        <div *ngIf="first_name?.errors?.required" class="alert alert-danger">
+      <div *ngIf="(firstName.touched || firstName.dirty) && firstName.errors">
+        <div *ngIf="firstName?.errors?.required" class="alert alert-danger">
           First Name cannot be empty
         </div>
-        <div *ngIf="first_name?.errors?.minlength" class="alert alert-danger">
+        <div *ngIf="firstName?.errors?.minlength" class="alert alert-danger">
           First Name is at least 3 characters
-          {{ first_name?.errors?.minlength.requiredLength }} characters
+          {{ firstName?.errors?.minlength.requiredLength }} characters
         </div>
       </div>
 
     </div>
     <div>
-      <p class="errorMessage">{{errorsMessage?.first_name.message}}</p>
+      <p class="errorMessage">{{errorsMessage?.firstName.message}}</p>
     </div>
     <div class="form-group">
       <label>Last Name :</label>
-      <input name="last_name"
+      <input name="lastName"
              type="text"
              class="form-control"
              id="type"
-             [(ngModel)]="employee.last_name"
-             #last_name="ngModel"
+             [(ngModel)]="employee.lastName"
+             #lastName="ngModel"
              placeholder="Last Name"
              minlength="3"
              required
       />
-      <div *ngIf="(last_name.touched || last_name.dirty) && last_name.errors">
-        <div *ngIf="last_name?.errors?.required" class="alert alert-danger">
+      <div *ngIf="(lastName.touched || lastName.dirty) && lastName.errors">
+        <div *ngIf="lastName?.errors?.required" class="alert alert-danger">
           You must enter a type for pet !
         </div>
-        <div *ngIf="last_name?.errors?.minlength" class="alert alert-danger">
+        <div *ngIf="lastName?.errors?.minlength" class="alert alert-danger">
           Last name must be at least 3 characters
-          {{ last_name?.errors?.minlength.requiredLength }} characters
+          {{ lastName?.errors?.minlength.requiredLength }} characters
         </div>
       </div>
       <div>
-        <p class="errorMessage">{{errorsMessage?.last_name.message}}</p>
+        <p class="errorMessage">{{errorsMessage?.lastName.message}}</p>
       </div>
     </div>
     <div>
@@ -85,7 +86,7 @@
     <div>
       <label>Password : </label>
       <input name="password"
-             type="text"
+             type="password"
              class="form-control"
              id="password"
              [(ngModel)]="employee.password"
@@ -108,17 +109,16 @@
       </div>
     </div>
     <div  *ngIf="isNewCompany">
-      <label>Company : OR </label><a (click)="changeCompnayInput()"> Has company name already?</a>
-      <input name="company" type="text" class="form-control" placeholder="Company"/>
+      <label>Company : OR </label><button (click)="changeCompanyInput()"> Has company name already?</button>
+      <input [(ngModel)]="newCompany.name" name="name" type="text" class="form-control" placeholder="Company"/>
     </div>
     <div  *ngIf="!isNewCompany">
       <label>Company : </label>
-      <section class="form-control" *ngFor="let company of companies">
-        <option value="{{company}}">{{company}}</option>
-      </section>
-
+      <select class="form-control">
+        <option *ngFor="let company of companies.companies" value="{{company.name}}">{{company.name}}</option>
+      </select>
     </div>
-    <button class="btn btn-primary" [disabled]="employeeForm.invalid">Register</button>
+    <button class="btn btn-primary" *ngIf="employeeForm.valid">Register</button>
     <button class="btn btn-danger" [routerLink] = "['']">Cancel</button>
   </form>
 </div>

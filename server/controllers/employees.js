@@ -4,8 +4,8 @@ const jwt = require('jsonwebtoken');
 module.exports = {
     index: async (_req, res) => {
         try {
-            const employees = await Employee.find().sort('type');
-            res.json({employees: employees});
+            const employees = await Employee.find();
+            res.json(employees);
         }
         catch (err) {
             res.json(err);
@@ -14,21 +14,27 @@ module.exports = {
     show: (req, res) => {
         Employee.findById(req.params.id)
             .then((data) => {
-                res.json({employee: data})
+                res.json(data)
             })
             .catch(err => res.json(err));
     },
     create: (req, res) => {
+        console.log("inside create");
+        console.log(req.body);
         Employee.create(req.body)
-            .then((data) => {
-                res.json({newEmployee: data});
+            .then((newEmployee) => {
+                console.log("logging data", newEmployee)
+                res.json(newEmployee);
             })
-            .catch(err => res.json(err));
+            .catch(err => {
+                console.log(err);
+                res.json(err)
+            });
     },
     update: (req, res) => {
         Employee.findOneAndUpdate({ _id : req.params.id }, { runValidators: true, context: 'query' }, req.body)
-            .then((data) => {
-                res.json({updatedEmployee: data});
+            .then((updatedEmployee) => {
+                res.json(updatedEmployee);
             })
             .catch(err => res.json(err));
     },

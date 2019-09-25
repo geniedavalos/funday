@@ -4,17 +4,21 @@ import { EmployeeService } from '../../services/employee.service';
 import {Router} from '@angular/router';
 import {CompanyService} from '../../services/company.service';
 import {Company} from '../../models/company';
+
 @Component({
   selector: 'app-employee-new',
   templateUrl: './employee-new.component.html',
   styleUrls: ['./employee-new.component.css']
 })
+
 export class EmployeeNewComponent implements OnInit {
   duplicatedError: any;
   errorsMessage: any;
   isNewCompany : boolean ;
+  selectedCompany : Company;
   employee = new Employee();
-  private companies: Company[] ;
+  newCompany : Company;
+  companies: Company[] ;
 
   constructor(
     private readonly employeeService: EmployeeService,
@@ -23,24 +27,44 @@ export class EmployeeNewComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.newCompany = new Company();
     this.isNewCompany = true;
-    this.GetAllCompany();
+    this.getAllCompanies();
   }
 
   createEmployee(event: Event) {
     event.preventDefault();
-    this.employeeService.createEmployee(this.employee).subscribe(result =>{
-      console.log(result);
+    this.employeeService.createEmployee(this.employee).subscribe(newEmployee =>{
+      console.log("LOGGING NEW EMPLOYEE",newEmployee);
+      if (this.isNewCompany) {
+        this.newCompany.owner = newEmployee;
+        this.companyService.createCompany(this.newCompany).subscribe(createdCompany => {
+          console.log(createdCompany);
+        })
+      }
+      else {
+        this.selectedCompany.employees.push(newEmployee);
+        this.companyService.updateCompany(this.selectedCompany).subscribe(updatedCompany => {
+          console.log(updatedCompany);
+        })
+      }
     });
   }
-  GetAllCompany() {
+  getAllCompanies() {
     this.companyService.getCompanies().subscribe(companies => {
-      this.companies = companies;
+      if (companies.length == 0){
+        this.companies = [];
+      }
+      else {
+        this.companies = companies;
+      }
     });
   }
 
-  changeCompnayInput() {
-    this.isNewCompany = false;
-
+  changeCompanyInput() {
+    console.log(this.companies);
+    console.log(this.isNewCompany);
+    this.isNewCompany = (!this.isNewCompany);
+    console.log(this.isNewCompany);
   }
 }

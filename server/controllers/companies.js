@@ -18,9 +18,10 @@ module.exports = {
             .catch(err => res.json(err));
     },
     create: (req, res) => {
-        const Company = new Company(req.body);
-        Company.save()
+        console.log("creating company", req.body)
+        Company.create(req.body)
             .then((data) => {
+                console.log("Logging new company data", data)
                 res.json({newCompany: data});
             })
             .catch(err => res.json(err));

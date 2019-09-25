@@ -26,7 +26,7 @@ const EmployeeSchema = new mongoose.Schema({
 }, {timestamps: true });
 EmployeeSchema.plugin(uniqueValidator, { message: 'Employee {PATH} must be unique.'})
   .pre('validate', function (next) {
-    if(!this.isModified(password)) {
+    if(!this.isModified(this.password)) {
       return next();
     }
     bcrypt

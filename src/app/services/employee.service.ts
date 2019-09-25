@@ -26,6 +26,7 @@ export class EmployeeService {
   }
 
   createEmployee(employee: Employee): Observable<Employee> {
+    console.log("In employee service", employee);
     return this.http.post<Employee>(this.base, employee);
   }
 
