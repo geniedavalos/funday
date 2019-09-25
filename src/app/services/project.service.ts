@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 
 import { Observable } from 'rxjs';
 
-import { Project } from '../models';
+import { Project, Task } from '../models';
 
 @Injectable({
   providedIn: 'root',
@@ -32,4 +32,17 @@ export class ProjectService {
   destroyProject(id: string): Observable<Project> {
     return this.http.delete<Project>(`${this.base}/${id}`);
   }
+
+  addTask(project: Project, task: Task): Observable<Project> {
+    return this.http.put<Project>(`${this.base}/${project._id}/addTask`, task)
+  }
+
+  addTeamMember(project: Project, employeeID: string): Observable<Project> {
+    return this.http.put<Project>(`${this.base}/${project._id}/addTeamMember`, employeeID)
+  }
+
+  removeTeamMember(project: Project, employeeID: string): Observable<Project> {
+    return this.http.put<Project>(`${this.base}/${project._id}/removeTeamMember`, employeeID)
+  }
+
 }

@@ -7,5 +7,8 @@ router.get('/', projects.index)
     .post('/', projects.create)
     .put('/:id', projects.update)
     .delete('/:id', projects.destroy)
+    .put('/:id/addTask', projects.addTask)
+    .put('/:id/addTeamMember', projects.addTeamMember)
+    .put('/:id/removeTeamMember', projects.removeTeamMember)
 
 module.exports = router;

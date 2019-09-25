@@ -8,5 +8,7 @@ router
   .post('/', tasks.create)
   .put('/:id', tasks.update)
   .delete('/:id', tasks.destroy)
+  .put('/:id/addTeamMember', tasks.addTeamMember)
+  .put('/:id/removeTeamMember', tasks.removeTeamMember)
 
 module.exports = router;
