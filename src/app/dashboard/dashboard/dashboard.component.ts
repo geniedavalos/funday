@@ -7,9 +7,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
+  isManager: Boolean;
   constructor() { }
 
   ngOnInit() {
+    this.isManager = false;
   }
 
 }
