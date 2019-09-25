@@ -37,7 +37,7 @@
           </li>
 
           <li class="nav-item">
-            <div id="lrbtn"><a class="nav-link" id="start" href="/dashboard/manager"><button type="button" class="btn btn-sm btn-outline-info">Dashboard</button></a></div>
+            <div id="lrbtn"><a class="nav-link" id="start" routerLink='/dashboard'><button type="button" class="btn btn-sm btn-outline-info">Dashboard</button></a></div>
           </li>
         </ul>
       </div>
@@ -89,7 +89,7 @@
                       </button>
                   </div>
                   <div class="modal-body">
-                      <form>
+                      <form #projectForm='ngForm' name='newProjectForm'>
                           <label for='title'>Title:</label>
                           <input type='text' class='form-control' name='title' [(ngModel)]='newProject.title'>
                           <label for='description'>Description:</label>
@@ -122,7 +122,7 @@
                       </form>
                   </div>
                   <div class="modal-footer justify-content-center">
-                      <button (click)='onSubmit()' type="button" class="btn btn-primary">Add</button>
+                      <button *ngIf='projectForm.valid' (click)='onSubmit()' type="button" class="btn btn-primary">Add Project</button>
                   </div>
               </div>
           </div>

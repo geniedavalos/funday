@@ -50,12 +50,10 @@ const routes: Routes = [
   {
     path: 'projects/:id',
     component: fromProjects.ProjectDetailsComponent,
-    children: [
-      {
-        path: 'tasks/:id',
-        component: fromTasks.TaskDetailsComponent,
-      }
-    ]
+  },
+  {
+    path: 'projects/:projectID/tasks/:taskID',
+    component: fromTasks.TaskDetailsComponent,
   },
       // {
       //   path: '',
