@@ -1,1 +1,272 @@
-<p>project-details works!</p>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Funday.com - Team Management Platform</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="project-details.component.css">
+</head>
+
+<body>
+  <div class="container">
+    <nav class="navbar navbar-expand-lg navbar-light bg-white">
+      <a class="navbar-brand" href="/index.html">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Twemoji_1f60e.svg/768px-Twemoji_1f60e.svg.png" width="30" height="30" class="d-inline-block align-top" alt="">
+        <strong>Funday</strong><span>.com</span></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" id="home" href="/index.html">Home</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" id="cases" href="/cases.html">Use Cases</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" id="team" href="/team.html">Our Team</a>
+          </li>
+
+          <li class="nav-item">
+            <div id="lrbtn"><a class="nav-link" id="start" href="/dashboard/manager"><button type="button" class="btn btn-sm btn-outline-info">Dashboard</button></a></div>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <section>
+      <h2>Cookie Project </h2>
+      <div class="progress">
+        <div class="progress-bar  progress-bar-striped bg-info" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+      </div>
+      <div class="mx-3 my-3 block">
+        <button type="button" class="btn btn-info"><a href="edit.html" class="text-white">Edit This Project</a></button>
+        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteProject">Delete Project</button>
+      </div>
+
+
+      <div class="modal fade" id="deleteProject" tabindex="-1" role="dialog" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                  <div class="modal-header">
+                      <h3 class="modal-title text-center">Delete Project</h3>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                      </button>
+                  </div>
+                  <div class="modal-body">
+                      <h5 class='text-danger'>This action cannot be undone! Enter the project name below to permanently delete.</h5>
+                      <form>
+                          <label for='noteDescription'>Project Name</label>
+                          <input type='text' class='form-control'name='projectTitle'>
+                      </form>
+                  </div>
+                  <div class="modal-footer justify-content-center">
+                      <button type="button" class="btn btn-danger">Delete</button>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+      <table class="table mt-5 text-center ">
+        <thead>
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Task</th>
+            <th scope="col">Progress</th>
+            <th scope="col">Due Date</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">Mark A.</th>
+            <td><a href="#">Design Sharks</a></td>
+            <td>
+              <div class="progress">
+                <div class="progress-bar  progress-bar-striped bg-info" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+            </td>
+            <td>6/25/19</td>
+            <td>
+              <a href="/tasks/:id/edit" class="btn btn-outline-success"><i class="fa fa-pencil" aria-hidden="true"></i>
+              </a>
+
+              <a href="/tasks/:id" class="btn btn-outline-danger"><i class="fa fa-trash" aria-hidden="true"></i></a>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">Mark A.</th>
+            <td><a href="#">Color sharks</a></td>
+            <td>
+              <div class="progress">
+                <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 10%" aria-valuenow="10"></div>
+              </div>
+            </td>
+            <td>8/25/19</td>
+            <td>
+              <a href="/tasks/:id/edit" class="btn btn-outline-success"><i class="fa fa-pencil" aria-hidden="true"></i>
+              </a>
+
+              <a href="/tasks/:id" class="btn btn-outline-danger"><i class="fa fa-trash" aria-hidden="true"></i></a>
+            </td>
+          </tr>
+
+          <tr>
+            <th scope="row">Mark A.</th>
+            <td><a href="#">Upload sharks</a></td>
+            <td>
+              <div class="progress">
+                <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 10%" aria-valuenow="10"></div>
+              </div>
+            </td>
+            <td>8/27/19</td>
+            <td>
+              <a href="/tasks/:id/edit" class="btn btn-outline-success"><i class="fa fa-pencil" aria-hidden="true"></i>
+              </a>
+
+              <a href="/tasks/:id" class="btn btn-outline-danger"><i class="fa fa-trash" aria-hidden="true"></i></a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="row text-center block my-4">
+        <div class="inline">
+            <button type="button" class="btn btn-success mt-3" data-toggle="modal" data-target="#addTask">Add Task</button>
+        </div>
+      </div>
+    </section>
+
+    <div class="modal fade" id="addTask" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title text-center">Add A Task</h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <label for='taskTitle'>Title:</label>
+                        <input type='text' class='form-control' name='taskTitle'>
+                        <label for='taskDescription'>Description:</label>
+                        <input type='text' class='form-control' name='taskDescription'>
+                        <label for='taskDue'>Due:</label>
+                        <input type='date' name='taskDue' class='form-control'>
+                        <label for='taskTeam'>Team Members:</label>
+                        <select multiple class='form-control' name='taskTeam'>
+                            <option>Justin</option>
+                            <option>David</option>
+                            <option>Jane</option>
+                            <option>Jill</option>
+                            <option>Austin</option>
+                            <option>Bob</option>
+                        </select>
+                    </form>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <button type="button" class="btn btn-primary">Add</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section id="users">
+      <h2>Manage Team</h2>
+      <table class="table text-center ">
+        <thead>
+          <tr>
+            <th scope="col">Department</th>
+            <th scope="col">Name</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">Marketing</th>
+            <td>Mark A.</td>
+            <td><a href="#" class="btn btn-outline-danger"><i class="fa fa-ban" aria-hidden="true"></i></a>
+
+              <a href="#" class="btn btn-outline-info"><i class="fa fa-search" aria-hidden="true"></i></a>
+
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">PR</th>
+            <td>Jacob B.</td>
+            <td><a href="#" class="btn btn-outline-danger"><i class="fa fa-ban" aria-hidden="true"></i></a>
+
+              <a href="#" class="btn btn-outline-info"><i class="fa fa-search" aria-hidden="true"></i></a>
+
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">Engineering</th>
+            <td>Larry C.</td>
+            <td><a href="#" class="btn btn-outline-danger"><i class="fa fa-ban" aria-hidden="true"></i></a>
+              <a href="#" class="btn btn-outline-info"><i class="fa fa-search" aria-hidden="true"></i></a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="row text-center block my-4">
+        <div class="inline">
+          <a href="new.html" class="btn btn-success inner  mx-3">Add Team Member</a>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="row map justify-content-center">
+        <div class="col-lg-4 col-sm-6">
+          <p><a href="/index.html"><strong>Our product</strong></a></p>
+          <p><a href="#" class="purpleh">Product</a></p>
+          <p><a href="#" class="purpleh">Pricing</a></p>
+        </div>
+
+        <div class="col-lg-4 col-sm-6">
+          <p><a href="/cases.html"><Strong>Use cases</Strong></a></p>
+          <p><a href="#" class="greenh">Product Management</a></p>
+          <p><a href="#" class="greenh">All Use Cases</a></p>
+        </div>
+
+
+        <div class="col-lg-3 col-sm-6">
+          <p><a href="/team.html"><Strong>Our Team</Strong></a></p>
+          <p><a href="#" class="blueh">About Us</a></p>
+          <p><a href="#" class="blueh">Contact Us</a></p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-6 col-sm-12 real-footer text-center">Made with <i class="fa fa-coffee" aria-hidden="true"></i> & <i class="fa fa-heart" aria-hidden="true"></i><br>
+          All Rights Reserved © funday.com</div>
+        <div class="col-lg-6 col-sm-12 real-footer justify-content-center">
+          <div class="row social justify-content-center">
+            <a href="https://www.facebook.com" class="fa fa-facebook" target="_blank"></a>
+            <a href="https://www.twitter.com" class="fa fa-twitter" target="_blank"></a>
+            <a href="https://www.youtube.com" class="fa fa-youtube" target="_blank"></a>
+            <a href="https://www.skype.com" class="fa fa-skype" target="_blank"></a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+
+</html>
