@@ -42,15 +42,9 @@ export class EmployeeNewComponent implements OnInit {
     }
     else {
       this.employeeService.createEmployee(this.employee).subscribe(newEmployee =>{
-        console.log("LOGGING NEW EMPLOYEE", newEmployee);
-        console.log(this.selectedCompanyID);
         this.companyService.getCompany(this.selectedCompanyID).subscribe(company => {
           const currentCompany = company;
-          console.log("logging new employee", newEmployee);
-          // currentCompany.employees.push(newEmployee);
-          // console.log("pushed into company", currentCompany)
           this.companyService.addEmployee(currentCompany, newEmployee).subscribe(updatedCompany => {
-            console.log("Logging 'updated' company...", updatedCompany);
           })
         })
       });
@@ -65,12 +59,6 @@ export class EmployeeNewComponent implements OnInit {
         this.companies = companies;
       }
     });
-  }
-
-  addEmployee(){
-    this.companyService.addEmployee().subscribe(data => {
-      console.log(data)
-    })
   }
 
   changeCompanyInput() {
