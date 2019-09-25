@@ -1,4 +1,5 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
 <div class="registration">
   <h2>Registration</h2>
   <form (submit)="Createemployee($event)" #employeeForm ='ngForm'>
@@ -73,8 +74,8 @@
           Email cannot be empty
         </div>
         <div *ngIf="email?.errors?.email" class="alert alert-danger">
-          Email must be valid
-          {{ email?.errors?.valid}} characters
+          Email must be a valid
+          {{ email?.errors?.valid}} email
         </div>
       </div>
       <div>
@@ -105,6 +106,17 @@
       <div>
         <p class="errorMessage">{{errorsMessage?.password.message}}</p>
       </div>
+    </div>
+    <div  *ngIf="isNewCompany">
+      <label>Company : OR </label><a (click)="changeCompnayInput()"> Has company name already?</a>
+      <input name="company" type="text" class="form-control" placeholder="Company"/>
+    </div>
+    <div  *ngIf="!isNewCompany">
+      <label>Company : </label>
+      <section class="form-control" *ngFor="let company of companies">
+        <option value="{{company}}">{{company}}</option>
+      </section>
+
     </div>
     <button class="btn btn-primary" [disabled]="employeeForm.invalid">Register</button>
     <button class="btn btn-danger" [routerLink] = "['']">Cancel</button>
