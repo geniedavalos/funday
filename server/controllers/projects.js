@@ -41,4 +41,28 @@ module.exports = {
                 res.json(err);
             });
     },
+    addTask: (req, res) => {
+        console.log("inside addTask to Project method", req.body)
+        Project.updateOne({_id : req.params.id}, {$push : {tasks: req.body}})
+        .then(data => {
+            res.json(data);
+        })
+        .catch(err => res.json(err));
+    },
+    addTeamMember: (req, res) => {
+        console.log("inside addTeamMember to Project method", req.body)
+        Project.updateOne({_id : req.params.id}, {$push : {teamMembers: req.body}})
+        .then(data => {
+            res.json(data);
+        })
+        .catch(err => res.json(err));
+    },
+    removeTeamMember: (req, res) => {
+        console.log("insde removeTeamMmber from Project method", req.body)
+        Project.updateOne({_id : req.params.id}, {$pull : {teamMembers: req.body}})
+        .then(data => {
+            res.json(data);
+        })
+        .catch(err => res.json(err));
+    },
 }

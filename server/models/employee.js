@@ -4,13 +4,13 @@ const emailValidator = require('validator');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 const EmployeeSchema = new mongoose.Schema({
-    first_name: { type: String, minlength: [2, 'First name must be at least 2 characters.']},
-    last_name: { type: String, minlength: [2, 'Last name must be at least 2 characters.']},
+    firstName: { type: String, minlength: [2, 'First name must be at least 2 characters.']},
+    lastName: { type: String, minlength: [2, 'Last name must be at least 2 characters.']},
     email: {
       type: String,
       required: [true, 'Enter a valid email.'],
       trim: true,
-      unique: true,
+      // unique: true,
       validate: {
         validator(value) {
           return emailValidator.isEmail(value);
@@ -21,12 +21,12 @@ const EmployeeSchema = new mongoose.Schema({
     password: { type: String, minlength: [8, 'Password must be at least 8 characters long.']},
     isManager: { type: Boolean, default: false },
     department: { type: String, required: false },
-    project: { type : mongoose.Schema.Types.ObjectId, ref : 'Project' },
-    tasks: [ { type : mongoose.Schema.Types.ObjectId, ref : 'Task' } ],
+    managedProjects: [ { type : mongoose.Schema.Types.ObjectId, ref : 'Project' } ],
+    assignedProjects: [ { type : mongoose.Schema.Types.ObjectId, ref : 'Project' } ],
 }, {timestamps: true });
 EmployeeSchema.plugin(uniqueValidator, { message: 'Employee {PATH} must be unique.'})
   .pre('validate', function (next) {
-    if(!this.isModified(password)) {
+    if(!this.isModified(this.password)) {
       return next();
     }
     bcrypt
@@ -43,4 +43,5 @@ EmployeeSchema.statics.validatePassword = function(candidate, hashed) {
 };
 
 mongoose.model('Employee', EmployeeSchema);
+module.exports = EmployeeSchema;
 

@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Funday.com - Team Management Platform</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="home.component.css">
+</head>
+
+<body>
+  <div class="container">
+    <nav class="navbar navbar-expand-lg navbar-light bg-white">
+      <a class="navbar-brand" routerLink="/home">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Twemoji_1f60e.svg/768px-Twemoji_1f60e.svg.png" width="30" height="30" class="d-inline-block align-top" alt="">
+        <strong>Funday</strong><span>.com</span></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" id="home" routerLink="/home">Home</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" id="cases" routerLink='/information'>Use Cases</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" id="team" routerLink='/devTeam'>Our Team</a>
+          </li>
+
+          <li class="nav-item">
+            <div id="lrbtn"><a class="nav-link" id="start" href="/login"><button type="button" class="btn btn-sm btn-outline-info">Log In</button></a></div>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <header id="img-section">
+      <div class="dark-overlay">
+        <div class="home-inner text-center">
+          <h2 class="display-5 text-center">A new way to manage your <span class="green">work</span></h2>
+          <div class="block">
+            <p>Plan. Organize. Track.<br>In one visual, collaborative space.</p>
+            <a href="/login" class="btn btn-lg btn-success">Get Started</a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <section id="product">
+      <div class="row grey ss">
+        <div class="col-4 my-auto">
+          <img src="https://www.stickpng.com/assets/images/58480fd7cef1014c0b5e4943.png" class="w-100">
+        </div>
+        <div class="col-4 my-auto">
+          <img src="https://www.aricheryou.com/wp-content/uploads/2017/07/Acorn.png" class="w-100">
+        </div>
+        <div class="col-4 my-auto">
+          <img src="http://pngimg.com/uploads/porsche_logo/porsche_logo_PNG4.png" class="w-100">
+        </div>
+      </div>
+
+      <div class="row ss">
+        <div class="col-lg-6 col-sm-12">
+          <p class="blue">Simple and intuitive</p>
+          <h2>Easy onboarding, fast adoption</h2>
+          <p>Getting your team on board is as simple as sending an email. Getting them hooked is as simple as letting them use it.</p>
+        </div>
+        <div class="col-lg-6 col-sm-12"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcBJf1hw8B6JdoXnjtc-Jq0BSbZaDJFMrZha6Cg0e-MpbjYHAc"></div>
+      </div>
+
+      <div class="row ss">
+        <div class="col-lg-6 col-sm-12"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcBJf1hw8B6JdoXnjtc-Jq0BSbZaDJFMrZha6Cg0e-MpbjYHAc"></div>
+        <div class="col-lg-6 col-sm-12">
+          <p class="green">Flexible and versatile</p>
+          <h2>Customize your workflow</h2>
+          <p>Different teams need different things at different times, so flexibility is key. Manage any workflow or process and be ready to address any challenge from the simple to the not-so-simple with total ease.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="pricing">
+      <h2>Pricing</h2>
+      <h4>Start your <span class="green">free</span> trial.</h4>
+      <p>Unlimited Users and Boards. No credit card needed.</p>
+      <table class="table text-white ">
+        <thead>
+          <tr>
+            <th scope="col" class="bg-light text-dark">Pick your plan</th>
+            <th scope="col" class="bg-danger">Basic</th>
+            <th scope="col" class="bg-warning">Standard</th>
+            <th scope="col" class="bg-success">Pro</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row" class="text-dark">
+              Unlimited Projects
+            </th>
+            <td class="text-danger"> <i class="fa fa-check-square-o emphasis" aria-hidden="true"></i> </td>
+            <td class="text-warning"><i class="fa fa-check-square-o emphasis" aria-hidden="true"></i> </td>
+            <td class="text-success"><i class="fa fa-check-square-o emphasis" aria-hidden="true"></i> </td>
+          </tr>
+
+          <tr>
+            <th scope="row" class="text-dark">
+              Manage User
+            </th>
+            <td class="text-danger"> <i class="fa fa-check-square-o emphasis" aria-hidden="true"></i> </td>
+            <td class="text-warning"><i class="fa fa-check-square-o emphasis" aria-hidden="true"></i> </td>
+            <td class="text-success"><i class="fa fa-check-square-o emphasis" aria-hidden="true"></i> </td>
+          </tr>
+
+          <tr>
+            <th scope="row" class="text-dark">
+              Progress Bar
+            </th>
+            <td class="text-danger"> <i class="fa fa-check-square-o emphasis" aria-hidden="true"></i> </td>
+            <td class="text-warning"><i class="fa fa-check-square-o emphasis" aria-hidden="true"></i> </td>
+            <td class="text-success"><i class="fa fa-check-square-o emphasis" aria-hidden="true"></i> </td>
+          </tr>
+
+          <tr>
+            <th scope="row" class="text-dark">
+              One-on-one training
+            </th>
+            <td class="text-danger"></td>
+            <td class="text-warning"><i class="fa fa-check-square-o emphasis" aria-hidden="true"></i> </td>
+            <td class="text-success"><i class="fa fa-check-square-o emphasis" aria-hidden="true"></i> </td>
+          </tr>
+
+          <tr>
+            <th scope="row" class="text-dark">
+              View Calendar
+            </th>
+            <td class="text-danger"> </td>
+            <td class="text-warning"> </td>
+            <td class="text-success"><i class="fa fa-check-square-o emphasis" aria-hidden="true"></i> </td>
+          </tr>
+
+          <tr>
+            <th scope="row" class="text-dark">
+              Almost 24/7 email & phone support
+            </th>
+            <td class="text-danger"> </td>
+            <td class="text-warning"></td>
+            <td class="text-success"><i class="fa fa-check-square-o emphasis" aria-hidden="true"></i> </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="faq">
+      <h2>Frequently Asked Questions</h2>
+
+        <h4 class="blue">Q. Is funday right for me?</h4>
+        <p>A. Yes, it is. If you value efficiency & orgnization, this is the right product for you!</p>
+
+        <h4 class="blue">Q. Is it hard to use?</h4>
+        <p>A. No, it is super simple. Every user gets to have a complimentary skype session to go through the product.</p>
+
+        <h4 class="blue">Q. Is it expensive?</h4>
+        <p>A. You can customize your own plan based on your needs.</p>
+    </section>
+
+    <footer>
+      <div class="row map justify-content-center">
+        <div class="col-lg-4 col-sm-6">
+          <p><a routerLink="/home"><strong>Our product</strong></a></p>
+          <p><a href="#" class="purpleh">Product</a></p>
+          <p><a href="#" class="purpleh">Pricing</a></p>
+        </div>
+
+        <div class="col-lg-4 col-sm-6">
+          <p><a routerLink='/information'><Strong>Use cases</Strong></a></p>
+          <p><a href="#" class="greenh">Product Management</a></p>
+          <p><a href="#" class="greenh">All Use Cases</a></p>
+        </div>
+
+
+        <div class="col-lg-3 col-sm-6">
+          <p><a routerLink='/devTeam'><Strong>Our Team</Strong></a></p>
+          <p><a href="#" class="blueh">About Us</a></p>
+          <p><a href="#" class="blueh">Contact Us</a></p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-6 col-sm-12 real-footer text-center">Made with <i class="fa fa-coffee" aria-hidden="true"></i> & <i class="fa fa-heart" aria-hidden="true"></i><br>
+          All Rights Reserved © funday.com</div>
+        <div class="col-lg-6 col-sm-12 real-footer justify-content-center">
+          <div class="row social justify-content-center">
+            <a href="https://www.facebook.com" class="fa fa-facebook" target="_blank"></a>
+            <a href="https://www.twitter.com" class="fa fa-twitter" target="_blank"></a>
+            <a href="https://www.youtube.com" class="fa fa-youtube" target="_blank"></a>
+            <a href="https://www.skype.com" class="fa fa-skype" target="_blank"></a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+
+</html>

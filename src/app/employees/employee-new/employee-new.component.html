@@ -1,1 +1,127 @@
-<p>employee-new works!</p>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+<div class="registration">
+  <h2>Registration</h2>
+  <h5>{{ employee|json }}</h5>
+  <form (submit)="createEmployee($event)" #employeeForm ='ngForm'>
+    <div class="form-group">
+      <div>
+        <p class="errorMessage">{{duplicatedError}}</p>
+      </div>
+      <label>First name: </label>
+      <input name="firstName"
+             type="text"
+             class="form-control"
+             id="name"
+             [(ngModel)]="employee.firstName"
+             #firstName="ngModel"
+             placeholder="First Name"
+             minlength="3"
+             required
+      />
+      <div *ngIf="(firstName.touched || firstName.dirty) && firstName.errors">
+        <div *ngIf="firstName?.errors?.required" class="alert alert-danger">
+          First Name cannot be empty
+        </div>
+        <div *ngIf="firstName?.errors?.minlength" class="alert alert-danger">
+          First Name is at least 3 characters
+          {{ firstName?.errors?.minlength.requiredLength }} characters
+        </div>
+      </div>
+
+    </div>
+    <div>
+      <p class="errorMessage">{{errorsMessage?.firstName.message}}</p>
+    </div>
+    <div class="form-group">
+      <label>Last Name :</label>
+      <input name="lastName"
+             type="text"
+             class="form-control"
+             id="type"
+             [(ngModel)]="employee.lastName"
+             #lastName="ngModel"
+             placeholder="Last Name"
+             minlength="3"
+             required
+      />
+      <div *ngIf="(lastName.touched || lastName.dirty) && lastName.errors">
+        <div *ngIf="lastName?.errors?.required" class="alert alert-danger">
+          You must enter a type for pet !
+        </div>
+        <div *ngIf="lastName?.errors?.minlength" class="alert alert-danger">
+          Last name must be at least 3 characters
+          {{ lastName?.errors?.minlength.requiredLength }} characters
+        </div>
+      </div>
+      <div>
+        <p class="errorMessage">{{errorsMessage?.lastName.message}}</p>
+      </div>
+    </div>
+    <div>
+      <label>Email : </label>
+      <input name="email"
+             type="text"
+             class="form-control"
+             id="description"
+             [(ngModel)]="employee.email"
+             #email="ngModel"
+             email
+             placeholder="Email"
+             required
+      />
+      <div *ngIf="(email.touched || email.dirty) && email.errors">
+        <div *ngIf="email?.errors?.required" class="alert alert-danger">
+          Email cannot be empty
+        </div>
+        <div *ngIf="email?.errors?.email" class="alert alert-danger">
+          Email must be a valid
+          {{ email?.errors?.valid}} email
+        </div>
+      </div>
+      <div>
+        <p class="errorMessage">{{errorsMessage?.email.message}}</p>
+      </div>
+    </div>
+    <div>
+      <label>Password : </label>
+      <input name="password"
+             type="password"
+             class="form-control"
+             id="password"
+             [(ngModel)]="employee.password"
+             #password="ngModel"
+             placeholder="Password"
+             minlength="8"
+             required
+      />
+      <div *ngIf="(password.touched || password.dirty) && password.errors">
+        <div *ngIf="password?.errors?.required" class="alert alert-danger">
+          Password cannot be empty
+        </div>
+        <div *ngIf="password?.errors?.minlength" class="alert alert-danger">
+          Password must be greater than
+          {{ password?.errors?.minlength.requiredLength }} characters
+        </div>
+      </div>
+      <div>
+        <p class="errorMessage">{{errorsMessage?.password.message}}</p>
+      </div>
+    </div>
+    <div  *ngIf="isNewCompany">
+      <label>Company : OR </label><button (click)="changeCompanyInput()"> Has company name already?</button>
+      <input [(ngModel)]="newCompany.name" name="name" type="text" class="form-control" placeholder="Company"/>
+    </div>
+    <div  *ngIf="!isNewCompany">
+      <h5>{{ selectedCompany|json }}</h5>
+      <label>Company : </label>
+      <select [(ngModel)]="selectedCompanyID" name="selectedCompanyID" class="form-control">
+        <option *ngFor="let company of companies" value="{{company._id}}">{{company.name}}</option>
+      </select>
+    </div>
+    <button class="btn btn-primary" *ngIf="employeeForm.valid">Register</button>
+    <button class="btn btn-danger" [routerLink] = "['']">Cancel</button>
+  </form>
+</div>
+
+

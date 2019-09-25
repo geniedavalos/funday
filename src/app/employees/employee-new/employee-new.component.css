@@ -1,0 +1,14 @@
+/*.registration{*/
+/*  background-image: url("https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60");*/
+/*  min-height: 100%;*/
+/*  min-width: 100%;*/
+/*  background-repeat: no-repeat;*/
+/*}*/
+.registration h2{
+  text-align: center;
+}
+.registration form{
+  width : 500px;
+  height:auto;
+  margin : 0 auto;
+}

@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const Task = mongoose.model('Tasks')
+const Task = mongoose.model('Task')
 module.exports = {
   index: (_req, res) => {
     Task.find({})
@@ -26,5 +26,21 @@ module.exports = {
     Task.findOneAndDelete({ _id : req.params.id })
       .then((data) => res.json(data))
       .catch(err => res.json(err))
+  },
+  addTeamMember: (req, res) => {
+    console.log("inside addTeamMember to Task method", req.body)
+    Task.updateOne({_id : req.params.id}, {$push : {teamMembers: req.body}})
+    .then(data => {
+        res.json(data);
+    })
+    .catch(err => res.json(err));
+  },
+  removeTeamMember: (req, res) => {
+      console.log("insde removeTeamMmber from Task method", req.body)
+      Task.updateOne({_id : req.params.id}, {$pull : {teamMembers: req.body}})
+      .then(data => {
+          res.json(data);
+      })
+      .catch(err => res.json(err));
   },
 }

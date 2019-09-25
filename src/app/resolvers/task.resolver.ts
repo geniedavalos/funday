@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Resolve } from '@angular/router';
 
-import { TaskService } from '../services';
-import { Task } from '../models';
+import { TaskService } from '../services/task.service';
+import { Task } from '../models/task';
 import { Observable } from 'rxjs';
 
 @Injectable()

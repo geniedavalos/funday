@@ -1,44 +1,42 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 
+import { SiteInfoComponent } from './site-info/site-info.component';
+import { DevTeamComponent } from './dev-team/dev-team.component';
 import { AppRoutingModule } from './app-routing.module';
+import { HomeComponent } from './home/home.component';
 import { AppComponent } from './app.component';
-import { EmployeeListComponent } from './employees/employee-list/employee-list.component';
-import { EmployeeDetailsComponent } from './employees/employee-details/employee-details.component';
-import { EmployeeNewComponent } from './employees/employee-new/employee-new.component';
-import { EmployeeEditComponent } from './employees/employee-edit/employee-edit.component';
-import { ProjectListComponent } from './projects/project-list/project-list.component';
-import { ProjectDetailsComponent } from './projects/project-details/project-details.component';
-import { ProjectNewComponent } from './projects/project-new/project-new.component';
-import { ProjectEditComponent } from './projects/project-edit/project-edit.component';
-import { TaskListComponent } from './tasks/task-list/task-list.component';
-import { TaskDetailsComponent } from './tasks/task-details/task-details.component';
-import { TaskNewComponent } from './tasks/task-new/task-new.component';
-import { TaskEditComponent } from './tasks/task-edit/task-edit.component';
-import { EmployeeLogInComponent } from './employees/employee-log-in/employee-log-in.component';
+
+import * as fromDashboards from './dashboard';
+import * as fromEmployees from './employees';
+import * as fromCompanies from './companies';
+import * as fromResolvers from './resolvers';
+import * as fromProjects from './projects';
+import * as fromTasks from './tasks';
 
 @NgModule({
   declarations: [
+    ...fromDashboards.components,
+    ...fromEmployees.components,
+    ...fromCompanies.components,
+    ...fromProjects.components,
+    ...fromTasks.components,
+    SiteInfoComponent,
+    DevTeamComponent,
+    HomeComponent,
     AppComponent,
-    EmployeeListComponent,
-    EmployeeDetailsComponent,
-    EmployeeNewComponent,
-    EmployeeEditComponent,
-    ProjectListComponent,
-    ProjectDetailsComponent,
-    ProjectNewComponent,
-    ProjectEditComponent,
-    TaskListComponent,
-    TaskDetailsComponent,
-    TaskNewComponent,
-    TaskEditComponent,
-    EmployeeLogInComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    HttpClientModule,
   ],
-  providers: [],
+  providers: [
+    ...fromResolvers.resolvers
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
