@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Company = mongoose.model('Company')
+
 module.exports = {
     index: async (_req, res) => {
         try {
@@ -36,7 +37,8 @@ module.exports = {
     },
     addEmployee: (req, res) => {
         console.log("inside addEmployee function. logging req.body...", req.body)
-        Company.updateOne({_id : req.params.id}, {$push : req.body})
+        console.log(typeof req.body)
+        Company.updateOne({_id : req.params.id}, {$push : {employees: req.body}})
         .then(data => {
             console.log("Logging data after 'pushing' employee into company", data);
             res.json(data);
