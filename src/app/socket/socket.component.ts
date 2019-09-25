@@ -20,7 +20,7 @@ export class SocketComponent implements OnInit {
     this.join();
     this.socketService.newMessage().subscribe(data => {
       console.log('data = ', data);
-      this.chatMessage.push(data.msg);
+//      this.chatMessage.push(data.msg);
     });
   }
   join() {
@@ -28,8 +28,8 @@ export class SocketComponent implements OnInit {
   }
 
   sendMessage(event: Event) {
-    event.preventDefault()
-    console.log(event.target.message.value)
-    this.socketService.sendMessage(this.user , event.target.message.value);
+    // event.preventDefault()
+    // console.log(event.target.message.value)
+    // this.socketService.sendMessage(this.user , event.target.message.value);
   }
 }

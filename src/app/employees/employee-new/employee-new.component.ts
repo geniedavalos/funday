@@ -15,6 +15,8 @@ export class EmployeeNewComponent implements OnInit {
   isNewCompany : boolean ;
   employee = new Employee();
   private companies: Company[] ;
+  private ConfirmPassword: string;
+  private isMatch: boolean = false;
 
   constructor(
     private readonly employeeService: EmployeeService,
@@ -39,8 +41,10 @@ export class EmployeeNewComponent implements OnInit {
     });
   }
 
-  changeCompnayInput() {
-    this.isNewCompany = false;
-
+  MustMatch() {
+    if(this.employee.password === this.ConfirmPassword){
+      this.isMatch = true;
+      return this.isMatch;
+    }
   }
 }
