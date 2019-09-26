@@ -1,4 +1,3 @@
-import { Employee } from './employee';
 import { Task } from './task';
 
 export class Project {

@@ -1,5 +1,3 @@
-import { Project } from './project';
-
 export class Employee {
   _id: string;
   firstName: string;

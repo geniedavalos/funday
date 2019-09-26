@@ -52,7 +52,8 @@
       <div class="overview">
         <div *ngFor="let project of projects" class="project mt-4">
           <h4><a [routerLink]="['/projects/', project._id]">{{project.title}}</a></h4>
-          <h5>Project Lead: {{currentUser?.firstName}} (<span class="green">{{project.dueDate}}</span>)</h5>
+          <h5>Project Lead: {{currentUser?.firstName}} {{currentUser?.lastName}}</h5>
+          <h5>Project Deadline: (<span class="green">{{project.dueDate | date: 'mediumDate'}}</span>)</h5>
           <div class="progress mb-3">
             <div class="progress-bar  progress-bar-striped bg-info" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
           </div>
@@ -88,13 +89,8 @@
                           </select>
                           <label for='projectTeam'>Team:</label>
                           <form>
-                            <select multiple class='form-control' id='teamNames' name='member' [(ngModel)]='newMember'>
-                                <option value='id:1-Justin'>Justin</option>
-                                <option value='id:2-David'>David</option>
-                                <option value='id:3-Jane'>Jane</option>
-                                <option value='id:4-Jill'>Jill</option>
-                                <option value='id:5-Austin'>Austin</option>
-                                <option value='id:6-Bob'>Bob</option>
+                            <select multiple class='form-control' id='teamNames' name='member' [(ngModel)]='newMembers'>
+                                <option *ngFor="let employee of employees" value="{{employee._id}}-{{employee.firstName}} {{employee.lastName}}">{{employee.firstName}} {{employee.lastName}}</option>
                             </select>
                             <div class='row'>
                               <button (click)='onAdd()' class='btn btn-primary mt-3 mx-auto'>Add Team Member</button>
@@ -106,7 +102,7 @@
                       </form>
                   </div>
                   <div class="modal-footer justify-content-center">
-                      <button *ngIf='projectForm.valid' (click)='onSubmit()' type="button" class="btn btn-primary">Add Project</button>
+                      <button *ngIf='projectForm.valid' data-dismiss="modal" (click)='onSubmit(projectForm)' type="button" class="btn btn-primary">Add Project</button>
                   </div>
               </div>
           </div>
@@ -126,7 +122,6 @@
           <p><a href="#" class="greenh">Product Management</a></p>
           <p><a href="#" class="greenh">All Use Cases</a></p>
         </div>
-
 
         <div class="col-lg-3 col-sm-6">
           <p><a routerLink='/devTeam'><Strong>Our Team</Strong></a></p>

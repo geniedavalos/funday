@@ -183,7 +183,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form>
+                    <form #taskForm='ngForm' name='newTaskForm'>
                         <label for='title'>Title:</label>
                         <input type='text' class='form-control' name='title' [(ngModel)]='newTask.title'>
                         <label for='description'>Description:</label>
