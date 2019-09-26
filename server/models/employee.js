@@ -23,6 +23,7 @@ const EmployeeSchema = new mongoose.Schema({
     department: { type: String, required: false },
     managedProjects: [ { type : mongoose.Schema.Types.ObjectId, ref : 'Project' } ],
     assignedProjects: [ { type : mongoose.Schema.Types.ObjectId, ref : 'Project' } ],
+    tasks: [{ type : mongoose.Schema.Types.ObjectId, ref : 'Task' }]
 }, {timestamps: true });
 EmployeeSchema.plugin(uniqueValidator, { message: 'Employee {PATH} must be unique.'})
   .pre('validate', function (next) {

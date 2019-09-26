@@ -37,4 +37,8 @@ export class EmployeeService {
   login(employee: { email: string; password: string }): Observable<Employee> {
     return this.http.post<Employee>(`${this.base}/login`, employee);
   }
+
+  addTask(employeeID: string, taskID: string): Observable<any> {
+    return this.http.put<any>(`${this.base}/${employeeID}/addTask`,taskID);
+  }
 }

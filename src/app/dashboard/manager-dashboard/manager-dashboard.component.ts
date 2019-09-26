@@ -45,7 +45,10 @@ export class ManagerDashboardComponent implements OnInit, OnChanges {
   }
 
   getProjects() {
-    this.projects = this.currentCompany.projects;
+    this.projectService.getManagedProjects(this.currentUser._id).subscribe(data => {
+      console.log(data)
+      this.projects = data;
+    })
     this.projects.sort((a, b) => {
       if (a.dueDate > b.dueDate) {
         return 1;

@@ -51,7 +51,7 @@
       <h2>Manage Projects</h2>
       <div class="overview">
         <div *ngFor="let project of projects" class="project mt-4">
-          <h4><a [routerLink]="['/projects/', project._id]">{{project.title}}</a></h4>
+          <h4><a [routerLink]="['/projects/', project?._id]">{{project?.title}}</a></h4>
           <h5>Project Lead: {{currentUser?.firstName}} {{currentUser?.lastName}}</h5>
           <h5>Project Deadline: (<span class="green">{{project.dueDate | date: 'mediumDate'}}</span>)</h5>
           <div class="progress mb-3">
@@ -170,7 +170,7 @@
                     </form>
                   </div>
                   <div class="modal-footer justify-content-center">
-                    <button [disabled]='projectForm.invalid' (click)='onSubmit()' type="button" class="btn btn-primary px-5">Add Project!</button>
+                    <button data-dismiss="modal" [disabled]='projectForm.invalid' (click)='onSubmit()' type="button" class="btn btn-primary px-5">Add Project!</button>
                   </div>
               </div>
           </div>
