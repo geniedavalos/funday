@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Funday.com - Team Management Platform</title>
+  <title>funday.com - Team Management Platform</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="site-info.component.css">
@@ -16,7 +16,7 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-white">
       <a class="navbar-brand" routerLink="/home">
         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Twemoji_1f60e.svg/768px-Twemoji_1f60e.svg.png" width="30" height="30" class="d-inline-block align-top" alt="">
-        <strong>Funday</strong><span>.com</span></a>
+        <strong> funday</strong><span>.com</span></a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -43,18 +43,22 @@
     </nav>
 
     <section id="manage">
-      <div class="row ss">
-        <div class="col-lg-6 col-sm-12">
-          <h2>Manage all your clients and their projects with ease</h2>
-          <p>Track your clients, their projects, invoices, and payments. Plan internal tasks and team workload. Know where everything stands at a glance.</p>
-        </div>
-        <div class="col-lg-6 col-sm-12"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcBJf1hw8B6JdoXnjtc-Jq0BSbZaDJFMrZha6Cg0e-MpbjYHAc"></div>
-      </div>
+        <div class="container">
+            <header id="img-section">
+              <div class="dark-overlay">
+                <div class="home-inner text-center px-2">
+                  <h2 class="text-center display-5">Manage everything in <span class="blue">one place</span></h2>
+                  <p>Make your everyday fun.<br>In one collaborative platform.</p>
+                  <a routerLink='/register' class="btn btn-lg btn-primary">Get Started</a>
+                </div>
+              </div>
+            </header>
+          </div>
 
       <div class="row ss">
         <div class="col-lg-4 col-sm-12">
-          <h4 class="blue">See project progress at a glance</h4>
-          <p>A visual way to keep track on project and tasks without effort</p>
+          <h4 class="blue">See project progress</h4>
+          <p>A visual way to keep track of projects and tasks without effort</p>
         </div>
 
         <div class="col-lg-4 col-sm-12">
@@ -63,109 +67,104 @@
         </div>
 
         <div class="col-lg-4 col-sm-12">
-          <h4 class="pink">Collaborate better with your team</h4>
+          <h4 class="pink">Collaborate better</h4>
           <p>Share files, ideas, comments, and more to get work done as a team.</p>
         </div>
       </div>
 
-      <div class="row ss grey justify-content-center">
-        <h2>Manage everything in one place</h2><br>
-        <p>Manage all your clients, projects, tasks, and billing in one place. Collaborate with your team members so that<br>
-          all your updates, assets and comments will be saved in context and can be found easily later.</p>
-      </div>
+      <div class="row ss">
+          <div class="col-sm-6"><img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2100&q=80" class="w-100 detail-img"></div>
+          <div class="col-sm-6">
+            <h5 class="purple marketing">Shareable boards</h5>
+            <h2>Share work with your teammates</h2>
+            <p>Work with your teammates so they will always know where things stand and efficiently prioritize tasks. No more misunderstandings.</p>
+          </div>
+        </div>
 
       <div class="row ss">
-        <div class="col-lg-6 col-sm-12">
-          <p class="blue">Stay on top of everything</p>
+        <div class="col-sm-6">
+          <h5 class="blue marketing">Stay on top of everything</h5>
           <h2>Manage all your projects visually</h2>
-          <p>See at a glance where all your projects stand and what you should do next. Manage your projects and tasks in the best view for you. Whether it's Kanban view, calendar view, timeline view, or even a table.</p>
+          <p>See at a glance how your projects are progressing. Manage your projects and tasks in the simplest way possible.</p>
         </div>
-        <div class="col-lg-6 col-sm-12"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcBJf1hw8B6JdoXnjtc-Jq0BSbZaDJFMrZha6Cg0e-MpbjYHAc"></div>
+        <div class="col-sm-6"><img src="https://images.unsplash.com/photo-1518718486060-ad84afd779a4?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60" class="w-100 detail-img"></div>
       </div>
 
-      <div class="row ss">
-        <div class="col-lg-6 col-sm-12"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcBJf1hw8B6JdoXnjtc-Jq0BSbZaDJFMrZha6Cg0e-MpbjYHAc"></div>
-        <div class="col-lg-6 col-sm-12">
-          <p class="purple">Shareable boards</p>
-          <h2>Share work with your teammates</h2>
-          <p>Work with your teammates so they will always know where things stand and what the priorities of the different projects and tasks are. No more misunderstandings.</p>
-        </div>
-      </div>
     </section>
 
     <section id="allcases">
-      <h2>All Use Cases</h2>
+      <h2>Sample Use Cases</h2>
       <div class="row justify-content-center">
         <div class="card" style="width: 18rem;">
           <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2100&q=80" class="card-img-top w-100" alt="...">
           <div class="card-body">
-            <p class="card-text">Project Management</p>
+            <h5 class="card-text">Project Management</h5>
           </div>
         </div>
         <div class="card" style="width: 18rem;">
           <img src="https://images.unsplash.com/photo-1526374870839-e155464bb9b2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2100&q=80" class="card-img-top w-100" alt="...">
           <div class="card-body">
-            <p class="card-text">Bug Tracking</p>
+            <h5 class="card-text">Bug Tracking</h5>
           </div>
         </div>
         <div class="card" style="width: 18rem;">
           <img src="https://images.unsplash.com/photo-1496902526517-c0f2cb8fdb6a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2100&q=80" class="card-img-top w-100" alt="...">
           <div class="card-body">
-            <p class="card-text">Project Planning</p>
+            <h5 class="card-text">Project Planning</h5>
           </div>
         </div>
         <div class="card" style="width: 18rem;">
           <img src="https://images.unsplash.com/photo-1501139083538-0139583c060f?ixlib=rb-1.2.1&auto=format&fit=crop&w=2100&q=80" class="card-img-top w-100" alt="...">
           <div class="card-body">
-            <p class="card-text">Time Management</p>
+            <h5 class="card-text">Time Management</h5>
           </div>
         </div>
         <div class="card" style="width: 18rem;">
           <img src="https://images.unsplash.com/photo-1531403009284-440f080d1e12?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2100&q=80" class="card-img-top w-100" alt="...">
           <div class="card-body">
-            <p class="card-text">Workflow Management</p>
+            <h5 class="card-text">Workflow Management</h5>
           </div>
         </div>
         <div class="card" style="width: 18rem;">
           <img src="https://images.unsplash.com/photo-1535209039648-9524289505fd?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2098&q=80" class="card-img-top w-100" alt="...">
           <div class="card-body">
-            <p class="card-text">Client Management</p>
+            <h5 class="card-text">Client Management</h5>
           </div>
         </div>
       </div>
     </section>
 
     <footer>
-      <div class="row map justify-content-center">
-        <div class="col-lg-4 col-sm-6">
-          <p><a routerLink="/home"><strong>Our product</strong></a></p>
-          <p><a href="">Product</a></p>
-          <p><a href="">Pricing</a></p>
-        </div>
+        <div class="row map justify-content-center">
+            <div class="col-lg-4 col-sm-6">
+              <p><a routerLink="/home"><strong>Our product</strong></a></p>
+              <p><a href="#" id="purpleh">Product</a></p>
+              <p><a href="#" id="purpleh">Pricing</a></p>
+            </div>
 
-        <div class="col-lg-4 col-sm-6">
-          <p><a routerLink='/information'><Strong>Use cases</Strong></a></p>
-          <p><a href="">Product Management</a></p>
-          <p><a href="">All Use Cases</a></p>
-        </div>
+            <div class="col-lg-4 col-sm-6">
+              <p><a routerLink='/information'><Strong>Use cases</Strong></a></p>
+              <p><a href="#" id="greenh">Product Management</a></p>
+              <p><a href="#" id="greenh">Sample Use Cases</a></p>
+            </div>
 
 
-        <div class="col-lg-3 col-sm-6">
-          <p><a routerLink='/devTeam'><Strong>Our Team</Strong></a></p>
-          <p><a href="">About Us</a></p>
-          <p><a href="">Contact Us</a></p>
-        </div>
-      </div>
+            <div class="col-lg-3 col-sm-6">
+              <p><a routerLink='/devTeam'><Strong>Our Team</Strong></a></p>
+              <p><a href="#" id="blueh">About Us</a></p>
+              <p><a href="#" id="blueh">Contact Us</a></p>
+            </div>
+          </div>
 
       <div class="row">
         <div class="col-lg-6 col-sm-12 real-footer text-center">Made with <i class="fa fa-coffee" aria-hidden="true"></i> & <i class="fa fa-heart" aria-hidden="true"></i><br>
           All Rights Reserved © funday.com</div>
         <div class="col-lg-6 col-sm-12 real-footer justify-content-center">
           <div class="row social justify-content-center">
-            <a href="https://www.facebook.com" class="fa fa-facebook" target="_blank"></a>
-            <a href="https://www.twitter.com" class="fa fa-twitter" target="_blank"></a>
-            <a href="https://www.youtube.com" class="fa fa-youtube" target="_blank"></a>
-            <a href="https://www.skype.com" class="fa fa-skype" target="_blank"></a>
+            <a href="https://www.facebook.com"  id="facebook" class="fa fa-facebook" target="_blank"></a>
+            <a href="https://www.twitter.com" id="twitter" class="fa fa-twitter" target="_blank"></a>
+            <a href="https://www.youtube.com" id="youtube" class="fa fa-youtube" target="_blank"></a>
+            <a href="https://www.skype.com" id="skype" class="fa fa-skype" target="_blank"></a>
           </div>
         </div>
       </div>
