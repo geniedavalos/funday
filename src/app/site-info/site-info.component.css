@@ -4,7 +4,7 @@ body, section {
 
 /* Header */
 #img-section {
-  background: url("https://images.unsplash.com/photo-1453928582365-b6ad33cbcf64?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1952&q=80");
+  background: url("https://images.unsplash.com/photo-1557804506-669a67965ba0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1867&q=80");
   background-repeat: no-repeat;
   background-size: cover;
   background-attachment: fixed;
@@ -85,8 +85,8 @@ nav {
 }
 
 .ss {
-  /* padding: 2%; */
-  margin: 2%;
+  padding: 2%;
+  margin: 3%;
 }
 
 /* Fixed/sticky icon bar (vertically aligned 50% from the top of the screen) */
@@ -222,7 +222,7 @@ footer {
   padding: 0px 20px;
 }
 
-.fa-facebook:hover {
+#facebook:hover {
   color: #3b5998;
 }
 
@@ -230,7 +230,7 @@ footer {
   padding: 0px 20px;
 }
 
-.fa-youtube:hover {
+#youtube:hover {
   color: #c4320b;
 }
 
@@ -238,7 +238,7 @@ footer {
   padding: 0px 20px;
 }
 
-.fa-twitter:hover {
+#twitter:hover {
   color: #00acee;
 }
 
@@ -246,7 +246,7 @@ footer {
   padding: 0px 20px;
 }
 
-.fa-skype:hover {
+#skype:hover {
   color: #00aff0;
 }
 
@@ -259,14 +259,26 @@ footer .map a {
   padding: 2%;
 }
 
-.purpleh:hover {
+#purpleh:hover {
   color: rgb(87, 20, 122);
 }
 
-.greenh:hover {
+#greenh:hover {
   color: green;
 }
 
-.blueh:hover {
+#blueh:hover {
   color: rgb(20, 108, 143);
+}
+
+.marketing {
+  font-weight: 700;
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+
+.detail-img {
+  border-radius: 8px;
 }
