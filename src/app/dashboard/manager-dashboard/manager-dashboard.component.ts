@@ -5,7 +5,6 @@ import { ProjectService, EmployeeService } from 'src/app/services';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 
-
 @Component({
   selector: 'app-manager-dashboard',
   templateUrl: './manager-dashboard.component.html',
@@ -20,6 +19,7 @@ export class ManagerDashboardComponent implements OnInit {
   newMembers: any;
   random: string;
   @Input() currentUser: Employee;
+  minDate: any;
 
   constructor(
     private readonly authService: AuthService,
@@ -29,6 +29,8 @@ export class ManagerDashboardComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.minDate = new Date()
+    console.log("now = ",this.minDate)
     this.addedIds = [];
     this.addedTeamMembers = [];
     this.getProjects();

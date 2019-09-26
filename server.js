@@ -26,7 +26,7 @@ io.on('connection', function (socket) { //2
     console.log('room chat = ', roomChat)
     console.log("hello from server");
     console.log(user);
-    io.emit('OutMessage', {msg :{ user :user, msg : "has joined the room"}});
+    io.emit('newUser', {msg :{ user :user, msg : "has joined the room"}});
   });
   socket.on('newMessage', function (msg) { //7
 

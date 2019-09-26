@@ -75,19 +75,60 @@
                   </div>
                   <div class="modal-body">
                       <form #projectForm='ngForm' name='newProjectForm'>
-                          <label for='title'>Title:</label>
-                          <input type='text' class='form-control' name='title' [(ngModel)]='newProject.title'>
-                          <label for='description'>Description:</label>
-                          <textarea class='form-control' name='description' [(ngModel)]='newProject.description'></textarea>
-                          <label for='dueDate'>Due Date: </label>
-                          <input type='date' class='form-control' name='date'[(ngModel)]='newProject.dueDate'>
-                          <label for='projectDept'>Department:</label>
+                          <label>Title:</label>
+                          <input type='text' class='form-control'
+                                 placeholder="Title"
+                                 name='title'
+                                 [(ngModel)]='newProject.title'
+                                 #title="ngModel"
+                                 minlength="3"
+                                 required
+                          >
+                        <small class="mt-0" *ngIf="(title.touched || title.dirty) && title.errors" >
+                          <div *ngIf="title?.errors?.required" class="alert alert-danger">
+                            First Name cannot be empty
+                          </div>
+                          <div *ngIf="title?.errors?.minlength" class="alert alert-danger">
+                            First Name is at least
+                            {{ title?.errors?.minlength.requiredLength }} characters
+                          </div>
+                        </small>
+                          <label>Description:</label>
+                          <input class='form-control' name='description'
+                                 [(ngModel)]='newProject.description'
+                                 placeholder="Description"
+                                 name='description'
+                                 #description="ngModel"
+                                 minlength="3"
+                                 required
+                          >
+                          <small class="mt-0" *ngIf="(description.touched || description.dirty) && description.errors" >
+                            <div *ngIf="description?.errors?.required" class="alert alert-danger">
+                              Description cannot be empty
+                            </div>
+                            <div *ngIf="description?.errors?.minlength" class="alert alert-danger">
+                              Description is at least
+                              {{ description?.errors?.minlength.requiredLength }} characters
+                            </div>
+                          </small>
+                          <label>Due Date: </label>
+                          <input type='date' class='form-control' name='date'[(ngModel)]='newProject.dueDate'
+                                 #dueDate="ngModel"
+                                 required
+                          >
+                        <small class="mt-0" *ngIf="(dueDate.touched || dueDate.dirty) && dueDate.errors" >
+                          <div *ngIf="dueDate?.errors?.required" class="alert alert-danger">
+                            Please enter a completed date
+                          </div>
+                        </small>
+
+                          <label>Department:</label>
                           <select class='form-control' name='projectDept'>
                               <option>Marketing</option>
                               <option>PR</option>
                               <option>Engineering</option>
                           </select>
-                          <label for='projectTeam'>Team:</label>
+                          <label>Team:</label>
                           <form>
                             <select multiple class='form-control' id='teamNames' name='member' [(ngModel)]='newMembers'>
                                 <option *ngFor="let employee of employees" value="{{employee._id}}-{{employee.firstName}} {{employee.lastName}}">{{employee.firstName}} {{employee.lastName}}</option>
@@ -103,6 +144,7 @@
                   </div>
                   <div class="modal-footer justify-content-center">
                       <button *ngIf='projectForm.valid' data-dismiss="modal" (click)='onSubmit(projectForm)' type="button" class="btn btn-primary">Add Project</button>
+                      <button [disabled]='projectForm.invalid' (click)='onSubmit()'   type="button" class="btn btn-primary">Add Project</button>
                   </div>
               </div>
           </div>
