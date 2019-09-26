@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Funday.com - Team Management Platform</title>
+  <title>funday.com - Team Management Platform</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="home.component.css">
@@ -16,7 +16,7 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-white">
       <a class="navbar-brand" routerLink="/home">
         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Twemoji_1f60e.svg/768px-Twemoji_1f60e.svg.png" width="30" height="30" class="d-inline-block align-top" alt="">
-        <strong>Funday</strong><span>.com</span></a>
+        <strong> funday</strong><span>.com</span></a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -42,20 +42,23 @@
       </div>
     </nav>
 
-    <header id="img-section">
-      <div class="dark-overlay">
-        <div class="home-inner text-center">
-          <h2 class="display-5 text-center">A new way to manage your <span class="green">work</span></h2>
-          <div class="block">
-            <p>Plan. Organize. Track.<br>In one visual, collaborative space.</p>
-            <a routerLink='/register' class="btn btn-lg btn-success">Get Started</a>
-          </div>
-        </div>
-      </div>
-    </header>
-
     <section id="product">
+        <div class="container">
+            <header id="img-section">
+              <div class="dark-overlay">
+                <div class="home-inner text-center px-2">
+                  <h2 class="text-center">A new way to manage your <span class="green">work</span></h2>
+                  <div class="block">
+                    <p>Plan. Organize. Track.<br>In one visual, collaborative space.</p>
+                    <a routerLink='/register' class="btn btn-lg btn-success">Get Started</a>
+                  </div>
+                </div>
+              </div>
+            </header>
+          </div>
+
       <div class="row grey ss">
+          <h5 class="col-12 block">Our future partners</h5>
         <div class="col-4 my-auto">
           <img src="https://www.stickpng.com/assets/images/58480fd7cef1014c0b5e4943.png" class="w-100">
         </div>
@@ -63,23 +66,23 @@
           <img src="https://www.aricheryou.com/wp-content/uploads/2017/07/Acorn.png" class="w-100">
         </div>
         <div class="col-4 my-auto">
-          <img src="http://pngimg.com/uploads/porsche_logo/porsche_logo_PNG4.png" class="w-100">
+         <img src="http://pngimg.com/uploads/tesla_logo/tesla_logo_PNG21.png" class="w-100">
         </div>
       </div>
 
       <div class="row ss">
-        <div class="col-lg-6 col-sm-12">
-          <p class="blue">Simple and intuitive</p>
+        <div class="col-sm-6">
+          <h5 class="blue marketing">Simple and intuitive</h5>
           <h2>Easy onboarding, fast adoption</h2>
           <p>Getting your team on board is as simple as sending an email. Getting them hooked is as simple as letting them use it.</p>
         </div>
-        <div class="col-lg-6 col-sm-12"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcBJf1hw8B6JdoXnjtc-Jq0BSbZaDJFMrZha6Cg0e-MpbjYHAc"></div>
+        <div class="col-sm-6 mb-3"><img src="https://images.unsplash.com/photo-1525349769815-0e6ba4e0bbdd?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2622&q=80" class="w-100 px-0 mx-0 detail-img"></div>
       </div>
 
       <div class="row ss">
-        <div class="col-lg-6 col-sm-12"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcBJf1hw8B6JdoXnjtc-Jq0BSbZaDJFMrZha6Cg0e-MpbjYHAc"></div>
-        <div class="col-lg-6 col-sm-12">
-          <p class="green">Flexible and versatile</p>
+        <div class="col-sm-6 mb-3"><img src="https://images.unsplash.com/photo-1564424555153-04228f0aa7ee?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2550&q=80" class="w-100 px-0 mx-0 detail-img"></div>
+        <div class="col-sm-6">
+          <h5 class="green marketing">Flexible and versatile</h5>
           <h2>Customize your workflow</h2>
           <p>Different teams need different things at different times, so flexibility is key. Manage any workflow or process and be ready to address any challenge from the simple to the not-so-simple with total ease.</p>
         </div>
@@ -147,7 +150,7 @@
 
           <tr>
             <th scope="row" class="text-dark">
-              Almost 24/7 email & phone support
+              24/7 email & phone support
             </th>
             <td class="text-danger"> </td>
             <td class="text-warning"></td>
@@ -159,36 +162,72 @@
 
     <section id="faq">
       <h2>Frequently Asked Questions</h2>
+      <h4>Find your <span class="text-info">answers</span>.</h4>
+      <p>Top three frequently asked questions for funday.com.</p>
+      <div class="accordion" id="accordionExample">
+        <div class="card">
+          <div class="card-header" id="headingOne">
+            <h2 class="mb-0">
+              <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                <h4 class="text-primary">Q. Is funday right for me?</h4>
+              </button>
+            </h2>
+          </div>
 
-        <h4 class="blue">Q. Is funday right for me?</h4>
-        <p>A. Yes, it is. If you value efficiency & orgnization, this is the right product for you!</p>
-
-        <h4 class="blue">Q. Is it hard to use?</h4>
-        <p>A. No, it is super simple. Every user gets to have a complimentary skype session to go through the product.</p>
-
-        <h4 class="blue">Q. Is it expensive?</h4>
-        <p>A. You can customize your own plan based on your needs.</p>
+          <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+            <div class="card-body">
+              <h5>A. Yes, it is. If you value efficiency & organization, this is the right product for you!</h5>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header" id="headingTwo">
+            <h2 class="mb-0">
+              <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                <h4 class="text-success">Q. Is it hard to use?</h4>
+              </button>
+            </h2>
+          </div>
+          <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+            <div class="card-body">
+        <h5>A. No, it is super simple. We offer a complimentary Skype tutorial session for every new member.</h5> </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header" id="headingThree">
+            <h2 class="mb-0">
+              <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                <h4 class="text-info">Q. Is it expensive?</h4>
+              </button>
+            </h2>
+          </div>
+          <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+            <div class="card-body">
+              <h5>A. You can customize your own plan based on your needs.</h5>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
     <footer>
       <div class="row map justify-content-center">
         <div class="col-lg-4 col-sm-6">
-          <p><a [routerLink]="['/home']"><strong>Our product</strong></a></p>
-          <p>Product</p>
-          <p>Pricing</p>
+          <p><a routerLink="/home"><strong>Our product</strong></a></p>
+          <p><a href="#" id="purpleh">Product</a></p>
+          <p><a href="#" id="purpleh">Pricing</a></p>
         </div>
 
         <div class="col-lg-4 col-sm-6">
-          <p><a [routerLink]="['/information']" ><Strong>Use cases</Strong></a></p>
-          <p>Product Management</p>
-          <p>All Use Cases</p>
+          <p><a routerLink='/information'><Strong>Use cases</Strong></a></p>
+          <p><a href="#" id="greenh">Product Management</a></p>
+          <p><a href="#" id="greenh">Sample Use Cases</a></p>
         </div>
 
-
-        <div class="col-lg-3 col-sm-6">
-          <p><a [routerLink]="['/devTeam']"><Strong>Our Team</Strong></a></p>
-          <p>About Us</p>
-          <p>Contact Us</p>
+        <div class="col-lg-4 col-sm-6">
+          <p><a routerLink='/devTeam'><Strong>Our Team</Strong></a></p>
+          <p><a href="#" id="blueh">About Us</a></p>
+          <p><a href="#" id="blueh">Contact Us</a></p>
         </div>
       </div>
 
@@ -197,10 +236,10 @@
           All Rights Reserved © funday.com</div>
         <div class="col-lg-6 col-sm-12 real-footer justify-content-center">
           <div class="row social justify-content-center">
-            <a href="https://www.facebook.com" class="fa fa-facebook" target="_blank"></a>
-            <a href="https://www.twitter.com" class="fa fa-twitter" target="_blank"></a>
-            <a href="https://www.youtube.com" class="fa fa-youtube" target="_blank"></a>
-            <a href="https://www.skype.com" class="fa fa-skype" target="_blank"></a>
+            <a href="https://www.facebook.com" id="facebook" class="fa fa-facebook" target="_blank"></a>
+            <a href="https://www.twitter.com" id="twitter" class="fa fa-twitter" target="_blank"></a>
+            <a href="https://www.youtube.com" id="youtube" class="fa fa-youtube" target="_blank"></a>
+            <a href="https://www.skype.com" id="skype" class="fa fa-skype" target="_blank"></a>
           </div>
         </div>
       </div>
