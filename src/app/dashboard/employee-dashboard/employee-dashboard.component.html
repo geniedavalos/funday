@@ -160,26 +160,26 @@
     </section>
 
     <footer>
-        <div class="row map justify-content-center">
-          <div class="col-lg-4 col-sm-6">
-            <p><a routerLink="/home"><strong>Our product</strong></a></p>
-            <p><a href="#" class="purpleh">Product</a></p>
-            <p><a href="#" class="purpleh">Pricing</a></p>
-          </div>
-
-          <div class="col-lg-4 col-sm-6">
-            <p><a routerLink='/information'><Strong>Use cases</Strong></a></p>
-            <p><a href="#" class="greenh">Product Management</a></p>
-            <p><a href="#" class="greenh">All Use Cases</a></p>
-          </div>
-
-
-          <div class="col-lg-3 col-sm-6">
-            <p><a routerLink='/devTeam'><Strong>Our Team</Strong></a></p>
-            <p><a href="#" class="blueh">About Us</a></p>
-            <p><a href="#" class="blueh">Contact Us</a></p>
-          </div>
+      <div class="row map justify-content-center">
+        <div class="col-lg-4 col-sm-6">
+          <p><a [routerLink]="['/home']"><strong>Our product</strong></a></p>
+          <p>Product</p>
+          <p>Pricing</p>
         </div>
+
+        <div class="col-lg-4 col-sm-6">
+          <p><a [routerLink]="['/information']" ><Strong>Use cases</Strong></a></p>
+          <p>Product Management</p>
+          <p>All Use Cases</p>
+        </div>
+
+
+        <div class="col-lg-3 col-sm-6">
+          <p><a [routerLink]="['/devTeam']"><Strong>Our Team</Strong></a></p>
+          <p>About Us</p>
+          <p>Contact Us</p>
+        </div>
+      </div>
 
       <div class="row">
         <div class="col-lg-6 col-sm-12 real-footer text-center">Made with <i class="fa fa-coffee" aria-hidden="true"></i> & <i class="fa fa-heart" aria-hidden="true"></i><br>

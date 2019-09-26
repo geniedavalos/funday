@@ -161,21 +161,22 @@
     <footer>
       <div class="row map justify-content-center">
         <div class="col-lg-4 col-sm-6">
-          <p><strong>Our product</strong></p>
-          <p><a href="#product" class="purpleh">Product</a></p>
-          <p><a href="#pricing" class="purpleh">Pricing</a></p>
+          <p><a [routerLink]="['/home']"><strong>Our product</strong></a></p>
+          <p>Product</p>
+          <p>Pricing</p>
         </div>
 
         <div class="col-lg-4 col-sm-6">
-          <p><a routerLink='/information'><Strong>Use cases</Strong></a></p>
-          <p><a href="#" class="greenh">Product Management</a></p>
-          <p><a href="#" class="greenh">All Use Cases</a></p>
+          <p><a [routerLink]="['/information']" ><Strong>Use cases</Strong></a></p>
+          <p>Product Management</p>
+          <p>All Use Cases</p>
         </div>
 
+
         <div class="col-lg-3 col-sm-6">
-          <p><a routerLink='/devTeam'><Strong>Our Team</Strong></a></p>
-          <p><a href="#" class="blueh">About Us</a></p>
-          <p><a href="#" class="blueh">Contact Us</a></p>
+          <p><a [routerLink]="['/devTeam']"><Strong>Our Team</Strong></a></p>
+          <p>About Us</p>
+          <p>Contact Us</p>
         </div>
       </div>
 
