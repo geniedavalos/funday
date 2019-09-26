@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Company } from '../models/company';
-import { Employee } from '../models';
+import { Employee, Project } from '../models';
 
 @Injectable({
   providedIn: 'root'
@@ -31,7 +31,10 @@ export class CompanyService {
   destroyCompany(id: string): Observable<Company> {
     return this.http.delete<Company>(`${this.base}/${id}`);
   }
-  addEmployee(company: Company, employee: Employee): Observable<Company>{
-    return this.http.put<Company>(`${this.base}/${company._id}/addEmployee`, employee)
+  addEmployee(company: Company, employee: Employee): Observable<Company> {
+    return this.http.put<Company>(`${this.base}/${company._id}/addEmployee`, employee);
+  }
+  addProject(company: Company, project: Project): Observable<Company> {
+    return this.http.put<Company>(`${this.base}/${company._id}/addProject`, project);
   }
 }

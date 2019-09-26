@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Employee } from 'src/app/models';
+import { ActivatedRoute, Router, Params } from '@angular/router';
+import { Employee, Company, Task} from 'src/app/models';
+import { TaskService } from 'src/app/services';
 
 @Component({
   selector: 'app-employee-dashboard',
@@ -7,17 +9,28 @@ import { Employee } from 'src/app/models';
   styleUrls: ['./employee-dashboard.component.css']
 })
 export class EmployeeDashboardComponent implements OnInit {
-  noteDescription: String;
+  noteDescription: string;
+  tasks: Task[];
   @Input() currentUser: Employee;
+  @Input() currentCompany: Company;
   theId = 'Random';
 
-  constructor() { }
+  constructor(
+    private readonly taskService: TaskService,
+  ) { }
   ngOnInit() {
+    this.getTasks();
   }
 
-  onSubmit(id:String) {
+  onSubmit(id: string) {
     console.log('Inside onSubmit()');
     console.log(id);
     console.log(this.noteDescription);
+  }
+
+  getTasks(){
+    this.taskService.getEmployeeTasks(this.currentUser._id).subscribe(tasks => {
+      this.tasks = tasks;
+    })
   }
 }

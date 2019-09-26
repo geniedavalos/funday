@@ -18,6 +18,7 @@ import * as fromCompanies from './companies';
 import * as fromResolvers from './resolvers';
 import * as fromProjects from './projects';
 import * as fromTasks from './tasks';
+import { OwnerDashboardComponent } from './dashboard/owner-dashboard/owner-dashboard.component';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import * as fromTasks from './tasks';
     DevTeamComponent,
     HomeComponent,
     AppComponent,
-    SocketComponent
+    SocketComponent,
+    OwnerDashboardComponent
   ],
   imports: [
     BrowserModule,

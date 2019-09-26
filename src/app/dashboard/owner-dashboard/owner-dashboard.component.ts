@@ -1,16 +1,17 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { Project, Employee, Company } from 'src/app/models';
+import { Router } from '@angular/router';
+import { NgForm } from '@angular/forms';
+
+import { Employee, Project, Company } from 'src/app/models';
 import { AuthService } from 'src/app/services/auth.service';
 import { ProjectService, EmployeeService, CompanyService } from 'src/app/services';
-import { NgForm } from '@angular/forms';
-import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-manager-dashboard',
-  templateUrl: './manager-dashboard.component.html',
-  styleUrls: ['./manager-dashboard.component.css']
+  selector: 'app-owner-dashboard',
+  templateUrl: './owner-dashboard.component.html',
+  styleUrls: ['./owner-dashboard.component.css']
 })
-export class ManagerDashboardComponent implements OnInit, OnChanges {
+export class OwnerDashboardComponent implements OnInit, OnChanges {
   projects: Project[];
   newProject = new Project();
   employees: Employee[];
@@ -33,8 +34,6 @@ export class ManagerDashboardComponent implements OnInit, OnChanges {
   ngOnInit() {
     this.addedIds = [];
     this.addedTeamMembers = [];
-    this.getProjects();
-    this.getEmployees();
   }
 
   ngOnChanges(changes: SimpleChanges) {

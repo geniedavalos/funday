@@ -57,38 +57,14 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <th scope="row"><a href="#">Draw sharks</a></th>
+          <tr *ngFor="let task of tasks">
+            <th scope="row"><a [routerLink]="" routerLinkActive="router-link-active">{{task.title}}</a></th>
             <td>
               <div class="progress">
                 <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 25%" aria-valuenow="25">25%</div>
               </div>
             </td>
             <td>3/18/2019</td>
-            <td>
-              <button type="button" class="btn btn-info" data-toggle="modal" data-target="#addNote"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
-            </td>
-          </tr>
-          <tr>
-            <th scope="row"><a href="#">Color sharks</a></th>
-            <td>
-              <div class="progress">
-                <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 35%" aria-valuenow="35">35%</div>
-              </div>
-            </td>
-            <td>3/20/2019</td>
-            <td>
-              <button type="button" class="btn btn-info" data-toggle="modal" data-target="#addNote"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
-            </td>
-          </tr>
-          <tr>
-            <th scope="row"><a href="#">Upload sharks</a></th>
-            <td>
-              <div class="progress">
-                <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 55%" aria-valuenow="55">55%</div>
-              </div>
-            </td>
-            <td>3/28/2019</td>
             <td>
               <button type="button" class="btn btn-info" data-toggle="modal" data-target="#addNote"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
             </td>
