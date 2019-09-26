@@ -127,19 +127,19 @@
                             </div>
                           </small>
                         </div>
+                          <label>Add Team Members:</label>
                           <label class='col-2 my-auto' for='projectDept'>Department:</label>
                           <select class='form-control col-3' name='projectDept'>
                               <option>Marketing</option>
                               <option>PR</option>
                               <option>Engineering</option>
                           </select>
-                          <label>Team:</label>
                           <form>
                             <select multiple class='form-control' id='teamNames' name='member' [(ngModel)]='newMembers'>
                                 <option *ngFor="let employee of employees" value="{{employee._id}}-{{employee.firstName}} {{employee.lastName}}">{{employee.firstName}} {{employee.lastName}}</option>
                             </select>
                             <div class='row'>
-                              <button (click)='onAdd()' class='btn btn-primary mt-3 mx-auto'>Add Team Member</button>
+                              <button (click)='onAdd()' class='btn btn-primary mt-3 mx-auto'>Add To Team</button>
                             </div>
                           </form>
                           <div class='addedMembers mt-3'>
