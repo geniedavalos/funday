@@ -12,7 +12,9 @@ module.exports = {
       .catch(err => res.json(err))
   },
   create: (req, res) => {
+    console.log(req.body)
     const Task = new Task(req.body)
+
     Task.save()
       .then(data => res.json(data))
       .catch(err => res.json(err))
