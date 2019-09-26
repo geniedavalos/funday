@@ -8,6 +8,7 @@ router.get('/', companies.index)
     .put('/:id', companies.update)
     .delete('/:id', companies.destroy)
     .put('/:id/addEmployee', companies.addEmployee)
-    .put('/:id/addProject', companies.addProject);
+    .put('/:id/addProject', companies.addProject)
+    .put('/:id/addDepartment', companies.addDepartment);
 
 module.exports = router;

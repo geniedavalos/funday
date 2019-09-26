@@ -33,8 +33,25 @@
 
       <h2 class="text-center">Welcome, {{currentUser?.firstName}}!</h2>
     </div>
-    <h2>Manage Projects</h2>
-    <div class="overview">
+    <h2 (click)="toggleCompany()">Manage {{currentCompany?.name}} <i *ngIf="!companyExpanded" class="fa fa-arrow-circle-down" aria-hidden="true"></i><i *ngIf="companyExpanded" class="fa fa-arrow-circle-up" aria-hidden="true"></i></h2>
+    <div *ngIf="companyExpanded" class="overview">
+      <form (submit)="editCompany(companyForm)" #companyForm="ngForm" name="editCompanyForm">
+        <h4 (click)="toggleEditName()" *ngIf="!editingName">{{currentCompany?.name}}</h4>
+        <h4 *ngIf="editingName"><input type="text" [(ngModel)]="currentCompany.name" name="name"></h4>
+        <a *ngIf="editingName" (click)="toggleEditName()"><small>Cancel</small></a>
+        <input *ngIf="editingName" type="submit">
+      </form>
+      <h5>Departments</h5>
+      <p *ngIf="currentCompany?.departments?.length < 1">None yet</p>
+      <p *ngFor="let department of currentCompany?.departments">{{department}}</p>
+      <form (submit)="addDepartment(departmentForm)" #departmentForm="ngForm" name="addDepartmentForm">
+        <input class="form-control" type="text" [(ngModel)]="newDepartment" name="new_department" placeholder="Enter Department Name">
+        <input type="submit" class="btn btn-secondary">
+      </form>
+    </div>
+    <hr>
+    <h2 (click)="toggleProjects()">Manage Projects <i *ngIf="!projectsExpanded" class="fa fa-arrow-circle-down" aria-hidden="true"></i><i *ngIf="projectsExpanded" class="fa fa-arrow-circle-up" aria-hidden="true"></i></h2>
+    <div *ngIf="projectsExpanded" class="overview">
       <div *ngFor="let project of projects" class="project mt-4">
         <h4><a [routerLink]="['/projects/', project._id]">{{project.title}}</a></h4>
         <h5>Project Lead: {{currentUser?.firstName}} {{currentUser?.lastName}}</h5>
@@ -44,10 +61,31 @@
         </div>
       </div>
     </div>
-    <div class='row'>
+    <div *ngIf="projectsExpanded" class='row'>
         <button type="button" class="btn btn-primary mt-3 mx-auto" data-toggle="modal" data-target="#addProject">Add Project</button>
     </div>
-
+    <hr>
+    <h2 (click)="toggleEmployees()">Manage Employees <i *ngIf="!employeesExpanded" class="fa fa-arrow-circle-down" aria-hidden="true"></i><i *ngIf="employeesExpanded" class="fa fa-arrow-circle-up" aria-hidden="true"></i></h2>
+    <div *ngIf="employeesExpanded" class="overview">
+      <table class="table text-center ">
+          <thead>
+            <tr>
+              <th scope="col">Department</th>
+              <th scope="col">Name</th>
+              <th scope="col">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor='let member of currentCompany?.employees'>
+              <th scope="row">{{member['department']}}</th>
+              <td>{{member['firstName']}} {{member['lastName']}}</td>
+              <td><a [routerLink]="['']" routerLinkActive="router-link-active"  class="btn btn-outline-danger mx-1"><i class="fa fa-ban" aria-hidden="true"></i></a>
+                <a [routerLink]="['']" routerLinkActive="router-link-active"  class="btn btn-outline-info mx-1"><i class="fa fa-search" aria-hidden="true"></i></a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+    </div>
     <div class="modal fade" id="addProject" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
