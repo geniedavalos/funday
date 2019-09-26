@@ -5,7 +5,7 @@ export class Company {
   _id: string;
   name: string;
   owner: Employee;
-  deparments: [string];
+  departments: [string];
   employees: [Employee];
   projects: [Project];
 }

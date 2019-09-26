@@ -37,4 +37,7 @@ export class CompanyService {
   addProject(company: Company, project: Project): Observable<Company> {
     return this.http.put<Company>(`${this.base}/${company._id}/addProject`, project);
   }
+  addDepartment(company: Company, department: string): Observable<Company> {
+    return this.http.put<Company>(`${this.base}/${company._id}/addDepartment`, {department});
+  }
 }
