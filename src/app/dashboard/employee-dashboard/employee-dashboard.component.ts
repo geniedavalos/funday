@@ -1,11 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
-<<<<<<< HEAD
-import { Employee, Company } from 'src/app/models';
-=======
-import { Employee, Task } from 'src/app/models';
-import { TaskService } from 'src/app/services';
 import { ActivatedRoute, Router, Params } from '@angular/router';
->>>>>>> wade_branch
+import { Employee, Company, Task} from 'src/app/models';
+import { TaskService } from 'src/app/services';
 
 @Component({
   selector: 'app-employee-dashboard',
@@ -13,12 +9,8 @@ import { ActivatedRoute, Router, Params } from '@angular/router';
   styleUrls: ['./employee-dashboard.component.css']
 })
 export class EmployeeDashboardComponent implements OnInit {
-<<<<<<< HEAD
   noteDescription: string;
-=======
   tasks: Task[];
-  noteDescription: String;
->>>>>>> wade_branch
   @Input() currentUser: Employee;
   @Input() currentCompany: Company;
   theId = 'Random';
