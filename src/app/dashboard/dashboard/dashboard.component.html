@@ -1,4 +1,3 @@
-<button (click)="logoutButton()">Logout</button>
-<button (click)="verifyButton()">Verify</button>
+<button class="btn btn-outline-dark" (click)="logoutButton()">Log Out</button>
 <app-employee-dashboard *ngIf="!isManager" [currentUser]="currentUser"></app-employee-dashboard>
 <app-manager-dashboard *ngIf="isManager" [currentUser]="currentUser"></app-manager-dashboard>
