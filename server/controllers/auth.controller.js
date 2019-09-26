@@ -11,7 +11,6 @@ module.exports = {
    * @param {Response} res Response instance
    */
   login: (req, res) => {
-    console.log('Logging in', req.body);
     Employee.findOne({ email: req.body.email })
       .then(employee => {
         bcrypt.compare(req.body.password, employee.password)
@@ -19,10 +18,15 @@ module.exports = {
             if(!isValid) {
               throw new Error();
             }
-            res.json(completeLogin(req, res, employee))
+            Company.findOne({ 'employees._id' : employee._id })
+              .then(company => {
+                res.json(completeLogin(req, res, employee, company));
+              })
+              .catch(err => {
+                console.log(err);
+              });
           })
           .catch(err => {
-            console.log(err);
             res.json(err);
           });
       })
@@ -35,73 +39,56 @@ module.exports = {
   newCompanyRegister: (req, res) => {
     const name = req.body.name;
     Company.create({name: name})
-      .then(async newCompany => {
+      .then(async company => {
         let owner;
         req.body.owner.isManager = true;
         req.body.owner.password = await bcrypt.hash(req.body.owner.password, 10);
         try {
           owner = await Employee.create(req.body.owner);
         } catch (err) {
-          Company.deleteOne(newCompany);
+          Company.deleteOne(company);
           res.json(err);
         }
-        newCompany.owner = owner;
-        newCompany.employees.push(owner);
-        Company.findByIdAndUpdate(newCompany._id, newCompany)
+        company.owner = owner;
+        company.employees.push(owner);
+        Company.findByIdAndUpdate(company._id, company)
           .then(async data => {
-            console.log(data);
-            const login = await completeLogin(req, res, owner, newCompany);
+            const login = await completeLogin(req, res, owner, company);
             login.data['createdCompany'] = data;
             res.json(login);
           })
           .catch(err => {
-            console.log(err);
             res.json(err);
           })
 
       })
       .catch(err => {
-        console.log(err);
         res.json(err);
       });
   },
   joinCompanyRegister: async (req, res) => {
-    console.log(req.params.id, req.body);
-    try {
-      const company = await Company.findById(req.params.id);
-      console.log("Got company:",company);
-      bcrypt.hash(req.body.password, 10)
-        .then(hashed => {
-          req.body.password = hashed;
-          console.log(req.body);
-          Employee.create(req.body)
-            .then(newEmployee => {
-              console.log("New employee created:", newEmployee);
-              Company.findByIdAndUpdate(req.params.id, {$push : { employees : newEmployee}})
-                .then(async data => {
-                  console.log("Joined company:", data);
-                  const login = await completeLogin(req, res, newEmployee, data);
-                  login.data['joinedCompany'] = data;
-                  res.json(login);
-                })
-                .catch(err => {
-                  console.log(err);
-                  res.json(err);
-                })
-            })
-            .catch(err => {
-              console.log(err);
-              res.json(err);
-            });
-        })
-        .catch(err => {
-          console.log(err);
-          res.json(err);
-        })
-    }
-    catch (err) {
-      res.json(err)
-    }
+    bcrypt.hash(req.body.password, 10)
+      .then(hashed => {
+        req.body.password = hashed;
+        Employee.create(req.body)
+          .then(employee => {
+            Company.findByIdAndUpdate(req.params.id, {$push : { employees : employee}})
+              .then(async company => {
+                const login = await completeLogin(req, res, employee, company);
+                login.data['joinedCompany'] = company;
+                res.json(login);
+              })
+              .catch(err => {
+                res.json(err);
+              })
+          })
+          .catch(err => {
+            res.json(err);
+          });
+      })
+      .catch(err => {
+        res.json(err);
+      })
   },
   /**
    * TODO: Performs JWT logout
@@ -120,9 +107,9 @@ module.exports = {
  * @param {Company} company Company instance
  */
 function completeLogin(req, res, employee, company) {
-  console.log('completing login', employee);
-  //TODO add company id
-  const token = jwt.sign({id: employee._id}, req.app.get('secretKey'), { expiresIn: '1m' });
+  // old token implementation:
+  // const token = jwt.sign({id: employee._id}, req.app.get('secretKey'), { expiresIn: '1m' });
+  const token = jwt.sign({ eid : employee._id, cid : company._id, isOwner : (company.owner.email == employee.email), isManager : employee.isManager }, req.app.get('secretKey'), { expiresIn: '1m' })
   employee = employee.toObject();
   delete employee.password;
   return {status: 'success', message: 'Logged in', data: { employee: employee, token: token }};
