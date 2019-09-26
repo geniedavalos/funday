@@ -6,7 +6,10 @@ const bcrypt = require('bcrypt');
 module.exports = {
     index: async (_req, res) => {
         try {
-            const employees = await Employee.find();
+            const employees = await Employee.find()
+                    .populate('tasks')
+                    .populate('managedProjects')
+                    .populate('assignedProjects');
             res.json(employees);
         }
         catch (err) {
@@ -15,6 +18,9 @@ module.exports = {
     },
     show: (req, res) => {
         Employee.findById(req.params.id)
+            .populate('tasks')
+            .populate('managedProjects')
+            .populate('assignedPojects')
             .then((data) => {
                 res.json(data)
             })
@@ -52,4 +58,13 @@ module.exports = {
                 res.json(err);
             });
     },
+    addTask: (req, res) => {
+        Employee.updateOne({_id : req.paramsid}, {$push : {tasks : req.body}})
+            .then((data) => {
+                res.json(data);
+            })
+            .catch(err => {
+                res.json(err);
+            })
+    }
 }

@@ -11,7 +11,6 @@ import { TaskService } from 'src/app/services';
 export class EmployeeDashboardComponent implements OnInit {
   noteDescription: string;
   tasks: Task[];
-  noteDescription: String;
   newNote: any;
   @Input() currentUser: Employee;
   @Input() currentCompany: Company;
@@ -35,7 +34,7 @@ export class EmployeeDashboardComponent implements OnInit {
       this.tasks = tasks;
     })
   }
-  onProgressUpdate() {
+  onAddNote() {
     console.log('Inside onProgressUpdate()');
   }
 }

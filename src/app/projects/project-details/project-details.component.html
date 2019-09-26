@@ -191,12 +191,12 @@
                     <p class='text-center'><strong>Add Team Member</strong></p>
 
                       <select multiple class='form-control col-8 mx-auto' name='taskTeam' [(ngModel)]='newTask.teamMembers'>
-                          <option *ngFor="let member of project?.teamMembers" value="{{member['_id']}}-{{member['firstName']}} {{member['lastName']}}">{{member['firstName']}} {{member['lastName']}}</option>
+                          <option *ngFor="let member of project?.teamMembers" value="{{member['_id']}}">{{member['firstName']}} {{member['lastName']}}</option>
                       </select>
                     </form>
                 </div>
                 <div class="modal-footer justify-content-center">
-                    <button (click)='onTaskCreate()' type="button" class="btn btn-success px-5">Add Task</button>
+                    <button data-dismiss="modal" (click)='onTaskCreate()' type="button" class="btn btn-success px-5">Add Task</button>
                 </div>
             </div>
         </div>
