@@ -10,5 +10,6 @@ router
   .delete('/:id', tasks.destroy)
   .put('/:id/addTeamMember', tasks.addTeamMember)
   .put('/:id/removeTeamMember', tasks.removeTeamMember)
+  .get('/getEmployeeTasks/:id', tasks.getEmployeeTasks)
 
 module.exports = router;

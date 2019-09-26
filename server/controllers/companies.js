@@ -49,7 +49,7 @@ module.exports = {
         .catch(err => res.json(err));
     },
     addProject: (req, res) => {
-        Company.updateOne({_id : req.params.id}, {$push : {projects: req.body}})
+        Company.findOneAndUpdate({_id : req.params.id}, {$push : {projects: req.body}})
         .then(data => {
             res.json(data);
         })

@@ -1,0 +1,184 @@
+<div class="container">
+  <nav class="navbar navbar-expand-lg navbar-light bg-white">
+    <a class="navbar-brand" routerLink="/home">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Twemoji_1f60e.svg/768px-Twemoji_1f60e.svg.png" width="30" height="30" class="d-inline-block align-top" alt="">
+      <strong>Funday</strong><span>.com</span></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" id="home" routerLink="/home">Home</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" id="cases" routerLink='/information'>Use Cases</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" id="team" routerLink='/devTeam'>Our Team</a>
+        </li>
+
+        <li class="nav-item">
+          <div id="lrbtn"><a class="nav-link" id="start" routerLink='/dashboard'><button type="button" class="btn btn-sm btn-outline-info">Dashboard</button></a></div>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <section id="projects">
+    <div class="welcome">
+
+      <h2 class="text-center">Welcome, {{currentUser?.firstName}}!</h2>
+    </div>
+    <h2>Manage Projects</h2>
+    <div class="overview">
+      <div *ngFor="let project of projects" class="project mt-4">
+        <h4><a [routerLink]="['/projects/', project._id]">{{project.title}}</a></h4>
+        <h5>Project Lead: {{currentUser?.firstName}} {{currentUser?.lastName}}</h5>
+        <h5>Project Deadline: (<span class="green">{{project.dueDate | date: 'mediumDate'}}</span>)</h5>
+        <div class="progress mb-3">
+          <div class="progress-bar  progress-bar-striped bg-info" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+        </div>
+      </div>
+    </div>
+    <div class='row'>
+        <button type="button" class="btn btn-primary mt-3 mx-auto" data-toggle="modal" data-target="#addProject">Add Project</button>
+    </div>
+
+    <div class="modal fade" id="addProject" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header text-center bg-primary">
+                    <h3 class="modal-title my-auto w-100 text-white">Create A Project</h3>
+                    <button type="button" class="close my-auto text-white" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form #projectForm='ngForm' name='newProjectForm'>
+                      <div class='form-group row justify-content-center'>
+                        <label class='col-2 my-auto' for='title'>Title:</label>
+                        <input type='text' class='form-control col-8' name='title' [(ngModel)]='newProject.title'
+                                placeholder="Title"
+                                #title="ngModel"
+                                minlength="3"
+                                required
+                        >
+                        <small class="mt-0" *ngIf="(title.touched || title.dirty) && title.errors" >
+                          <div *ngIf="title?.errors?.required" class="alert alert-danger">
+                            Please enter a title.
+                          </div>
+                          <div *ngIf="title?.errors?.minlength" class="alert alert-danger">
+                            Title should be at least
+                            {{ title?.errors?.minlength.requiredLength }} characters
+                          </div>
+                        </small>
+                      </div>
+                      <div class='form-group row justify-content-center'>
+                        <label class='col-2 my-auto' for='description'>Description:</label>
+                        <textarea class='form-control col-8'
+                                name='description'
+                                [(ngModel)]='newProject.description'
+                                placeholder="Description"
+                                #description="ngModel"
+                                minlength="3"
+                                required
+                        ></textarea>
+                        <small class="mt-0" *ngIf="(description.touched || description.dirty) && description.errors" >
+                          <div *ngIf="description?.errors?.required" class="alert alert-danger">
+                            Please enter a project description.
+                          </div>
+                          <div *ngIf="description?.errors?.minlength" class="alert alert-danger">
+                            Description should be at least
+                            {{ description?.errors?.minlength.requiredLength }} characters.
+                          </div>
+                        </small>
+                      </div>
+                      <div class='form-group row'>
+                        <label class='col-2 my-auto' for='dueDate'>Due Date: </label>
+                        <input type='date'
+                                class='form-control col-3'
+                                name='date'
+                                [(ngModel)]='newProject.dueDate'
+                                #dueDate="ngModel"
+                                required
+                        >
+                        <small class="mt-0" *ngIf="(dueDate.touched || dueDate.dirty) && dueDate.errors" >
+                          <div *ngIf="dueDate?.errors?.required" class="alert alert-danger">
+                            Please enter a valid date.
+                          </div>
+                        </small>
+                      </div>
+                        <label>Add Team Members:</label>
+                        <div class='form-group row'>
+                          <label class='col-2 my-auto' for='projectDept'>Department:</label>
+                          <select class='form-control col-3' name='projectDept'>
+                              <option>Marketing</option>
+                              <option>PR</option>
+                              <option>Engineering</option>
+                          </select>
+                        </div>
+                        <form>
+                          <select multiple class='form-control col-5' id='teamNames' name='member' [(ngModel)]='newMembers'>
+                              <option *ngFor="let employee of employees" value="{{employee._id}}-{{employee.firstName}} {{employee.lastName}}">{{employee.firstName}} {{employee.lastName}}</option>
+                          </select>
+                          <div class='row'>
+                            <button (click)='onAdd()' class='btn btn-primary mt-3 mx-auto'>Add To Team</button>
+                          </div>
+                        </form>
+                        <div class='addedMembers mt-3'>
+                          <span *ngFor='let member of addedTeamMembers' class='badge badge-success mx-1'>{{ member }}</span>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <button [disabled]='projectForm.invalid' (click)='onSubmit()'   type="button" class="btn btn-primary">Add Project</button>
+                </div>
+                <p>{{ newProject | json }}</p>
+            </div>
+        </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="row map justify-content-center">
+      <div class="col-lg-4 col-sm-6">
+        <p><a routerLink="/home"><strong>Our product</strong></a></p>
+        <p><a href="#" class="purpleh">Product</a></p>
+        <p><a href="#" class="purpleh">Pricing</a></p>
+      </div>
+
+      <div class="col-lg-4 col-sm-6">
+        <p><a routerLink='/information'><Strong>Use cases</Strong></a></p>
+        <p><a href="#" class="greenh">Product Management</a></p>
+        <p><a href="#" class="greenh">All Use Cases</a></p>
+      </div>
+
+      <div class="col-lg-3 col-sm-6">
+        <p><a routerLink='/devTeam'><Strong>Our Team</Strong></a></p>
+        <p><a href="#" class="blueh">About Us</a></p>
+        <p><a href="#" class="blueh">Contact Us</a></p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-6 col-sm-12 real-footer text-center">Made with <i class="fa fa-coffee" aria-hidden="true"></i> & <i class="fa fa-heart" aria-hidden="true"></i><br>
+        All Rights Reserved © funday.com</div>
+      <div class="col-lg-6 col-sm-12 real-footer justify-content-center">
+        <div class="row social justify-content-center">
+          <a href="https://www.facebook.com" class="fa fa-facebook" target="_blank"></a>
+          <a href="https://www.twitter.com" class="fa fa-twitter" target="_blank"></a>
+          <a href="https://www.youtube.com" class="fa fa-youtube" target="_blank"></a>
+          <a href="https://www.skype.com" class="fa fa-skype" target="_blank"></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
