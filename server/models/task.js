@@ -19,6 +19,7 @@ const TaskSchema = new mongoose.Schema({
     default: 0
   },
   teamMembers: [ {type : mongoose.Schema.Types.ObjectId, ref : 'Employee'} ],
+  notes : [{type : mongoose.Schema.Types.ObjectId, ref : 'Note'}]
 }, {timestamps: true });
 TaskSchema.plugin(uniqueValidator, { message: 'Task must be unique within a project'});
 mongoose.model('Task', TaskSchema);
