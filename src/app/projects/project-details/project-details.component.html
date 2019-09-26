@@ -162,7 +162,7 @@
         </thead>
         <tbody>
           <tr>
-            <td><a href="#">Design Sharks</a></td>
+            <td><a [routerLink]="['/tasks', 1]" href="" >Design Sharks</a></td>
             <td>
               <div class="progress">
                 <div class="progress-bar  progress-bar-striped bg-info" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
@@ -170,10 +170,10 @@
             </td>
             <td>6/25/19</td>
             <td>
-                <a href="/tasks/:id/edit" class="btn btn-outline-success mx-1"><i class="fa fa-pencil" aria-hidden="true"></i>
+                <a [routerLink]="['/tasks', 1,'edit']" href="" class="btn btn-outline-success mx-1"><i class="fa fa-pencil" aria-hidden="true"></i>
               </a>
 
-              <a href="/tasks/:id" class="btn btn-outline-danger mx-1"><i class="fa fa-trash" aria-hidden="true"></i></a>
+              <a [routerLink]="['/tasks', 1,'delete']" class="btn btn-outline-danger mx-1"><i class="fa fa-trash" aria-hidden="true"></i></a>
             </td>
           </tr>
           <tr>
