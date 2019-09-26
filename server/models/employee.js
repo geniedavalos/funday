@@ -20,7 +20,7 @@ const EmployeeSchema = new mongoose.Schema({
     },
     password: { type: String, minlength: [8, 'Password must be at least 8 characters long.']},
     isManager: { type: Boolean, default: false },
-    department: { type: String, required: false },
+    department: { type: String, default: 'Unassigned' },
     managedProjects: [ { type : mongoose.Schema.Types.ObjectId, ref : 'Project' } ],
     assignedProjects: [ { type : mongoose.Schema.Types.ObjectId, ref : 'Project' } ],
     tasks: [{ type : mongoose.Schema.Types.ObjectId, ref : 'Task' }]
