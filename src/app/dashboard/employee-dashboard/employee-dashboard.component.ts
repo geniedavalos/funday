@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import {Component, OnInit, Input, OnChanges} from '@angular/core';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { Employee, Company, Task} from 'src/app/models';
 import { TaskService } from 'src/app/services';
@@ -9,7 +9,7 @@ import {Observable} from "rxjs";
   templateUrl: './employee-dashboard.component.html',
   styleUrls: ['./employee-dashboard.component.css']
 })
-export class EmployeeDashboardComponent implements OnInit {
+export class EmployeeDashboardComponent implements OnInit, OnChanges {
   noteDescription: string;
   tasks: Task[];
   newNote: any;
