@@ -11,6 +11,9 @@ import { TaskService } from 'src/app/services';
 export class TaskDetailsComponent implements OnInit {
   private id: string;
   private task: Task;
+  updateProgress: string;
+  percentage: string;
+  newNote: any;
   constructor(
     private readonly taskService: TaskService,
     private readonly route: ActivatedRoute,
@@ -18,6 +21,8 @@ export class TaskDetailsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.updateProgress = '50';
+    this.percentage = this.updateProgress + '%';
     this.route.params.subscribe((params: Params) => {
       this.id = params.get('taskId');
       this.getTask(this.id);
@@ -28,5 +33,10 @@ export class TaskDetailsComponent implements OnInit {
       console.log(result);
       this.task = result;
     });
+  }
+
+  onProgressUpdate() {
+    console.log('Inside onProgressUpdate()');
+    console.log('New progress: ' + this.updateProgress);
   }
 }

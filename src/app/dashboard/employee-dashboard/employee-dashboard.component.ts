@@ -8,6 +8,7 @@ import { Employee } from 'src/app/models';
 })
 export class EmployeeDashboardComponent implements OnInit {
   noteDescription: String;
+  newNote: any;
   @Input() currentUser: Employee;
   theId = 'Random';
 
@@ -19,5 +20,9 @@ export class EmployeeDashboardComponent implements OnInit {
     console.log('Inside onSubmit()');
     console.log(id);
     console.log(this.noteDescription);
+  }
+
+  onProgressUpdate() {
+    console.log('Inside onProgressUpdate()');
   }
 }

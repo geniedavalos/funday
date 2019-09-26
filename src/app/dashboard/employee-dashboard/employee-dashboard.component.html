@@ -97,26 +97,31 @@
       </table>
 
       <div class="modal fade" id="addNote" tabindex="-1" role="dialog" aria-hidden="true">
-          <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                  <div class="modal-header">
-                      <h3 class="modal-title text-center">Add A Note</h3>
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                      </button>
-                  </div>
-                  <div class="modal-body">
-                      <form>
-                          <label for='noteDescription'>Note:</label>
-                          <textarea type='text' rows='4' class='form-control' name='noteDescription' [(ngModel)]='noteDescription'></textarea>
-                      </form>
-                  </div>
-                  <div class="modal-footer justify-content-center">
-                      <button (click)='onSubmit(theId)' type="button" class="btn btn-primary">Add</button>
-                  </div>
+          <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+              <div class="modal-header text-center bg-info">
+                <h3 class="modal-title w-100  my-auto text-white">Add New Notes</h3>
+                <button type="button" class="close text-white my-auto" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
               </div>
+              <div class="modal-body">
+
+                <p class='text-center'><strong>Enter your new notes below</strong></p>
+                <div class='input-group mb-2 justify-content-center'>
+                  <div class='input-group-prepend'>
+                    <span class='input-group-text' id='basic-addon1'><i class="fa fa-pencil-square-o" aria-hidden="true"></i></span>
+                  </div>
+                  <textarea class='form-control col-8' name='note' [(ngModel)]='newNote.content'></textarea>
+                </div>
+
+              </div>
+              <div class="modal-footer justify-content-center">
+                  <button type="button" (click)='onProgressUpdate()' class="btn btn-info">Add Note</button>
+              </div>
+            </div>
           </div>
-      </div>
+        </div>
 
     </section>
 
