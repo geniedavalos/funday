@@ -51,4 +51,33 @@ export class DashboardComponent implements OnInit {
       });
     }
   }
+
+  logoutButton() {
+    const token = localStorage.getItem('access_token');
+    if (!token) {
+      this.router.navigateByUrl('/home');
+    } else {
+      this.authService.logout(token).subscribe(result => {
+        console.log('logoutButton result:', result);
+        this.router.navigateByUrl('/home');
+      });
+    }
+  }
+
+  verifyButton() {
+    const token = localStorage.getItem('access_token');
+    if (!token) {
+      this.router.navigateByUrl('/home');
+    } else {
+      this.authService.verifyLogin(token).subscribe(result => {
+        console.log('verifyButton result:', result);
+        if (result['name'] && result['name'] === 'TokenExpiredError') {
+          this.authService.logout(token).subscribe(logoutResult => {
+            console.log(logoutResult);
+            this.router.navigateByUrl('/home');
+          });
+        }
+      });
+    }
+  }
 }

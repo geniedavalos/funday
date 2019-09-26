@@ -64,5 +64,4 @@ export class ManagerDashboardComponent implements OnInit {
       this.router.navigateByUrl('/dashboard');
     });
   }
-
 }

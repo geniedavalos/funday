@@ -95,8 +95,12 @@ module.exports = {
    * @param {Request} req Request instance
    * @param {Response} res Response instance
    */
-  logout(req, res) {
-    console.log('Logging out!');
+  logout: async (req, res) => {
+    const invalidatedToken = await invalidateToken(req, res, req.body.token);
+    res.json(invalidatedToken);
+  },
+  verify: (req, res) => {
+    verifyToken(req, res, req.body.token);
   }
 }
 /**
@@ -105,12 +109,27 @@ module.exports = {
  * @param {Response} res Server response instance
  * @param {Employee} employee Employee instance
  * @param {Company} company Company instance
+ * @returns {string} Json package including access token
  */
 function completeLogin(req, res, employee, company) {
   // old token implementation:
   // const token = jwt.sign({id: employee._id}, req.app.get('secretKey'), { expiresIn: '1m' });
-  const token = jwt.sign({ eid : employee._id, cid : company._id, isOwner : (company.owner.email == employee.email), isManager : employee.isManager }, req.app.get('secretKey'), { expiresIn: '1m' })
+  const token = jwt.sign({ eid : employee._id, cid : company._id, isOwner : (company.owner.email == employee.email), isManager : employee.isManager, isValid: true }, req.app.get('secretKey'), { expiresIn: '1m' })
   employee = employee.toObject();
   delete employee.password;
   return {status: 'success', message: 'Logged in', data: { employee: employee, token: token }};
+}
+
+function verifyToken(req, res, token) {
+  try {
+    const verifiedToken = jwt.verify(token, req.app.get('secretKey'));
+    res.json(verifiedToken);
+  } catch (err) {
+    res.json(err);
+  }
+}
+
+function invalidateToken(req, res, token) {
+  const decoded = jwt.decode(token);
+  return jwt.sign({ eid : decoded.eid, cid : decoded.cid, isOwner : decoded.isOwner, isManager : decoded.isManager, isValid: false }, req.app.get('secretKey'), { expiresIn: '1s' });
 }
