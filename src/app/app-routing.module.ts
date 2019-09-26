@@ -20,7 +20,7 @@ const enableTracing = false && !environment.production;
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'socket',
+    redirectTo: 'home',
     pathMatch: 'full',
   },
   {
