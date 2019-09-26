@@ -103,15 +103,14 @@
               <span class="input-group-text" id="basic-addon1"><i class="fa fa-building" aria-hidden="true"></i>
               </span>
               </div>
-              <select [(ngModel)]="selectedCompanyID" id="company" class="form-control" name="company"  aria-label="Company" aria-describedby="basic-addon1">
+              <select [(ngModel)]="selectedCompanyID" id="company" class="form-control col" name="company"  aria-label="Company" aria-describedby="basic-addon1">
                 <option selected disabled hidden value="">--Select Company--</option>
                 <option value="createNew">--Add New Company--</option>
                 <option *ngFor="let company of companies" value="{{company._id}}">{{company.name}}</option>
               </select>
-              <span class="px-2 py-2"></span>
               <input *ngIf="selectedCompanyID == 'createNew'" name="name" [(ngModel)]="newCompany.name" type="text" class="form-control" placeholder="Enter here" aria-label="Company" aria-describedby="basic-addon1">
-              <small>If you don't see your company on the list, select "Add New Company."</small>
             </div>
+            <small>If you don't see your company on the list, select "Add New Company."</small>
 
             <div class="input-group mb-3">
               <div class="input-group-prepend">

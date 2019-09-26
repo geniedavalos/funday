@@ -121,7 +121,8 @@ module.exports = {
  */
 function completeLogin(req, res, employee, company) {
   console.log('completing login', employee);
-  const token = jwt.sign({eid: employee._id}, {cid: company._id}, req.app.get('secretKey'), { expiresIn: '1m' });
+  //TODO add company id
+  const token = jwt.sign({id: employee._id}, req.app.get('secretKey'), { expiresIn: '1m' });
   employee = employee.toObject();
   delete employee.password;
   return {status: 'success', message: 'Logged in', data: { employee: employee, token: token }};

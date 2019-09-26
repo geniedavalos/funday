@@ -4,7 +4,7 @@ const Company = mongoose.model('Company')
 module.exports = {
     index: async (_req, res) => {
         try {
-            const companies = await Company.find().sort('type');
+            const companies = await Company.find().sort('name');
             res.json(companies);
         }
         catch (err) {

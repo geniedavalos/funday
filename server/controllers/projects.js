@@ -77,4 +77,11 @@ module.exports = {
         })
         .catch(err => res.json(err));
     },
+    getManagedProjects: (req, res) => {
+        Project.find({'projectLead': req.params.id })
+        .then(data => {
+            res.json(data);
+        })
+        .catch(err => res.json(err));
+    }
 }

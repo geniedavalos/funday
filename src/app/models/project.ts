@@ -8,7 +8,7 @@ export class Project {
     dueDate: Date;
     progress: number;
     isComplete: boolean;
-    projectLead: Employee;
+    projectLead: string;
     teamMembers: string[];
     tasks: Task[];
 }

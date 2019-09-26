@@ -44,5 +44,7 @@ export class ProjectService {
   removeTeamMember(project: Project, employeeID: string): Observable<Project> {
     return this.http.put<Project>(`${this.base}/${project._id}/removeTeamMember`, employeeID)
   }
-
+  getManagedProjects(id: string): Observable<Project[]>{
+    return this.http.get<Project[]>(`${this.base}/getManagedProjects/${id}`);
+  }
 }

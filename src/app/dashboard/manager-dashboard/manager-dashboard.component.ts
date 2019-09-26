@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./manager-dashboard.component.css']
 })
 export class ManagerDashboardComponent implements OnInit {
+  projects : Project[];
   newProject = new Project();
   addedTeamMembers: any [];
   addedIds: any [];
@@ -28,7 +29,13 @@ export class ManagerDashboardComponent implements OnInit {
   ngOnInit() {
     this.addedIds = [];
     this.addedTeamMembers = [];
-    this.random = 'random-string';
+    this.getProjects();
+  }
+
+  getProjects(){
+    this.projectService.getManagedProjects(this.currentUser._id).subscribe(results => {
+      this.projects = results;
+    })
   }
 
   onAdd() {
@@ -48,7 +55,8 @@ export class ManagerDashboardComponent implements OnInit {
     console.log('Inside onSubmit() for form');
     console.log('Submitting: ' + this.newProject.title + ', ' + this.newProject.description + ', ' + this.newProject.dueDate);
     console.log('project', this.newProject);
-    this.newProject.teamMembers = this.addedIds;
+    this.newProject.projectLead = this.currentUser._id
+    // this.newProject.teamMembers = this.addedIds;
     this.projectService.createProject(this.newProject).subscribe(result => {
       console.log(result);
       this.newProject = new Project();
