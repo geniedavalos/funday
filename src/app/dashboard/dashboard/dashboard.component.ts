@@ -35,7 +35,6 @@ export class DashboardComponent implements OnInit {
       this.router.navigateByUrl('/home');
     } else {
       const decoded = this.authService.getDecodedAccessToken(token);
-      console.log(decoded);
       this.employeeService.getEmployee(decoded['eid']).subscribe(result => {
         if (!result) {
           this.router.navigateByUrl('/home');
