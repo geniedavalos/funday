@@ -107,23 +107,22 @@
     </div>
   </form>
 
-  <footer>
+ <footer>
       <div class="row map justify-content-center">
         <div class="col-lg-4 col-sm-6">
-          <p><a routerLink="/home"><strong>Our product</strong></a></p>
+          <p><a [routerLink]="['/home']"><strong>Our product</strong></a></p>
           <p><a href="#" id="purpleh">Product</a></p>
           <p><a href="#" id="purpleh">Pricing</a></p>
         </div>
 
         <div class="col-lg-4 col-sm-6">
-          <p><a routerLink='/information'><Strong>Use cases</Strong></a></p>
+          <p><a [routerLink]="['/information']"><Strong>Use cases</Strong></a></p>
           <p><a href="#" id="greenh">Product Management</a></p>
           <p><a href="#" id="greenh">Sample Use Cases</a></p>
         </div>
 
-
-        <div class="col-lg-3 col-sm-6">
-          <p><a routerLink='/devTeam'><Strong>Our Team</Strong></a></p>
+        <div class="col-lg-4 col-sm-6">
+          <p><a a [routerLink]="['/devTeam']"><Strong>Our Team</Strong></a></p>
           <p><a href="#" id="blueh">About Us</a></p>
           <p><a href="#" id="blueh">Contact Us</a></p>
         </div>
