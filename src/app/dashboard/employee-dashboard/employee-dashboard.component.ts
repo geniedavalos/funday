@@ -11,6 +11,8 @@ import { TaskService } from 'src/app/services';
 export class EmployeeDashboardComponent implements OnInit {
   noteDescription: string;
   tasks: Task[];
+  noteDescription: String;
+  newNote: any;
   @Input() currentUser: Employee;
   @Input() currentCompany: Company;
   theId = 'Random';
@@ -32,5 +34,7 @@ export class EmployeeDashboardComponent implements OnInit {
     this.taskService.getEmployeeTasks(this.currentUser._id).subscribe(tasks => {
       this.tasks = tasks;
     })
+  onProgressUpdate() {
+    console.log('Inside onProgressUpdate()');
   }
 }
