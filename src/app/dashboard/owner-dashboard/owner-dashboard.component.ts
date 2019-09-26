@@ -45,12 +45,32 @@ export class OwnerDashboardComponent implements OnInit, OnChanges {
 
   getProjects() {
     this.projects = this.currentCompany.projects;
-    console.log(this.projects);
-    console.log(this.currentCompany);
+    this.projects.sort((a, b) => {
+      if (a.dueDate > b.dueDate) {
+        return 1;
+      } else if (a.dueDate < b.dueDate) {
+        return -1;
+      }
+      return 0;
+    });
   }
 
   getEmployees() {
     this.employees = this.currentCompany.employees;
+    this.employees.sort((a, b) => {
+      if (a.lastName.toUpperCase() > b.lastName.toUpperCase()) {
+        return 1;
+      } else if (a.lastName.toUpperCase() < b.lastName.toUpperCase()) {
+        return -1;
+      } else {
+        if (a.firstName.toUpperCase() > b.firstName.toUpperCase()) {
+          return 1;
+        } else if (a.firstName.toUpperCase() < b.firstName.toUpperCase()) {
+          return -1;
+        }
+        return 0;
+      }
+    });
   }
 
   onAdd() {

@@ -14,6 +14,7 @@ export class ProjectDetailsComponent implements OnInit {
   id: string;
   project: Project;
   newTask = new Task();
+  newMembers: any;
   editProject = new Project();
   constructor(
     private readonly projectService: ProjectService,
@@ -38,7 +39,7 @@ export class ProjectDetailsComponent implements OnInit {
 
   onTaskCreate(form: NgForm) {
     console.log('Inside onTaskCreate()');
-    
+
   }
 
   onAddTeam() {

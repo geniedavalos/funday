@@ -183,7 +183,7 @@
                       <div class='form-group row'>
                         <label class='my-auto col-3' for='taskTeam'>Team Members:</label>
                         <select multiple class='form-control col-5' name='taskTeam' [(ngModel)]='newTask.teamMembers'>
-                            <option *ngFor="let member of project ?. teamMembers" value="{{member._id}}-{{member.firstName}} {{member.lastName}}">{{member.firstName}} {{member.lastName}}</option>
+                            <option *ngFor="let member of project?.teamMembers" value="{{member['_id']}}-{{member['firstName']}} {{member['lastName']}}">{{member['firstName']}} {{member['lastName']}}</option>
                         </select>
                       </div>
                       <div class='input-group mb-2 justify-content-center'>
@@ -223,29 +223,13 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <th scope="row">Marketing</th>
-            <td>Mark A.</td>
-            <td><a href="#" class="btn btn-outline-danger mx-1"><i class="fa fa-ban" aria-hidden="true"></i></a>
+          <tr *ngFor='let member of project?.teamMembers'>
+            <th scope="row">{{member['department']}}</th>
+            <td>{{member['firstName']}} {{member['lastName']}}</td>
+            <td><a [routerLink]="['']" routerLinkActive="router-link-active"  class="btn btn-outline-danger mx-1"><i class="fa fa-ban" aria-hidden="true"></i></a>
 
-              <a href="#" class="btn btn-outline-info mx-1"><i class="fa fa-search" aria-hidden="true"></i></a>
+              <a [routerLink]="['']" routerLinkActive="router-link-active"  class="btn btn-outline-info mx-1"><i class="fa fa-search" aria-hidden="true"></i></a>
 
-            </td>
-          </tr>
-          <tr>
-            <th scope="row">PR</th>
-            <td>Jacob B.</td>
-            <td><a href="#" class="btn btn-outline-danger mx-1"><i class="fa fa-ban" aria-hidden="true"></i></a>
-
-              <a href="#" class="btn btn-outline-info mx-1"><i class="fa fa-search" aria-hidden="true"></i></a>
-
-            </td>
-          </tr>
-          <tr>
-            <th scope="row">Engineering</th>
-            <td>Larry C.</td>
-            <td><a href="#" class="btn btn-outline-danger mx-1"><i class="fa fa-ban" aria-hidden="true"></i></a>
-              <a href="#" class="btn btn-outline-info mx-1"><i class="fa fa-search" aria-hidden="true"></i></a>
             </td>
           </tr>
         </tbody>
@@ -280,7 +264,7 @@
                   </div>
 
                   <div class='form-group row col-10 mx-auto'>
-                    <select multiple class='form-control' id='teamNames' name='member' [(ngModel)]='newMember'>
+                    <select multiple class='form-control' id='teamNames' name='member' [(ngModel)]='newMembers'>
                         <option value='id:1-Justin'>Justin</option>
                         <option value='id:2-David'>David</option>
                         <option value='id:3-Jane'>Jane</option>
