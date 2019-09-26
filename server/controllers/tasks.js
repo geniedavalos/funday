@@ -12,8 +12,10 @@ module.exports = {
       .catch(err => res.json(err))
   },
   create: (req, res) => {
-    const Task = new Task(req.body)
-    Task.save()
+    console.log(req.body)
+
+
+    Task.create(req.body)
       .then(data => res.json(data))
       .catch(err => res.json(err))
   },

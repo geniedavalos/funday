@@ -18,7 +18,12 @@ export class OwnerDashboardComponent implements OnInit, OnChanges {
   addedTeamMembers: any [];
   addedIds: any [];
   newMembers: any;
-  random: string;
+  newDepartment: string;
+  companyExpanded = false;
+  projectsExpanded = false;
+  employeesExpanded = false;
+
+  editingName = false;
 
   @Input() currentUser: Employee;
   @Input() currentCompany: Company;
@@ -73,6 +78,36 @@ export class OwnerDashboardComponent implements OnInit, OnChanges {
     });
   }
 
+  toggleCompany() {
+    this.companyExpanded = (!this.companyExpanded);
+  }
+
+  toggleProjects() {
+    this.projectsExpanded = (!this.projectsExpanded);
+  }
+
+  toggleEmployees() {
+    this.employeesExpanded = (!this.employeesExpanded);
+  }
+
+  toggleEditName() {
+    this.editingName = (!this.editingName);
+  }
+
+  editCompany(form: NgForm) {
+    this.companyService.updateCompany(this.currentCompany).subscribe(result => {
+      console.log(result);
+    });
+  }
+
+  addDepartment(form: NgForm) {
+    const observable = this.companyService.addDepartment(this.currentCompany, this.newDepartment);
+    observable.subscribe(data => {
+      console.log(data);
+      this.currentCompany = data;
+    });
+  }
+
   onAdd() {
     console.log('Inside onAdd() for teammembers');
     console.log(this.newMembers);
@@ -98,13 +133,11 @@ export class OwnerDashboardComponent implements OnInit, OnChanges {
     this.newProject.teamMembers = this.addedIds;
     this.projectService.createProject(this.newProject).subscribe(result => {
       this.companyService.addProject(this.currentCompany, result).subscribe(res => {
-        this.companyService.getCompany(this.currentCompany._id).subscribe(finalRes => {
-          this.currentCompany = finalRes;
-          this.newProject = new Project();
-          this.getProjects();
-          this.addedIds = [];
-          this.addedTeamMembers = [];
-        });
+        this.currentCompany = res;
+        this.newProject = new Project();
+        this.getProjects();
+        this.addedIds = [];
+        this.addedTeamMembers = [];
       });
     });
   }
