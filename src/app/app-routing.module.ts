@@ -59,6 +59,14 @@ const routes: Routes = [
     path: 'projects/:projectID/tasks/:taskID',
     component: fromTasks.TaskDetailsComponent,
   },
+  {
+    path: 'tasks/:taskID',
+    component: fromTasks.TaskDetailsComponent,
+  },
+  {
+    path: 'tasks/:taskID/edit',
+    component: fromTasks.TaskEditComponent,
+  },
       // {
       //   path: '',
       //   component: fromProjects.ProjectListComponent,
