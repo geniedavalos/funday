@@ -1,5 +1,5 @@
 body, section {
-  margin: 3%;
+  margin: 2%;
 }
 
 /* Header */
@@ -43,14 +43,13 @@ nav {
 }
 
 #img-section .dark-overlay {
-  /* position: absolute; */
   width: 100%;
   min-height: 400px;
   background: rgba(0, 0, 0, 0.8);
 }
 
 #img-section .home-inner {
-  padding-top: 200px;
+  padding-top: 120px;
 }
 
 .green {
@@ -92,8 +91,31 @@ nav {
   margin-top: -50px;
 }
 
-#aboutus .card:hover {
-  background: #3292a6;
+#aboutus .eric:hover {
+  background: rgb(12, 136, 158);
+  color: #fff;
+}
+
+#aboutus .genie:hover {
+  background: #050468;
+  color: #fff;
+}
+
+
+#aboutus .michael:hover {
+  background: #cf2e19;
+  color: #fff;
+}
+
+
+#aboutus .phat:hover {
+  background: #2abb67;
+  color: #fff;
+}
+
+
+#aboutus .wade:hover {
+  background: #131596;
   color: #fff;
 }
 
@@ -103,7 +125,6 @@ nav {
 
 #lead {
   font-size: 1.3rem;
-  line-height: 0.5;
 }
 
 .fa {
@@ -124,7 +145,7 @@ nav {
 }
 
 .support {
-  padding: 4rem 0.3rem;
+  padding: 2.5rem 0.3rem;
   margin: 1rem;
   background-color: rgb(29, 163, 29);
   color: white;
@@ -133,7 +154,7 @@ nav {
 }
 
 .hire {
-  padding: 4rem 0.3rem;
+  padding: 2.5rem 0.3rem;
   margin: 1rem;
   background-color: rgb(20, 108, 143);
   color: white;
@@ -142,7 +163,7 @@ nav {
 }
 
 .guide {
-  padding: 4rem 0.3rem;
+  padding: 2.5rem 0.3rem;
   margin: 1rem;
   background-color: rgb(87, 20, 122);
   color: white;
@@ -189,7 +210,7 @@ footer {
   padding: 0px 20px;
 }
 
-.fa-facebook:hover {
+#facebook:hover {
   color: #3b5998;
 }
 
@@ -197,7 +218,7 @@ footer {
   padding: 0px 20px;
 }
 
-.fa-youtube:hover {
+#youtube:hover {
   color: #c4320b;
 }
 
@@ -205,7 +226,7 @@ footer {
   padding: 0px 20px;
 }
 
-.fa-twitter:hover {
+#twitter:hover {
   color: #00acee;
 }
 
@@ -213,7 +234,7 @@ footer {
   padding: 0px 20px;
 }
 
-.fa-skype:hover {
+#skype:hover {
   color: #00aff0;
 }
 
@@ -226,16 +247,15 @@ footer .map a {
   padding: 2%;
 }
 
-
-.purpleh:hover {
+#purpleh:hover {
   color: rgb(87, 20, 122);
 }
 
-.greenh:hover {
+#greenh:hover {
   color: green;
 }
 
-.blueh:hover {
+#blueh:hover {
   color: rgb(20, 108, 143);
 }
 

@@ -1,46 +1,40 @@
-import {Component, OnInit, Input, OnChanges, SimpleChanges} from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { Employee, Company, Task} from 'src/app/models';
 import { TaskService } from 'src/app/services';
-import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-employee-dashboard',
   templateUrl: './employee-dashboard.component.html',
   styleUrls: ['./employee-dashboard.component.css']
 })
-export class EmployeeDashboardComponent implements OnInit , OnChanges{
+export class EmployeeDashboardComponent implements OnInit {
   noteDescription: string;
   tasks: Task[];
-  id : string;
-  @Input() currentUser: Observable<Employee>;
-  @Input() currentCompany: Observable<Company>;
+  noteDescription: String;
+  newNote: any;
+  @Input() currentUser: Employee;
+  @Input() currentCompany: Company;
+  theId = 'Random';
+
   constructor(
     private readonly taskService: TaskService,
   ) { }
-
   ngOnInit() {
+    this.getTasks();
   }
 
-  ngOnChanges(changes): void {
-    if ('currentUser' in changes) {
-      this.currentUser = changes.currentUser.currentValue;
-      this.id = this.currentUser['_id'];
-      console.log("id = ", this.id)
-      this.getTasks(this.id);
-    }
-  }
-
-  onSubmit() {
+  onSubmit(id: string) {
     console.log('Inside onSubmit()');
+    console.log(id);
     console.log(this.noteDescription);
   }
 
-  getTasks(id){
-
-    this.taskService.getEmployeeTasks(id).subscribe(tasks => {
-      console.log('tasks = ', tasks)
+  getTasks(){
+    this.taskService.getEmployeeTasks(this.currentUser._id).subscribe(tasks => {
       this.tasks = tasks;
     })
+  onProgressUpdate() {
+    console.log('Inside onProgressUpdate()');
   }
 }

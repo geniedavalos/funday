@@ -24,19 +24,19 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a class="nav-link" id="home" href="/index.html">Home</a>
+            <a class="nav-link" id="home" routerLink='/home'>Home</a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" id="cases" href="/cases.html">Use Cases</a>
+            <a class="nav-link" id="cases" routerLink='/information'>Use Cases</a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" id="team" href="/team.html">Our Team</a>
+            <a class="nav-link" id="team" routerLink='/devTeam'>Our Team</a>
           </li>
 
           <li class="nav-item">
-            <div id="lrbtn"><a class="nav-link" id="start" href="/dashboard/manager"><button type="button" class="btn btn-sm btn-outline-info">Dashboard</button></a></div>
+            <div id="lrbtn"><a class="nav-link" id="start" routerLink='/dashboard/'><button type="button" class="btn btn-sm btn-outline-info">Dashboard</button></a></div>
           </li>
         </ul>
       </div>
@@ -48,7 +48,41 @@
         <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 10%" aria-valuenow="10">
         </div>
       </div>
-      <div class="block">  <a href="update.html" class="btn btn-info my-3">Update Progress</a></div>
+      <div class='row mt-3'>
+        <button type="button" class="btn btn-info mx-auto" data-toggle="modal" data-target="#updateProgress">Update Progress</button>
+      </div>
+
+      <div class="modal fade" id="updateProgress" tabindex="-1" role="dialog" aria-hidden="true">
+          <div class="modal-dialog modal-lg" role="document">
+              <div class="modal-content">
+                  <div class="modal-header text-center bg-info">
+                      <h3 class="modal-title w-100  my-auto text-white">Update Progress</h3>
+                      <button type="button" class="close text-white my-auto" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                      </button>
+                  </div>
+                  <div class="modal-body">
+
+                      <p class='text-center'><strong>Enter your progress below</strong></p>
+                      <p class='text-center'>Current Progress</p>
+                      <div class="progress mb-2 col-8 mx-auto p-0">
+                        <div class="progress-bar progress-bar-striped" role="progressbar" [style.width]='percentage' aria-valuenow='5' aria-valuemin='0' aria-valuemax='100'>{{ percentage }}</div>
+                      </div>
+                      <div class='input-group mb-2 justify-content-center mt-3'>
+                      <input type='text' class='form-control col-1' name='progress' [(ngModel)]='updateProgress'>
+                      <div class='input-group-append'>
+                        <span class="input-group-text" id="basic-addon1"><i class="fa fa-percent" aria-hidden="true"></i></span>
+                      </div>
+                      </div>
+
+                  </div>
+                  <div class="modal-footer justify-content-center">
+                      <button type="button" (click)='onProgressUpdate()' class="btn btn-info">Edit Progress</button>
+                  </div>
+              </div>
+          </div>
+      </div>
+
     </section>
 
     <section>
@@ -59,7 +93,36 @@
       <textarea>
       </textarea>
       <br>
-      <div class="block"> <a href="#" class="btn btn-success"> Add Notes</a></div>
+      <div class='row'>
+        <button type="button" class="btn btn-success mx-auto mt-3" data-toggle="modal" data-target="#addNotes">Add Notes</button>
+      </div>
+
+      <div class="modal fade" id="addNotes" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+              <div class="modal-header text-center bg-success">
+                <h3 class="modal-title w-100  my-auto text-white">Add New Notes</h3>
+                <button type="button" class="close text-white my-auto" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+
+                <p class='text-center'><strong>Enter your new notes below</strong></p>
+                <div class='input-group mb-2 justify-content-center'>
+                  <div class='input-group-prepend'>
+                    <span class='input-group-text' id='basic-addon1'><i class="fa fa-pencil-square-o" aria-hidden="true"></i></span>
+                  </div>
+                  <textarea class='form-control col-8' name='note' [(ngModel)]='newNote.content'></textarea>
+                </div>
+
+              </div>
+              <div class="modal-footer justify-content-center">
+                  <button type="button" (click)='onProgressUpdate()' class="btn btn-success">Add Note</button>
+              </div>
+            </div>
+        </div>
+      </div>
 
     </section>
 

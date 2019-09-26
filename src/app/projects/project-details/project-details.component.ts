@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { Project, Task } from 'src/app/models';
-import { ProjectService } from 'src/app/services';
+import { ProjectService, TaskService, EmployeeService } from 'src/app/services';
 import { NgForm } from '@angular/forms';
 
 @Component({
@@ -17,7 +17,9 @@ export class ProjectDetailsComponent implements OnInit {
   newMembers: any;
   editProject = new Project();
   constructor(
+    private readonly employeeService: EmployeeService,
     private readonly projectService: ProjectService,
+    private readonly taskService: TaskService,
     private readonly route: ActivatedRoute,
     private readonly router: Router
   ) { }
@@ -39,7 +41,16 @@ export class ProjectDetailsComponent implements OnInit {
 
   onTaskCreate(form: NgForm) {
     console.log('Inside onTaskCreate()');
-
+    this.taskService.createTask(this.newTask).subscribe(task => {
+      this.projectService.addTask(this.project, task).subscribe(result => {
+        console.log(result);
+      });
+      for(let teamMember of task.teamMembers){
+        this.employeeService.addTask(teamMember, task._id).subscribe(data => {
+          console.log(data);
+        })
+      }
+    })
   }
 
   onAddTeam() {
