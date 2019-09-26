@@ -148,7 +148,6 @@
                       </form>
                   </div>
                   <div class="modal-footer justify-content-center">
-                      <button *ngIf='projectForm.valid' data-dismiss="modal" (click)='onSubmit(projectForm)' type="button" class="btn btn-primary">Add Project</button>
                       <button [disabled]='projectForm.invalid' (click)='onSubmit()'   type="button" class="btn btn-primary">Add Project</button>
                   </div>
                   <p>{{ newProject | json }}</p>

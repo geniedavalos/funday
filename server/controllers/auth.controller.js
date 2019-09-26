@@ -114,7 +114,7 @@ module.exports = {
 function completeLogin(req, res, employee, company) {
   // old token implementation:
   // const token = jwt.sign({id: employee._id}, req.app.get('secretKey'), { expiresIn: '1m' });
-  const token = jwt.sign({ eid : employee._id, cid : company._id, isOwner : (company.owner.email == employee.email), isManager : employee.isManager, isValid: true }, req.app.get('secretKey'), { expiresIn: '1m' })
+  const token = jwt.sign({ eid : employee._id, cid : company._id, isOwner : (company.owner.email == employee.email), isManager : employee.isManager, isValid: true }, req.app.get('secretKey'), { expiresIn: '2h' })
   employee = employee.toObject();
   delete employee.password;
   return {status: 'success', message: 'Logged in', data: { employee: employee, token: token }};
