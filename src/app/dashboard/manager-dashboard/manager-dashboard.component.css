@@ -270,3 +270,6 @@ footer .map a {
 .blueh:hover {
   color: rgb(20, 108, 143);
 }
+.errorMessage{
+  max-height:15px;
+}

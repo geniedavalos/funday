@@ -12,5 +12,6 @@ router.get('/', projects.index)
     .put('/:id/addTeamMember', projects.addTeamMember)
     .put('/:id/removeTeamMember', projects.removeTeamMember)
     .get('/getManagedProjects/:id', projects.getManagedProjects)
+    .get('/:id/getTasks')
 
 module.exports = router;

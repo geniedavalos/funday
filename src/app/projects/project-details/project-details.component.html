@@ -36,7 +36,7 @@
           </li>
 
           <li class="nav-item">
-            <div id="lrbtn"><a class="nav-link" id="start" href="/dashboard/manager"><button type="button" class="btn btn-sm btn-outline-info">Dashboard</button></a></div>
+            <div id="lrbtn"><a class="nav-link" id="start" routerLink='/dashboard'><button type="button" class="btn btn-sm btn-outline-info">Dashboard</button></a></div>
           </li>
         </ul>
       </div>
@@ -55,26 +55,32 @@
       <div class="modal fade" id="editProject" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h3 class="modal-title text-center">Edit Project</h3>
-                    <p>{{ editProject | json }}</p>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <div class="modal-header text-center bg-info">
+                    <h3 class="modal-title w-100  my-auto text-white">Edit Project</h3>
+                    <button type="button" class="close text-white my-auto" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
                   <form>
-                    <label for='title'>Title:</label>
-                    <input type='text' class='form-control' name='title' [(ngModel)]='editProject.title'>
-                    <label for='description'>Description:</label>
-                    <textarea class='form-control' name='description' [(ngModel)]='editProject.description'></textarea>
-                    <label for='dueDate'>Due Date: </label>
-                    <input type='date' class='form-control' name='date'[(ngModel)]='editProject.dueDate'>
+                    <div class='form-group row justify-content-center'>
+                      <label class='col-3 my-auto' for='title'>Title:</label>
+                      <input type='text' class='form-control col-7' name='title' [(ngModel)]='editProject.title'>
+                    </div>
+                    <div class='form-group row justify-content-center'>
+                      <label for='description' class='col-3 my-auto'>Description:</label>
+                      <textarea class='form-control col-7' name='description' [(ngModel)]='editProject.description'></textarea>
+                    </div>
+                    <div class='form-group row justify-content-center'>
+                      <label class='col-3 my-auto' for='dueDate'>Due Date: </label>
+                      <input type='date' class='form-control col-5' name='date'[(ngModel)]='editProject.dueDate'>
+                    </div>
                   </form>
                 </div>
                 <div class="modal-footer justify-content-center">
-                    <button type="button" (click)='onProjectEdit()' class="btn btn-primary">Edit Project</button>
+                    <button type="button" (click)='onProjectEdit()' class="btn btn-info">Edit Project</button>
                 </div>
+                <p>{{ editProject | json }}</p>
             </div>
         </div>
     </div>
@@ -82,17 +88,19 @@
       <div class="modal fade" id="deleteProject" tabindex="-1" role="dialog" aria-hidden="true">
           <div class="modal-dialog" role="document">
               <div class="modal-content">
-                  <div class="modal-header">
-                      <h3 class="modal-title text-center">Delete Project</h3>
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <div class="modal-header text-center bg-danger">
+                      <h3 class="modal-title w-100 my-auto text-white">Delete Project</h3>
+                      <button type="button" class="close text-white my-auto" data-dismiss="modal" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
                       </button>
                   </div>
                   <div class="modal-body">
-                      <h5 class='text-danger'>This action cannot be undone! Enter the project name below to permanently delete.</h5>
+                      <h5 class='text-danger text-center'>This action cannot be undone! Enter the project name below to permanently delete.</h5>
                       <form>
-                          <label for='noteDescription'>Project Name</label>
-                          <input type='text' class='form-control'name='projectTitle'>
+                        <div class='form-group row mt-3'>
+                          <label class='col-4 my-auto' for='noteDescription'>Project Name</label>
+                          <input type='text' class='form-control col-7'name='projectTitle'>
+                        </div>
                       </form>
                   </div>
                   <div class="modal-footer justify-content-center">
@@ -105,7 +113,6 @@
       <table class="table mt-5 text-center ">
         <thead>
           <tr>
-            <th scope="col">Name</th>
             <th scope="col">Task</th>
             <th scope="col">Progress</th>
             <th scope="col">Due Date</th>
@@ -114,7 +121,6 @@
         </thead>
         <tbody>
           <tr>
-            <th scope="row">Mark A.</th>
             <td><a href="#">Design Sharks</a></td>
             <td>
               <div class="progress">
@@ -130,7 +136,6 @@
             </td>
           </tr>
           <tr>
-            <th scope="row">Mark A.</th>
             <td><a href="#">Color sharks</a></td>
             <td>
               <div class="progress">
@@ -147,7 +152,6 @@
           </tr>
 
           <tr>
-            <th scope="row">Mark A.</th>
             <td><a href="#">Upload sharks</a></td>
             <td>
               <div class="progress">
@@ -175,23 +179,30 @@
     <div class="modal fade" id="addTask" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h3 class="modal-title text-center">Add A Task</h3>
+                <div class="modal-header bg-success text-center">
+                    <h3 class="modal-title text-center my-auto w-100 text-white">Create A Task</h3>
                     <p>{{ newTask | json }}</p>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close my-auto text-white" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form>
-                        <label for='title'>Title:</label>
-                        <input type='text' class='form-control' name='title' [(ngModel)]='newTask.title'>
-                        <label for='description'>Description:</label>
-                        <input type='text' class='form-control' name='description' [(ngModel)]='newTask.description'>
-                        <label for='due'>Due Date:</label>
-                        <input type='date' name='due' class='form-control' [(ngModel)]='newTask.dueDate'>
-                        <label for='taskTeam'>Team Members:</label>
-                        <select multiple class='form-control' name='taskTeam' [(ngModel)]='newTask.teamMembers'>
+                    <form #taskForm='ngForm' name='newTaskForm'>
+                      <div class='form-group row'>
+                        <label class='col-3 my-auto' for='title'>Title:</label>
+                        <input type='text' class='form-control col-7' name='title' [(ngModel)]='newTask.title'>
+                      </div>
+                      <div class='form-group row'>
+                        <label class='col-3 my-auto' for='description'>Description:</label>
+                        <input type='text' class='form-control col-7' name='description' [(ngModel)]='newTask.description'>
+                      </div>
+                      <div class='form-group row'>
+                        <label class='col-3 my-auto' for='due'>Due Date:</label>
+                        <input type='date' name='due' class='form-control col-5' [(ngModel)]='newTask.dueDate'>
+                      </div>
+                      <div class='form-group row'>
+                        <label class='my-auto col-3' for='taskTeam'>Team Members:</label>
+                        <select multiple class='form-control col-5' name='taskTeam' [(ngModel)]='newTask.teamMembers'>
                             <option value='id-1'>Justin</option>
                             <option value='id-2'>David</option>
                             <option value='id-3'>Jane</option>
@@ -199,10 +210,11 @@
                             <option value='id-5'>Austin</option>
                             <option value='id-6'>Bob</option>
                         </select>
+                      </div>
                     </form>
                 </div>
                 <div class="modal-footer justify-content-center">
-                    <button (click)='onTaskCreate()' type="button" class="btn btn-primary">Add Task</button>
+                    <button (click)='onTaskCreate()' type="button" class="btn btn-success">Add Task</button>
                 </div>
             </div>
         </div>
@@ -256,36 +268,38 @@
       <div class="modal fade" id="addTeamMember" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h3 class="modal-title">Add Team Members</h3>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <div class="modal-header bg-success text-center">
+                    <h3 class="modal-title w-100 text-white my-auto">Add Team Members</h3>
+                    <button type="button" class="close text-white my-auto" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                        <label for='projectDept'>Department:</label>
-                        <select class='form-control' name='projectDept'>
-                            <option>Marketing</option>
-                            <option>PR</option>
-                            <option>Engineering</option>
-                        </select>
-                        <label for='projectTeam'>Team:</label>
-                        <form>
-                          <select multiple class='form-control' id='teamNames' name='member' [(ngModel)]='newMember'>
-                              <option value='id:1-Justin'>Justin</option>
-                              <option value='id:2-David'>David</option>
-                              <option value='id:3-Jane'>Jane</option>
-                              <option value='id:4-Jill'>Jill</option>
-                              <option value='id:5-Austin'>Austin</option>
-                              <option value='id:6-Bob'>Bob</option>
-                          </select>
-                        </form>
+                  <div class='form-group row'>
+                    <label class='col-3' for='projectDept'>Department:</label>
+                    <select class='form-control col-7' name='projectDept'>
+                        <option>Marketing</option>
+                        <option>PR</option>
+                        <option>Engineering</option>
+                    </select>
+                  </div>
+                  <div class='form-group row'>
+                    <label class='col-3' for='projectTeam'>Team:</label>
+                    <select multiple class='form-control col-7' id='teamNames' name='member' [(ngModel)]='newMember'>
+                        <option value='id:1-Justin'>Justin</option>
+                        <option value='id:2-David'>David</option>
+                        <option value='id:3-Jane'>Jane</option>
+                        <option value='id:4-Jill'>Jill</option>
+                        <option value='id:5-Austin'>Austin</option>
+                        <option value='id:6-Bob'>Bob</option>
+                    </select>
+                  </div>
                         <div class='addedMembers mt-3'>
                           <span *ngFor='let member of addedTeamMembers' class='badge badge-success mx-1'>{{ member }}</span>
                         </div>
                 </div>
                 <div class="modal-footer justify-content-center">
-                    <button (click)='onAddTeam()' type="button" class="btn btn-primary">Add Team Member</button>
+                    <button (click)='onAddTeam()' type="button" class="btn btn-success">Add Team Member</button>
                 </div>
             </div>
         </div>
