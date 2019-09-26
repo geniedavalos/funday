@@ -3,8 +3,8 @@ const Project = mongoose.model('Project')
 module.exports = {
     index: async (_req, res) => {
         try {
-            const Projects = await Project.find().sort('type');
-            res.json({Projects: Projects});
+            const projects = await Project.find().sort('type');
+            res.json(projects);
         }
         catch (err) {
             res.json(err);
@@ -13,7 +13,7 @@ module.exports = {
     show: (req, res) => {
         Project.findById(req.params.id)
             .then((data) => {
-                res.json({Project: data})
+                res.json(data)
             })
             .catch(err => res.json(err));
     },
@@ -32,7 +32,7 @@ module.exports = {
     update: (req, res) => {
         Project.findOneAndUpdate({ _id : req.params.id }, { runValidators: true, context: 'query' }, req.body)
             .then((data) => {
-                res.json({updatedProject: data});
+                res.json(data);
             })
             .catch(err => res.json(err));
     },

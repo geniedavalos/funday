@@ -40,4 +40,7 @@ export class TaskService {
   removeTeamMember(task: Task, employeeID: string): Observable<Task> {
     return this.http.put<Task>(`${this.base}/${task._id}/removeTeamMember`, employeeID)
   }
+  getEmployeeTasks(id: String): Observable<Task[]> {
+    return this.http.get<Task[]>(`${this.base}/getEmployeeTasks/${id}`)
+  }
 }

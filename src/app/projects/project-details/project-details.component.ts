@@ -11,8 +11,8 @@ import { NgForm } from '@angular/forms';
 })
 export class ProjectDetailsComponent implements OnInit {
   tasks: Task[];
-  private id: string;
-  private project: Project;
+  id: string;
+  project: Project;
   newTask = new Task();
   editProject = new Project();
   constructor(
@@ -24,15 +24,15 @@ export class ProjectDetailsComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe((params: Params) => {
       this.id = params['id'];
-      this.tasks = this.getProject(this.id)["tasks"];
-      console.log(this.tasks)
+      this.getProject(this.id);
     });
   }
   getProject(id) {
     this.projectService.getProject(id).subscribe(result => {
-      console.log(result);
       this.project = result;
-      return this.project;
+      console.log(this.project);
+      this.tasks = this.project.tasks;
+      console.log(this.tasks);
     });
   }
 
