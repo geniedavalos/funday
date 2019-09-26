@@ -196,7 +196,7 @@
                       <hr>
                       <p class='text-center'><strong>Add Team Member</strong></p>
                       <select multiple class='form-control col-8 mx-auto' name='taskTeam' [(ngModel)]='newTask.teamMembers'>
-                        <option *ngFor="let member of project?.teamMembers" value="member._id">{{member.firstName}} {{member.lastName}}</option>
+                        <option *ngFor="let member of project?.teamMembers" value="{{member._id}}">{{member.firstName}} {{member.lastName}}</option>
                       </select>
                     </form>
                 </div>
