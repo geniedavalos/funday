@@ -34,6 +34,7 @@ export class EmployeeDashboardComponent implements OnInit {
     this.taskService.getEmployeeTasks(this.currentUser._id).subscribe(tasks => {
       this.tasks = tasks;
     })
+  }
   onProgressUpdate() {
     console.log('Inside onProgressUpdate()');
   }

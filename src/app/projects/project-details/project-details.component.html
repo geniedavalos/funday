@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Funday.com - Team Management Platform</title>
+  <title>funday.com - Team Management Platform</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="project-details.component.css">
@@ -16,7 +16,7 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-white">
       <a class="navbar-brand" href="/index.html">
         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Twemoji_1f60e.svg/768px-Twemoji_1f60e.svg.png" width="30" height="30" class="d-inline-block align-top" alt="">
-        <strong>Funday</strong><span>.com</span></a>
+        <strong> funday</strong><span>.com</span></a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -180,12 +180,6 @@
                         </div>
                         <input type='text' placeholder='Title' class='form-control col-7' name='title' [(ngModel)]='newTask.title'>
                       </div>
-                      <div class='form-group row'>
-                        <label class='my-auto col-3' for='taskTeam'>Team Members:</label>
-                        <select multiple class='form-control col-5' name='taskTeam' [(ngModel)]='newTask.teamMembers'>
-                            <option *ngFor="let member of project?.teamMembers" value="{{member['_id']}}-{{member['firstName']}} {{member['lastName']}}">{{member['firstName']}} {{member['lastName']}}</option>
-                        </select>
-                      </div>
                       <div class='input-group mb-2 justify-content-center'>
                         <div class="input-group-prepend">
                           <span class="input-group-text" id="basic-addon1"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></span>
@@ -193,15 +187,11 @@
                         <textarea placeholder='Description' class='form-control col-7' name='description' [(ngModel)]='newTask.description'></textarea>
                       </div>
 
-                      <hr>
-                      <p class='text-center'><strong>Add Team Member</strong></p>
+                    <hr>
+                    <p class='text-center'><strong>Add Team Member</strong></p>
+
                       <select multiple class='form-control col-8 mx-auto' name='taskTeam' [(ngModel)]='newTask.teamMembers'>
-                        <option value='id-1'>Justin</option>
-                        <option value='id-2'>David</option>
-                        <option value='id-3'>Jane</option>
-                        <option value='id-4'>Jill</option>
-                        <option value='id-5'>Austin</option>
-                        <option value='id-6'>Bob</option>
+                          <option *ngFor="let member of project?.teamMembers" value="{{member['_id']}}-{{member['firstName']}} {{member['lastName']}}">{{member['firstName']}} {{member['lastName']}}</option>
                       </select>
                     </form>
                 </div>
@@ -297,7 +287,7 @@
         <div class="col-lg-4 col-sm-6">
           <p><a href="/cases.html"><Strong>Use cases</Strong></a></p>
           <p><a href="#" class="greenh">Product Management</a></p>
-          <p><a href="#" class="greenh">All Use Cases</a></p>
+          <p><a href="#" class="greenh">Sample Use Cases</a></p>
         </div>
 
 
