@@ -21,6 +21,14 @@ export class SocketService {
     });
     return observable;
   }
+  newUser() {
+    const observable = new Observable<{user: string, message: string}>(observer => {
+      this.socket.on('newUser', (data) => {
+        observer.next(data);
+      });
+    });
+    return observable;
+  }
   sendMessage(user, msg) {
     this.socket.emit('newMessage', {user, msg});
   }
