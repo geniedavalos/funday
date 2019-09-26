@@ -80,5 +80,4 @@ export class ManagerDashboardComponent implements OnInit {
     });
     form.reset();
   }
-
 }

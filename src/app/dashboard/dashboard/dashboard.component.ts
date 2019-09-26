@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
-import { EmployeeService } from 'src/app/services';
+import { EmployeeService, CompanyService } from 'src/app/services';
 import { Employee } from 'src/app/models';
 import { Router } from '@angular/router';
+import { Company } from 'src/app/models/company';
 
 @Component({
   selector: 'app-dashboard',
@@ -11,16 +12,19 @@ import { Router } from '@angular/router';
 })
 export class DashboardComponent implements OnInit {
   currentUser: Employee;
+  currentCompany: Company;
 
-
-  isManager: Boolean;
+  isOwner: boolean;
+  isManager: boolean;
   constructor(
     private readonly authService: AuthService,
     private readonly employeeService: EmployeeService,
+    private readonly companyService: CompanyService,
     private readonly router: Router,
   ) { }
 
   ngOnInit() {
+    this.isOwner = false;
     this.isManager = false;
     this.getCurrentUser();
   }
@@ -31,12 +35,48 @@ export class DashboardComponent implements OnInit {
       this.router.navigateByUrl('/home');
     } else {
       const decoded = this.authService.getDecodedAccessToken(token);
-      this.employeeService.getEmployee(decoded['id']).subscribe(result => {
+      console.log(decoded);
+      this.employeeService.getEmployee(decoded['eid']).subscribe(result => {
         if (!result) {
           this.router.navigateByUrl('/home');
         }
         this.currentUser = result;
-        this.isManager = this.currentUser.isManager;
+        this.isManager = decoded.isManager;
+        this.isOwner = decoded.isOwner;
+      });
+      this.companyService.getCompany(decoded['cid']).subscribe(result => {
+        if (result) {
+          this.currentCompany = result;
+        }
+      });
+    }
+  }
+
+  logoutButton() {
+    const token = localStorage.getItem('access_token');
+    if (!token) {
+      this.router.navigateByUrl('/home');
+    } else {
+      this.authService.logout(token).subscribe(result => {
+        console.log('logoutButton result:', result);
+        this.router.navigateByUrl('/home');
+      });
+    }
+  }
+
+  verifyButton() {
+    const token = localStorage.getItem('access_token');
+    if (!token) {
+      this.router.navigateByUrl('/home');
+    } else {
+      this.authService.verifyLogin(token).subscribe(result => {
+        console.log('verifyButton result:', result);
+        if (result['name'] && result['name'] === 'TokenExpiredError') {
+          this.authService.logout(token).subscribe(logoutResult => {
+            console.log(logoutResult);
+            this.router.navigateByUrl('/home');
+          });
+        }
       });
     }
   }
