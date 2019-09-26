@@ -53,7 +53,7 @@
       </div>
 
       <div class="modal fade" id="editProject" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header text-center bg-info">
                     <h3 class="modal-title w-100  my-auto text-white">Edit Project</h3>
@@ -63,24 +63,32 @@
                 </div>
                 <div class="modal-body">
                   <form>
-                    <div class='form-group row justify-content-center'>
-                      <label class='col-3 my-auto' for='title'>Title:</label>
-                      <input type='text' class='form-control col-7' name='title' [(ngModel)]='editProject.title'>
+                    <p class='text-center'>Edit project details below</p>
+                    <div class='input-group mb-2 justify-content-center'>
+                      <div class='input-group-prepend'>
+                        <span class="input-group-text" id="basic-addon1"><i class="fa fa-terminal" aria-hidden="true"></i></span>
+                      </div>
+                      <input type='text' placeholder='Title' class='form-control col-7' name='title' [(ngModel)]='editProject.title'>
                     </div>
-                    <div class='form-group row justify-content-center'>
-                      <label for='description' class='col-3 my-auto'>Description:</label>
-                      <textarea class='form-control col-7' name='description' [(ngModel)]='editProject.description'></textarea>
+
+                    <div class='input-group mb-2 justify-content-center'>
+                      <div class='input-group-prepend'>
+                        <span class="input-group-text" id="basic-addon1"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></span>
+                      </div>
+                      <textarea class='form-control col-7' placeholder='Description' name='description' [(ngModel)]='editProject.description'></textarea>
                     </div>
-                    <div class='form-group row justify-content-center'>
-                      <label class='col-3 my-auto' for='dueDate'>Due Date: </label>
-                      <input type='date' class='form-control col-5' name='date'[(ngModel)]='editProject.dueDate'>
+
+                    <div class='input-group mb-2 justify-content-center'>
+                      <div class='input-group-prepend'>
+                        <span class="input-group-text" id="basic-addon1"><i class="fa fa-calendar" aria-hidden="true"></i></span>
+                      </div>
+                      <input type='date' class='form-control col-7' name='date'[(ngModel)]='editProject.dueDate'>
                     </div>
                   </form>
                 </div>
                 <div class="modal-footer justify-content-center">
                     <button type="button" (click)='onProjectEdit()' class="btn btn-info">Edit Project</button>
                 </div>
-                <p>{{ editProject | json }}</p>
             </div>
         </div>
     </div>
@@ -95,11 +103,14 @@
                       </button>
                   </div>
                   <div class="modal-body">
-                      <h5 class='text-danger text-center'>This action cannot be undone! Enter the project name below to permanently delete.</h5>
+                      <p class='text-center'>This action cannot be undone!</p>
+                      <p class='text-center'>Enter the project name below to permanently delete.</p>
                       <form>
-                        <div class='form-group row mt-3'>
-                          <label class='col-4 my-auto' for='noteDescription'>Project Name</label>
-                          <input type='text' class='form-control col-7'name='projectTitle'>
+                        <div class='input-group mb-2 justify-content-center'>
+                          <div class='input-group-prepend'>
+                            <span class="input-group-text text-danger" id="basic-addon1"><i class="fa fa-trash-o" aria-hidden="true"></i></span>
+                          </div>
+                          <input type='text' placeholder='Project Name' class='form-control col-7'name='projectTitle'>
                         </div>
                       </form>
                   </div>
@@ -177,44 +188,52 @@
     </section>
 
     <div class="modal fade" id="addTask" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header bg-success text-center">
-                    <h3 class="modal-title text-center my-auto w-100 text-white">Create A Task</h3>
-                    <p>{{ newTask | json }}</p>
-                    <button type="button" class="close my-auto text-white" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    </button>
+                  <h3 class="modal-title text-center my-auto w-100 text-white">Create A Task</h3>
+                  <button type="button" class="close my-auto text-white" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                  </button>
                 </div>
                 <div class="modal-body">
+                    <p class='text-center'><strong>Enter a due date, title and description</strong></p>
                     <form #taskForm='ngForm' name='newTaskForm'>
-                      <div class='form-group row'>
-                        <label class='col-3 my-auto' for='title'>Title:</label>
-                        <input type='text' class='form-control col-7' name='title' [(ngModel)]='newTask.title'>
+                      <div class='input-group mb-2 justify-content-center'>
+                        <div class="input-group-prepend">
+                          <span class="input-group-text" id="basic-addon1"><i class="fa fa-calendar" aria-hidden="true"></i></span>
+                        </div>
+                        <input type='date' name='due' class='form-control col-7' [(ngModel)]='newTask.dueDate'>
                       </div>
-                      <div class='form-group row'>
-                        <label class='col-3 my-auto' for='description'>Description:</label>
-                        <input type='text' class='form-control col-7' name='description' [(ngModel)]='newTask.description'>
+
+                      <div class='input-group mb-2 justify-content-center'>
+                        <div class='input-group-prepend'>
+                          <span class="input-group-text" id="basic-addon1"><i class="fa fa-terminal" aria-hidden="true"></i></span>
+                        </div>
+                        <input type='text' placeholder='Title' class='form-control col-7' name='title' [(ngModel)]='newTask.title'>
                       </div>
-                      <div class='form-group row'>
-                        <label class='col-3 my-auto' for='due'>Due Date:</label>
-                        <input type='date' name='due' class='form-control col-5' [(ngModel)]='newTask.dueDate'>
+
+                      <div class='input-group mb-2 justify-content-center'>
+                        <div class="input-group-prepend">
+                          <span class="input-group-text" id="basic-addon1"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></span>
+                        </div>
+                        <textarea placeholder='Description' class='form-control col-7' name='description' [(ngModel)]='newTask.description'></textarea>
                       </div>
-                      <div class='form-group row'>
-                        <label class='my-auto col-3' for='taskTeam'>Team Members:</label>
-                        <select multiple class='form-control col-5' name='taskTeam' [(ngModel)]='newTask.teamMembers'>
-                            <option value='id-1'>Justin</option>
-                            <option value='id-2'>David</option>
-                            <option value='id-3'>Jane</option>
-                            <option value='id-4'>Jill</option>
-                            <option value='id-5'>Austin</option>
-                            <option value='id-6'>Bob</option>
-                        </select>
-                      </div>
+
+                      <hr>
+                      <p class='text-center'><strong>Add Team Members</strong></p>
+                      <select multiple class='form-control col-8 mx-auto' name='taskTeam' [(ngModel)]='newTask.teamMembers'>
+                        <option value='id-1'>Justin</option>
+                        <option value='id-2'>David</option>
+                        <option value='id-3'>Jane</option>
+                        <option value='id-4'>Jill</option>
+                        <option value='id-5'>Austin</option>
+                        <option value='id-6'>Bob</option>
+                      </select>
                     </form>
                 </div>
                 <div class="modal-footer justify-content-center">
-                    <button (click)='onTaskCreate()' type="button" class="btn btn-success">Add Task</button>
+                    <button (click)='onTaskCreate()' type="button" class="btn btn-success px-5">Add Task</button>
                 </div>
             </div>
         </div>
@@ -275,17 +294,20 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                  <div class='form-group row'>
-                    <label class='col-3' for='projectDept'>Department:</label>
-                    <select class='form-control col-7' name='projectDept'>
+                  <p class='text-center'><strong>Select Team Members</strong></p>
+                  <div class='input-group mb-2 justify-content-center'>
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="basic-addon1"><i class="fa fa-building" aria-hidden="true"></i></span>
+                    </div>
+                    <select class='form-control col-8' name='projectDept'>
                         <option>Marketing</option>
                         <option>PR</option>
                         <option>Engineering</option>
                     </select>
                   </div>
-                  <div class='form-group row'>
-                    <label class='col-3' for='projectTeam'>Team:</label>
-                    <select multiple class='form-control col-7' id='teamNames' name='member' [(ngModel)]='newMember'>
+
+                  <div class='form-group row col-10 mx-auto'>
+                    <select multiple class='form-control' id='teamNames' name='member' [(ngModel)]='newMember'>
                         <option value='id:1-Justin'>Justin</option>
                         <option value='id:2-David'>David</option>
                         <option value='id:3-Jane'>Jane</option>
@@ -299,7 +321,7 @@
                         </div>
                 </div>
                 <div class="modal-footer justify-content-center">
-                    <button (click)='onAddTeam()' type="button" class="btn btn-success">Add Team Member</button>
+                    <button (click)='onAddTeam()' type="button" class="btn btn-success px-5">Add Team Member</button>
                 </div>
             </div>
         </div>

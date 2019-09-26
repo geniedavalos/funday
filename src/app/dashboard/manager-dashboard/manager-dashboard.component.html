@@ -67,92 +67,111 @@
           <div class="modal-dialog modal-lg" role="document">
               <div class="modal-content">
                   <div class="modal-header text-center bg-primary">
-                      <h3 class="modal-title my-auto w-100 text-white">Create A Project</h3>
-                      <button type="button" class="close my-auto text-white" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                      </button>
+                    <h3 class="modal-title my-auto w-100 text-white">Create A Project</h3>
+                    <button type="button" class="close my-auto text-white" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
                   </div>
                   <div class="modal-body">
-                      <form #projectForm='ngForm' name='newProjectForm'>
-                        <div class='form-group row justify-content-center'>
-                          <label class='col-2 my-auto' for='title'>Title:</label>
-                          <input type='text' class='form-control col-8' name='title' [(ngModel)]='newProject.title'
-                                 placeholder="Title"
-                                 #title="ngModel"
-                                 minlength="3"
-                                 required
-                          >
-                          <small class="mt-0" *ngIf="(title.touched || title.dirty) && title.errors" >
-                            <div *ngIf="title?.errors?.required" class="alert alert-danger">
-                              Please enter a title.
-                            </div>
-                            <div *ngIf="title?.errors?.minlength" class="alert alert-danger">
-                              Title should be at least
-                              {{ title?.errors?.minlength.requiredLength }} characters
-                            </div>
-                          </small>
+                    <p class='text-center'><strong>Step 1</strong></p>
+                    <p class='text-center'>Enter a due date, title and description</p>
+                    <form #projectForm='ngForm' name='newProjectForm'>
+                      <div class='input-group mb-2 justify-content-center'>
+                        <div class="input-group-prepend">
+                          <span class="input-group-text" id="basic-addon1"><i class="fa fa-calendar" aria-hidden="true"></i></span>
                         </div>
-                        <div class='form-group row justify-content-center'>
-                          <label class='col-2 my-auto' for='description'>Description:</label>
-                          <textarea class='form-control col-8'
-                                 name='description'
-                                 [(ngModel)]='newProject.description'
-                                 placeholder="Description"
-                                 #description="ngModel"
-                                 minlength="3"
-                                 required
-                          ></textarea>
-                          <small class="mt-0" *ngIf="(description.touched || description.dirty) && description.errors" >
-                            <div *ngIf="description?.errors?.required" class="alert alert-danger">
-                              Please enter a project description.
-                            </div>
-                            <div *ngIf="description?.errors?.minlength" class="alert alert-danger">
-                              Description should be at least
-                              {{ description?.errors?.minlength.requiredLength }} characters.
-                            </div>
-                          </small>
+                        <input type='date'
+                                class='form-control col-8'
+                                name='date'
+                                [(ngModel)]='newProject.dueDate'
+                                #dueDate="ngModel"
+                                required
+                        >
+                      </div>
+                      <small class="mt-0" *ngIf="(dueDate.touched || dueDate.dirty) && dueDate.errors" >
+                        <div *ngIf="dueDate?.errors?.required" class="alert alert-danger col-8 mx-auto">
+                          Please enter a valid date.
                         </div>
-                        <div class='form-group row'>
-                          <label class='col-2 my-auto' for='dueDate'>Due Date: </label>
-                          <input type='date'
-                                 class='form-control col-3'
-                                 name='date'
-                                 [(ngModel)]='newProject.dueDate'
-                                 #dueDate="ngModel"
-                                 required
-                          >
-                          <small class="mt-0" *ngIf="(dueDate.touched || dueDate.dirty) && dueDate.errors" >
-                            <div *ngIf="dueDate?.errors?.required" class="alert alert-danger">
-                              Please enter a valid date.
-                            </div>
-                          </small>
+                      </small>
+
+                      <div class='input-group mb-2 justify-content-center'>
+                        <div class="input-group-prepend">
+                          <span class="input-group-text" id="basic-addon1"><i class="fa fa-terminal" aria-hidden="true"></i></span>
                         </div>
-                          <label>Add Team Members:</label>
-                          <div class='form-group row'>
-                            <label class='col-2 my-auto' for='projectDept'>Department:</label>
-                            <select class='form-control col-3' name='projectDept'>
-                                <option>Marketing</option>
-                                <option>PR</option>
-                                <option>Engineering</option>
-                            </select>
+                        <input type='text' class='form-control col-8' name='title' [(ngModel)]='newProject.title'
+                                placeholder="Title"
+                                #title="ngModel"
+                                minlength="3"
+                                required
+                        >
+                        </div>
+                        <small *ngIf="(title.touched || title.dirty) && title.errors" >
+                          <div *ngIf="title?.errors?.required" class="alert alert-danger col-8 mx-auto">
+                            Please enter a title.
                           </div>
-                          <form>
-                            <select multiple class='form-control col-5' id='teamNames' name='member' [(ngModel)]='newMembers'>
+                          <div *ngIf="title?.errors?.minlength" class="alert alert-danger col-8 mx-auto">
+                            Title should be at least
+                            {{ title?.errors?.minlength.requiredLength }} characters
+                          </div>
+                        </small>
+
+
+                      <div class='input-group mb-2 justify-content-center'>
+                        <div class="input-group-prepend">
+                          <span class="input-group-text" id="basic-addon1"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></span>
+                        </div>
+                        <textarea class='form-control col-8'
+                                name='description'
+                                [(ngModel)]='newProject.description'
+                                placeholder="Description"
+                                #description="ngModel"
+                                minlength="3"
+                                required
+                        ></textarea>
+                        </div>
+                        <small *ngIf="(description.touched || description.dirty) && description.errors" >
+                          <div *ngIf="description?.errors?.required" class="alert alert-danger col-8 mx-auto">
+                            Please enter a project description.
+                          </div>
+                          <div *ngIf="description?.errors?.minlength" class="alert alert-danger col-8 mx-auto">
+                            Description should be at least
+                            {{ description?.errors?.minlength.requiredLength }} characters.
+                          </div>
+                        </small>
+
+                      <hr>
+                      <p class='text-center'><strong>Step 2</strong></p>
+                        <p class='text-center'>Add Team Members</p>
+                        <div class='input-group mb-2 justify-content-center'>
+                          <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1"><i class="fa fa-building" aria-hidden="true"></i></span>
+                          </div>
+                          <select class='form-control col-8' name='projectDept'>
+                              <option>--Select Department--</option>
+                              <option>Marketing</option>
+                              <option>PR</option>
+                              <option>Engineering</option>
+                          </select>
+                        </div>
+
+                        <form>
+                          <div class='form-group row col-9 mx-auto'>
+                            <select multiple class='form-control mx-auto' id='teamNames' name='member' [(ngModel)]='newMembers'>
                                 <option *ngFor="let employee of employees" value="{{employee._id}}-{{employee.firstName}} {{employee.lastName}}">{{employee.firstName}} {{employee.lastName}}</option>
                             </select>
-                            <div class='row'>
-                              <button (click)='onAdd()' class='btn btn-primary mt-3 mx-auto'>Add To Team</button>
-                            </div>
-                          </form>
-                          <div class='addedMembers mt-3'>
-                            <span *ngFor='let member of addedTeamMembers' class='badge badge-success mx-1'>{{ member }}</span>
                           </div>
-                      </form>
+                          <div class='row'>
+                            <button (click)='onAdd()' class='btn btn-sm btn-success mt-3 mx-auto'>Add To Team</button>
+                          </div>
+                        </form>
+                        <div class='addedMembers mt-3'>
+                          <span *ngFor='let member of addedTeamMembers' class='badge badge-success mx-1'>{{ member }}</span>
+                        </div>
+                    </form>
                   </div>
                   <div class="modal-footer justify-content-center">
-                      <button [disabled]='projectForm.invalid' (click)='onSubmit()'   type="button" class="btn btn-primary">Add Project</button>
+                    <button [disabled]='projectForm.invalid' (click)='onSubmit()' type="button" class="btn btn-primary px-5">Add Project!</button>
                   </div>
-                  <p>{{ newProject | json }}</p>
               </div>
           </div>
       </div>
