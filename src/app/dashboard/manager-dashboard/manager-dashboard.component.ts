@@ -18,8 +18,8 @@ export class ManagerDashboardComponent implements OnInit {
   addedIds: any [];
   newMembers: any;
   random: string;
+  
   @Input() currentUser: Employee;
-  minDate: any;
 
   constructor(
     private readonly authService: AuthService,
@@ -29,8 +29,6 @@ export class ManagerDashboardComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.minDate = new Date()
-    console.log("now = ",this.minDate)
     this.addedIds = [];
     this.addedTeamMembers = [];
     this.getProjects();
