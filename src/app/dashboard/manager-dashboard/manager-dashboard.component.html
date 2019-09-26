@@ -117,11 +117,7 @@
                           >
                         <small class="mt-0" *ngIf="(dueDate.touched || dueDate.dirty) && dueDate.errors" >
                           <div *ngIf="dueDate?.errors?.required" class="alert alert-danger">
-                            First Name cannot be empty
-                          </div>
-                          <div *ngIf="dueDate?.errors?.minlength" class="alert alert-danger">
-                            First Name is at least 3 characters
-                            {{ dueDate?.errors?.minlength.requiredLength }} characters
+                            Please enter a completed date
                           </div>
                         </small>
 
@@ -151,7 +147,7 @@
                       </form>
                   </div>
                   <div class="modal-footer justify-content-center">
-                      <button *ngIf='projectForm.valid' (click)='onSubmit()' type="button" class="btn btn-primary">Add Project</button>
+                      <button [disabled]='projectForm.invalid' (click)='onSubmit()'   type="button" class="btn btn-primary">Add Project</button>
                   </div>
               </div>
           </div>
