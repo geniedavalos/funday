@@ -7,5 +7,7 @@ router.get('/', companies.index)
     .post('/', companies.create)
     .put('/:id', companies.update)
     .delete('/:id', companies.destroy)
+    .put('/:id/addEmployee', companies.addEmployee)
+    .put('/:id/addProject', companies.addProject);
 
 module.exports = router;

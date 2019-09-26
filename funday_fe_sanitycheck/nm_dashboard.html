@@ -6,12 +6,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Funday.com - Team Management Platform</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
   <div class="container">
     <nav class="navbar navbar-expand-lg navbar-light bg-white">
-      <a class="navbar-brand" routerLink="/home">
+      <a class="navbar-brand" href="/index.html">
         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Twemoji_1f60e.svg/768px-Twemoji_1f60e.svg.png" width="30" height="30" class="d-inline-block align-top" alt="">
         <strong>Funday</strong><span>.com</span></a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -21,15 +24,15 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a class="nav-link" id="home" routerLink="/home">Home</a>
+            <a class="nav-link" id="home" href="/index.html">Home</a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" id="cases" routerLink='/information'>Use Cases</a>
+            <a class="nav-link" id="cases" href="/cases.html">Use Cases</a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" id="team" routerLink='/devTeam'>Our Team</a>
+            <a class="nav-link" id="team" href="/team.html">Our Team</a>
           </li>
 
           <li class="nav-item">
@@ -41,7 +44,7 @@
 
     <section>
       <div class="welcome">
-        <h2 class="text-center">Welcome, {{currentUser?.firstName}}!</h2>
+        <h2 class="text-center">Welcome, Eric!</h2>
       </div>
     </section>
 
@@ -65,9 +68,9 @@
               </div>
             </td>
             <td>3/18/2019</td>
-            <td>
-              <button type="button" class="btn btn-info" data-toggle="modal" data-target="#addNote"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
-            </td>
+            <td>	
+                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#addNote"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+              </td>
           </tr>
           <tr>
             <th scope="row"><a href="#">Color sharks</a></th>
@@ -77,9 +80,9 @@
               </div>
             </td>
             <td>3/20/2019</td>
-            <td>
-              <button type="button" class="btn btn-info" data-toggle="modal" data-target="#addNote"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
-            </td>
+            <td>	
+                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#addNote"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+              </td>
           </tr>
           <tr>
             <th scope="row"><a href="#">Upload sharks</a></th>
@@ -89,37 +92,35 @@
               </div>
             </td>
             <td>3/28/2019</td>
-            <td>
-              <button type="button" class="btn btn-info" data-toggle="modal" data-target="#addNote"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
-            </td>
+            <td>	
+                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#addNote"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+              </td>
           </tr>
         </tbody>
       </table>
-
-      <div class="modal fade" id="addNote" tabindex="-1" role="dialog" aria-hidden="true">
-          <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                  <div class="modal-header">
-                      <h3 class="modal-title text-center">Add A Note</h3>
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                      </button>
-                  </div>
-                  <div class="modal-body">
-                      <form>
-                          <label for='noteDescription'>Note:</label>
-                          <textarea type='text' rows='4' class='form-control' name='noteDescription' [(ngModel)]='noteDescription'></textarea>
-                      </form>
-                  </div>
-                  <div class="modal-footer justify-content-center">
-                      <button (click)='onSubmit(theId)' type="button" class="btn btn-primary">Add</button>
-                  </div>
-              </div>
-          </div>
-      </div>
-
     </section>
 
+    <div class="modal fade" id="addNote" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title text-center">Add A Note</h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <label for='noteDescription'>Note:</label>
+                        <textarea type='text' rows='4' class='form-control' name='noteDescription'></textarea>
+                    </form>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <button type="button" class="btn btn-primary">Add</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <section id="users">
       <h2>My Team</h2>
@@ -162,20 +163,20 @@
     <footer>
         <div class="row map justify-content-center">
           <div class="col-lg-4 col-sm-6">
-            <p><a routerLink="/home"><strong>Our product</strong></a></p>
+            <p><a href="/index.html"><strong>Our product</strong></a></p>
             <p><a href="#" class="purpleh">Product</a></p>
             <p><a href="#" class="purpleh">Pricing</a></p>
           </div>
-
+  
           <div class="col-lg-4 col-sm-6">
-            <p><a routerLink='/information'><Strong>Use cases</Strong></a></p>
+            <p><a href="/cases.html"><Strong>Use cases</Strong></a></p>
             <p><a href="#" class="greenh">Product Management</a></p>
             <p><a href="#" class="greenh">All Use Cases</a></p>
           </div>
-
-
+  
+  
           <div class="col-lg-3 col-sm-6">
-            <p><a routerLink='/devTeam'><Strong>Our Team</Strong></a></p>
+            <p><a href="/team.html"><Strong>Our Team</Strong></a></p>
             <p><a href="#" class="blueh">About Us</a></p>
             <p><a href="#" class="blueh">Contact Us</a></p>
           </div>
@@ -195,7 +196,9 @@
       </div>
     </footer>
   </div>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>
 
 </html>
-

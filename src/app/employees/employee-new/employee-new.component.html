@@ -43,7 +43,7 @@
   </nav>
 
 
-  <form (submit)="Createemployee($event)" #employeeForm ='ngForm'>
+  <form (submit)="createEmployee($event)" #employeeForm ='ngForm'>
     <div class="row justify-content-center">
       <div class="col-lg-6 col-sm-8">
         <div class="card">
@@ -103,18 +103,14 @@
               <span class="input-group-text" id="basic-addon1"><i class="fa fa-building" aria-hidden="true"></i>
               </span>
               </div>
-              <input type="select" list="" class="form-control" name="company"  aria-label="Company" aria-describedby="basic-addon1">
-              <datalist id="browsers">
-                <option value="Robinhood">
-                <option value="Microsoft">
-                <option value="MongoDB">
-                <option value="Waze">
-                <option value="Safari Park">
-              </datalist>
-              <span class="px-2 py-2">or</span>
-              <input type="text" class="form-control" placeholder="Enter here" aria-label="Company" aria-describedby="basic-addon1">
-              <small>If you don't see your company from the list, please enter your company name.</small>
+              <select [(ngModel)]="selectedCompanyID" id="company" class="form-control col" name="company"  aria-label="Company" aria-describedby="basic-addon1">
+                <option selected disabled hidden value="">--Select Company--</option>
+                <option value="createNew">--Add New Company--</option>
+                <option *ngFor="let company of companies" value="{{company._id}}">{{company.name}}</option>
+              </select>
+              <input *ngIf="selectedCompanyID == 'createNew'" name="name" [(ngModel)]="newCompany.name" type="text" class="form-control" placeholder="Enter here" aria-label="Company" aria-describedby="basic-addon1">
             </div>
+            <small>If you don't see your company on the list, select "Add New Company."</small>
 
             <div class="input-group mb-3">
               <div class="input-group-prepend">

@@ -4,7 +4,7 @@ const TaskSchema = new mongoose.Schema({
   title: {
     type: String,
     minlength: [3, 'Title must be at least 3 characters long.'],
-    unique: true
+    //unique: true
   },
   description: {
     type: String,

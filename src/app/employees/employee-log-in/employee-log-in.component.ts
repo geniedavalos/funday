@@ -1,16 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import {EmployeeService} from '../../services/employee.service';
 import {Router} from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 @Component({
   selector: 'app-employee-log-in',
   templateUrl: './employee-log-in.component.html',
   styleUrls: ['./employee-log-in.component.css']
 })
 export class EmployeeLogInComponent implements OnInit {
+  employeeLogin : {email: string, password : string };
 
-  employeeLogin : {email: string, password : string }
   constructor(
-    private readonly employeeService: EmployeeService,
+    private readonly authService: AuthService,
     private readonly router: Router
   ) {
     this.employeeLogin = {email : '', password : ''};
@@ -20,10 +21,12 @@ export class EmployeeLogInComponent implements OnInit {
   }
 
 
-  Login(event: Event) {
+  onSubmit(event: Event) {
     event.preventDefault();
-    this.employeeService.Login(this.employeeLogin).subscribe(result =>{
-      console.log(result);
+    this.authService.login(this.employeeLogin).subscribe(result =>{
+      if(result['status'] == "success"){
+        this.router.navigateByUrl('/dashboard')
+      }
     })
   }
 }

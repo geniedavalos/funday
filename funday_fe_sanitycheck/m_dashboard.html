@@ -8,14 +8,14 @@
   <title>Funday.com - Team Management Platform</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="manager-dashboard.component.css">
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
   <div class="container">
     <nav class="navbar navbar-expand-lg navbar-light bg-white">
-      <a class="navbar-brand" routerLink="/home">
+      <a class="navbar-brand" href="/index.html">
         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Twemoji_1f60e.svg/768px-Twemoji_1f60e.svg.png" width="30" height="30" class="d-inline-block align-top" alt="">
         <strong>Funday</strong><span>.com</span></a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -25,19 +25,20 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a class="nav-link" id="home" routerLink="/home">Home</a>
+            <a class="nav-link" id="home" href="/index.html">Home</a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" id="cases" routerLink='/information'>Use Cases</a>
+            <a class="nav-link" id="cases" href="/cases.html">Use Cases</a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" id="team" routerLink='/devTeam'>Our Team</a>
+            <a class="nav-link" id="team" href="/team.html">Our Team</a>
           </li>
 
+
           <li class="nav-item">
-            <div id="lrbtn"><a class="nav-link" id="start" routerLink='/dashboard'><button type="button" class="btn btn-sm btn-outline-info">Dashboard</button></a></div>
+            <div id="lrbtn"><a class="nav-link" id="start" href="/dashboard/manager"><button type="button" class="btn btn-sm btn-outline-info">Dashboard</button></a></div>
           </li>
         </ul>
       </div>
@@ -46,15 +47,31 @@
     <section id="projects">
       <div class="welcome">
 
-        <h2 class="text-center">Welcome, {{currentUser?.firstName}}!</h2>
+        <h2 class="text-center">Welcome, Eric!</h2>
       </div>
       <h2>Manage Projects</h2>
       <div class="overview">
-        <div *ngFor="let project of projects" class="project mt-4">
-          <h4><a [routerLink]="['/projects/', project._id]">{{project.title}}</a></h4>
-          <h5>Project Lead: {{currentUser?.firstName}} (<span class="green">{{project.dueDate}}</span>)</h5>
+        <div class="project mt-4">
+          <h4><a href="#">Cookie Project</a></h4>
+          <h5>Task Lead: John (<span class="green">Due: 10/25/19</span>)</h5>
           <div class="progress mb-3">
             <div class="progress-bar  progress-bar-striped bg-info" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+          </div>
+        </div>
+
+        <div class="project mt-4">
+          <h4><a href="#">Shark Project</a></h4>
+          <h5>Task Lead: Jane (<span class="green">Due: 10/25/19</span>)</h5>
+          <div class="progress mb-3">
+            <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: 30%;" aria-valuenow="30">30%</div>
+          </div>
+        </div>
+
+        <div class="project mt-4">
+          <h4><a href="#">Guinea Pig Project</a></h4>
+          <h5>Task Lead: Mark (<span class="green">Due: 10/25/19</span>)</h5>
+          <div class="progress mb-3">
+            <div class="progress-bar progress-bar-striped  bg-danger" role="progressbar" style="width: 70%;" aria-valuenow="70">70%</div>
           </div>
         </div>
       </div>
@@ -63,23 +80,20 @@
       </div>
 
       <div class="modal fade" id="addProject" tabindex="-1" role="dialog" aria-hidden="true">
-          <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-dialog" role="document">
               <div class="modal-content">
                   <div class="modal-header">
                       <h3 class="modal-title text-center">Add A Project</h3>
-                      <p>{{ newProject | json }}</p>
                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
                       </button>
                   </div>
                   <div class="modal-body">
-                      <form #projectForm='ngForm' name='newProjectForm'>
-                          <label for='title'>Title:</label>
-                          <input type='text' class='form-control' name='title' [(ngModel)]='newProject.title'>
-                          <label for='description'>Description:</label>
-                          <textarea class='form-control' name='description' [(ngModel)]='newProject.description'></textarea>
-                          <label for='dueDate'>Due Date: </label>
-                          <input type='date' class='form-control' name='date'[(ngModel)]='newProject.dueDate'>
+                      <form>
+                          <label for='projectTitle'>Title:</label>
+                          <input type='text' class='form-control' name='projectTitle'>
+                          <label for='projectDescription'>Description:</label>
+                          <textarea class='form-control' name='projectDescription'></textarea>
                           <label for='projectDept'>Department:</label>
                           <select class='form-control' name='projectDept'>
                               <option>Marketing</option>
@@ -87,26 +101,18 @@
                               <option>Engineering</option>
                           </select>
                           <label for='projectTeam'>Team:</label>
-                          <form>
-                            <select multiple class='form-control' id='teamNames' name='member' [(ngModel)]='newMember'>
-                                <option value='id:1-Justin'>Justin</option>
-                                <option value='id:2-David'>David</option>
-                                <option value='id:3-Jane'>Jane</option>
-                                <option value='id:4-Jill'>Jill</option>
-                                <option value='id:5-Austin'>Austin</option>
-                                <option value='id:6-Bob'>Bob</option>
-                            </select>
-                            <div class='row'>
-                              <button (click)='onAdd()' class='btn btn-primary mt-3 mx-auto'>Add Team Member</button>
-                            </div>
-                          </form>
-                          <div class='addedMembers mt-3'>
-                            <span *ngFor='let member of addedTeamMembers' class='badge badge-success mx-1'>{{ member }}</span>
-                          </div>
+                          <select multiple class='form-control' name='projectTeam'>
+                              <option>Justin</option>
+                              <option>David</option>
+                              <option>Jane</option>
+                              <option>Jill</option>
+                              <option>Austin</option>
+                              <option>Bob</option>
+                          </select>
                       </form>
                   </div>
                   <div class="modal-footer justify-content-center">
-                      <button *ngIf='projectForm.valid' (click)='onSubmit()' type="button" class="btn btn-primary">Add Project</button>
+                      <button type="button" class="btn btn-primary">Add</button>
                   </div>
               </div>
           </div>
@@ -116,20 +122,20 @@
     <footer>
       <div class="row map justify-content-center">
         <div class="col-lg-4 col-sm-6">
-          <p><a routerLink="/home"><strong>Our product</strong></a></p>
+          <p><a href="/index.html"><strong>Our product</strong></a></p>
           <p><a href="#" class="purpleh">Product</a></p>
           <p><a href="#" class="purpleh">Pricing</a></p>
         </div>
 
         <div class="col-lg-4 col-sm-6">
-          <p><a routerLink='/information'><Strong>Use cases</Strong></a></p>
+          <p><a href="/cases.html"><Strong>Use cases</Strong></a></p>
           <p><a href="#" class="greenh">Product Management</a></p>
           <p><a href="#" class="greenh">All Use Cases</a></p>
         </div>
 
 
         <div class="col-lg-3 col-sm-6">
-          <p><a routerLink='/devTeam'><Strong>Our Team</Strong></a></p>
+          <p><a href="/team.html"><Strong>Our Team</Strong></a></p>
           <p><a href="#" class="blueh">About Us</a></p>
           <p><a href="#" class="blueh">Contact Us</a></p>
         </div>

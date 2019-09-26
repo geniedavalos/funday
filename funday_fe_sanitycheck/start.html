@@ -36,31 +36,33 @@
           </li>
 
           <li class="nav-item">
-            <div id="lrbtn"><a class="nav-link" id="start" href="/dashboard/manager"><button type="button" class="btn btn-sm btn-outline-info">Dashboard</button></a></div>
+            <div id="lrbtn"><a class="nav-link" id="start" href="/start.html"><button type="button" class="btn btn-sm btn-outline-info">Start</button></a></div>
           </li>
         </ul>
       </div>
     </nav>
-    <section>
 
-      <h2>Task Name <span style="font-size: 1.2rem;">(Due: 11/18/19)</span></h2>
-      <div class="progress">
-        <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 10%" aria-valuenow="10">
+    <section>
+      <div class="row justify-content-center">
+        <h2>vote needed: should we separate login page and registration page? <br>
+          (c.f. https://us.battle.net) </h2>
+        <!-- <div class="col-lg-6">
+          <h3>Log In</h3>
+
         </div>
+        <div class="col-lg-6">
+          <h3>Registration</h3>
+        </div> -->
       </div>
-      <div class="block">  <a href="update.html" class="btn btn-info my-3">Update Progress</a></div>
     </section>
 
-    <section>
-      <h2>Notes</h2>
-      <div class="notes my-4">
-        notesfslajflksdflsadlkfjlksdflsdjflkjsldfjlkajflksdjfkljslfjslkadfjlksjdfkljdsklfjsdlfjklsdfjsfjlsadfksafjsafksa
-      </div>
-      <textarea>
-      </textarea>
-      <br>
-      <div class="block"> <a href="#" class="btn btn-success"> Add Notes</a></div>
-
+    <section class="text-center">
+      conceptually, once register / signin succeeds,<br>it goes to either<br>
+      (when user != manager)
+      <a href="/demo_nm.html">no manager</a>
+      <br> or <br>
+      (when user = manager)
+      <a href="/demo.html">manager</a>
     </section>
 
     <footer>
@@ -70,14 +72,14 @@
             <p><a href="#" class="purpleh">Product</a></p>
             <p><a href="#" class="purpleh">Pricing</a></p>
           </div>
-
+  
           <div class="col-lg-4 col-sm-6">
             <p><a href="/cases.html"><Strong>Use cases</Strong></a></p>
             <p><a href="#" class="greenh">Product Management</a></p>
             <p><a href="#" class="greenh">All Use Cases</a></p>
           </div>
-
-
+  
+  
           <div class="col-lg-3 col-sm-6">
             <p><a href="/team.html"><Strong>Our Team</Strong></a></p>
             <p><a href="#" class="blueh">About Us</a></p>
@@ -106,4 +108,3 @@
 </body>
 
 </html>
-

@@ -8,7 +8,7 @@
   <title>Funday.com - Team Management Platform</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="project-details.component.css">
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
@@ -48,36 +48,10 @@
         <div class="progress-bar  progress-bar-striped bg-info" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
       </div>
       <div class="mx-3 my-3 block">
-        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#editProject">Edit This Project</button>
-        <button type="button" class="btn btn-danger ml-3" data-toggle="modal" data-target="#deleteProject">Delete Project</button>
+        <button type="button" class="btn btn-info"><a href="edit.html" class="text-white">Edit This Project</a></button>
+        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteProject">Delete Project</button>
       </div>
 
-      <div class="modal fade" id="editProject" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h3 class="modal-title text-center">Edit Project</h3>
-                    <p>{{ editProject | json }}</p>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                  <form>
-                    <label for='title'>Title:</label>
-                    <input type='text' class='form-control' name='title' [(ngModel)]='editProject.title'>
-                    <label for='description'>Description:</label>
-                    <textarea class='form-control' name='description' [(ngModel)]='editProject.description'></textarea>
-                    <label for='dueDate'>Due Date: </label>
-                    <input type='date' class='form-control' name='date'[(ngModel)]='editProject.dueDate'>
-                  </form>
-                </div>
-                <div class="modal-footer justify-content-center">
-                    <button type="button" (click)='onProjectEdit()' class="btn btn-primary">Edit Project</button>
-                </div>
-            </div>
-        </div>
-    </div>
 
       <div class="modal fade" id="deleteProject" tabindex="-1" role="dialog" aria-hidden="true">
           <div class="modal-dialog" role="document">
@@ -96,7 +70,7 @@
                       </form>
                   </div>
                   <div class="modal-footer justify-content-center">
-                      <button type="button" class="btn btn-danger">Delete Project</button>
+                      <button type="button" class="btn btn-danger">Delete</button>
                   </div>
               </div>
           </div>
@@ -123,10 +97,10 @@
             </td>
             <td>6/25/19</td>
             <td>
-                <a href="/tasks/:id/edit" class="btn btn-outline-success mx-1"><i class="fa fa-pencil" aria-hidden="true"></i>
+              <a href="/tasks/:id/edit" class="btn btn-outline-success"><i class="fa fa-pencil" aria-hidden="true"></i>
               </a>
 
-              <a href="/tasks/:id" class="btn btn-outline-danger mx-1"><i class="fa fa-trash" aria-hidden="true"></i></a>
+              <a href="/tasks/:id" class="btn btn-outline-danger"><i class="fa fa-trash" aria-hidden="true"></i></a>
             </td>
           </tr>
           <tr>
@@ -139,10 +113,10 @@
             </td>
             <td>8/25/19</td>
             <td>
-              <a href="/tasks/:id/edit" class="btn btn-outline-success mx-1"><i class="fa fa-pencil" aria-hidden="true"></i>
+              <a href="/tasks/:id/edit" class="btn btn-outline-success"><i class="fa fa-pencil" aria-hidden="true"></i>
               </a>
 
-              <a href="/tasks/:id" class="btn btn-outline-danger mx-1"><i class="fa fa-trash" aria-hidden="true"></i></a>
+              <a href="/tasks/:id" class="btn btn-outline-danger"><i class="fa fa-trash" aria-hidden="true"></i></a>
             </td>
           </tr>
 
@@ -156,10 +130,10 @@
             </td>
             <td>8/27/19</td>
             <td>
-              <a href="/tasks/:id/edit" class="btn btn-outline-success mx-1"><i class="fa fa-pencil" aria-hidden="true"></i>
+              <a href="/tasks/:id/edit" class="btn btn-outline-success"><i class="fa fa-pencil" aria-hidden="true"></i>
               </a>
 
-              <a href="/tasks/:id" class="btn btn-outline-danger mx-1"><i class="fa fa-trash" aria-hidden="true"></i></a>
+              <a href="/tasks/:id" class="btn btn-outline-danger"><i class="fa fa-trash" aria-hidden="true"></i></a>
             </td>
           </tr>
         </tbody>
@@ -177,32 +151,31 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h3 class="modal-title text-center">Add A Task</h3>
-                    <p>{{ newTask | json }}</p>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
                     <form>
-                        <label for='title'>Title:</label>
-                        <input type='text' class='form-control' name='title' [(ngModel)]='newTask.title'>
-                        <label for='description'>Description:</label>
-                        <input type='text' class='form-control' name='description' [(ngModel)]='newTask.description'>
-                        <label for='due'>Due Date:</label>
-                        <input type='date' name='due' class='form-control' [(ngModel)]='newTask.dueDate'>
+                        <label for='taskTitle'>Title:</label>
+                        <input type='text' class='form-control' name='taskTitle'>
+                        <label for='taskDescription'>Description:</label>
+                        <input type='text' class='form-control' name='taskDescription'>
+                        <label for='taskDue'>Due:</label>
+                        <input type='date' name='taskDue' class='form-control'>
                         <label for='taskTeam'>Team Members:</label>
-                        <select multiple class='form-control' name='taskTeam' [(ngModel)]='newTask.teamMembers'>
-                            <option value='id-1'>Justin</option>
-                            <option value='id-2'>David</option>
-                            <option value='id-3'>Jane</option>
-                            <option value='id-4'>Jill</option>
-                            <option value='id-5'>Austin</option>
-                            <option value='id-6'>Bob</option>
+                        <select multiple class='form-control' name='taskTeam'>
+                            <option>Justin</option>
+                            <option>David</option>
+                            <option>Jane</option>
+                            <option>Jill</option>
+                            <option>Austin</option>
+                            <option>Bob</option>
                         </select>
                     </form>
                 </div>
                 <div class="modal-footer justify-content-center">
-                    <button (click)='onTaskCreate()' type="button" class="btn btn-primary">Add Task</button>
+                    <button type="button" class="btn btn-primary">Add</button>
                 </div>
             </div>
         </div>
@@ -222,26 +195,26 @@
           <tr>
             <th scope="row">Marketing</th>
             <td>Mark A.</td>
-            <td><a href="#" class="btn btn-outline-danger mx-1"><i class="fa fa-ban" aria-hidden="true"></i></a>
+            <td><a href="#" class="btn btn-outline-danger"><i class="fa fa-ban" aria-hidden="true"></i></a>
 
-              <a href="#" class="btn btn-outline-info mx-1"><i class="fa fa-search" aria-hidden="true"></i></a>
+              <a href="#" class="btn btn-outline-info"><i class="fa fa-search" aria-hidden="true"></i></a>
 
             </td>
           </tr>
           <tr>
             <th scope="row">PR</th>
             <td>Jacob B.</td>
-            <td><a href="#" class="btn btn-outline-danger mx-1"><i class="fa fa-ban" aria-hidden="true"></i></a>
+            <td><a href="#" class="btn btn-outline-danger"><i class="fa fa-ban" aria-hidden="true"></i></a>
 
-              <a href="#" class="btn btn-outline-info mx-1"><i class="fa fa-search" aria-hidden="true"></i></a>
+              <a href="#" class="btn btn-outline-info"><i class="fa fa-search" aria-hidden="true"></i></a>
 
             </td>
           </tr>
           <tr>
             <th scope="row">Engineering</th>
             <td>Larry C.</td>
-            <td><a href="#" class="btn btn-outline-danger mx-1"><i class="fa fa-ban" aria-hidden="true"></i></a>
-              <a href="#" class="btn btn-outline-info mx-1"><i class="fa fa-search" aria-hidden="true"></i></a>
+            <td><a href="#" class="btn btn-outline-danger"><i class="fa fa-ban" aria-hidden="true"></i></a>
+              <a href="#" class="btn btn-outline-info"><i class="fa fa-search" aria-hidden="true"></i></a>
             </td>
           </tr>
         </tbody>
@@ -249,48 +222,9 @@
 
       <div class="row text-center block my-4">
         <div class="inline">
-          <button type="button" class="btn btn-success inner  mx-3" data-toggle="modal" data-target="#addTeamMember">Add Team Member</button>
+          <a href="new.html" class="btn btn-success inner  mx-3">Add Team Member</a>
         </div>
       </div>
-
-      <div class="modal fade" id="addTeamMember" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h3 class="modal-title">Add Team Members</h3>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                        <label for='projectDept'>Department:</label>
-                        <select class='form-control' name='projectDept'>
-                            <option>Marketing</option>
-                            <option>PR</option>
-                            <option>Engineering</option>
-                        </select>
-                        <label for='projectTeam'>Team:</label>
-                        <form>
-                          <select multiple class='form-control' id='teamNames' name='member' [(ngModel)]='newMember'>
-                              <option value='id:1-Justin'>Justin</option>
-                              <option value='id:2-David'>David</option>
-                              <option value='id:3-Jane'>Jane</option>
-                              <option value='id:4-Jill'>Jill</option>
-                              <option value='id:5-Austin'>Austin</option>
-                              <option value='id:6-Bob'>Bob</option>
-                          </select>
-                        </form>
-                        <div class='addedMembers mt-3'>
-                          <span *ngFor='let member of addedTeamMembers' class='badge badge-success mx-1'>{{ member }}</span>
-                        </div>
-                </div>
-                <div class="modal-footer justify-content-center">
-                    <button (click)='onAddTeam()' type="button" class="btn btn-primary">Add Team Member</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
     </section>
 
     <footer>
@@ -329,6 +263,7 @@
       </div>
     </footer>
   </div>
+
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>

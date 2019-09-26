@@ -1,10 +1,11 @@
 const mongoose = require('mongoose');
 const Company = mongoose.model('Company')
+
 module.exports = {
     index: async (_req, res) => {
         try {
-            const companies = await Company.find().sort('type');
-            res.json({Companies: companies});
+            const companies = await Company.find().sort('name');
+            res.json(companies);
         }
         catch (err) {
             res.json(err);
@@ -13,22 +14,21 @@ module.exports = {
     show: (req, res) => {
         Company.findById(req.params.id)
             .then((data) => {
-                res.json({Company: data})
+                res.json(data)
             })
             .catch(err => res.json(err));
     },
     create: (req, res) => {
-        const Company = new Company(req.body);
-        Company.save()
+        Company.create(req.body)
             .then((data) => {
-                res.json({newCompany: data});
+                res.json(data);
             })
             .catch(err => res.json(err));
     },
     update: (req, res) => {
-        Company.findOneAndUpdate({ _id : req.params.id }, { runValidators: true, context: 'query' }, req.body)
+        Company.updateOne({ _id : req.params.id }, { runValidators: true, context: 'query' }, )
             .then((data) => {
-                res.json({updatedCompany: data});
+                res.json(data);
             })
             .catch(err => res.json(err));
     },
@@ -40,5 +40,19 @@ module.exports = {
             .catch(err => {
                 res.json(err);
             });
+    },
+    addEmployee: (req, res) => {
+        Company.updateOne({_id : req.params.id}, {$push : {employees: req.body}})
+        .then(data => {
+            res.json(data);
+        })
+        .catch(err => res.json(err));
+    },
+    addProject: (req, res) => {
+        Company.updateOne({_id : req.params.id}, {$push : {projects: req.body}})
+        .then(data => {
+            res.json(data);
+        })
+        .catch(err => res.json(err));
     },
 }

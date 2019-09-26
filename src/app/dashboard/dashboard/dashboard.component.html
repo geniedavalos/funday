@@ -1,2 +1,2 @@
-<app-employee-dashboard *ngIf="!isManager" ></app-employee-dashboard>
-<app-manager-dashboard *ngIf="isManager" ></app-manager-dashboard>
+<app-employee-dashboard *ngIf="!isManager" [currentUser]="currentUser"></app-employee-dashboard>
+<app-manager-dashboard *ngIf="isManager" [currentUser]="currentUser"></app-manager-dashboard>

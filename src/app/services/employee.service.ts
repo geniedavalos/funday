@@ -26,6 +26,7 @@ export class EmployeeService {
   }
 
   createEmployee(employee: Employee): Observable<Employee> {
+    console.log("In employee service", employee);
     return this.http.post<Employee>(this.base, employee);
   }
 
@@ -33,8 +34,7 @@ export class EmployeeService {
     return this.http.delete<Employee>(`${this.base}/${id}`);
   }
 
-  Login(employee: { email: string; password: string }): Observable<Employee> {
-    console.log(employee)
-     return this.http.post<Employee>(`${this.base}/login`, employee);
+  login(employee: { email: string; password: string }): Observable<Employee> {
+    return this.http.post<Employee>(`${this.base}/login`, employee);
   }
 }

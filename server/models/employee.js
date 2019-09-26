@@ -10,7 +10,7 @@ const EmployeeSchema = new mongoose.Schema({
       type: String,
       required: [true, 'Enter a valid email.'],
       trim: true,
-      unique: true,
+      // unique: true,
       validate: {
         validator(value) {
           return emailValidator.isEmail(value);
@@ -26,7 +26,7 @@ const EmployeeSchema = new mongoose.Schema({
 }, {timestamps: true });
 EmployeeSchema.plugin(uniqueValidator, { message: 'Employee {PATH} must be unique.'})
   .pre('validate', function (next) {
-    if(!this.isModified(password)) {
+    if(!this.isModified(this.password)) {
       return next();
     }
     bcrypt

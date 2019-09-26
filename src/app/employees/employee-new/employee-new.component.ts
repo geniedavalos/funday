@@ -1,48 +1,81 @@
 import { Component, OnInit } from '@angular/core';
+import {Router} from '@angular/router';
 import {Employee} from '../../models/employee';
 import { EmployeeService } from '../../services/employee.service';
-import {Router} from '@angular/router';
 import {CompanyService} from '../../services/company.service';
 import {Company} from '../../models/company';
+import { AuthService } from '../../services/auth.service';
+
 @Component({
   selector: 'app-employee-new',
   templateUrl: './employee-new.component.html',
   styleUrls: ['./employee-new.component.css']
 })
+
 export class EmployeeNewComponent implements OnInit {
   duplicatedError: any;
   errorsMessage: any;
-  isNewCompany : boolean ;
+  isNewCompany: boolean;
+  selectedCompanyID: string = "";
   employee = new Employee();
-  private companies: Company[] ;
+  newCompany: Company;
+  companies: Company[];
   private ConfirmPassword: string;
   private isMatch: boolean = false;
 
+
   constructor(
+    private readonly authService: AuthService,
     private readonly employeeService: EmployeeService,
     private readonly companyService: CompanyService,
     private readonly router: Router
-  ) { }
+  ) {
+  }
 
   ngOnInit() {
+    this.newCompany = new Company();
     this.isNewCompany = true;
-    this.GetAllCompany();
+    this.getAllCompanies();
   }
 
-  Createemployee(event: Event) {
+  createEmployee(event: Event) {
     event.preventDefault();
-    this.employeeService.createEmployee(this.employee).subscribe(result =>{
-      console.log(result);
+    if (this.selectedCompanyID == "createNew") {
+      this.newCompany.owner = this.employee;
+      this.authService.newCompanyRegister(this.newCompany).subscribe(result => {
+        if(result["status"] == "success"){
+          this.router.navigateByUrl('/dashboard')
+        }
+      });
+    } else {
+      this.authService.joinCompanyRegister(this.selectedCompanyID, this.employee).subscribe(result => {
+        if(result["status"] == "success"){
+          this.router.navigateByUrl('/dashboard')
+        }
+      });
+    }
+  }
+
+  getAllCompanies() {
+    this.companyService.getCompanies().subscribe(companies => {
+      if (companies.length === 0) {
+        this.companies = [];
+      } else {
+        this.companies = companies;
+      }
     });
   }
-  GetAllCompany() {
-    this.companyService.getCompanies().subscribe(companies => {
-      this.companies = companies;
-    });
+
+  changeCompanyInput() {
+    console.log(this.companies);
+    console.log(this.isNewCompany);
+    this.isNewCompany = (!this.isNewCompany);
+    console.log(this.isNewCompany);
+
   }
 
   MustMatch() {
-    if(this.employee.password === this.ConfirmPassword){
+    if (this.employee.password === this.ConfirmPassword) {
       this.isMatch = true;
       return this.isMatch;
     }
