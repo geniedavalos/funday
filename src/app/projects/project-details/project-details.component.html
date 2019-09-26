@@ -65,15 +65,56 @@
                   <form>
                     <div class='form-group row justify-content-center'>
                       <label class='col-3 my-auto' for='title'>Title:</label>
-                      <input type='text' class='form-control col-7' name='title' [(ngModel)]='editProject.title'>
+                      <input type='text' class='form-control col-7' name='title' [(ngModel)]='editProject.title'
+                             placeholder="Title"
+                             #proTitle="ngModel"
+                             minlength="3"
+                             required
+                      >
+                      <small class="mt-0" *ngIf="(proTitle.touched || proTitle.dirty) && proTitle.errors" >
+                        <div *ngIf="proTitle?.errors?.required" class="alert alert-danger">
+                          Please enter a title.
+                        </div>
+                        <div *ngIf="proTitle?.errors?.minlength" class="alert alert-danger">
+                          Title should be at least
+                          {{ proTitle?.errors?.minlength.requiredLength }} characters
+                        </div>
+                      </small>
                     </div>
                     <div class='form-group row justify-content-center'>
                       <label for='description' class='col-3 my-auto'>Description:</label>
-                      <textarea class='form-control col-7' name='description' [(ngModel)]='editProject.description'></textarea>
+                      <textarea class='form-control col-7'
+                                name='description'
+                                [(ngModel)]='editProject.description'
+                                placeholder="Description"
+                                #proDescription="ngModel"
+                                minlength="3"
+                                required
+                      ></textarea>
+                      <small class="mt-0" *ngIf="(proDescription.touched || proDescription.dirty) && proDescription.errors" >
+                        <div *ngIf="proDescription?.errors?.required" class="alert alert-danger">
+                          Please enter a project description.
+                        </div>
+                        <div *ngIf="proDescription?.errors?.minlength" class="alert alert-danger">
+                          Description should be at least
+                          {{ proDescription?.errors?.minlength.requiredLength }} characters.
+                        </div>
+                      </small>
                     </div>
                     <div class='form-group row justify-content-center'>
                       <label class='col-3 my-auto' for='dueDate'>Due Date: </label>
-                      <input type='date' class='form-control col-5' name='date'[(ngModel)]='editProject.dueDate'>
+                      <input type='date'
+                             class='form-control col-5'
+                             name='dueDate'
+                             [(ngModel)]='editProject.dueDate'
+                             #proDueDate="ngModel"
+                             required
+                      >
+                      <small class="mt-0 ml-auto" *ngIf="(proDueDate.touched || proDueDate.dirty) && proDueDate.errors" >
+                        <div *ngIf="proDueDate?.errors?.required" class="alert alert-danger">
+                          Please enter a valid date.
+                        </div>
+                      </small>
                     </div>
                   </form>
                 </div>
@@ -190,15 +231,57 @@
                     <form #taskForm='ngForm' name='newTaskForm'>
                       <div class='form-group row'>
                         <label class='col-3 my-auto' for='title'>Title:</label>
-                        <input type='text' class='form-control col-7' name='title' [(ngModel)]='newTask.title'>
+                        <input type='text' class='form-control col-7' name='title' [(ngModel)]='newTask.title'
+                               placeholder="Title"
+                               #title="ngModel"
+                               minlength="3"
+                               required
+                        >
+                        <small class="mt-0" *ngIf="(title.touched || title.dirty) && title.errors" >
+                          <div *ngIf="title?.errors?.required" class="alert alert-danger">
+                            Please enter a title.
+                          </div>
+                          <div *ngIf="title?.errors?.minlength" class="alert alert-danger">
+                            Title should be at least
+                            {{ title?.errors?.minlength.requiredLength }} characters
+                          </div>
+                        </small>
                       </div>
                       <div class='form-group row'>
                         <label class='col-3 my-auto' for='description'>Description:</label>
-                        <input type='text' class='form-control col-7' name='description' [(ngModel)]='newTask.description'>
+                        <textarea class='form-control col-7'
+                                  name='description'
+                                  [(ngModel)]='newTask.description'
+                                  placeholder="Description"
+                                  #description="ngModel"
+                                  minlength="3"
+                                  required
+                        ></textarea>
+                        <small class="mt-0" *ngIf="(description.touched || description.dirty) && description.errors" >
+                          <div *ngIf="description?.errors?.required" class="alert alert-danger">
+                            Please enter a project description.
+                          </div>
+                          <div *ngIf="description?.errors?.minlength" class="alert alert-danger">
+                            Description should be at least
+                            {{ description?.errors?.minlength.requiredLength }} characters.
+                          </div>
+                        </small>
                       </div>
                       <div class='form-group row'>
                         <label class='col-3 my-auto' for='due'>Due Date:</label>
-                        <input type='date' name='due' class='form-control col-5' [(ngModel)]='newTask.dueDate'>
+                        <input type='date'
+                               class='form-control col-5'
+                               name='dueDate'
+                               [(ngModel)]='newTask.dueDate'
+                               #dueDate="ngModel"
+                               required
+                        >
+                          <small class="mt-0 ml-auto" *ngIf="(dueDate.touched || dueDate.dirty) && dueDate.errors" >
+                          <div *ngIf="dueDate?.errors?.required" class="alert alert-danger">
+                            Please enter a valid date.
+                          </div>
+                        </small>
+
                       </div>
                       <div class='form-group row'>
                         <label class='my-auto col-3' for='taskTeam'>Team Members:</label>
