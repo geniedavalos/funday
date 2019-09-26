@@ -78,7 +78,7 @@ module.exports = {
         .catch(err => res.json(err));
     },
     getManagedProjects: (req, res) => {
-        Project.find({'projectLead': req.params.id })
+        Project.find({'projectLead': req.params.id }).sort('dueDate')
         .then(data => {
             res.json(data);
         })

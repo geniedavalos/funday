@@ -1,10 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Project, Employee } from 'src/app/models';
 import { AuthService } from 'src/app/services/auth.service';
-import { ProjectService } from 'src/app/services';
+import { ProjectService, EmployeeService } from 'src/app/services';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-
 
 @Component({
   selector: 'app-manager-dashboard',
@@ -14,22 +13,28 @@ import { Router } from '@angular/router';
 export class ManagerDashboardComponent implements OnInit {
   projects : Project[];
   newProject = new Project();
+  employees : Employee[];
   addedTeamMembers: any [];
   addedIds: any [];
-  newMember: any;
+  newMembers: any;
   random: string;
   @Input() currentUser: Employee;
+  minDate: any;
 
   constructor(
     private readonly authService: AuthService,
     private readonly projectService: ProjectService,
-    private readonly router: Router
+    private readonly router: Router,
+    private readonly employeeService: EmployeeService
   ) { }
 
   ngOnInit() {
+    this.minDate = new Date()
+    console.log("now = ",this.minDate)
     this.addedIds = [];
     this.addedTeamMembers = [];
     this.getProjects();
+    this.getEmployees();
   }
 
   getProjects(){
@@ -38,12 +43,18 @@ export class ManagerDashboardComponent implements OnInit {
     })
   }
 
+  getEmployees(){
+    this.employeeService.getEmployees().subscribe(results => {
+      this.employees = results;
+    })
+  }
+
   onAdd() {
     console.log('Inside onAdd() for teammembers');
-    console.log(this.newMember);
+    console.log(this.newMembers);
 
-    for (const  members of this.newMember) {
-      const split = members.split('-');
+    for (const member of this.newMembers) {
+      const split = member.split('-');
       this.addedIds.push(split[0]);
       this.addedTeamMembers.push(split[1]);
     }
@@ -52,17 +63,24 @@ export class ManagerDashboardComponent implements OnInit {
   }
 
   onSubmit(form: NgForm) {
+    console.log(form)
+    if (this.addedIds.length == 0 || this.addedIds === null){
+      this.addedIds = [];
+    }
     console.log('Inside onSubmit() for form');
     console.log('Submitting: ' + this.newProject.title + ', ' + this.newProject.description + ', ' + this.newProject.dueDate);
     console.log('project', this.newProject);
-    this.newProject.projectLead = this.currentUser._id
-    // this.newProject.teamMembers = this.addedIds;
+    this.newProject.projectLead = this.currentUser._id;
+    this.newProject.teamMembers = this.addedIds;
     this.projectService.createProject(this.newProject).subscribe(result => {
       console.log(result);
       this.newProject = new Project();
-      form.reset();
-      this.router.navigateByUrl('/dashboard');
+      this.getProjects();
+      this.addedIds = [];
+      this.addedTeamMembers = [];
+
     });
+    form.reset();
   }
 
 }

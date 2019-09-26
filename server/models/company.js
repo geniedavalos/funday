@@ -11,6 +11,7 @@ const CompanySchema = new mongoose.Schema({
         unique: true
     },
     owner: { type: Employee },
+    departments: [String],
     employees: [Employee],
     projects: [Project],
 }, {timestamps: true });
