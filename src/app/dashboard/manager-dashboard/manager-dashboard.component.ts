@@ -1,5 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { Project } from 'src/app/models';
+import { Component, OnInit, Input } from '@angular/core';
+import { Project, Employee } from 'src/app/models';
+import { AuthService } from 'src/app/services/auth.service';
+import { ProjectService } from 'src/app/services';
+import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-manager-dashboard',
@@ -12,7 +17,13 @@ export class ManagerDashboardComponent implements OnInit {
   addedIds: any [];
   newMember: any;
   random: string;
-  constructor() { }
+  @Input() currentUser: Employee;
+
+  constructor(
+    private readonly authService: AuthService,
+    private readonly projectService: ProjectService,
+    private readonly router: Router
+  ) { }
 
   ngOnInit() {
     this.addedIds = [];
@@ -33,9 +44,17 @@ export class ManagerDashboardComponent implements OnInit {
     console.log('Names are: ' + this.addedTeamMembers);
   }
 
-  onSubmit() {
+  onSubmit(form: NgForm) {
     console.log('Inside onSubmit() for form');
     console.log('Submitting: ' + this.newProject.title + ', ' + this.newProject.description + ', ' + this.newProject.dueDate);
+    console.log('project', this.newProject);
+    this.newProject.teamMembers = this.addedIds;
+    this.projectService.createProject(this.newProject).subscribe(result => {
+      console.log(result);
+      this.newProject = new Project();
+      form.reset();
+      this.router.navigateByUrl('/dashboard');
+    });
   }
 
 }

@@ -50,7 +50,7 @@ module.exports = {
         Company.findByIdAndUpdate(newCompany._id, newCompany)
           .then(async data => {
             console.log(data);
-            const login = await completeLogin(req, res, owner);
+            const login = await completeLogin(req, res, owner, newCompany);
             login.data['createdCompany'] = data;
             res.json(login);
           })
@@ -80,7 +80,7 @@ module.exports = {
               Company.findByIdAndUpdate(req.params.id, {$push : { employees : newEmployee}})
                 .then(async data => {
                   console.log("Joined company:", data);
-                  const login = await completeLogin(req, res, newEmployee);
+                  const login = await completeLogin(req, res, newEmployee, data);
                   login.data['joinedCompany'] = data;
                   res.json(login);
                 })
@@ -117,10 +117,11 @@ module.exports = {
  * @param {Request} req Client request instance
  * @param {Response} res Server response instance
  * @param {Employee} employee Employee instance
+ * @param {Company} company Company instance
  */
-function completeLogin(req, res, employee) {
+function completeLogin(req, res, employee, company) {
   console.log('completing login', employee);
-  const token = jwt.sign({id: employee._id}, req.app.get('secretKey'), { expiresIn: '1m' });
+  const token = jwt.sign({eid: employee._id}, {cid: company._id}, req.app.get('secretKey'), { expiresIn: '1m' });
   employee = employee.toObject();
   delete employee.password;
   return {status: 'success', message: 'Logged in', data: { employee: employee, token: token }};

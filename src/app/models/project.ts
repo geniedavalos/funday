@@ -9,6 +9,6 @@ export class Project {
     progress: number;
     isComplete: boolean;
     projectLead: Employee;
-    teamMembers: [Employee];
-    tasks: [Task];
+    teamMembers: string[];
+    tasks: Task[];
 }

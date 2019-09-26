@@ -8,6 +8,7 @@ router.get('/', projects.index)
     .put('/:id', projects.update)
     .delete('/:id', projects.destroy)
     .put('/:id/addTask', projects.addTask)
+    .put('/:id/removeTask', projects.removeTask)
     .put('/:id/addTeamMember', projects.addTeamMember)
     .put('/:id/removeTeamMember', projects.removeTeamMember)
 

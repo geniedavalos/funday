@@ -8,6 +8,6 @@ export class Employee {
   password: string;
   isManager: boolean;
   department: string;
-  managedProjects: [Project];
-  assignedProjects: [Project];
+  managedProjects: string[];
+  assignedProjects: string[];
 }

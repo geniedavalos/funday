@@ -6,5 +6,5 @@ export class Task {
     description: string;
     dueDate: Date;
     progress: number;
-    teamMembers: [Employee];
+    teamMembers: string[];
 }
