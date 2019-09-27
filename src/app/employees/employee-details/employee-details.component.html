@@ -45,10 +45,10 @@
     <section>
       <div class="introduction text-center">
         <h2>{{employee.firstName}} {{employee.lastName}}</h2>
-        <h4>Feed guinea pigs</h4>
+        <h4>Project : {{assignedProjects.title}}</h4>
       </div>
 
-      <table class="table mt-5 text-center ">
+      <table class="table mt-5 text-center " >
         <thead>
           <tr>
             <th scope="col">Task</th>
@@ -58,14 +58,14 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td><a href="#">Design Sharks</a></td>
+          <tr *ngFor="let task of tasks">
+            <td><a href="#">{{task.title}}</a></td>
             <td>
               <div class="progress">
                 <div class="progress-bar  progress-bar-striped bg-info" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
               </div>
             </td>
-            <td>6/25/19</td>
+            <td>{{task.dueDate}}</td>
             <td>
               <a href="#" class="btn btn-outline-info mx-1"><i class="fa fa-search" aria-hidden="true"></i></a>
               <a href="/tasks/:id/edit" class="btn btn-outline-success mx-1"><i class="fa fa-pencil" aria-hidden="true"></i>
@@ -74,39 +74,39 @@
               <a href="/tasks/:id" class="btn btn-outline-danger mx-1"><i class="fa fa-trash" aria-hidden="true"></i></a>
             </td>
           </tr>
-          <tr>
-            <td><a href="#">Color sharks</a></td>
-            <td>
-              <div class="progress">
-                <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 10%" aria-valuenow="10"></div>
-              </div>
-            </td>
-            <td>8/25/19</td>
-            <td>
-              <a href="#" class="btn btn-outline-info mx-1"><i class="fa fa-search" aria-hidden="true"></i></a>
-              <a href="/tasks/:id/edit" class="btn btn-outline-success mx-1"><i class="fa fa-pencil" aria-hidden="true"></i>
-              </a>
+<!--          <tr>-->
+<!--            <td><a href="#">Color sharks</a></td>-->
+<!--            <td>-->
+<!--              <div class="progress">-->
+<!--                <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 10%" aria-valuenow="10"></div>-->
+<!--              </div>-->
+<!--            </td>-->
+<!--            <td>8/25/19</td>-->
+<!--            <td>-->
+<!--              <a href="#" class="btn btn-outline-info mx-1"><i class="fa fa-search" aria-hidden="true"></i></a>-->
+<!--              <a href="/tasks/:id/edit" class="btn btn-outline-success mx-1"><i class="fa fa-pencil" aria-hidden="true"></i>-->
+<!--              </a>-->
 
-              <a href="/tasks/:id" class="btn btn-outline-danger mx-1"><i class="fa fa-trash" aria-hidden="true"></i></a>
-            </td>
-          </tr>
+<!--              <a href="/tasks/:id" class="btn btn-outline-danger mx-1"><i class="fa fa-trash" aria-hidden="true"></i></a>-->
+<!--            </td>-->
+<!--          </tr>-->
 
-          <tr>
-            <td><a href="#">Upload sharks</a></td>
-            <td>
-              <div class="progress">
-                <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 10%" aria-valuenow="10"></div>
-              </div>
-            </td>
-            <td>8/27/19</td>
-            <td>
-              <a href="#" class="btn btn-outline-info mx-1"><i class="fa fa-search" aria-hidden="true"></i></a>
-              <a href="/tasks/:id/edit" class="btn btn-outline-success mx-1"><i class="fa fa-pencil" aria-hidden="true"></i>
-              </a>
+<!--          <tr>-->
+<!--            <td><a href="#">Upload sharks</a></td>-->
+<!--            <td>-->
+<!--              <div class="progress">-->
+<!--                <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 10%" aria-valuenow="10"></div>-->
+<!--              </div>-->
+<!--            </td>-->
+<!--            <td>8/27/19</td>-->
+<!--            <td>-->
+<!--              <a href="#" class="btn btn-outline-info mx-1"><i class="fa fa-search" aria-hidden="true"></i></a>-->
+<!--              <a href="/tasks/:id/edit" class="btn btn-outline-success mx-1"><i class="fa fa-pencil" aria-hidden="true"></i>-->
+<!--              </a>-->
 
-              <a href="/tasks/:id" class="btn btn-outline-danger mx-1"><i class="fa fa-trash" aria-hidden="true"></i></a>
-            </td>
-          </tr>
+<!--              <a href="/tasks/:id" class="btn btn-outline-danger mx-1"><i class="fa fa-trash" aria-hidden="true"></i></a>-->
+<!--            </td>-->
+<!--          </tr>-->
         </tbody>
       </table>
     </section>
