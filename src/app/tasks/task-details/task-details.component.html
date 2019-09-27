@@ -43,7 +43,7 @@
     </nav>
     <section>
 
-      <h2>Task Name <span style="font-size: 1.2rem;">(Due: 11/18/19)</span></h2>
+      <h2>Task Name {{task.title}} <span style="font-size: 1.2rem;">(Due: {{task.dueDate| date:"mediumDate"}})</span></h2>
       <p>Task details, this is such a great task, hey can't wait to get it done! Yay!</p>
       <div class="progress">
         <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 10%" aria-valuenow="10">
