@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Note = mongoose.model('Note')
+const Employee = mongoose.model('Employee');
 module.exports = {
   index: (_req, res) => {
     Note.find({})
@@ -13,9 +14,18 @@ module.exports = {
   },
   create: (req, res) => {
     console.log("note controller ", req.body)
-    Note.create(req.body)
-      .then(data => res.json(data))
+    var newNote = new Note();
+    newNote.content = req.body.content;
+    Employee.findOne({_id:req.body.sender})
+      .then(data =>{
+        console.log('employee = ', data)
+        newNote.sender={firstName: data.firstName, lastName : data.lastName}
+        newNote.save()
+               .then(data => res.json(data))
+               .catch(err => res.json(err))
+      })
       .catch(err => res.json(err))
+
   },
   update: (req, res) => {
     Note.updateOne({ _id : req.params.id }, { runValidators: true, context: 'query' }, req.body)

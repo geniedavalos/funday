@@ -43,7 +43,7 @@
     </nav>
     <section>
 
-      <h2>Task Name <span style="font-size: 1.2rem;">(Due: 11/18/19)</span></h2>
+      <h2>Task Name {{task.title}} <span style="font-size: 1.2rem;">(Due: {{task.dueDate| date:"mediumDate"}})</span></h2>
       <p>Task details, this is such a great task, hey can't wait to get it done! Yay!</p>
       <div class="progress">
         <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 10%" aria-valuenow="10">
@@ -88,28 +88,15 @@
 
     <section>
       <h2>Team Members</h2>
-      <span class='badge badge-info mx-1 px-2'><a class='text-white' routerLink=''>Jill</a></span>
-      <span class='badge badge-info mx-1 px-2'><a class='text-white' routerLink=''>Jack</a></span>
-      <span class='badge badge-info mx-1 px-2'><a class='text-white' routerLink=''>James</a></span>
+      <span class='badge badge-info mx-1 px-2' *ngFor="let member of task.teamMembers" ><a class='text-white' [routerLink]="['/employee',member._id,'detail']">{{member.firstName}}</a></span>
+
     </section>
 
     <section>
       <h2>Notes</h2>
       <div class="notes my-4">
-        <p>(12/19/2020) Wade says: Hey working on this</p>
-        <p>(12/22/2020) Genie says: My registration isn't working!</p>
-        <p>(12/19/2020) Wade says: Hey working on this</p>
-        <p>(12/22/2020) Genie says: My registration isn't working!</p>
-        <p>(12/19/2020) Wade says: Hey working on this</p>
-        <p>(12/22/2020) Genie says: My registration isn't working!</p>
-        <p>(12/19/2020) Wade says: Hey working on this</p>
-        <p>(12/22/2020) Genie says: My registration isn't working!</p>
-        <p>(12/19/2020) Wade says: Hey working on this</p>
-        <p>(12/22/2020) Genie says: My registration isn't working!</p>
-        <p>(12/19/2020) Wade says: Hey working on this</p>
-        <p>(12/22/2020) Genie says: My registration isn't working!</p>
-        <p>(12/19/2020) Wade says: Hey working on this</p>
-        <p>(12/22/2020) Genie says: My registration isn't working!</p>
+        <p *ngFor="let note of notes">({{note.createdAt| date:"mediumDate"}}) {{note.sender.firstName}} :  {{note.content}} </p>
+
       </div>
       <textarea rows='2' class='form-control' [(ngModel)]='newNote.content'>
       </textarea>

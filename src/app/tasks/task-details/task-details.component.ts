@@ -18,6 +18,7 @@ export class TaskDetailsComponent implements OnInit {
   updateProgress: string;
   percentage: string;
   newNote: any;
+  private notes: Note[];
   constructor(
     private readonly authService : AuthService,
     private readonly taskService: TaskService,
@@ -36,13 +37,12 @@ export class TaskDetailsComponent implements OnInit {
       this.getThisTask();
     });
     this.userId = this.authService.getDecodedAccessToken().eid
-    console.log("user id = ",this.userId)
   }
   getThisTask() {
-    console.log("task id = ",this.taskId)
     this.taskService.getTask(this.taskId).subscribe(result => {
-      console.log(result);
       this.task = result;
+      this.notes = this.task['notes'];
+      console.log(this.task)
     });
   }
 
@@ -52,10 +52,10 @@ export class TaskDetailsComponent implements OnInit {
 
   onAddNote() {
     this.newNote['sender']=this.userId;
-    this.noteService.createNote(this.newNote).subscribe(newNode =>{
-      console.log("created new node ", newNode)
-      this.taskService.addNote(this.taskId, newNode).subscribe(result=>{
-        console.log("add note to task ", result)
+    this.noteService.createNote(this.newNote).subscribe(newNote =>{
+      this.taskService.addNote(this.taskId, newNote).subscribe(result=>{
+        this.getThisTask()
+        this.newNote= new Note();
       })
     })
   }
