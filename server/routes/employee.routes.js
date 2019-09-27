@@ -9,5 +9,6 @@ router.get('/', employees.index)
     .delete('/:id', employees.destroy)
     .put('/:id/addTask', employees.addTask)
     .put('/:id/addProject', employees.addProject)
+    .put('/:id/addManagedProject', employees.addManagedProject)
     
 module.exports = router;

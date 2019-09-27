@@ -79,5 +79,18 @@ module.exports = {
             .catch(err => {
                 res.json(err);
             })
+    },
+    addManagedProject: (req, res) => {
+        console.log("Insider server addManagedProject to managedProjects");
+        console.log("logging req.params.id",req.params.id);
+        console.log("logging req.body",req.body);
+        Employee.updateOne({_id : req.params.id}, {$push : {managedProjects : req.body.projectID}})
+            .then((data) => {
+                console.log(data);
+                res.json(data);
+            })
+            .catch(err => {
+                res.json(err);
+            })
     }
 }
