@@ -15,7 +15,7 @@ export class CompanyDetailsComponent implements OnInit {
     owner: null,
     employees: null,
     projects: null,
-    deparments: null,
+    departments: null,
   };
   id: string;
   constructor(
