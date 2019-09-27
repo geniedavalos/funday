@@ -16,7 +16,7 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-white">
       <a class="navbar-brand" href="/index.html">
         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Twemoji_1f60e.svg/768px-Twemoji_1f60e.svg.png" width="30" height="30" class="d-inline-block align-top" alt="">
-        <strong>Funday</strong><span>.com</span></a>
+        <strong> funday</strong><span>.com</span></a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -44,6 +44,7 @@
     <section>
 
       <h2>Task Name <span style="font-size: 1.2rem;">(Due: 11/18/19)</span></h2>
+      <p>Task details, this is such a great task, hey can't wait to get it done! Yay!</p>
       <div class="progress">
         <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 10%" aria-valuenow="10">
         </div>
@@ -77,7 +78,7 @@
 
                   </div>
                   <div class="modal-footer justify-content-center">
-                      <button type="button" (click)='onProgressUpdate()' class="btn btn-info">Edit Progress</button>
+                      <button type="button" (click)='onProgressUpdate()' class="btn btn-info">Update</button>
                   </div>
               </div>
           </div>
@@ -88,40 +89,26 @@
     <section>
       <h2>Notes</h2>
       <div class="notes my-4">
-        notesfslajfl ksdflsadlkf jlksdflsdjflkjs ldfjlkajflksdjfkl jslfjsl kadfjlksjdf kljdsklfjsdlfjklsdfjsfjlsadfksafjsafksa
+        <p>(12/19/2020) Wade says: Hey working on this</p>
+        <p>(12/22/2020) Genie says: My registration isn't working!</p>
+        <p>(12/19/2020) Wade says: Hey working on this</p>
+        <p>(12/22/2020) Genie says: My registration isn't working!</p>
+        <p>(12/19/2020) Wade says: Hey working on this</p>
+        <p>(12/22/2020) Genie says: My registration isn't working!</p>
+        <p>(12/19/2020) Wade says: Hey working on this</p>
+        <p>(12/22/2020) Genie says: My registration isn't working!</p>
+        <p>(12/19/2020) Wade says: Hey working on this</p>
+        <p>(12/22/2020) Genie says: My registration isn't working!</p>
+        <p>(12/19/2020) Wade says: Hey working on this</p>
+        <p>(12/22/2020) Genie says: My registration isn't working!</p>
+        <p>(12/19/2020) Wade says: Hey working on this</p>
+        <p>(12/22/2020) Genie says: My registration isn't working!</p>
       </div>
-      <textarea>
+      <textarea rows='2' class='form-control' [(ngModel)]='newNote'>
       </textarea>
       <br>
       <div class='row'>
-        <button type="button" class="btn btn-success mx-auto mt-3" data-toggle="modal" data-target="#addNotes">Add Notes</button>
-      </div>
-
-      <div class="modal fade" id="addNotes" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-          <div class="modal-content">
-            <div class="modal-header text-center bg-success">
-              <h3 class="modal-title w-100  my-auto text-white">Add New Notes</h3>
-              <button type="button" class="close text-white my-auto" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-
-              <p class='text-center'><strong>Enter your new notes below</strong></p>
-              <div class='input-group mb-2 justify-content-center'>
-                <div class='input-group-prepend'>
-                  <span class='input-group-text' id='basic-addon1'><i class="fa fa-pencil-square-o" aria-hidden="true"></i></span>
-                </div>
-                <textarea class='form-control col-8' name='note' [(ngModel)]='newNote.content'></textarea>
-              </div>
-
-            </div>
-            <div class="modal-footer justify-content-center">
-                <button type="button" (click)='onProgressUpdate()' class="btn btn-success">Add Note</button>
-            </div>
-          </div>
-        </div>
+        <button type="button" (click)='onAddNote()' class="btn btn-success mx-auto">Add Note</button>
       </div>
 
     </section>
@@ -137,7 +124,7 @@
           <div class="col-lg-4 col-sm-6">
             <p><a href="/cases.html"><Strong>Use cases</Strong></a></p>
             <p><a href="#" class="greenh">Product Management</a></p>
-            <p><a href="#" class="greenh">All Use Cases</a></p>
+            <p><a href="#" class="greenh">Sample Use Cases</a></p>
           </div>
 
 
@@ -148,20 +135,20 @@
           </div>
         </div>
 
-      <div class="row">
-        <div class="col-lg-6 col-sm-12 real-footer text-center">Made with <i class="fa fa-coffee" aria-hidden="true"></i> & <i class="fa fa-heart" aria-hidden="true"></i><br>
-          All Rights Reserved © funday.com</div>
-        <div class="col-lg-6 col-sm-12 real-footer justify-content-center">
-          <div class="row social justify-content-center">
-            <a href="https://www.facebook.com" class="fa fa-facebook" target="_blank"></a>
-            <a href="https://www.twitter.com" class="fa fa-twitter" target="_blank"></a>
-            <a href="https://www.youtube.com" class="fa fa-youtube" target="_blank"></a>
-            <a href="https://www.skype.com" class="fa fa-skype" target="_blank"></a>
+        <div class="row">
+            <div class="col-lg-6 col-sm-12 real-footer text-center">Made with <i class="fa fa-coffee" aria-hidden="true"></i> & <i class="fa fa-heart" aria-hidden="true"></i><br>
+              All Rights Reserved © funday.com</div>
+            <div class="col-lg-6 col-sm-12 real-footer justify-content-center">
+              <div class="row social justify-content-center">
+                <a href="https://www.facebook.com" id="facebook" class="fa fa-facebook" target="_blank"></a>
+                <a href="https://www.twitter.com" id="twitter" class="fa fa-twitter" target="_blank"></a>
+                <a href="https://www.youtube.com" id="youtube" class="fa fa-youtube" target="_blank"></a>
+                <a href="https://www.skype.com" id="skype" class="fa fa-skype" target="_blank"></a>
+              </div>
+            </div>
           </div>
-        </div>
+        </footer>
       </div>
-    </footer>
-  </div>
 
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
