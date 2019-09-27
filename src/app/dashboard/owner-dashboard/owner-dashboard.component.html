@@ -244,21 +244,21 @@
   <footer>
     <div class="row map justify-content-center">
       <div class="col-lg-4 col-sm-6">
-        <p><a routerLink="/home"><strong>Our product</strong></a></p>
-        <p><a href="#" class="purpleh">Product</a></p>
-        <p><a href="#" class="purpleh">Pricing</a></p>
+        <p><a [routerLink]="['/home']"><strong>Our product</strong></a></p>
+        <p><a [routerLink]="['/home']" id="purpleh">Product</a></p>
+        <p><a [routerLink]="['/home']" id="purpleh">Pricing</a></p>
       </div>
 
       <div class="col-lg-4 col-sm-6">
-        <p><a routerLink='/information'><Strong>Use Cases</Strong></a></p>
-        <p><a href="#" class="greenh">Product Management</a></p>
-        <p><a href="#" class="greenh">Sample Use Cases</a></p>
+        <p><a [routerLink]="['/information']"><strong>Use Cases</strong></a></p>
+        <p><a [routerLink]="['/information']" id="greenh">Product Management</a></p>
+        <p><a [routerLink]="['/information']" id="greenh">Sample Use Cases</a></p>
       </div>
 
-      <div class="col-lg-3 col-sm-6">
-        <p><a routerLink='/devTeam'><Strong>Our Team</Strong></a></p>
-        <p><a href="#" class="blueh">About Us</a></p>
-        <p><a href="#" class="blueh">Contact Us</a></p>
+      <div class="col-lg-4 col-sm-6">
+        <p><a [routerLink]="['/devTeam']"><Strong>Our Team</Strong></a></p>
+        <p><a [routerLink]="['/devTeam']" id="blueh">About Us</a></p>
+        <p><a [routerLink]="['/devTeam']" id="blueh">Contact Us</a></p>
       </div>
     </div>
 
@@ -267,10 +267,10 @@
         All Rights Reserved © funday.com</div>
       <div class="col-lg-6 col-sm-12 real-footer justify-content-center">
         <div class="row social justify-content-center">
-          <a href="https://www.facebook.com" class="fa fa-facebook" target="_blank"></a>
-          <a href="https://www.twitter.com" class="fa fa-twitter" target="_blank"></a>
-          <a href="https://www.youtube.com" class="fa fa-youtube" target="_blank"></a>
-          <a href="https://www.skype.com" class="fa fa-skype" target="_blank"></a>
+          <a href="https://www.facebook.com" id="facebook" class="fa fa-facebook" target="_blank"></a>
+          <a href="https://www.twitter.com" id="twitter" class="fa fa-twitter" target="_blank"></a>
+          <a href="https://www.youtube.com" id="youtube" class="fa fa-youtube" target="_blank"></a>
+          <a href="https://www.skype.com" id="skype" class="fa fa-skype" target="_blank"></a>
         </div>
       </div>
     </div>

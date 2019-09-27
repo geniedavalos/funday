@@ -217,12 +217,11 @@ footer {
   color: rgb(73, 68, 68);
   text-decoration: none;
 }
-
 .fa-facebook {
   padding: 0px 20px;
 }
 
-.fa-facebook:hover {
+#facebook:hover {
   color: #3b5998;
 }
 
@@ -230,7 +229,7 @@ footer {
   padding: 0px 20px;
 }
 
-.fa-youtube:hover {
+#youtube:hover {
   color: #c4320b;
 }
 
@@ -238,7 +237,7 @@ footer {
   padding: 0px 20px;
 }
 
-.fa-twitter:hover {
+#twitter:hover {
   color: #00acee;
 }
 
@@ -246,7 +245,7 @@ footer {
   padding: 0px 20px;
 }
 
-.fa-skype:hover {
+#skype:hover {
   color: #00aff0;
 }
 
@@ -259,17 +258,18 @@ footer .map a {
   padding: 2%;
 }
 
-.purpleh:hover {
+#purpleh:hover {
   color: rgb(87, 20, 122);
 }
 
-.greenh:hover {
+#greenh:hover {
   color: green;
 }
 
-.blueh:hover {
+#blueh:hover {
   color: rgb(20, 108, 143);
 }
+
 .errorMessage{
   max-height:15px;
 }

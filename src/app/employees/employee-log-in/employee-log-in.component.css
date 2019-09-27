@@ -252,26 +252,6 @@ footer .map a {
   padding: 2%;
 }
 
-.purpleh:hover {
-  color: rgb(87, 20, 122);
-}
-
-.greenh:hover {
-  color: green;
-}
-
-.blueh:hover {
-  color: rgb(20, 108, 143);
-}
-
-.company-list {
-  width: 50%;
-}
-
-#building-icon {
-  height: 38px;
-}
-
 #purpleh:hover {
   color: rgb(87, 20, 122);
 }
@@ -284,3 +264,10 @@ footer .map a {
   color: rgb(20, 108, 143);
 }
 
+.company-list {
+  width: 50%;
+}
+
+#building-icon {
+  height: 38px;
+}
