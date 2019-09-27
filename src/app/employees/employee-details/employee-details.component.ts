@@ -11,6 +11,9 @@ import { EmployeeService } from 'src/app/services';
 export class EmployeeDetailsComponent implements OnInit {
   private id: string;
   private employee: Employee;
+  private managedProjects: any[];
+  private assignedProjects: any;
+  private tasks: any[];
   constructor(
     private readonly employeeService: EmployeeService,
     private readonly route: ActivatedRoute,
@@ -28,6 +31,10 @@ export class EmployeeDetailsComponent implements OnInit {
     this.employeeService.getEmployee(id).subscribe(result => {
       console.log(result);
       this.employee = result;
+      this.managedProjects = result.managedProjects;
+      this.assignedProjects = result.assignedProjects;
+      this.tasks = result['tasks'];
+      console.log(this.assignedProjects)
     });
   }
 }

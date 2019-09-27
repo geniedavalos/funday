@@ -33,6 +33,7 @@ export class EmployeeDashboardComponent implements OnInit, OnChanges {
       console.log("id = ", this.id)
       this.getTeamMembers();
       console.log("logging currentUser", this.currentUser)
+      this.getTasks(this.id)
     }
   }
 
