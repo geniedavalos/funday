@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { Task } from '../models/task';
+import {Note} from "../models/note";
 
 @Injectable({
   providedIn: 'root',
@@ -42,5 +43,9 @@ export class TaskService {
   }
   getEmployeeTasks(id: String): Observable<Task[]> {
     return this.http.get<Task[]>(`${this.base}/getEmployeeTasks/${id}`)
+  }
+
+  addNote(id: string, newNode: Note) : Observable<any> {
+    return this.http.put(`${this.base}/addNote/${id}`, newNode)
   }
 }
