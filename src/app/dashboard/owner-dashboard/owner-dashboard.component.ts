@@ -153,4 +153,11 @@ export class OwnerDashboardComponent implements OnInit, OnChanges {
       });
     });
   }
+
+  makeManager(id){
+    this.employeeService.promoteToManager(id).subscribe(result =>{
+      console.log(result)
+    })
+  }
+
 }
