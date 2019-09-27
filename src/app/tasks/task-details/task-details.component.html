@@ -88,9 +88,8 @@
 
     <section>
       <h2>Team Members</h2>
-      <span class='badge badge-info mx-1 px-2'><a class='text-white' routerLink=''>Jill</a></span>
-      <span class='badge badge-info mx-1 px-2'><a class='text-white' routerLink=''>Jack</a></span>
-      <span class='badge badge-info mx-1 px-2'><a class='text-white' routerLink=''>James</a></span>
+      <span class='badge badge-info mx-1 px-2' *ngFor="let member of task.teamMembers" ><a class='text-white' [routerLink]="['/employee',member._id,'detail']">{{member.firstName}}</a></span>
+
     </section>
 
     <section>

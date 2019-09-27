@@ -67,6 +67,10 @@ const routes: Routes = [
     path: 'tasks/:taskID/edit',
     component: fromTasks.TaskEditComponent,
   },
+  {
+    path: 'employee/:id/detail',
+    component: fromEmployees.EmployeeDetailsComponent,
+  },
       // {
       //   path: '',
       //   component: fromProjects.ProjectListComponent,

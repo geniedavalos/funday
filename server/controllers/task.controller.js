@@ -8,7 +8,9 @@ module.exports = {
   },
   show: (req, res) => {
     Task.findOne({ _id : req.params.id })
+      .populate('teamMembers')
       .populate('notes')
+
       .then(data => res.json(data))
       .catch(err => res.json(err))
   },

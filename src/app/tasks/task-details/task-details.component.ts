@@ -41,7 +41,8 @@ export class TaskDetailsComponent implements OnInit {
   getThisTask() {
     this.taskService.getTask(this.taskId).subscribe(result => {
       this.task = result;
-      this.notes = this.task.notes;
+      this.notes = this.task['notes'];
+      console.log(this.task)
     });
   }
 
