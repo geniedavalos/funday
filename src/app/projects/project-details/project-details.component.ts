@@ -61,7 +61,7 @@ export class ProjectDetailsComponent implements OnInit {
   onTaskCreate(form: NgForm) {
     console.log('Inside onTaskCreate()');
     this.taskService.createTask(this.newTask).subscribe(task => {
-      this.projectService.addTask(this.project, task).subscribe(result => {
+      this.projectService.addTask(this.project, task._id).subscribe(result => {
         console.log(result);
       });
       for(let teamMember of task.teamMembers){

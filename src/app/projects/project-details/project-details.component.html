@@ -46,7 +46,7 @@
       <h2>Project Title: {{project?.title}}</h2>
       <p>Getting this project done! Adding tasks, projects, notes, etc...</p>
       <div class="progress">
-        <div class="progress-bar  progress-bar-striped bg-info" role="progressbar" [style]="['width:', project?.progress, '%;']" aria-valuenow="" aria-valuemin="0" aria-valuemax="100">{{project?.progress}}%</div>
+        <div class="progress-bar  progress-bar-striped bg-info" role="progressbar" [ngStyle]="{'width': project?.progress+'%'}" aria-valuenow="" aria-valuemin="0" aria-valuemax="100">{{project?.progress}}%</div>
       </div>
       <div class="mx-3 my-3 block">
         <button type="button" class="btn btn-info" data-toggle="modal" data-target="#editProject">Edit This Project</button>
@@ -136,7 +136,7 @@
             <td><a [routerLink]="['tasks', task._id]" routerLinkActive="router-link-active" >{{task.title}}</a></td>
             <td>
               <div class="progress">
-                <div class="progress-bar  progress-bar-striped bg-info" role="progressbar" [style]="['width:', task.progress, '%;']" aria-valuenow="" aria-valuemin="0" aria-valuemax="100"></div>
+                <div class="progress-bar  progress-bar-striped bg-info" role="progressbar" [ngStyle]="{'width': task.progress+'%'}" aria-valuenow="" aria-valuemin="0" aria-valuemax="100"></div>
               </div>
             </td>
             <td>{{task?.dueDate | date: 'mediumDate'}}</td>
@@ -223,6 +223,8 @@
         </div>
     </div>
 
+<!-- BEGIN EDIT TASK MODAL -->
+
     <div class="modal fade" id="editTask" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
@@ -258,7 +260,7 @@
                       <p class='text-center'><strong>Remove Team Members</strong></p>
 
                         <select multiple class='form-control col-8 mx-auto' name='taskTeam' [ngModel]='editTask?.teamMembers'>
-                            <option *ngFor="let member of project?.teamMembers" value="{{member._id}}">{{member.firstName}} {{member.lastName}}</option>
+                            <option *ngFor="let member of editTask?.teamMembers" value="{{member._id}}">{{member?.firstName}} {{member?.lastName}}</option>
                         </select>
                     </form>
                 </div>
@@ -268,6 +270,8 @@
             </div>
         </div>
     </div>
+
+    <!-- END EDIT TASK MODAL -->
 
     <section id="users">
       <h2>Manage Team</h2>

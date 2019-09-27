@@ -7,9 +7,9 @@ module.exports = {
     index: async (_req, res) => {
         try {
             const employees = await Employee.find()
-                    .populate('tasks')
+                    .populate({path:'tasks', populate: {path: 'teamMembers'}})
                     .populate('managedProjects')
-                    .populate('assignedProjects');
+                    .populate({path:'assignedProjects', populate: {path: 'teamMembers'}});
             res.json(employees);
         }
         catch (err) {
@@ -18,9 +18,9 @@ module.exports = {
     },
     show: (req, res) => {
         Employee.findById(req.params.id)
-            .populate('tasks')
+            .populate({path:'tasks', populate: {path: 'teamMembers'}})
             .populate('managedProjects')
-            .populate('assignedProjects')
+            .populate({path:'assignedProjects', populate: {path: 'teamMembers'}})
             .then((data) => {
               console.log(data)
                 res.json(data)

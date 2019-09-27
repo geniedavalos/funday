@@ -105,7 +105,6 @@
 
     <section id="users">
       <h2>My Team</h2>
-
       <div *ngIf='currentUser?.tasks?.length == 0'><h5 class='text-center text-primary'>You are currently not assigned to a team!</h5></div>
       <table class="table text-center " *ngIf='teamMembers.length > 0'>
         <thead>

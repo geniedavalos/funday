@@ -3,7 +3,12 @@ const Project = mongoose.model('Project')
 module.exports = {
     index: async (_req, res) => {
         try {
-            const projects = await Project.find().sort('dueDate').populate('tasks');
+            const projects = await Project
+                                    .find()
+                                    .sort('dueDate')
+                                    .populate({path:'tasks', populate: {path: 'teamMembers'}})
+                                    .populate('teamMembers')
+                                    .populate('projectLead');
             res.json(projects);
         }
         catch (err) {
@@ -13,7 +18,8 @@ module.exports = {
     show: (req, res) => {
         Project.findById(req.params.id)
             .populate('teamMembers')
-            .populate('tasks')
+            .populate({path:'tasks', populate: {path: 'teamMembers'}})
+            .populate('projectLead')
             .then((data) => {
                 res.json(data)
             })
@@ -32,7 +38,7 @@ module.exports = {
         })
     },
     update: (req, res) => {
-        Project.findOneAndUpdate({ _id : req.params.id }, { runValidators: true, context: 'query' }, req.body)
+        Project.findOneAndUpdate({ _id : req.params.id }, req.body, {new: true})
             .then((data) => {
                 res.json(data);
             })
@@ -49,7 +55,7 @@ module.exports = {
     },
     addTask: (req, res) => {
         console.log("inside addTask to Project method", req.body)
-        Project.updateOne({_id : req.params.id}, {$push : {tasks: req.body}})
+        Project.findOneAndUpdate({_id : req.params.id}, {$push : {tasks: req.body.taskID}}, {new: true})
         .then(data => {
             res.json(data);
         })
@@ -57,7 +63,7 @@ module.exports = {
     },
     removeTask: (req, res) => {
         console.log("insde removeTask from Project method", req.body)
-        Project.updateOne({_id : req.params.id}, {$pull : {tasks: req.body}})
+        Project.findOneAndUpdate({_id : req.params.id}, {$pull : {tasks: req.body}})
         .then(data => {
             res.json(data);
         })
@@ -65,7 +71,7 @@ module.exports = {
     },
     addTeamMember: (req, res) => {
         console.log("inside addTeamMember to Project method", req.body)
-        Project.updateOne({_id : req.params.id}, {$push : {teamMembers: req.body}})
+        Project.findOneAndUpdate({_id : req.params.id}, {$push : {teamMembers: req.body}}, {new: true})
         .then(data => {
             res.json(data);
         })
@@ -73,7 +79,7 @@ module.exports = {
     },
     removeTeamMember: (req, res) => {
         console.log("insde removeTeamMmber from Project method", req.body)
-        Project.updateOne({_id : req.params.id}, {$pull : {teamMembers: req.body}})
+        Project.findOneAndUpdate({_id : req.params.id}, {$pull : {teamMembers: req.body}})
         .then(data => {
             res.json(data);
         })

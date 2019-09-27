@@ -12,6 +12,9 @@ module.exports = {
    */
   login: (req, res) => {
     Employee.findOne({ email: req.body.email })
+      .populate('managedProjects')
+      .populate('assignedProjects')
+      .populate({path:'tasks', populate: {path: 'teamMembers'}})
       .then(employee => {
         bcrypt.compare(req.body.password, employee.password)
           .then(isValid => {

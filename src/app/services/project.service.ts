@@ -33,16 +33,16 @@ export class ProjectService {
     return this.http.delete<Project>(`${this.base}/${id}`);
   }
 
-  addTask(project: Project, task: Task): Observable<Project> {
-    return this.http.put<Project>(`${this.base}/${project._id}/addTask`, task)
+  addTask(project: Project, taskID: string): Observable<Project> {
+    return this.http.put<Project>(`${this.base}/${project._id}/addTask`, {taskID})
   }
 
   addTeamMember(project: Project, employeeID: string): Observable<Project> {
-    return this.http.put<Project>(`${this.base}/${project._id}/addTeamMember`, employeeID)
+    return this.http.put<Project>(`${this.base}/${project._id}/addTeamMember`, {employeeID})
   }
 
   removeTeamMember(project: Project, employeeID: string): Observable<Project> {
-    return this.http.put<Project>(`${this.base}/${project._id}/removeTeamMember`, employeeID)
+    return this.http.put<Project>(`${this.base}/${project._id}/removeTeamMember`, {employeeID})
   }
   getManagedProjects(id: string): Observable<Project[]>{
     return this.http.get<Project[]>(`${this.base}/getManagedProjects/${id}`);

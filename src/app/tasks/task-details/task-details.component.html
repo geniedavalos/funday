@@ -43,8 +43,8 @@
     </nav>
     <section>
 
-      <h2>Task Name {{task.title}} <span style="font-size: 1.2rem;">(Due: {{task.dueDate| date:"mediumDate"}})</span></h2>
-      <p>Task details, this is such a great task, hey can't wait to get it done! Yay!</p>
+      <h2>{{task.title}} <span style="font-size: 1.2rem;">(Due: {{task.dueDate| date:"mediumDate"}})</span></h2>
+      <p class="border rounded">Task Details: {{task.description}}</p>
       <div class="progress">
         <div class="progress-bar progress-bar-striped" role="progressbar" [ngStyle]="{'width': task?.progress+'%'}" aria-valuenow="10">{{task?.progress}}%
         </div>
@@ -89,21 +89,21 @@
 
     <section>
       <h2>Team Members</h2>
-      <span class='badge badge-info mx-1 px-2' *ngFor="let member of task.teamMembers" ><a class='text-white' [routerLink]="['/employee',member._id,'detail']">{{member.firstName}}</a></span>
+      <span class='badge badge-info mx-1 px-2' *ngFor="let member of task.teamMembers" ><a class='text-white' [routerLink]="['/employee',member._id,'detail']">{{member.firstName}} {{member.lastName}}</a></span>
 
     </section>
 
     <section>
       <h2>Notes</h2>
-      <div class="notes my-4">
-        <p *ngFor="let note of notes">({{note.createdAt| date:"mediumDate"}}) {{note.sender.firstName}} : {{note.content}} </p>
+      <div class="notes my-4 py-0 px-1">
+        <p class="my-0" *ngFor="let note of notes">({{note.createdAt| date:"medium"}}) {{note.sender.firstName}} {{note.sender.lastName}} : {{note.content}} </p>
 
       </div>
       <textarea minlength="1" rows='2' #content="ngModel" required class='form-control' id="content" name="content" [(ngModel)]='newNote.content'>
       </textarea>
       <br>
       <div class='row'>
-        <button [disabled]="(content.touched || content.dirty)" type="button" (click)='onAddNote()' class="btn btn-success mx-auto">Add Note</button>
+        <button [disabled]="(!content.valid)"  type="button" (click)='onAddNote()' class="btn btn-success mx-auto">Add Note</button>
       </div>
 
     </section>
