@@ -33,34 +33,38 @@ export class ManagerDashboardComponent implements OnInit, OnChanges {
   ngOnInit() {
     this.addedIds = [];
     this.addedTeamMembers = [];
-    this.getProjects();
-    this.getEmployees();
   }
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes.currentCompany.currentValue) {
+      console.log(changes)
       this.getProjects();
       this.getEmployees();
     }
   }
 
   getProjects() {
+    console.log(this.currentUser);
     this.projectService.getManagedProjects(this.currentUser._id).subscribe(data => {
       console.log(data)
       this.projects = data;
-    })
-    this.projects.sort((a, b) => {
-      if (a.dueDate > b.dueDate) {
-        return 1;
-      } else if (a.dueDate < b.dueDate) {
-        return -1;
+      if(this.projects.length > 0){
+        this.projects.sort((a, b) => {
+          if (a.dueDate > b.dueDate) {
+            return 1;
+          } else if (a.dueDate < b.dueDate) {
+            return -1;
+          }
+          return 0;
+        });
       }
-      return 0;
-    });
+    })
   }
 
   getEmployees() {
+    console.log(this.currentCompany);
     this.employees = this.currentCompany.employees;
+    console.log("LOGGING EMPLOYEES!!!!!!!!!!!",this.employees)
     this.employees.sort((a, b) => {
       if (a.lastName.toUpperCase() > b.lastName.toUpperCase()) {
         return 1;

@@ -51,5 +51,12 @@ module.exports = {
       res.json(data);
     })
     .catch(err => res.json(err))
-  }
+  },
+  addNote: (req, res) => {
+    Task.updateOne({_id: req.params.id}, {$push : {sender:req.body}})
+      .then(data => {
+        res.json(data);
+      })
+      .catch(err => res.json(err))
+  },
 }
