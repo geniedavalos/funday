@@ -12,7 +12,7 @@ const CompanySchema = new mongoose.Schema({
     },
     owner: { type: Employee },
     departments: [String],
-    employees: [Employee],
+    employees: [ { type : mongoose.Schema.Types.ObjectId, ref : 'Employee' } ],
     projects: [Project],
 }, {timestamps: true });
 CompanySchema.plugin(uniqueValidator, { message: 'Company {PATH} must be unique.'});

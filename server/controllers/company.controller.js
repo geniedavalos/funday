@@ -4,7 +4,8 @@ const Company = mongoose.model('Company')
 module.exports = {
     index: async (_req, res) => {
         try {
-            const companies = await Company.find().sort('name');
+            const companies = await Company.find().sort('name')
+            .populate('employees');
             res.json(companies);
         }
         catch (err) {
@@ -13,6 +14,7 @@ module.exports = {
     },
     show: (req, res) => {
         Company.findById(req.params.id)
+        .populate('employees')
             .then((data) => {
                 res.json(data)
             })
