@@ -21,7 +21,7 @@ module.exports = {
             if(!isValid) {
               throw new Error();
             }
-            Company.findOne({ 'employees._id' : employee._id })
+            Company.findOne({ 'employees' : employee._id })
               .then(company => {
                 res.json(completeLogin(req, res, employee, company));
               })
@@ -75,6 +75,7 @@ module.exports = {
         req.body.password = hashed;
         Employee.create(req.body)
           .then(employee => {
+            console.log('*******************************************************' + employee);
             Company.findByIdAndUpdate(req.params.id, {$push : { employees : employee}})
               .then(async company => {
                 const login = await completeLogin(req, res, employee, company);
