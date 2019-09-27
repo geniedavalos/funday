@@ -16,6 +16,7 @@ module.exports = {
       .populate('assignedProjects')
       .populate({path:'tasks', populate: {path: 'teamMembers'}})
       .then(employee => {
+<<<<<<< HEAD
         console.log("employee = ",employee)
         if(employee!= null) {
           bcrypt.compare(req.body.password, employee.password)
@@ -36,6 +37,24 @@ module.exports = {
             });
         }else {res.json({'Wrong email':"wronf"})}
 
+=======
+        bcrypt.compare(req.body.password, employee.password)
+          .then(isValid => {
+            if(!isValid) {
+              throw new Error();
+            }
+            Company.findOne({ 'employees' : employee._id })
+              .then(company => {
+                res.json(completeLogin(req, res, employee, company));
+              })
+              .catch(err => {
+                console.log(err);
+              });
+          })
+          .catch(err => {
+            res.json(err);
+          });
+>>>>>>> frontend
       })
 
   },
@@ -80,6 +99,7 @@ module.exports = {
         req.body.password = hashed;
         Employee.create(req.body)
           .then(employee => {
+            console.log('*******************************************************' + employee);
             Company.findByIdAndUpdate(req.params.id, {$push : { employees : employee}})
               .then(async company => {
                 const login = await completeLogin(req, res, employee, company);
