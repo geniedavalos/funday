@@ -15,9 +15,9 @@ export class TaskDetailsComponent implements OnInit {
   private userId : string;
   private taskId: string;
   private task: Task;
-  updateProgress: string;
-  percentage: string;
+  updateProgress: number;
   newNote: any;
+  testTask = {'testNumber':70};
   private notes: Note[];
   constructor(
     private readonly authService : AuthService,
@@ -28,9 +28,9 @@ export class TaskDetailsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.newNote = new Note()
-    this.updateProgress = '50';
-    this.percentage = this.updateProgress + '%';
+    console.log('Inside Ngoninit, testTask.testnumber =' + this.testTask.testNumber);
+    this.newNote = new Note();
+    this.updateProgress = 50;
     this.route.params.subscribe((params: Params) => {
       console.log(params['taskID'])
       this.taskId = params['taskID'];
