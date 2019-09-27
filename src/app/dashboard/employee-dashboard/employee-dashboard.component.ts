@@ -14,7 +14,7 @@ export class EmployeeDashboardComponent implements OnInit, OnChanges {
   noteDescription: string;
   tasks: Task[];
   newNote: Note;
-  teamMembers: Employee[];
+  teamMembers: any[] = [];
   @Input() currentUser: Employee;
   @Input() currentCompany: Company;
   private id: any;
@@ -31,8 +31,8 @@ export class EmployeeDashboardComponent implements OnInit, OnChanges {
     if (changes.currentUser.currentValue) {
       this.id = this.currentUser['_id'];
       console.log("id = ", this.id)
-      this.getTasks(this.id);
       this.getTeamMembers();
+      console.log("logging currentUser", this.currentUser)
     }
   }
 
@@ -42,7 +42,6 @@ export class EmployeeDashboardComponent implements OnInit, OnChanges {
   }
 
   getTasks(id){
-
     this.taskService.getEmployeeTasks(id).subscribe(tasks => {
       console.log('tasks = ', tasks)
       this.tasks = tasks;
@@ -51,16 +50,17 @@ export class EmployeeDashboardComponent implements OnInit, OnChanges {
   }
   onAddNote() {
     console.log('Inside onProgressUpdate()');
-
   }
 
   getTeamMembers(){
-    for(const projectID of this.currentUser.assignedProjects){
+    for(let projectID of this.currentUser.assignedProjects){
+      console.log("in getTeamMembers method, logging projectID:", projectID)
       this.projectService.getProject(projectID).subscribe(project => {
-        for(const id of project.teamMembers){
-          this.employeeService.getEmployee(id).subscribe(employee => {
-            this.teamMembers.push(employee);
-          })
+        console.log("got the project, here it is!", project)
+        for(let member of project.teamMembers){
+          if(!this.teamMembers.includes(member)){
+            this.teamMembers.push(member);
+          }
         }
       })
     }

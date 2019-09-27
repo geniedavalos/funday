@@ -43,7 +43,7 @@ module.exports = {
         })
     },
     update: (req, res) => {
-        Employee.findOneAndUpdate({ _id : req.params.id }, { runValidators: true, context: 'query' }, req.body)
+        Employee.findOneAndUpdate({ _id : req.params.id }, { runValidators: true, context: 'query' }, req.body, { new: true })
             .then((updatedEmployee) => {
                 res.json(updatedEmployee);
             })
@@ -59,7 +59,7 @@ module.exports = {
             });
     },
     addTask: (req, res) => {
-        Employee.updateOne({_id : req.params.id}, {$push : {tasks : req.body.taskID}})
+        Employee.findOneAndUpdate({_id : req.params.id}, {$push : {tasks : req.body.taskID}}, { new: true })
             .then((data) => {
                 res.json(data);
             })
@@ -71,7 +71,7 @@ module.exports = {
         console.log("Insider server addProject to assignedProjects");
         console.log("logging req.params.id",req.params.id);
         console.log("logging req.body",req.body);
-        Employee.updateOne({_id : req.params.id}, {$push : {assignedProjects : req.body.projectID}})
+        Employee.findOneAndUpdate({_id : req.params.id}, {$push : {assignedProjects : req.body.projectID}}, { new: true })
             .then((data) => {
                 console.log(data);
                 res.json(data);
@@ -84,7 +84,7 @@ module.exports = {
         console.log("Insider server addManagedProject to managedProjects");
         console.log("logging req.params.id",req.params.id);
         console.log("logging req.body",req.body);
-        Employee.updateOne({_id : req.params.id}, {$push : {managedProjects : req.body.projectID}})
+        Employee.findOneAndUpdate({_id : req.params.id}, {$push : {managedProjects : req.body.projectID}}, { new: true })
             .then((data) => {
                 console.log(data);
                 res.json(data);

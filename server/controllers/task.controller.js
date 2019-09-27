@@ -34,7 +34,7 @@ module.exports = {
   },
   addTeamMember: (req, res) => {
     console.log("inside addTeamMember to Task method", req.body)
-    Task.updateOne({_id : req.params.id}, {$push : {teamMembers: req.body}})
+    Task.updateOne({_id : req.params.id}, {$push : {teamMembers: req.body.employeeID}})
     .then(data => {
         res.json(data);
     })
@@ -42,7 +42,7 @@ module.exports = {
   },
   removeTeamMember: (req, res) => {
       console.log("insde removeTeamMmber from Task method", req.body)
-      Task.updateOne({_id : req.params.id}, {$pull : {teamMembers: req.body}})
+      Task.updateOne({_id : req.params.id}, {$pull : {teamMembers: req.body.employeeID}})
       .then(data => {
           res.json(data);
       })
