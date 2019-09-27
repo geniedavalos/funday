@@ -29,7 +29,7 @@ export class EmployeeLogInComponent implements OnInit {
         this.router.navigateByUrl('/dashboard')
       }
       else {
-        this.errorMessage ='Email or password is wrong'
+        this.errorMessage ='Unable to log in'
       }
     })
   }
