@@ -14,6 +14,9 @@ export class ProjectDetailsComponent implements OnInit {
   id: string;
   project: Project;
   newTask = new Task();
+  editTask: Task;
+  populateEditId: string;
+  deleteTaskId: string;
   newMembers: any;
   editProject = new Project();
   constructor(
@@ -53,11 +56,34 @@ export class ProjectDetailsComponent implements OnInit {
     })
   }
 
+
+  //called inside the addTeam modal, should add the selected employee ids to the project teammates list
   onAddTeam() {
     console.log('Inside onAddTeam()');
   }
 
+
+  //this is called byt the editprojectbutton inside the modal which should edit the project with the given information
   onProjectEdit() {
     console.log('Inside onProjectEdit()');
+  }
+
+  //this is called by the first delete button to set the deleteTask id of the task to be deleted
+  onDeleteTaskId(id: string) {
+    console.log('Inside onDeleteTaskId');
+    this.deleteTaskId = id;
+  }
+
+  //this is called by the delete button in the modal, and should go ahead with the task delete by this.deleteTaskId
+  onDelete() {
+    console.log('Inside onDelete()');
+    console.log('Task to be deleted: ' + this.deleteTaskId);
+  }
+
+
+  //this is called by the edit task button, which should set the populateEditId with the id of the task to edit
+  populateEdit(id: string) {
+    console.log('Inside populateEdit()');
+    this.populateEditId = id;
   }
 }
