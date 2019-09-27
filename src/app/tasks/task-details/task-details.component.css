@@ -52,6 +52,10 @@ nav {
 .btn-outline-info {
   padding: 5px 15px;
 }
+.notes {
+  overflow-wrap: break-word;
+  height: 40vh;
+}
 
 .green {
   color: green;
