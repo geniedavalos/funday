@@ -71,32 +71,6 @@ const routes: Routes = [
     path: 'employee/:id/detail',
     component: fromEmployees.EmployeeDetailsComponent,
   },
-      // {
-      //   path: '',
-      //   component: fromProjects.ProjectListComponent,
-      //   resolve: { products: ProjectResolver}
-      // },
-      // {
-      //   path: 'new',
-      //   component: fromProjects.ProjectNewComponent,
-      // },
-      // {
-      //   path: ':id/edit',
-      //   component: fromProjects.ProjectEditComponent
-      // }
-      // {
-      //   path: '',
-      //   component: fromTasks.TaskListComponent,
-      //   resolve: { tasks: TaskResolver}
-      // },
-      // {
-      //   path: 'new',
-      //   component: fromTasks.TaskNewComponent,
-      // },
-      // {
-      //   path: ':id/edit',
-      //   component: fromTasks.TaskEditComponent
-      // }
   {
     path: 'employees',
     children: [
