@@ -46,7 +46,7 @@
       <h2>Task Name {{task.title}} <span style="font-size: 1.2rem;">(Due: {{task.dueDate| date:"mediumDate"}})</span></h2>
       <p>Task details, this is such a great task, hey can't wait to get it done! Yay!</p>
       <div class="progress">
-        <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 10%" aria-valuenow="10">
+        <div class="progress-bar progress-bar-striped" role="progressbar" [ngStyle]="{'width': task?.progress+'%'}" aria-valuenow="10">{{task?.progress}}%
         </div>
       </div>
       <div class='row mt-3'>
@@ -70,7 +70,7 @@
                         <div class="progress-bar progress-bar-striped" role="progressbar" [ngStyle]="{'width': updateProgress+'%'}" aria-valuenow='5' aria-valuemin='0' aria-valuemax='100'>{{ updateProgress }}%</div>
                       </div>
                       <div class='input-group mb-2 justify-content-center mt-3'>
-                      <input type='text' class='form-control col-1' name='progress' [(ngModel)]='updateProgress'>
+                      <input type='number' max="100" min="0" class='form-control col-1' name='progress' [(ngModel)]='updateProgress'>
                       <div class='input-group-append'>
                         <span class="input-group-text" id="basic-addon1"><i class="fa fa-percent" aria-hidden="true"></i></span>
                       </div>
@@ -78,7 +78,7 @@
 
                   </div>
                   <div class="modal-footer justify-content-center">
-                      <button type="button" (click)='onProgressUpdate()' class="btn btn-info">Update</button>
+                      <button type="button" data-dismiss="modal" (click)='onProgressUpdate()' class="btn btn-info">Update</button>
                   </div>
               </div>
           </div>
@@ -95,14 +95,14 @@
     <section>
       <h2>Notes</h2>
       <div class="notes my-4">
-        <p *ngFor="let note of notes">({{note.createdAt| date:"mediumDate"}}) {{note.sender.firstName}} :  {{note.content}} </p>
+        <p *ngFor="let note of notes">({{note.createdAt| date:"mediumDate"}}) {{note.sender.firstName}} : {{note.content}} </p>
 
       </div>
-      <textarea rows='2' class='form-control' [(ngModel)]='newNote.content'>
+      <textarea minlength="1" rows='2' #content="ngModel" required class='form-control' id="content" name="content" [(ngModel)]='newNote.content'>
       </textarea>
       <br>
       <div class='row'>
-        <button type="button" (click)='onAddNote()' class="btn btn-success mx-auto">Add Note</button>
+        <button [disabled]="(content.touched || content.dirty)" type="button" (click)='onAddNote()' class="btn btn-success mx-auto">Add Note</button>
       </div>
 
     </section>

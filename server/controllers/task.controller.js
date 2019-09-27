@@ -23,7 +23,9 @@ module.exports = {
       .catch(err => res.json(err))
   },
   update: (req, res) => {
-    Task.updateOne({ _id : req.params.id }, { runValidators: true, context: 'query' }, req.body)
+    console.log(req.body)
+    console.log(req.params.id)
+    Task.findOneAndUpdate({ _id : req.params.id },  req.body, {new : true})
       .then(data =>res.json(data))
       .catch(err => res.json(err));
   },
@@ -34,7 +36,7 @@ module.exports = {
   },
   addTeamMember: (req, res) => {
     console.log("inside addTeamMember to Task method", req.body)
-    Task.updateOne({_id : req.params.id}, {$push : {teamMembers: req.body.employeeID}})
+    Task.findOneAndUpdate({_id : req.params.id}, {$push : {teamMembers: req.body.employeeID}})
     .then(data => {
         res.json(data);
     })
@@ -42,7 +44,7 @@ module.exports = {
   },
   removeTeamMember: (req, res) => {
       console.log("insde removeTeamMmber from Task method", req.body)
-      Task.updateOne({_id : req.params.id}, {$pull : {teamMembers: req.body.employeeID}})
+      Task.findOneAndUpdate({_id : req.params.id}, {$pull : {teamMembers: req.body.employeeID}})
       .then(data => {
           res.json(data);
       })
@@ -57,7 +59,7 @@ module.exports = {
   },
   addNote: (req, res) => {
     console.log('adding note', req.body)
-    Task.updateOne({_id: req.params.id}, {$push : {notes:req.body}})
+    Task.findOneAndUpdate({_id: req.params.id}, {$push : {notes:req.body}})
       .then(data => {
         res.json(data);
       })

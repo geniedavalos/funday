@@ -47,8 +47,8 @@
 
     <section id="projects">
       <h2>My Tasks</h2>
-      <div *ngIf='tasks.length == 0'><h5 class='text-center text-primary'>You currently don't have any tasks!</h5></div>
-      <table class="table text-center " *ngIf='tasks.length > 0'>
+      <div *ngIf='currentUser?.tasks?.length == 0'><h5 class='text-center text-primary'>You currently don't have any tasks!</h5></div>
+      <table class="table text-center " *ngIf='currentUser?.tasks?.length > 0'>
         <thead>
           <tr>
             <th scope="col">Task Name</th>
@@ -106,7 +106,7 @@
     <section id="users">
       <h2>My Team</h2>
 
-      <div *ngIf='tasks.length == 0'><h5 class='text-center text-primary'>You are currently not assigned to a team!</h5></div>
+      <div *ngIf='currentUser?.tasks?.length == 0'><h5 class='text-center text-primary'>You are currently not assigned to a team!</h5></div>
       <table class="table text-center " *ngIf='teamMembers.length > 0'>
         <thead>
           <tr>

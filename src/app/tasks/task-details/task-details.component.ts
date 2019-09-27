@@ -16,7 +16,7 @@ export class TaskDetailsComponent implements OnInit {
   private taskId: string;
   private task: Task;
   updateProgress: number;
-  newNote: any;
+  newNote: Note;
   testTask = {'testNumber':70};
   private notes: Note[];
   constructor(
@@ -30,7 +30,6 @@ export class TaskDetailsComponent implements OnInit {
   ngOnInit() {
     console.log('Inside Ngoninit, testTask.testnumber =' + this.testTask.testNumber);
     this.newNote = new Note();
-    this.updateProgress = 50;
     this.route.params.subscribe((params: Params) => {
       console.log(params['taskID'])
       this.taskId = params['taskID'];
@@ -43,14 +42,20 @@ export class TaskDetailsComponent implements OnInit {
       this.task = result;
       this.notes = this.task['notes'];
       console.log(this.task)
+      this.updateProgress = this.task.progress;
     });
   }
 
   onProgressUpdate() {
     console.log('Inside onProgressUpdate()');
+    this.task.progress = this.updateProgress;
+    this.taskService.updateTask(this.task).subscribe(result => {
+      console.log(result);
+    })
   }
 
   onAddNote() {
+    console.log("****************************",this.newNote)
     this.newNote['sender']=this.userId;
     this.noteService.createNote(this.newNote).subscribe(newNote =>{
       this.taskService.addNote(this.taskId, newNote).subscribe(result=>{
