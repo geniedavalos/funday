@@ -2,7 +2,7 @@
   <nav class="navbar navbar-expand-lg navbar-light bg-white">
     <a class="navbar-brand" routerLink="/home">
       <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Twemoji_1f60e.svg/768px-Twemoji_1f60e.svg.png" width="30" height="30" class="d-inline-block align-top" alt="">
-      <strong>Funday</strong><span>.com</span></a>
+      <strong> funday</strong><span>.com</span></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -33,7 +33,7 @@
 
       <h2 class="text-center">Welcome, {{currentUser?.firstName}}!</h2>
     </div>
-    <h2 (click)="toggleCompany()">Manage {{currentCompany?.name}} <i *ngIf="!companyExpanded" class="fa fa-arrow-circle-down" aria-hidden="true"></i><i *ngIf="companyExpanded" class="fa fa-arrow-circle-up" aria-hidden="true"></i></h2>
+    <h2 (click)="toggleCompany()">Manage {{currentCompany?.name}} <i *ngIf="!companyExpanded" i class="fa fa-chevron-down" aria-hidden="true"></i><i *ngIf="companyExpanded" class="fa fa-chevron-up" aria-hidden="true"></i></h2>
     <div *ngIf="companyExpanded" class="overview">
       <form (submit)="editCompany(companyForm)" #companyForm="ngForm" name="editCompanyForm">
         <h4 (click)="toggleEditName()" *ngIf="!editingName">{{currentCompany?.name}}</h4>
@@ -50,7 +50,7 @@
       </form>
     </div>
     <hr>
-    <h2 (click)="toggleProjects()">Manage Projects <i *ngIf="!projectsExpanded" class="fa fa-arrow-circle-down" aria-hidden="true"></i><i *ngIf="projectsExpanded" class="fa fa-arrow-circle-up" aria-hidden="true"></i></h2>
+    <h2 (click)="toggleProjects()">Manage Projects <i *ngIf="!projectsExpanded" i class="fa fa-chevron-down" aria-hidden="true"></i><i *ngIf="projectsExpanded" class="fa fa-chevron-up" aria-hidden="true"></i></h2>
     <div *ngIf="projectsExpanded" class="overview">
       <div *ngFor="let project of projects" class="project mt-4">
         <h4><a [routerLink]="['/projects/', project._id]">{{project.title}}</a></h4>
@@ -65,7 +65,7 @@
         <button type="button" class="btn btn-primary mt-3 mx-auto" data-toggle="modal" data-target="#addProject">Add Project</button>
     </div>
     <hr>
-    <h2 (click)="toggleEmployees()">Manage Employees <i *ngIf="!employeesExpanded" class="fa fa-arrow-circle-down" aria-hidden="true"></i><i *ngIf="employeesExpanded" class="fa fa-arrow-circle-up" aria-hidden="true"></i></h2>
+    <h2 (click)="toggleEmployees()">Manage Employees <i *ngIf="!employeesExpanded" i class="fa fa-chevron-down" aria-hidden="true"></i><i *ngIf="employeesExpanded" class="fa fa-chevron-up"" aria-hidden="true"></i></h2>
     <div *ngIf="employeesExpanded" class="overview">
       <table class="table text-center ">
           <thead>
