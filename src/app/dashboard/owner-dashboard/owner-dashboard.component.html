@@ -33,31 +33,31 @@
 
       <h2 class="text-center">Welcome, {{currentUser?.firstName}}!</h2>
     </div>
-    <h2 (click)="toggleCompany()">Manage {{currentCompany?.name}} <i *ngIf="!companyExpanded" class="fa fa-chevron-down" aria-hidden="true"></i><i *ngIf="companyExpanded" class="fa fa-chevron-up" aria-hidden="true"></i></h2>
+    <h4 (click)="toggleCompany()">Manage {{currentCompany?.name}} <i *ngIf="!companyExpanded" class="fa fa-chevron-down" aria-hidden="true"></i><i *ngIf="companyExpanded" class="fa fa-chevron-up" aria-hidden="true"></i></h4>
     <div *ngIf="companyExpanded" class="overview">
       <form (submit)="editCompany(companyForm)" #companyForm="ngForm" name="editCompanyForm">
-        <h4 (click)="toggleEditName()" *ngIf="!editingName">{{currentCompany?.name}}</h4>
-        <h4 *ngIf="editingName"><input type="text" [(ngModel)]="currentCompany.name" name="name"></h4>
+        <h4 (click)="toggleEditName()" *ngIf="!editingName" class="ml-3">{{currentCompany?.name}}</h4>
+        <h4 *ngIf="editingName" class="ml-4"><input type="text" [(ngModel)]="currentCompany.name" name="name"></h4>
         <a *ngIf="editingName" (click)="toggleEditName()"><small>Cancel</small></a>
         <input *ngIf="editingName" type="submit">
       </form>
-      <h5>Departments</h5>
-      <p *ngIf="currentCompany?.departments?.length < 1">None yet</p>
-      <p *ngFor="let department of currentCompany?.departments">{{department}}</p>
+      <h5 class="ml-4">Departments</h5>
+      <p *ngIf="currentCompany?.departments?.length < 1" class="ml-4">None yet</p>
+      <p *ngFor="let department of currentCompany?.departments" class="ml-4">{{department}}</p>
       <form (submit)="addDepartment(departmentForm)" #departmentForm="ngForm" name="addDepartmentForm">
         <input class="form-control" type="text" [(ngModel)]="newDepartment" name="new_department" placeholder="Enter Department Name">
-        <input type="submit" class="btn btn-secondary">
+        <input type="submit" class="btn btn-secondary my-3">
       </form>
     </div>
     <hr>
-    <h2 (click)="toggleProjects()">Manage Projects <i *ngIf="!projectsExpanded" class="fa fa-chevron-down" aria-hidden="true"></i><i *ngIf="projectsExpanded" class="fa fa-chevron-up" aria-hidden="true"></i></h2>
+    <h4 (click)="toggleProjects()">Manage Projects <i *ngIf="!projectsExpanded" class="fa fa-chevron-down" aria-hidden="true"></i><i *ngIf="projectsExpanded" class="fa fa-chevron-up" aria-hidden="true"></i></h4>
     <div *ngIf="projectsExpanded" class="overview">
       <div *ngFor="let project of projects" class="project mt-4">
-        <h4><a [routerLink]="['/projects/', project._id]">{{project.title}}</a></h4>
-        <h5>Project Lead: {{currentUser?.firstName}} {{currentUser?.lastName}}</h5>
-        <h5>Project Deadline: (<span class="green">{{project.dueDate | date: 'mediumDate'}}</span>)</h5>
-        <div class="progress mb-3">
-          <div class="progress-bar  progress-bar-striped bg-info" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+        <h4 class="ml-4"><a [routerLink]="['/projects/', project._id]">{{project.title}}</a></h4>
+        <h5 class="ml-4">Project Lead: {{currentUser?.firstName}} {{currentUser?.lastName}}</h5>
+        <h5 class="ml-4">Project Deadline: (<span class="green">{{project.dueDate | date: 'mediumDate'}}</span>)</h5>
+        <div class="progress mb-3 ml-4">
+          <div class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
         </div>
       </div>
     </div>
@@ -65,7 +65,7 @@
         <button type="button" class="btn btn-primary mt-3 mx-auto" data-toggle="modal" data-target="#addProject">Add Project</button>
     </div>
     <hr>
-    <h2 (click)="toggleEmployees()">Manage Employees <i *ngIf="!employeesExpanded" class="fa fa-chevron-down" aria-hidden="true"></i><i *ngIf="employeesExpanded" class="fa fa-chevron-up" aria-hidden="true"></i></h2>
+    <h4 (click)="toggleEmployees()">Manage Employees <i *ngIf="!employeesExpanded" class="fa fa-chevron-down" aria-hidden="true"></i><i *ngIf="employeesExpanded" class="fa fa-chevron-up" aria-hidden="true"></i></h4>
     <div *ngIf="employeesExpanded" class="overview">
       <table class="table text-center ">
           <thead>
@@ -211,7 +211,7 @@
       <div class="col-lg-4 col-sm-6">
         <p><a routerLink='/information'><Strong>Use cases</Strong></a></p>
         <p><a href="#" class="greenh">Product Management</a></p>
-        <p><a href="#" class="greenh">All Use Cases</a></p>
+        <p><a href="#" class="greenh">Sample Use Cases</a></p>
       </div>
 
       <div class="col-lg-3 col-sm-6">
