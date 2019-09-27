@@ -3,7 +3,7 @@ const Project = mongoose.model('Project')
 module.exports = {
     index: async (_req, res) => {
         try {
-            const projects = await Project.find().sort('dueDate');
+            const projects = await Project.find().sort('dueDate').populate('tasks');
             res.json(projects);
         }
         catch (err) {
@@ -13,6 +13,7 @@ module.exports = {
     show: (req, res) => {
         Project.findById(req.params.id)
             .populate('teamMembers')
+            .populate('tasks')
             .then((data) => {
                 res.json(data)
             })

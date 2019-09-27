@@ -139,9 +139,9 @@
                 <div class="progress-bar  progress-bar-striped bg-info" role="progressbar" [style]="['width:', task.progress, '%;']" aria-valuenow="" aria-valuemin="0" aria-valuemax="100"></div>
               </div>
             </td>
-            <td>{{task.dueDate | date: 'mediumDate'}}</td>
+            <td>{{task?.dueDate | date: 'mediumDate'}}</td>
             <td>
-                <button type='button' (click)='populateEdit(task._id)' class='btn btn-outline-warning ml-3' data-toggle='modal' data-target='#editTask'><i class="fa fa-pencil" aria-hidden="true"></i></button>
+                <button type='button' (click)='populateEdit(task)' class='btn btn-outline-warning ml-3' data-toggle='modal' data-target='#editTask'><i class="fa fa-pencil" aria-hidden="true"></i></button>
 
                 <button type='button' (click)='onDeleteTaskId(task._id)' data-toggle='modal' data-target='#confirmDelete' class="btn btn-outline-danger ml-3"><i class="fa fa-trash" aria-hidden="true"></i></button>
 
@@ -234,36 +234,36 @@
                 </div>
                 <div class="modal-body">
                     <p class='text-center'><strong>Edit the due date, title and description</strong></p>
-                    <form #taskForm='ngForm' name='newTaskForm'>
+                    <form #editTaskForm='ngForm' name='editTaskForm'>
                       <div class='input-group mb-2 justify-content-center'>
                         <div class="input-group-prepend">
                           <span class="input-group-text" id="basic-addon1"><i class="fa fa-calendar" aria-hidden="true"></i></span>
                         </div>
-                        <input type='date' name='due' class='form-control col-7' [(ngModel)]='editTask.dueDate'>
+                        <input type='date' name='due' class='form-control col-7' [ngModel]='editTask?.dueDate'>
                       </div>
 
                       <div class='input-group mb-2 justify-content-center'>
                         <div class='input-group-prepend'>
                           <span class="input-group-text" id="basic-addon1"><i class="fa fa-terminal" aria-hidden="true"></i></span>
                         </div>
-                        <input type='text' placeholder='Title' class='form-control col-7' name='title' [(ngModel)]='editTask.title'>
+                        <input type='text' placeholder='Title' class='form-control col-7' name='title' [ngModel]='editTask?.title'>
                       </div>
                       <div class='input-group mb-2 justify-content-center'>
                         <div class="input-group-prepend">
                           <span class="input-group-text" id="basic-addon1"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></span>
                         </div>
-                        <textarea placeholder='Description' class='form-control col-7' name='description' [(ngModel)]='editTask.description'></textarea>
+                        <textarea placeholder='Description' class='form-control col-7' name='description' [ngModel]='editTask?.description'></textarea>
                       </div>
                       <hr>
                       <p class='text-center'><strong>Remove Team Members</strong></p>
 
-                        <select multiple class='form-control col-8 mx-auto' name='taskTeam' [(ngModel)]='editTask.teamMembers'>
-                            <option *ngFor="let member of project?.teamMembers" value="{{member['_id']}}">{{member['firstName']}} {{member['lastName']}}</option>
+                        <select multiple class='form-control col-8 mx-auto' name='taskTeam' [ngModel]='editTask?.teamMembers'>
+                            <option *ngFor="let member of project?.teamMembers" value="{{member._id}}">{{member.firstName}} {{member.lastName}}</option>
                         </select>
                     </form>
                 </div>
                 <div class="modal-footer justify-content-center">
-                    <button data-dismiss="modal" (click)='onTaskCreate()' type="button" class="text-white btn btn-warning px-5">Edit</button>
+                    <button data-dismiss="modal" (click)='onTaskEdit()' type="button" class="text-white btn btn-warning px-5">Edit</button>
                 </div>
             </div>
         </div>

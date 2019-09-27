@@ -19,6 +19,8 @@ export class ProjectDetailsComponent implements OnInit {
   deleteTaskId: string;
   newMembers: any;
   editProject = new Project();
+  taskProgressArray: number[] = [];
+
   constructor(
     private readonly employeeService: EmployeeService,
     private readonly projectService: ProjectService,
@@ -36,10 +38,24 @@ export class ProjectDetailsComponent implements OnInit {
   getProject(id) {
     this.projectService.getProject(id).subscribe(result => {
       this.project = result;
-      console.log(this.project);
+      console.log("Logging this.project",this.project);
       this.tasks = this.project.tasks;
-      console.log(this.tasks);
+      console.log("Logging this.tasks",this.tasks);
+      for(const task of this.tasks){
+        this.taskProgressArray.push(task.progress);
+      }
+      this.project.progress = Number.parseFloat(this.getAvg(this.taskProgressArray).toFixed(1));
+      console.log("logging this.project.progress",this.project.progress)
     });
+  }
+
+  getAvg(arr: number[]){
+    let sum = 0;
+    for(let num of arr){
+      sum+=num;
+    }
+    const avg = sum/arr.length;
+    return avg
   }
 
   onTaskCreate(form: NgForm) {
@@ -84,8 +100,8 @@ export class ProjectDetailsComponent implements OnInit {
 
 
   //this is called by the edit task button, which should set the populateEditId with the id of the task to edit
-  populateEdit(id: string) {
-    console.log('Inside populateEdit()');
-    this.populateEditId = id;
+  populateEdit(task: Task) {
+    this.editTask = task;
   }
+    
 }
