@@ -46,10 +46,6 @@ export class TaskDetailsComponent implements OnInit {
     });
   }
 
-  onAddNote() {
-    console.log('Inside onAddNote()');
-  }
-
   onProgressUpdate() {
     console.log('Inside onProgressUpdate()');
   }

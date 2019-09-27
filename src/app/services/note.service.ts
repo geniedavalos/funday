@@ -26,7 +26,8 @@ export class NoteService {
   }
 
   createNote(note: Note): Observable<Note> {
-    return this.http.post<Note>(this.base, note);
+    console.log("note service", note)
+    return this.http.post<Note>(`${this.base}`, note);
   }
 
   destroyNote(id: string): Observable<Note> {

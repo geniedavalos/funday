@@ -46,6 +46,8 @@ export class ProjectDetailsComponent implements OnInit {
         console.log(result);
       });
       for(let teamMember of task.teamMembers){
+        console.log("task._id = ", task._id)
+        console.log("teamMember = ", teamMember)
         this.employeeService.addTask(teamMember, task._id).subscribe(data => {
           console.log(data);
         })

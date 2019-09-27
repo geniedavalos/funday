@@ -12,8 +12,8 @@ module.exports = {
       .catch(err => res.json(err))
   },
   create: (req, res) => {
-    const Task = new Task(req.body)
-    Note.save()
+    console.log("note controller ", req.body)
+    Note.create(req.body)
       .then(data => res.json(data))
       .catch(err => res.json(err))
   },
