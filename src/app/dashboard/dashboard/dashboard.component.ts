@@ -46,6 +46,7 @@ export class DashboardComponent implements OnInit {
       this.companyService.getCompany(decoded['cid']).subscribe(result => {
         if (result) {
           this.currentCompany = result;
+          console.log("IN DASHBOARD COMP.  LOGGING RESULT", result)
         }
       });
     }

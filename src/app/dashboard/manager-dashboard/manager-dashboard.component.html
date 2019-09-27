@@ -157,7 +157,7 @@
                         <form>
                           <div class='form-group row col-9 mx-auto'>
                             <select multiple class='form-control mx-auto' id='teamNames' name='member' [(ngModel)]='newMembers'>
-                                <option *ngFor="let employee of employees" value="{{employee._id}}-{{employee.firstName}} {{employee.lastName}}">{{employee.firstName}} {{employee.lastName}}</option>
+                                <option *ngFor="let employee of employees" value="{{employee?._id}}-{{employee?.firstName}} {{employee?.lastName}}">{{employee.firstName}} {{employee.lastName}}</option>
                             </select>
                           </div>
                           <div class='row'>

@@ -56,9 +56,9 @@
             <th scope="col">Add Notes</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody *ngIf="tasks">
           <tr *ngFor="let task of tasks">
-            <th scope="row"><a [routerLink]="" routerLinkActive="router-link-active">{{task.title}}</a></th>
+            <th scope="row"><a [routerLink]="" routerLinkActive="router-link-active">{{task?.title}}</a></th>
             <td>
               <div class="progress">
                 <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 25%" aria-valuenow="25">25%</div>

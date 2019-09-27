@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const notes = require('../controllers/notes');
+const notes = require('../controllers/note.controller');
 
 router
   .get('/', notes.index)
