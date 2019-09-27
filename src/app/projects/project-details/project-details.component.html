@@ -88,7 +88,7 @@
                   </form>
                 </div>
                 <div class="modal-footer justify-content-center">
-                    <button type="button" (click)='onProjectEdit()' class="btn btn-info">Edit Project</button>
+                  <button type="button" (click)='onProjectEdit()' class="btn btn-info">Edit</button>
                 </div>
             </div>
         </div>
@@ -116,7 +116,7 @@
                       </form>
                   </div>
                   <div class="modal-footer justify-content-center">
-                      <button type="button" class="btn btn-danger">Delete Project</button>
+                      <button type="button" class="btn btn-danger">Delete</button>
                   </div>
               </div>
           </div>
@@ -141,17 +141,43 @@
             </td>
             <td>{{task.dueDate | date: 'mediumDate'}}</td>
             <td>
-              <!-- TODO: change edit task link to open a modal -->
-              <a [routerLink]="['/tasks/', task._id, '/edit']" class="btn btn-outline-success mx-1"><i class="fa fa-pencil" aria-hidden="true"></i></a>
-              <a [routerLink]="['tasks/', task._id]" class="btn btn-outline-danger mx-1"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                <button type='button' (click)='populateEdit(task._id)' class='btn btn-outline-warning ml-3' data-toggle='modal' data-target='#editTask'><i class="fa fa-pencil" aria-hidden="true"></i></button>
+
+                <button type='button' (click)='onDeleteTaskId(task._id)' data-toggle='modal' data-target='#confirmDelete' class="btn btn-outline-danger ml-3"><i class="fa fa-trash" aria-hidden="true"></i></button>
+
+                <div class="modal fade" id="confirmDelete" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header bg-danger text-center">
+                              <h3 class="modal-title text-center my-auto w-100 text-white">Are You Sure?</h3>
+                              <button type="button" class="close my-auto text-white" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body justify-content-center">
+                              <p class='text-center my-auto'><strong>This action cannot be undone!</strong></p>
+                            </div>
+                            <div class="modal-footer justify-content-center">
+                              <button (click)='onDelete()' class='btn btn-danger text-white'>Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </td>
           </tr>
         </tbody>
       </table>
 
       <div class="row text-center block my-4">
-        <div class="inline">
-            <button type="button" class="btn btn-success mt-3" data-toggle="modal" data-target="#addTask">Add Task</button>
+        <div class="inline mt-3">
+            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addTask">Add Task</button>
+            <!-- <button type='button' class='btn btn-warning text-white ml-3' data-toggle='modal' data-target='#editTask'>Edit Task</button>
+            <button type="button" (click)='onConfirmation()' class="btn btn-danger">Delete Task</button>
+            <div *ngIf='show'>
+              <p>Are you sure you want to delete?</p>
+              <a routerLink='' class='btn btn-danger text-white'>Delete</a>
+            </div> -->
         </div>
       </div>
     </section>
@@ -189,7 +215,7 @@
                       </div>
 
                     <hr>
-                    <p class='text-center'><strong>Add Team Member</strong></p>
+                    <p class='text-center'><strong>Add Team Members</strong></p>
 
                       <select multiple class='form-control col-8 mx-auto' name='taskTeam' [(ngModel)]='newTask.teamMembers'>
                           <option *ngFor="let member of project?.teamMembers" value="{{member['_id']}}">{{member['firstName']}} {{member['lastName']}}</option>
@@ -197,7 +223,53 @@
                     </form>
                 </div>
                 <div class="modal-footer justify-content-center">
-                    <button data-dismiss="modal" (click)='onTaskCreate()' type="button" class="btn btn-success px-5">Add Task</button>
+                    <button data-dismiss="modal" (click)='onTaskCreate()' type="button" class="btn btn-success px-5">Add</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="editTask" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-warning text-center">
+                  <h3 class="modal-title text-center my-auto w-100 text-white">Edit A Task</h3>
+                  <button type="button" class="close my-auto text-white" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                    <p class='text-center'><strong>Edit the due date, title and description</strong></p>
+                    <form #taskForm='ngForm' name='newTaskForm'>
+                      <div class='input-group mb-2 justify-content-center'>
+                        <div class="input-group-prepend">
+                          <span class="input-group-text" id="basic-addon1"><i class="fa fa-calendar" aria-hidden="true"></i></span>
+                        </div>
+                        <input type='date' name='due' class='form-control col-7' [(ngModel)]='editTask.dueDate'>
+                      </div>
+
+                      <div class='input-group mb-2 justify-content-center'>
+                        <div class='input-group-prepend'>
+                          <span class="input-group-text" id="basic-addon1"><i class="fa fa-terminal" aria-hidden="true"></i></span>
+                        </div>
+                        <input type='text' placeholder='Title' class='form-control col-7' name='title' [(ngModel)]='editTask.title'>
+                      </div>
+                      <div class='input-group mb-2 justify-content-center'>
+                        <div class="input-group-prepend">
+                          <span class="input-group-text" id="basic-addon1"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></span>
+                        </div>
+                        <textarea placeholder='Description' class='form-control col-7' name='description' [(ngModel)]='editTask.description'></textarea>
+                      </div>
+                      <hr>
+                      <p class='text-center'><strong>Remove Team Members</strong></p>
+
+                        <select multiple class='form-control col-8 mx-auto' name='taskTeam' [(ngModel)]='editTask.teamMembers'>
+                            <option *ngFor="let member of project?.teamMembers" value="{{member['_id']}}">{{member['firstName']}} {{member['lastName']}}</option>
+                        </select>
+                    </form>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <button data-dismiss="modal" (click)='onTaskCreate()' type="button" class="text-white btn btn-warning px-5">Edit</button>
                 </div>
             </div>
         </div>
@@ -228,7 +300,7 @@
 
       <div class="row text-center block my-4">
         <div class="inline">
-          <button type="button" class="btn btn-success inner  mx-3" data-toggle="modal" data-target="#addTeamMember">Add Team Member</button>
+          <button type="button" class="btn btn-success inner  mx-3" data-toggle="modal" data-target="#addTeamMember">Add Team Members</button>
         </div>
       </div>
 
@@ -269,7 +341,7 @@
                         </div>
                 </div>
                 <div class="modal-footer justify-content-center">
-                    <button (click)='onAddTeam()' type="button" class="btn btn-success px-5">Add Team Member</button>
+                    <button (click)='onAddTeam()' type="button" class="btn btn-success px-5">Add</button>
                 </div>
             </div>
         </div>
