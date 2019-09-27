@@ -38,7 +38,7 @@ module.exports = {
    */
   newCompanyRegister: (req, res) => {
     const name = req.body.name;
-    Company.create({name: name})
+    Company.create({name: name, departments: ['Unassigned']})
       .then(async company => {
         let owner;
         req.body.owner.isManager = true;

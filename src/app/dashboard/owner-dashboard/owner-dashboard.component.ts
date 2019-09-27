@@ -22,6 +22,8 @@ export class OwnerDashboardComponent implements OnInit, OnChanges {
   companyExpanded = false;
   projectsExpanded = false;
   employeesExpanded = false;
+  departmentMembership: any = {};
+  managers = [];
 
   editingName = false;
 
@@ -76,6 +78,15 @@ export class OwnerDashboardComponent implements OnInit, OnChanges {
         return 0;
       }
     });
+    for (const dept of this.currentCompany.departments) {
+      this.departmentMembership[dept] = 0;
+    }
+    for (const employee of this.employees) {
+      if (employee.isManager) {
+        this.managers.push(employee);
+      }
+      this.departmentMembership[employee.department] += 1;
+    }
   }
 
   toggleCompany() {
@@ -104,6 +115,7 @@ export class OwnerDashboardComponent implements OnInit, OnChanges {
     const observable = this.companyService.addDepartment(this.currentCompany, this.newDepartment);
     observable.subscribe(data => {
       console.log(data);
+      this.departmentMembership[this.newDepartment] = 0;
       this.currentCompany = data;
     });
   }

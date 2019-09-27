@@ -42,12 +42,51 @@
         <input *ngIf="editingName" type="submit">
       </form>
       <h5 class="ml-4">Departments</h5>
-      <p *ngIf="currentCompany?.departments?.length < 1" class="ml-4">None yet</p>
-      <p *ngFor="let department of currentCompany?.departments" class="ml-4">{{department}}</p>
+      <table class="table text-center ml-4">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Members</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor='let department of currentCompany?.departments'>
+            <td>{{department}}</td>
+            <td>{{departmentMembership[department]}}</td>
+            <td>
+              <a [routerLink]="['']" routerLinkActive="router-link-active"  class="btn btn-outline-danger mx-1"><i class="fa fa-ban" aria-hidden="true"></i></a>
+              <a [routerLink]="['']" class="btn btn-outline-success mx-1"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
       <form (submit)="addDepartment(departmentForm)" #departmentForm="ngForm" name="addDepartmentForm">
         <input class="form-control" type="text" [(ngModel)]="newDepartment" name="new_department" placeholder="Enter Department Name">
         <input type="submit" class="btn btn-secondary my-3">
       </form>
+      <hr>
+      <h5>Management</h5>
+      <table class="table text-center ml-4">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Managed Projects</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor='let manager of managers'>
+            <td>{{manager.firstName}} {{manager.lastName}}</td>
+            <td>{{manager.managedProjects.length}}</td>
+            <td>
+              <a [routerLink]="['']" routerLinkActive="router-link-active"  class="btn btn-outline-danger mx-1"><i class="fa fa-ban" aria-hidden="true"></i></a>
+              <a [routerLink]="['']" routerLinkActive="router-link-active"  class="btn btn-outline-info mx-1"><i class="fa fa-search" aria-hidden="true"></i></a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
     </div>
     <hr>
     <h4 (click)="toggleProjects()">Manage Projects <i *ngIf="!projectsExpanded" class="fa fa-chevron-down" aria-hidden="true"></i><i *ngIf="projectsExpanded" class="fa fa-chevron-up" aria-hidden="true"></i></h4>
@@ -79,7 +118,8 @@
             <tr *ngFor='let member of currentCompany?.employees'>
               <th scope="row">{{member['department']}}</th>
               <td>{{member['firstName']}} {{member['lastName']}}</td>
-              <td><a [routerLink]="['']" routerLinkActive="router-link-active"  class="btn btn-outline-danger mx-1"><i class="fa fa-ban" aria-hidden="true"></i></a>
+              <td>
+                <a [routerLink]="['']" routerLinkActive="router-link-active"  class="btn btn-outline-danger mx-1"><i class="fa fa-ban" aria-hidden="true"></i></a>
                 <a [routerLink]="['']" routerLinkActive="router-link-active"  class="btn btn-outline-info mx-1"><i class="fa fa-search" aria-hidden="true"></i></a>
               </td>
             </tr>
