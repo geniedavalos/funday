@@ -59,8 +59,21 @@ module.exports = {
             });
     },
     addTask: (req, res) => {
-        Employee.updateOne({_id : req.paramsid}, {$push : {tasks : req.body}})
+        Employee.updateOne({_id : req.params.id}, {$push : {tasks : req.body.taskID}})
             .then((data) => {
+                res.json(data);
+            })
+            .catch(err => {
+                res.json(err);
+            })
+    },
+    addProject: (req, res) => {
+        console.log("Insider server addProject to assignedProjects");
+        console.log("logging req.params.id",req.params.id);
+        console.log("logging req.body",req.body);
+        Employee.updateOne({_id : req.params.id}, {$push : {assignedProjects : req.body.projectID}})
+            .then((data) => {
+                console.log(data);
                 res.json(data);
             })
             .catch(err => {

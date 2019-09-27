@@ -44,9 +44,9 @@ export class ManagerDashboardComponent implements OnInit, OnChanges {
   }
 
   getProjects() {
-    console.log(this.currentUser);
+    console.log("logging current user:",this.currentUser);
     this.projectService.getManagedProjects(this.currentUser._id).subscribe(data => {
-      console.log(data)
+      console.log("logging data from getManagedProjects",data)
       this.projects = data;
       if(this.projects.length > 0){
         this.projects.sort((a, b) => {
@@ -104,8 +104,15 @@ export class ManagerDashboardComponent implements OnInit, OnChanges {
     console.log('project', this.newProject);
     this.newProject.projectLead = this.currentUser._id;
     this.newProject.teamMembers = this.addedIds;
-    this.projectService.createProject(this.newProject).subscribe(result => {
-      this.companyService.addProject(this.currentCompany, result).subscribe(res => {
+    this.projectService.createProject(this.newProject).subscribe(createdProject => {
+      console.log("Logging createdProject", createdProject);
+      for(let teamMember of createdProject.teamMembers){
+        console.log("teamMember = ", teamMember)
+        this.employeeService.addProject(teamMember, createdProject._id).subscribe(data => {
+          console.log(data);
+        })
+      };
+      this.companyService.addProject(this.currentCompany, createdProject).subscribe(res => {
         this.companyService.getCompany(this.currentCompany._id).subscribe(finalRes => {
           this.currentCompany = finalRes;
           this.newProject = new Project();

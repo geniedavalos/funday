@@ -39,6 +39,16 @@ export class EmployeeService {
   }
 
   addTask(employeeID: string, taskID: string): Observable<any> {
-    return this.http.put<any>(`${this.base}/${employeeID}/addTask`,taskID);
+    return this.http.put<any>(`${this.base}/${employeeID}/addTask`,{taskID});
   }
+
+  addProject(employeeID: string, projectID: string): Observable<any> {
+    console.log("Inside employee service addProject")
+    console.log("employee ID:",employeeID);
+    console.log("projectID: ", projectID)
+    return this.http.put<any>(`${this.base}/${employeeID}/addProject`, {projectID});
+  }
+
+  addProjectManaged()
+
 }

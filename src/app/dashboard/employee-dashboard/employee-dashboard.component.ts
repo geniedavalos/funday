@@ -1,7 +1,7 @@
 import {Component, OnInit, Input, OnChanges} from '@angular/core';
 import { ActivatedRoute, Router, Params } from '@angular/router';
-import { Employee, Company, Task} from 'src/app/models';
-import { TaskService } from 'src/app/services';
+import { Employee, Company, Task, Project} from 'src/app/models';
+import { TaskService, ProjectService, EmployeeService } from 'src/app/services';
 import {Observable} from "rxjs";
 import { Note } from 'src/app/models/note';
 
@@ -14,11 +14,14 @@ export class EmployeeDashboardComponent implements OnInit, OnChanges {
   noteDescription: string;
   tasks: Task[];
   newNote: Note;
-  @Input() currentUser: Observable<Employee>;
-  @Input() currentCompany: Observable<Company>;
+  teamMembers: Employee[];
+  @Input() currentUser: Employee;
+  @Input() currentCompany: Company;
   private id: any;
 
   constructor(
+    private readonly employeeService: EmployeeService,
+    private readonly projectService: ProjectService,
     private readonly taskService: TaskService,
   ) { }
   ngOnInit() {
@@ -29,6 +32,7 @@ export class EmployeeDashboardComponent implements OnInit, OnChanges {
       this.id = this.currentUser['_id'];
       console.log("id = ", this.id)
       this.getTasks(this.id);
+      this.getTeamMembers();
     }
   }
 
@@ -48,5 +52,17 @@ export class EmployeeDashboardComponent implements OnInit, OnChanges {
   onAddNote() {
     console.log('Inside onProgressUpdate()');
 
+  }
+
+  getTeamMembers(){
+    for(const projectID of this.currentUser.assignedProjects){
+      this.projectService.getProject(projectID).subscribe(project => {
+        for(const id of project.teamMembers){
+          this.employeeService.getEmployee(id).subscribe(employee => {
+            this.teamMembers.push(employee);
+          })
+        }
+      })
+    }
   }
 }

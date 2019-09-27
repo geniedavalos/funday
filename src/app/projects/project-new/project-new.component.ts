@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ProjectService } from 'src/app/services/project.service';
 import { Project } from 'src/app/models/project';
+import { EmployeeService } from 'src/app/services';
 
 @Component({
   selector: 'app-project-new',
@@ -16,6 +17,7 @@ export class ProjectNewComponent implements OnInit {
   createProject = new EventEmitter<Project>();
 
   constructor(
+    private readonly employeeService: EmployeeService,
     private readonly projectService: ProjectService,
     private readonly router: Router
   ) { }
@@ -25,7 +27,14 @@ export class ProjectNewComponent implements OnInit {
 
   onSubmit(event: Event, form: NgForm) {
     event.preventDefault();
-    this.projectService.createProject(this.project).subscribe(_createdProject => {
+    this.projectService.createProject(this.project).subscribe(createdProject => {
+      for(let teamMember of createdProject.teamMembers){
+        console.log("project._id = ", createdProject._id)
+        console.log("teamMember = ", teamMember)
+        this.employeeService.addProject(teamMember, createdProject._id).subscribe(data => {
+          console.log(data);
+        })
+      }
       this.project = new Project();
       form.reset();
       this.router.navigateByUrl('/');

@@ -61,10 +61,10 @@
             <th scope="row"><a [routerLink]="" routerLinkActive="router-link-active">{{task?.title}}</a></th>
             <td>
               <div class="progress">
-                <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 25%" aria-valuenow="25">25%</div>
+                <div class="progress-bar progress-bar-striped" role="progressbar" [style]="['width: ', task.progress ,'%;']" aria-valuenow="25">{{task.progress}}%</div>
               </div>
             </td>
-            <td>3/18/2019</td>
+            <td>{{task.dueDate | date : "mediumDate" }}</td>
             <td>
               <button type="button" class="btn btn-info" data-toggle="modal" data-target="#addNote"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
             </td>
@@ -108,33 +108,15 @@
         <thead>
           <tr>
             <th scope="col">Name</th>
-            <th scope="col">Task Name</th>
-            <th scope="col">Task Progress</th>
-            <th scope="col">Due Date</th>
-
+            <th scope="col">Department</th>
+            <th scope="col">Actions</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <th scope="row">Phat L.</th>
-            <td>Shark Project</td>
-            <td>
-              <div class="progress">
-                <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 10%" aria-valuenow="10"></div>
-              </div>
-            </td>
-            <td>9/13/2019</td>
-
-          </tr>
-          <tr>
-            <th scope="row">Wade A.</th>
-            <td>Shark Project</td>
-            <td>
-              <div class="progress">
-                <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 10%" aria-valuenow="10"></div>
-              </div>
-            </td>
-            <td>12/13/19</td>
+          <tr *ngFor="let member of teamMembers">
+            <th scope="row">{{member.firstName}} {{member.lastName}}</th>
+            <td>{{member.department}}</td>
+            <td><button class="btn btn-outline-info">Message Button</button></td>
           </tr>
         </tbody>
       </table>
