@@ -45,7 +45,8 @@ export class TaskService {
     return this.http.get<Task[]>(`${this.base}/getEmployeeTasks/${id}`)
   }
 
-  addNote(id: string, newNode: Note) : Observable<any> {
-    return this.http.put(`${this.base}/addNote/${id}`, newNode)
+  addNote(id: string, newNote: Note) : Observable<any> {
+    console.log('task service ', newNote)
+    return this.http.put(`${this.base}/addNote/${id}`, newNote)
   }
 }

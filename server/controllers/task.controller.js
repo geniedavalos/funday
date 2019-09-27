@@ -8,6 +8,7 @@ module.exports = {
   },
   show: (req, res) => {
     Task.findOne({ _id : req.params.id })
+      .populate('notes')
       .then(data => res.json(data))
       .catch(err => res.json(err))
   },
@@ -53,7 +54,8 @@ module.exports = {
     .catch(err => res.json(err))
   },
   addNote: (req, res) => {
-    Task.updateOne({_id: req.params.id}, {$push : {sender:req.body}})
+    console.log('adding note', req.body)
+    Task.updateOne({_id: req.params.id}, {$push : {notes:req.body}})
       .then(data => {
         res.json(data);
       })
