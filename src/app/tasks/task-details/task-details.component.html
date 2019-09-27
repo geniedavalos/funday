@@ -67,7 +67,8 @@
                       <p class='text-center'><strong>Enter your progress below</strong></p>
                       <p class='text-center'>Current Progress</p>
                       <div class="progress mb-2 col-8 mx-auto p-0">
-                        <div class="progress-bar progress-bar-striped" role="progressbar" [ngStyle]="{'width': updateProgress+'%'}" aria-valuenow='5' aria-valuemin='0' aria-valuemax='100'>{{ updateProgress }}%</div>
+                        <div class="progress-bar progress-bar-striped bg-success" role="progressbar" [ngStyle]="{'width': updateProgress+'%'}" [ngClass]="{'bg-success': updateProgress > 74, 'bg-warning': updateProgress < 75 }" aria-valuenow='5' aria-valuemin='0' aria-valuemax='100'>{{ updateProgress }}%</div>
+
                       </div>
                       <div class='input-group mb-2 justify-content-center mt-3'>
                       <input type='number' max="100" min="0" class='form-control col-1' name='progress' [(ngModel)]='updateProgress'>

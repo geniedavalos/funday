@@ -30,6 +30,7 @@ export class TaskDetailsComponent implements OnInit {
   ngOnInit() {
     console.log('Inside Ngoninit, testTask.testnumber =' + this.testTask.testNumber);
     this.newNote = new Note();
+    this.updateProgress = 55;
     this.route.params.subscribe((params: Params) => {
       console.log(params['taskID'])
       this.taskId = params['taskID'];

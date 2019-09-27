@@ -20,8 +20,9 @@ module.exports = {
         Employee.findById(req.params.id)
             .populate('tasks')
             .populate('managedProjects')
-            .populate('assignedPojects')
+            .populate('assignedProjects')
             .then((data) => {
+              console.log(data)
                 res.json(data)
             })
             .catch(err => res.json(err));
