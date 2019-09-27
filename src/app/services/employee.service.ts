@@ -56,6 +56,8 @@ export class EmployeeService {
     return this.http.put<any>(`${this.base}/${employeeID}/addManagedProject`, {projectID});
   }
 
-  
 
+  promoteToManager(id: any) {
+    return this.http.get(`${this.base}/${id}/promoteManager`)
+  }
 }
