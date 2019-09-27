@@ -1,3 +1,4 @@
+
 const mongoose = require('mongoose');
 const Employee = mongoose.model('Employee');
 const jwt = require('jsonwebtoken');
@@ -93,5 +94,16 @@ module.exports = {
             .catch(err => {
                 res.json(err);
             })
-    }
+    },
+  PromoteToManager : (req, res) =>{
+    Employee.findOneAndUpdate({_id : req.params.id}, {$set : {isManager : true}})
+      .then((data) => {
+        console.log(data);
+        res.json(data);
+      })
+      .catch(err => {
+        res.json(err);
+      })
+  }
+
 }
