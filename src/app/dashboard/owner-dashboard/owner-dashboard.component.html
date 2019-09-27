@@ -122,6 +122,7 @@
               <td>
                 <a [routerLink]="['']" routerLinkActive="router-link-active"  class="btn btn-outline-danger mx-1"><i class="fa fa-ban" aria-hidden="true"></i></a>
                 <a [routerLink]="['']" routerLinkActive="router-link-active"  class="btn btn-outline-info mx-1"><i class="fa fa-search" aria-hidden="true"></i></a>
+                <button (click)='makeManager(member._id)' class='btn btn-outline-primary mx-1'>Promote to Manager</button>
               </td>
             </tr>
           </tbody>
