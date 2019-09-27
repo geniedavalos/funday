@@ -160,4 +160,16 @@ export class OwnerDashboardComponent implements OnInit, OnChanges {
     })
   }
 
+  logoutButton() {
+    const token = localStorage.getItem('access_token');
+    if (!token) {
+      this.router.navigateByUrl('/home');
+    } else {
+      this.authService.logout(token).subscribe(result => {
+        console.log('logoutButton result:', result);
+        this.router.navigateByUrl('/home');
+      });
+    }
+  }
+
 }

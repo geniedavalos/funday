@@ -16,23 +16,28 @@ module.exports = {
       .populate('assignedProjects')
       .populate({path:'tasks', populate: {path: 'teamMembers'}})
       .then(employee => {
-        bcrypt.compare(req.body.password, employee.password)
-          .then(isValid => {
-            if(!isValid) {
-              throw new Error();
-            }
-            Company.findOne({ 'employees._id' : employee._id })
-              .then(company => {
-                res.json(completeLogin(req, res, employee, company));
-              })
-              .catch(err => {
-                console.log(err);
-              });
-          })
-          .catch(err => {
-            res.json(err);
-          });
+        console.log("employee = ",employee)
+        if(employee!= null) {
+          bcrypt.compare(req.body.password, employee.password)
+            .then(isValid => {
+              if (!isValid) {
+                throw new Error();
+              }
+              Company.findOne({'employees._id': employee._id})
+                .then(company => {
+                  res.json(completeLogin(req, res, employee, company));
+                })
+                .catch(err => {
+                  console.log(err);
+                });
+            })
+            .catch(err => {
+              res.json(err);
+            });
+        }else {res.json({'Wrong email':"wronf"})}
+
       })
+
   },
   /**
    * Receives and validates registration requests

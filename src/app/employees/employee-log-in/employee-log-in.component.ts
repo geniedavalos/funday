@@ -9,6 +9,7 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class EmployeeLogInComponent implements OnInit {
   employeeLogin : {email: string, password : string };
+  private errorMessage: string;
 
   constructor(
     private readonly authService: AuthService,
@@ -20,12 +21,15 @@ export class EmployeeLogInComponent implements OnInit {
   ngOnInit() {
   }
 
-
   onSubmit(event: Event) {
     event.preventDefault();
     this.authService.login(this.employeeLogin).subscribe(result =>{
+      console.log("result = ", result)
       if(result['status'] == "success"){
         this.router.navigateByUrl('/dashboard')
+      }
+      else {
+        this.errorMessage ='Email or password is wrong'
       }
     })
   }

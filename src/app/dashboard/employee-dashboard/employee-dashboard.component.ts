@@ -1,9 +1,10 @@
 import {Component, OnInit, Input, OnChanges} from '@angular/core';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { Employee, Company, Task, Project} from 'src/app/models';
-import { TaskService, ProjectService, EmployeeService } from 'src/app/services';
+import {TaskService, ProjectService, EmployeeService, CompanyService} from 'src/app/services';
 import {Observable} from "rxjs";
 import { Note } from 'src/app/models/note';
+import {AuthService} from "../../services/auth.service";
 
 @Component({
   selector: 'app-employee-dashboard',
@@ -20,8 +21,10 @@ export class EmployeeDashboardComponent implements OnInit, OnChanges {
   private id: any;
 
   constructor(
-    private readonly employeeService: EmployeeService,
+    private readonly authService: AuthService,
+    private readonly companyService: CompanyService,
     private readonly projectService: ProjectService,
+    private readonly router: Router,
     private readonly taskService: TaskService,
   ) { }
   ngOnInit() {
@@ -62,6 +65,17 @@ export class EmployeeDashboardComponent implements OnInit, OnChanges {
           seenIDs[member['_id']] = 1;
         }
       }
+    }
+  }
+  logoutButton() {
+    const token = localStorage.getItem('access_token');
+    if (!token) {
+      this.router.navigateByUrl('/home');
+    } else {
+      this.authService.logout(token).subscribe(result => {
+        console.log('logoutButton result:', result);
+        this.router.navigateByUrl('/home');
+      });
     }
   }
 }

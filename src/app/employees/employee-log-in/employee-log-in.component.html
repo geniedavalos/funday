@@ -73,7 +73,9 @@
                 Please enter the valid email
               </div>
             </small>
-
+            <div *ngIf="errorMessage" class="alert alert-danger">
+              {{errorMessage}}
+            </div>
             <div class="input-group mb-3">
               <div class="input-group-prepend">
                 <span class="input-group-text" id="basic-addon2"><i class="fa fa-key" aria-hidden="true"></i></span>
