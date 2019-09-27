@@ -3,6 +3,7 @@ import { ActivatedRoute, Router, Params } from '@angular/router';
 import { Employee, Company, Task} from 'src/app/models';
 import { TaskService } from 'src/app/services';
 import {Observable} from "rxjs";
+import { Note } from 'src/app/models/note';
 
 @Component({
   selector: 'app-employee-dashboard',
@@ -12,7 +13,7 @@ import {Observable} from "rxjs";
 export class EmployeeDashboardComponent implements OnInit, OnChanges {
   noteDescription: string;
   tasks: Task[];
-  newNote: any;
+  newNote: Note;
   @Input() currentUser: Observable<Employee>;
   @Input() currentCompany: Observable<Company>;
   private id: any;
@@ -21,10 +22,10 @@ export class EmployeeDashboardComponent implements OnInit, OnChanges {
     private readonly taskService: TaskService,
   ) { }
   ngOnInit() {
+    this.newNote = new Note();
   }
   ngOnChanges(changes): void {
-    if ('currentUser' in changes) {
-      this.currentUser = changes.currentUser.currentValue;
+    if (changes.currentUser.currentValue) {
       this.id = this.currentUser['_id'];
       console.log("id = ", this.id)
       this.getTasks(this.id);
