@@ -58,10 +58,10 @@
         </thead>
         <tbody>
           <tr *ngFor="let task of currentUser?.tasks">
-            <th scope="row"><a [routerLink]="" routerLinkActive="router-link-active">{{task?.title}}</a></th>
+            <th scope="row"><a [routerLink]="['/tasks/', task._id]" routerLinkActive="router-link-active">{{task?.title}}</a></th>
             <td>
               <div class="progress">
-                <div class="progress-bar progress-bar-striped" role="progressbar" [style]="['width: ', task.progress ,'%;']" aria-valuenow="25">{{task.progress}}%</div>
+                <div class="progress-bar progress-bar-striped" role="progressbar" [ngStyle]="{'width': task.progress+'%'}" aria-valuenow="25">{{task.progress}}%</div>
               </div>
             </td>
             <td>{{task.dueDate | date : "mediumDate" }}</td>

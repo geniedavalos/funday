@@ -53,13 +53,13 @@ export class EmployeeDashboardComponent implements OnInit, OnChanges {
   }
 
   getTeamMembers(){
+    const seenIDs = {};
     for(let projectID of this.currentUser.assignedProjects){
-      console.log("in getTeamMembers method, logging projectID:", projectID)
       this.projectService.getProject(projectID).subscribe(project => {
-        console.log("got the project, here it is!", project)
         for(let member of project.teamMembers){
-          if(!this.teamMembers.includes(member)){
+          if(!seenIDs[member['_id']]){
             this.teamMembers.push(member);
+            seenIDs[member['_id']] = 1;
           }
         }
       })
