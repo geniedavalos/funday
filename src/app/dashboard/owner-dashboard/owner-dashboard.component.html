@@ -118,7 +118,7 @@
           <tbody>
             <tr *ngFor='let member of currentCompany?.employees'>
               <th scope="row">{{member['department']}}</th>
-              <td>{{member['firstName']}} {{member['lastName']}} {{member['isManager']}}</td>
+              <td>{{member['firstName']}} {{member['lastName']}}</td>
               <td>
                 <a [routerLink]="['']" routerLinkActive="router-link-active"  class="btn btn-outline-danger mx-1"><i class="fa fa-window-close" aria-hidden="true"></i></a>
                 <a [routerLink]="['']" routerLinkActive="router-link-active"  class="btn btn-outline-info mx-1"><i class="fa fa-search" aria-hidden="true"></i></a>

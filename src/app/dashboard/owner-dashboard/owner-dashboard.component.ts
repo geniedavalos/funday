@@ -157,6 +157,10 @@ export class OwnerDashboardComponent implements OnInit, OnChanges {
   makeManager(id){
     this.employeeService.promoteToManager(id).subscribe(result =>{
       console.log(result)
+      this.companyService.getCompany(this.currentCompany._id).subscribe(company => {
+        this.currentCompany = company;
+        this.getEmployees();
+      })
     })
   }
 

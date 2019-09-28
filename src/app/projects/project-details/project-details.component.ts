@@ -71,6 +71,7 @@ export class ProjectDetailsComponent implements OnInit {
           console.log(data);
         })
       }
+      this.getProject(this.id);
     })
   }
 
