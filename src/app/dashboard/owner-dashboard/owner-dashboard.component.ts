@@ -48,6 +48,7 @@ export class OwnerDashboardComponent implements OnInit, OnChanges {
     if (changes.currentCompany.currentValue) {
       this.getProjects();
       this.getEmployees();
+      this.sortDepartments();
     }
   }
 
@@ -113,12 +114,30 @@ export class OwnerDashboardComponent implements OnInit, OnChanges {
     });
   }
 
+  sortDepartments() {
+    this.currentCompany.departments.sort((a, b) => {
+      if (a === 'Unassigned') {
+        return -1;
+      } else if (b === 'Unassigned') {
+        return 1;
+      }
+      if (a > b) {
+        return 1;
+      } else if (a < b) {
+        return -1;
+      } else {
+        return 0;
+      }
+    });
+  }
+
   addDepartment(form: NgForm) {
     const observable = this.companyService.addDepartment(this.currentCompany, this.newDepartment);
     observable.subscribe(data => {
       console.log(data);
       this.departmentMembership[this.newDepartment] = 0;
       this.currentCompany = data;
+      this.sortDepartments();
     });
   }
 
@@ -146,7 +165,9 @@ export class OwnerDashboardComponent implements OnInit, OnChanges {
     this.newProject.projectLead = this.currentUser._id;
     this.newProject.teamMembers = this.addedIds;
     this.projectService.createProject(this.newProject).subscribe(result => {
+      console.log('creatd project, result:', result);
       this.companyService.addProject(this.currentCompany, result).subscribe(res => {
+        console.log('added project, result:', res);
         this.currentCompany = res;
         this.newProject = new Project();
         this.getProjects();

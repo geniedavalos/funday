@@ -17,10 +17,10 @@ module.exports = {
         Company.findById(req.params.id)
         .populate('employees')
         .populate('projects')
-            .then((data) => {
-                res.json(data)
-            })
-            .catch(err => res.json(err));
+        .then((data) => {
+            res.json(data)
+        })
+        .catch(err => res.json(err));
     },
     create: (req, res) => {
         Company.create(req.body)
@@ -54,21 +54,22 @@ module.exports = {
     },
     addProject: (req, res) => {
         Company.findOneAndUpdate({_id : req.params.id}, {$push : {projects: req.body}}, { new: true })
+        .populate('employees')
+        .populate('projects')
         .then(data => {
             res.json(data);
         })
         .catch(err => res.json(err));
     },
     addDepartment: (req, res) => {
-      console.log(req.body);
-      console.log(req.body.department);
       Company.findByIdAndUpdate(
                 req.params.id,
                 { $push : { departments : { $each : [ req.body.department ], $sort: 1 } } },
                 { new: true }
                 )
+        .populate('employees')
+        .populate('projects')
         .then(data => {
-          console.log(data);
           res.json(data);
         })
         .catch(err => res.json(err));

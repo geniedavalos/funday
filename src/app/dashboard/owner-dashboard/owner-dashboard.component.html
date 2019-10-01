@@ -44,7 +44,7 @@
       <h5 class="ml-4">Departments</h5>
       <form (submit)="addDepartment(departmentForm)" #departmentForm="ngForm" name="addDepartmentForm">
         <input class="form-control ml-4" type="text" [(ngModel)]="newDepartment" name="new_department" required minlength="2" placeholder="Enter Department Name">
-        <input [disabled]="departmentForm.invalid" type="submit" class="btn btn-secondary my-3 ml-4">
+        <input [disabled]="departmentForm.invalid || currentCompany?.departments.includes(newDepartment)" type="submit" class="btn btn-secondary my-3 ml-4">
       </form>
       <table class="table text-center ml-4">
         <thead>

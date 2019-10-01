@@ -26,7 +26,7 @@ module.exports = {
             .catch(err => res.json(err));
     },
     create: (req, res) => {
-      console.log('in projects controller, creating, reqbody:', req.body);
+      req.body.dueDate += 'T12:00:00';
       Project.create(req.body)
         .then(data => {
           console.log(data);
@@ -54,7 +54,6 @@ module.exports = {
             });
     },
     addTask: (req, res) => {
-        console.log("inside addTask to Project method", req.body)
         Project.findOneAndUpdate({_id : req.params.id}, {$push : {tasks: req.body.taskID}}, {new: true})
         .then(data => {
             res.json(data);
@@ -62,7 +61,6 @@ module.exports = {
         .catch(err => res.json(err));
     },
     removeTask: (req, res) => {
-        console.log("insde removeTask from Project method", req.body)
         Project.findOneAndUpdate({_id : req.params.id}, {$pull : {tasks: req.body}})
         .then(data => {
             res.json(data);
@@ -70,7 +68,6 @@ module.exports = {
         .catch(err => res.json(err));
     },
     addTeamMember: (req, res) => {
-        console.log("inside addTeamMember to Project method", req.body)
         Project.findOneAndUpdate({_id : req.params.id}, {$push : {teamMembers: req.body}}, {new: true})
         .then(data => {
             res.json(data);
@@ -78,7 +75,6 @@ module.exports = {
         .catch(err => res.json(err));
     },
     removeTeamMember: (req, res) => {
-        console.log("insde removeTeamMmber from Project method", req.body)
         Project.findOneAndUpdate({_id : req.params.id}, {$pull : {teamMembers: req.body}})
         .then(data => {
             res.json(data);
