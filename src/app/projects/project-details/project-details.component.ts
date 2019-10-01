@@ -104,5 +104,5 @@ export class ProjectDetailsComponent implements OnInit {
   populateEdit(task: Task) {
     this.editTask = task;
   }
-    
+
 }

@@ -5,6 +5,7 @@ import { NgForm } from '@angular/forms';
 import { Employee, Project, Company } from 'src/app/models';
 import { AuthService } from 'src/app/services/auth.service';
 import { ProjectService, EmployeeService, CompanyService } from 'src/app/services';
+import { ThrowStmt } from '@angular/compiler';
 
 @Component({
   selector: 'app-owner-dashboard',
@@ -25,6 +26,7 @@ export class OwnerDashboardComponent implements OnInit, OnChanges {
   departmentMembership: any = {};
   managers: Employee[] = [];
   selectedDepartment: string;
+  deleteItem: string;
 
   editingName = false;
 
@@ -176,6 +178,17 @@ export class OwnerDashboardComponent implements OnInit, OnChanges {
         this.router.navigateByUrl('/home');
       });
     }
+  }
+
+  setDeleteItem(id: string) {
+    console.log('Inside setDeleteItem()');
+    console.log('Id passed in is: ' + id);
+    this.deleteItem = id;
+  }
+
+  onDelete() {
+    console.log('Inside onDelete()');
+    console.log('Deleting: ' + this.deleteItem);
   }
 
 }
