@@ -27,6 +27,7 @@ export class OwnerDashboardComponent implements OnInit, OnChanges {
   managers: Employee[] = [];
   selectedDepartment: string;
   deleteItem: string;
+  editItem: Employee;
 
   editingName = false;
 
@@ -44,6 +45,7 @@ export class OwnerDashboardComponent implements OnInit, OnChanges {
   ngOnInit() {
     this.addedIds = [];
     this.addedTeamMembers = [];
+    this.editItem = new Employee();
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -189,6 +191,19 @@ export class OwnerDashboardComponent implements OnInit, OnChanges {
   onDelete() {
     console.log('Inside onDelete()');
     console.log('Deleting: ' + this.deleteItem);
+  }
+
+  setEditEmployee(employee) {
+    console.log(this.currentCompany.departments);
+    console.log('Inside setEditEmployee()');
+    console.log(employee);
+    this.editItem = JSON.parse(JSON.stringify(employee));
+  }
+
+  onEdit() {
+    console.log('Inside onEdit()');
+    console.log(this.editItem._id);
+    console.log('Id to be editted: ' + this.editItem.firstName + this.editItem.lastName + this.editItem.email + this.editItem.department);
   }
 
 }

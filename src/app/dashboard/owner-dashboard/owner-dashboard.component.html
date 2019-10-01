@@ -47,6 +47,7 @@
         <input [disabled]="departmentForm.invalid" type="submit" class="btn btn-secondary my-3 ml-4">
       </form>
 
+      <!--Modal For All Deletes-->
       <div class="modal fade" id="deleteItem" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
@@ -60,7 +61,7 @@
               <p class='text-center'><strong>This action cannot be undone!</strong></p>
             </div>
             <div class="modal-footer justify-content-center">
-              <button type="button" (click)='onDelete()' class="btn btn-danger">Delete</button>
+              <button type="button" data-dismiss='modal' (click)='onDelete()' class="btn btn-danger">Delete</button>
             </div>
         </div>
       </div>
@@ -80,7 +81,6 @@
             <td>{{departmentMembership[department]}}</td>
             <td>
               <button data-toggle='modal' data-target='#deleteItem' (click)='setDeleteItem(department)' title='Delete Department' class="btn btn-outline-danger mx-1"><i class="fa fa-window-close" aria-hidden="true"></i></button>
-              <a [routerLink]="['']" class="btn btn-outline-success mx-1" title='Edit Team Members'><i class="fa fa-pencil" aria-hidden="true"></i></a>
             </td>
           </tr>
         </tbody>
@@ -130,24 +130,76 @@
       <table class="table text-center ">
           <thead>
             <tr>
-              <th scope="col">Department</th>
               <th scope="col">Name</th>
+              <th scope="col">Department</th>
               <th scope="col">Actions</th>
             </tr>
           </thead>
           <tbody>
             <tr *ngFor='let member of currentCompany?.employees'>
-              <th scope="row">{{member['department']}}</th>
               <td>{{member['firstName']}} {{member['lastName']}}</td>
+              <td scope="row">{{member['department']}}</td>
               <td>
-                <button data-toggle='modal' data-target='#deleteItem' (click)='setDeleteItem(member._id)' title='Remove Employee' class="btn btn-outline-danger mx-1"><i class="fa fa-window-close" aria-hidden="true"></i></button>
                 <a [routerLink]="['']" routerLinkActive="router-link-active" title='Employee Profile' class="btn btn-outline-info mx-1"><i class="fa fa-search" aria-hidden="true"></i></a>
                 <button *ngIf='member.isManager != true' (click)='makeManager(member._id)' title='Promote to Manager' class='btn btn-outline-primary mx-1'><i class="fa fa-handshake-o" aria-hidden="true"></i></button>
+                <button data-toggle='modal' data-target='#editEmployee' (click)='setEditEmployee(member)' class="btn btn-outline-success mx-1" title='Edit Employee'><i class="fa fa-pencil" aria-hidden="true"></i></button>
+                <button data-toggle='modal' data-target='#deleteItem' (click)='setDeleteItem(member._id)' title='Remove Employee' class="btn btn-outline-danger mx-1"><i class="fa fa-window-close" aria-hidden="true"></i></button>
               </td>
             </tr>
           </tbody>
         </table>
     </div>
+
+    <!--Edit Employee Modal-->
+    <div class="modal fade" id="editEmployee" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header text-center bg-success">
+              <h3 class="modal-title w-100 my-auto text-white">Edit Employee</h3>
+              <button type="button" class="close text-white my-auto" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p class='text-center'>Edit first name, last name and email</p>
+              <div class="input-group mb-2 justify-content-center">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1"><i class="fa fa-user-o" aria-hidden="true"></i></span>
+                  </div>
+                <input type='text' value={{editItem?.firstName}} class='form-control col-8' [(ngModel)]='editItem.firstName'>
+              </div>
+              <div class="input-group mb-2 justify-content-center">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1"><i class="fa fa-user-o" aria-hidden="true"></i></span>
+                  </div>
+                <input type='text' value={{editItem?.lastName}} class='form-control col-8' [(ngModel)]='editItem.lastName'>
+              </div>
+              <div class="input-group mb-2 justify-content-center">
+                  <div class="input-group-prepend">
+                      <span class="input-group-text" id="basic-addon1"><i class="fa fa-envelope" aria-hidden="true"></i></span>
+                  </div>
+                <input type='text' value={{editItem?.email}} class='form-control col-8' [(ngModel)]='editItem.email'>
+              </div>
+              <hr>
+                <p class='text-center'>Change Department</p>
+                <div class='input-group mb-2 justify-content-center'>
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1"><i class="fa fa-building" aria-hidden="true"></i></span>
+                  </div>
+                  <select class='form-control col-8' name='projectDept' [(ngModel)]='editItem.department'>
+                      <option value="Unassigned">Unassigned</option>
+                      <option *ngFor="let department of currentCompany?.departments" [hidden]="department === 'Unassigned'" value="{{department}}">{{department}}</option>
+                  </select>
+                </div>
+            </div>
+            <div class="modal-footer justify-content-center">
+              <button type="button" data-dismiss='modal' (click)='onEdit()' class="btn btn-sm btn-success px-3">Edit</button>
+            </div>
+        </div>
+      </div>
+    </div>
+
+    <!--Modal For Adding New Projects-->
     <div class="modal fade" id="addProject" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
