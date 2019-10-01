@@ -23,7 +23,8 @@ export class OwnerDashboardComponent implements OnInit, OnChanges {
   projectsExpanded = false;
   employeesExpanded = false;
   departmentMembership: any = {};
-  managers = [];
+  managers: Employee[] = [];
+  selectedDepartment: string;
 
   editingName = false;
 
@@ -81,6 +82,7 @@ export class OwnerDashboardComponent implements OnInit, OnChanges {
     for (const dept of this.currentCompany.departments) {
       this.departmentMembership[dept] = 0;
     }
+    this.managers = [];
     for (const employee of this.employees) {
       if (employee.isManager) {
         this.managers.push(employee);

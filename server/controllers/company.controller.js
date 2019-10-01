@@ -62,7 +62,11 @@ module.exports = {
     addDepartment: (req, res) => {
       console.log(req.body);
       console.log(req.body.department);
-      Company.findByIdAndUpdate(req.params.id, {$push : {departments : req.body.department }}, { new: true })
+      Company.findByIdAndUpdate(
+                req.params.id,
+                { $push : { departments : { $each : [ req.body.department ], $sort: 1 } } },
+                { new: true }
+                )
         .then(data => {
           console.log(data);
           res.json(data);

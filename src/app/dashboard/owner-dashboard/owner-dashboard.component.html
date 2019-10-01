@@ -43,8 +43,8 @@
       </form>
       <h5 class="ml-4">Departments</h5>
       <form (submit)="addDepartment(departmentForm)" #departmentForm="ngForm" name="addDepartmentForm">
-        <input class="form-control ml-4" type="text" [(ngModel)]="newDepartment" name="new_department" placeholder="Enter Department Name">
-        <input type="submit" class="btn btn-secondary my-3 ml-4">
+        <input class="form-control ml-4" type="text" [(ngModel)]="newDepartment" name="new_department" required minlength="2" placeholder="Enter Department Name">
+        <input [disabled]="departmentForm.invalid" type="submit" class="btn btn-secondary my-3 ml-4">
       </form>
       <table class="table text-center ml-4">
         <thead>
@@ -212,10 +212,9 @@
                           <span class="input-group-text" id="basic-addon1"><i class="fa fa-building" aria-hidden="true"></i></span>
                         </div>
                         <select class='form-control col-8' name='projectDept'>
-                            <option>--Select Department--</option>
-                            <option>Marketing</option>
-                            <option>PR</option>
-                            <option>Engineering</option>
+                            <option value="">All Departments</option>
+                            <option value="Unassigned">Unassigned</option>
+                            <option *ngFor="let department of currentCompany?.departments" [hidden]="department === 'Unassigned'" value="{{department}}">{{department}}</option>
                         </select>
                       </div>
 
