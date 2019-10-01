@@ -46,6 +46,26 @@
         <input class="form-control ml-4" type="text" [(ngModel)]="newDepartment" name="new_department" placeholder="Enter Department Name">
         <input type="submit" class="btn btn-secondary my-3 ml-4">
       </form>
+
+      <div class="modal fade" id="deleteItem" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header text-center bg-danger">
+              <h3 class="modal-title w-100 my-auto text-white">Are You Sure?</h3>
+              <button type="button" class="close text-white my-auto" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p class='text-center'><strong>This action cannot be undone!</strong></p>
+            </div>
+            <div class="modal-footer justify-content-center">
+              <button type="button" (click)='onDelete()' class="btn btn-danger">Delete</button>
+            </div>
+        </div>
+      </div>
+    </div>
+
       <table class="table text-center ml-4">
         <thead>
           <tr>
@@ -59,8 +79,8 @@
             <td>{{department}}</td>
             <td>{{departmentMembership[department]}}</td>
             <td>
-              <a [routerLink]="['']" routerLinkActive="router-link-active"  class="btn btn-outline-danger mx-1"><i class="fa fa-ban" aria-hidden="true"></i></a>
-              <a [routerLink]="['']" class="btn btn-outline-success mx-1"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+              <button data-toggle='modal' data-target='#deleteItem' (click)='setDeleteItem(department)' title='Delete Department' class="btn btn-outline-danger mx-1"><i class="fa fa-window-close" aria-hidden="true"></i></button>
+              <a [routerLink]="['']" class="btn btn-outline-success mx-1" title='Edit Team Members'><i class="fa fa-pencil" aria-hidden="true"></i></a>
             </td>
           </tr>
         </tbody>
@@ -81,8 +101,8 @@
             <td>{{manager.firstName}} {{manager.lastName}}</td>
             <td>{{manager.managedProjects.length}}</td>
             <td>
-              <a [routerLink]="['']" routerLinkActive="router-link-active"  class="btn btn-outline-danger mx-1"><i class="fa fa-ban" aria-hidden="true"></i></a>
-              <a [routerLink]="['']" routerLinkActive="router-link-active"  class="btn btn-outline-info mx-1"><i class="fa fa-search" aria-hidden="true"></i></a>
+              <button data-toggle='modal' data-target='#deleteItem' (click)='setDeleteItem(manager._id)' title='Remove Manager' class="btn btn-outline-danger mx-1"><i class="fa fa-window-close" aria-hidden="true"></i></button>
+              <a [routerLink]="['']" routerLinkActive="router-link-active" title='Manager Profile' class="btn btn-outline-info mx-1"><i class="fa fa-search" aria-hidden="true"></i></a>
             </td>
           </tr>
         </tbody>
@@ -120,8 +140,8 @@
               <th scope="row">{{member['department']}}</th>
               <td>{{member['firstName']}} {{member['lastName']}}</td>
               <td>
-                <a [routerLink]="['']" routerLinkActive="router-link-active"  class="btn btn-outline-danger mx-1"><i class="fa fa-window-close" aria-hidden="true"></i></a>
-                <a [routerLink]="['']" routerLinkActive="router-link-active"  class="btn btn-outline-info mx-1"><i class="fa fa-search" aria-hidden="true"></i></a>
+                <button data-toggle='modal' data-target='#deleteItem' (click)='setDeleteItem(member._id)' title='Remove Employee' class="btn btn-outline-danger mx-1"><i class="fa fa-window-close" aria-hidden="true"></i></button>
+                <a [routerLink]="['']" routerLinkActive="router-link-active" title='Employee Profile' class="btn btn-outline-info mx-1"><i class="fa fa-search" aria-hidden="true"></i></a>
                 <button *ngIf='member.isManager != true' (click)='makeManager(member._id)' title='Promote to Manager' class='btn btn-outline-primary mx-1'><i class="fa fa-handshake-o" aria-hidden="true"></i></button>
               </td>
             </tr>

@@ -44,71 +44,39 @@
 
     <section>
       <div class="introduction text-center">
-        <h2>{{employee.firstName}} {{employee.lastName}}</h2>
-        <h4>Assigned Project : {{assignedProjects.title}}</h4>
+        <h2>{{employee?.firstName}} {{employee?.lastName}}</h2>
+        <h3>{{employee?.email}}</h3>
+        <h4>Assigned Project : {{assignedProjects?.title}}</h4>
+        <button class='btn btn-sm btn-primary'>Promote</button>
+      </div>
+      <div class='projectInfo' *ngFor='let project of assignedProjects'>
+        <h3>{{project.title}}</h3>
+        <table class="table mt-5 text-center " >
+            <thead>
+              <tr>
+                <th scope="col">Task</th>
+                <th scope="col">Progress</th>
+                <th scope="col">Due Date</th>
+                <th scope="col">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let task of tasks">
+                <td><a href="#">{{task.title}}</a></td>
+                <td>
+                  <div class="progress">
+                    <div class="progress-bar  progress-bar-striped bg-info" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                  </div>
+                </td>
+                <td>{{task.dueDate}}</td>
+                <td>
+                  <a routerLink="['/tasks', task._id]" title='Task Details' class="btn btn-outline-info mx-1"><i class="fa fa-search" aria-hidden="true"></i></a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
       </div>
 
-      <table class="table mt-5 text-center " >
-        <thead>
-          <tr>
-            <th scope="col">Task</th>
-            <th scope="col">Progress</th>
-            <th scope="col">Due Date</th>
-            <th scope="col">Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let task of tasks">
-            <td><a href="#">{{task.title}}</a></td>
-            <td>
-              <div class="progress">
-                <div class="progress-bar  progress-bar-striped bg-info" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-              </div>
-            </td>
-            <td>{{task.dueDate}}</td>
-            <td>
-              <a href="#" class="btn btn-outline-info mx-1"><i class="fa fa-search" aria-hidden="true"></i></a>
-              <a href="/tasks/:id/edit" class="btn btn-outline-success mx-1"><i class="fa fa-pencil" aria-hidden="true"></i>
-              </a>
-
-              <a href="/tasks/:id" class="btn btn-outline-danger mx-1"><i class="fa fa-trash" aria-hidden="true"></i></a>
-            </td>
-          </tr>
-<!--          <tr>-->
-<!--            <td><a href="#">Color sharks</a></td>-->
-<!--            <td>-->
-<!--              <div class="progress">-->
-<!--                <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 10%" aria-valuenow="10"></div>-->
-<!--              </div>-->
-<!--            </td>-->
-<!--            <td>8/25/19</td>-->
-<!--            <td>-->
-<!--              <a href="#" class="btn btn-outline-info mx-1"><i class="fa fa-search" aria-hidden="true"></i></a>-->
-<!--              <a href="/tasks/:id/edit" class="btn btn-outline-success mx-1"><i class="fa fa-pencil" aria-hidden="true"></i>-->
-<!--              </a>-->
-
-<!--              <a href="/tasks/:id" class="btn btn-outline-danger mx-1"><i class="fa fa-trash" aria-hidden="true"></i></a>-->
-<!--            </td>-->
-<!--          </tr>-->
-
-<!--          <tr>-->
-<!--            <td><a href="#">Upload sharks</a></td>-->
-<!--            <td>-->
-<!--              <div class="progress">-->
-<!--                <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 10%" aria-valuenow="10"></div>-->
-<!--              </div>-->
-<!--            </td>-->
-<!--            <td>8/27/19</td>-->
-<!--            <td>-->
-<!--              <a href="#" class="btn btn-outline-info mx-1"><i class="fa fa-search" aria-hidden="true"></i></a>-->
-<!--              <a href="/tasks/:id/edit" class="btn btn-outline-success mx-1"><i class="fa fa-pencil" aria-hidden="true"></i>-->
-<!--              </a>-->
-
-<!--              <a href="/tasks/:id" class="btn btn-outline-danger mx-1"><i class="fa fa-trash" aria-hidden="true"></i></a>-->
-<!--            </td>-->
-<!--          </tr>-->
-        </tbody>
-      </table>
     </section>
 
     <footer>
