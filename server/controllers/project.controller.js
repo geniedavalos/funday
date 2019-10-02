@@ -66,7 +66,7 @@ module.exports = {
                     {$pull : {tasks : {$in : project.tasks}, managedProjects : project._id, assignedProjects: project._id}},
                     { multi: true })
                     .then(data => {
-                        console.log("Loggind data after 'deleting' tasks", data)
+                        console.log("Logging data after 'deleting' tasks", data)
                     });
                 res.json(project);
             })
@@ -82,7 +82,7 @@ module.exports = {
         .catch(err => res.json(err));
     },
     removeTask: (req, res) => {
-        Project.findOneAndUpdate({_id : req.params.id}, {$pull : {tasks: req.body}})
+        Project.findOneAndUpdate({_id : req.params.id}, {$pull : {tasks: req.body.taskID}}, {new: true})
         .then(data => {
             res.json(data);
         })

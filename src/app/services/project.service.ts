@@ -36,6 +36,9 @@ export class ProjectService {
   addTask(project: Project, taskID: string): Observable<Project> {
     return this.http.put<Project>(`${this.base}/${project._id}/addTask`, {taskID})
   }
+  removeTask(project: Project, taskID: string): Observable<Project> {
+    return this.http.put<Project>(`${this.base}/${project._id}/removeTask`, {taskID})
+  }
 
   addTeamMember(project: Project, employeeID: string): Observable<Project> {
     return this.http.put<Project>(`${this.base}/${project._id}/addTeamMember`, {employeeID})

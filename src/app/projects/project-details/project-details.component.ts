@@ -169,6 +169,9 @@ export class ProjectDetailsComponent implements OnInit {
   onDeleteTask() {
     this.taskService.destroyTask(this.deleteTaskId).subscribe(_data => {
       this.getProject(this.id);
+      this.projectService.removeTask(this.project, this.deleteTaskId).subscribe(result => {
+        console.log(result);
+      })
     });
   }
 
