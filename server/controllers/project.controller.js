@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const Project = mongoose.model('Project')
 const Employee = mongoose.model('Employee')
 const Company = mongoose.model('Company')
+const Task = mongoose.model('Task')
 
 module.exports = {
     index: async (_req, res) => {
@@ -64,7 +65,7 @@ module.exports = {
                     {$pull : {tasks : {$in : project.tasks}, managedProjects : project._id, assignedProjects: project._id}},
                     { multi: true })
                     .then(data => {
-                      res.json(data);
+                        res.json(data);
                     });
                 res.json(project);
             })
@@ -94,14 +95,18 @@ module.exports = {
         .catch(err => res.json(err));
     },
     removeTeamMember: (req, res) => {
-        Project.findOneAndUpdate({_id : req.params.id}, {$pull : {teamMembers: req.body.employeeID}}, {new: true})
-        .then(data => {
+        Project.findOneAndUpdate({_id : req.params.id}, 
+            {$pull : {teamMembers: req.body.employeeID}}, {new: true})
+        .then(project => {
             Task.update({_id: {$in : project.tasks}},
                 {$pull : {teamMembers : req.body.employeeID}}, {multi : true})
                 .then(result => {
-                    res.json(result)
+                    Employee.findOneAndUpdate({_id: req.body.employeeID}, 
+                        {$pull : {tasks : {$in : project.tasks}, assignedProjects : project._id} })
+                        .then(employee => {
+                            res.json(project);
+                        })
                 })
-            res.json(data);
         })
         .catch(err => res.json(err));
     },

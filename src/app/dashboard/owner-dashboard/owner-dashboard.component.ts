@@ -157,13 +157,22 @@ export class OwnerDashboardComponent implements OnInit, OnChanges {
     }
     this.newProject.projectLead = this.currentUser._id;
     this.newProject.teamMembers = this.addedIds;
-    this.projectService.createProject(this.newProject).subscribe(result => {
-      this.companyService.addProject(this.currentCompany, result).subscribe(res => {
-        this.currentCompany = res;
-        this.newProject = new Project();
-        this.getProjects();
-        this.addedIds = [];
-        this.addedTeamMembers = [];
+    this.projectService.createProject(this.newProject).subscribe(createdProject => {
+      this.employeeService.addManagedProject(this.currentUser._id, createdProject._id).subscribe(_result => {
+
+      });
+      for (const teamMember of createdProject.teamMembers) {
+        this.employeeService.addProject(teamMember, createdProject._id).subscribe(_data => {
+        });
+      }
+      this.companyService.addProject(this.currentCompany, createdProject).subscribe(_res => {
+        this.companyService.getCompany(this.currentCompany._id).subscribe(finalRes => {
+          this.currentCompany = finalRes;
+          this.newProject = new Project();
+          this.getProjects();
+          this.addedIds = [];
+          this.addedTeamMembers = [];
+        });
       });
     });
   }
