@@ -43,4 +43,7 @@ export class CompanyService {
   removeProject(company: Company, projectID: string): Observable<Company> {
     return this.http.put<Company>(`${this.base}/${company._id}/removeProject`, {projectID});
   }
+  removeDepartment(company: Company, department: string): Observable<Company> {
+    return this.http.put<Company>(`${this.base}/${company._id}/removeDepartment`, {department});
+  }
 }

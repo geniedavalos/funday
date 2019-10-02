@@ -99,4 +99,15 @@ module.exports = {
         })
         .catch(err => res.json(err));
     },
+    removeDepartment: (req, res) => {
+      Company.findByIdAndUpdate(req.params.id,
+                                { $pull : { departments : req.body.department }},
+                                { new: true })
+          .then(company => {
+            res.json(company);
+          })
+          .catch(err => {
+            res.json(err);
+          })
+    }
 }

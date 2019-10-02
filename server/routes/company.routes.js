@@ -11,5 +11,6 @@ router.get('/', companies.index)
     .put('/:id/addProject', companies.addProject)
     .put('/:id/addDepartment', companies.addDepartment)
     .put('/:id/removeProject', companies.removeProject)
+    .put('/:id/removeDepartment', companies.removeDepartment)
 
 module.exports = router;
