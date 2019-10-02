@@ -17,6 +17,7 @@ module.exports = {
       .catch(err => res.json(err))
   },
   create: (req, res) => {
+    req.body.dueDate += 'T12:00:00';
     Task.create(req.body)
       .then(data => res.json(data))
       .catch(err => res.json(err))
