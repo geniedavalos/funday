@@ -2,6 +2,10 @@ body, section {
   margin: 2%;
 }
 
+.loading{
+  height: 300px;
+}
+
 /* Header */
 #img-section {
   background: url("https://images.unsplash.com/photo-1453928582365-b6ad33cbcf64?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1952&q=80");

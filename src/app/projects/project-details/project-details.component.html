@@ -41,15 +41,20 @@
         </ul>
       </div>
     </nav>
-
-    <section>
+    <section *ngIf="loadedProject == false">
+      <div class="row justify-content-around">
+          <img class="loading" src="../../../assets/image/index.rotate-pie-preloader-gif.svg">
+      </div>
+    </section>
+    <section *ngIf="loadedProject == true">
       <h2>Project Title: {{project?.title}}</h2>
-      <p>Getting this project done! Adding tasks, projects, notes, etc...</p>
+      <button *ngIf="readMore == false" (click)=onShowDetails() class="btn btn-outline-dark mb-3">Show Project Details</button>
+      <p *ngIf="readMore == true" class="border rounded">{{project.description}}</p>
       <div class="progress">
         <div class="progress-bar  progress-bar-striped bg-info" role="progressbar" [ngStyle]="{'width': project?.progress+'%'}" aria-valuenow="" aria-valuemin="0" aria-valuemax="100">{{project?.progress}}%</div>
       </div>
       <div class="mx-3 my-3 block">
-        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#editProject">Edit This Project</button>
+        <button type="button" class="btn btn-info" data-toggle="modal" (click)="populateEditProject()" data-target="#editProject">Edit This Project</button>
         <button type="button" class="btn btn-danger ml-3" data-toggle="modal" data-target="#deleteProject">Delete Project</button>
       </div>
 
@@ -88,7 +93,7 @@
                   </form>
                 </div>
                 <div class="modal-footer justify-content-center">
-                  <button type="button" (click)='onProjectEdit()' class="btn btn-info">Edit</button>
+                  <button type="button" data-dismiss="modal" (click)='onEditProject()' class="btn btn-info">Edit</button>
                 </div>
             </div>
         </div>
@@ -111,12 +116,12 @@
                           <div class='input-group-prepend'>
                             <span class="input-group-text text-danger" id="basic-addon1"><i class="fa fa-trash-o" aria-hidden="true"></i></span>
                           </div>
-                          <input type='text' placeholder='Project Name' class='form-control col-7'name='projectTitle'>
+                          <input type='text' id="projectTitle" [(ngModel)]="projectTitle" placeholder='Project Name' class='form-control col-7' name='projectTitle'>
                         </div>
                       </form>
                   </div>
                   <div class="modal-footer justify-content-center">
-                      <button type="button" class="btn btn-danger">Delete</button>
+                      <button [disabled]="projectTitle != project?.title" type="button" (click)="onDeleteProject()" data-dismiss="modal" class="btn btn-danger">Delete</button>
                   </div>
               </div>
           </div>
@@ -141,9 +146,9 @@
             </td>
             <td>{{task?.dueDate | date: 'mediumDate'}}</td>
             <td>
-                <button type='button' (click)='populateEdit(task)' class='btn btn-outline-warning ml-3' data-toggle='modal' data-target='#editTask'><i class="fa fa-pencil" aria-hidden="true"></i></button>
+                <button type='button' (click)='populateEditTask(task)' class='btn btn-outline-warning ml-3' data-toggle='modal' data-target='#editTask'><i class="fa fa-pencil" aria-hidden="true"></i></button>
 
-                <button type='button' (click)='onDeleteTaskId(task._id)' data-toggle='modal' data-target='#confirmDelete' class="btn btn-outline-danger ml-3"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                <button type='button' (click)='setDeleteTaskID(task._id)' data-toggle='modal' data-target='#confirmDelete' class="btn btn-outline-danger ml-3"><i class="fa fa-trash" aria-hidden="true"></i></button>
 
                 <div class="modal fade" id="confirmDelete" tabindex="-1" role="dialog" aria-hidden="true">
                     <div class="modal-dialog" role="document">
@@ -158,7 +163,7 @@
                               <p class='text-center my-auto'><strong>This action cannot be undone!</strong></p>
                             </div>
                             <div class="modal-footer justify-content-center">
-                              <button (click)='onDelete()' class='btn btn-danger text-white'>Delete</button>
+                              <button data-dismiss="modal" (click)='onDeleteTask()' class='btn btn-danger text-white'>Delete</button>
                             </div>
                         </div>
                     </div>
@@ -265,7 +270,7 @@
                     </form>
                 </div>
                 <div class="modal-footer justify-content-center">
-                    <button data-dismiss="modal" (click)='onTaskEdit()' type="button" class="text-white btn btn-warning px-5">Edit</button>
+                    <button data-dismiss="modal" (click)='onEditTask()' type="button" class="text-white btn btn-warning px-5">Edit</button>
                 </div>
             </div>
         </div>
@@ -278,18 +283,18 @@
       <table class="table text-center ">
         <thead>
           <tr>
-            <th scope="col">Department</th>
             <th scope="col">Name</th>
+            <th scope="col">Department</th>
             <th scope="col">Actions</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor='let member of project?.teamMembers'>
-            <th scope="row">{{member['department']}}</th>
             <td>{{member['firstName']}} {{member['lastName']}}</td>
-            <td><a [routerLink]="['']" routerLinkActive="router-link-active"  class="btn btn-outline-danger mx-1"><i class="fa fa-ban" aria-hidden="true"></i></a>
+            <td scope="row">{{member['department']}}</td>
+            <td><button (click)=onRemoveFromTeam(member._id)  class="btn btn-outline-danger mx-1"><i class="fa fa-ban" aria-hidden="true"></i></button>
 
-              <a [routerLink]="['']" routerLinkActive="router-link-active"  class="btn btn-outline-info mx-1"><i class="fa fa-search" aria-hidden="true"></i></a>
+              <a [routerLink]="['/employees/', member._id]" routerLinkActive="router-link-active"  class="btn btn-outline-info mx-1"><i class="fa fa-search" aria-hidden="true"></i></a>
 
             </td>
           </tr>
@@ -326,12 +331,7 @@
 
                   <div class='form-group row col-10 mx-auto'>
                     <select multiple class='form-control' id='teamNames' name='member' [(ngModel)]='newMembers'>
-                        <option value='id:1-Justin'>Justin</option>
-                        <option value='id:2-David'>David</option>
-                        <option value='id:3-Jane'>Jane</option>
-                        <option value='id:4-Jill'>Jill</option>
-                        <option value='id:5-Austin'>Austin</option>
-                        <option value='id:6-Bob'>Bob</option>
+                        <option *ngFor="let employee of currentCompany?.employees" value="{{employee?._id}}">{{employee.firstName}} {{employee.lastName}}</option>
                     </select>
                   </div>
                         <div class='addedMembers mt-3'>
@@ -339,7 +339,7 @@
                         </div>
                 </div>
                 <div class="modal-footer justify-content-center">
-                    <button (click)='onAddTeam()' type="button" class="btn btn-success px-5">Add</button>
+                    <button (click)='onAddTeamMembers()' type="button" class="btn btn-success px-5">Add</button>
                 </div>
             </div>
         </div>
