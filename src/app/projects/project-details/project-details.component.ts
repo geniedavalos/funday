@@ -104,9 +104,7 @@ export class ProjectDetailsComponent implements OnInit {
       this.projectService.addTask(this.project, task._id).subscribe(result => {
         console.log(result);
       });
-      for(let teamMember of task.teamMembers){
-        console.log("task._id = ", task._id)
-        console.log("teamMember = ", teamMember)
+      for (const teamMember of task.teamMembers) {
         this.employeeService.addTask(teamMember, task._id).subscribe(data => {
           console.log(data);
         })
@@ -116,7 +114,7 @@ export class ProjectDetailsComponent implements OnInit {
   }
 
 
-  //called inside the addTeam modal, should add the selected employee ids to the project teammates list
+  // called inside the addTeam modal, should add the selected employee ids to the project teammates list
   onAddTeamMembers() {
     for(let member of this.newMembers){
       this.projectService.addTeamMember(this.project, member).subscribe(result => {
@@ -125,12 +123,15 @@ export class ProjectDetailsComponent implements OnInit {
       })
     }
   }
-
+  /**
+   * Removes a team member from a project, and removes them from all associated tasks.
+   * @param id ID of the team member to be removed from the project.
+   */
   onRemoveFromTeam(id: string){
     this.projectService.removeTeamMember(this.project, id).subscribe(result => {
-      console.log(result)
-      this.getProject(this.id)
-    })
+      console.log(result);
+      this.getProject(this.id);
+    });
   }
 
   //this is called byt the editprojectbutton inside the modal which should edit the project with the given information

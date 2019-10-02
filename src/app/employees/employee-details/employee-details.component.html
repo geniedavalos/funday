@@ -1,4 +1,5 @@
-    <section>
+<app-loading *ngIf="!finishedLoading"></app-loading>
+<section *ngIf="finishedLoading">
       <div class="introduction text-center">
         <h2>{{employee?.firstName}} {{employee?.lastName}}</h2>
         <h3>{{employee?.email}}</h3>

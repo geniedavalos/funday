@@ -29,11 +29,7 @@
       </div>
     </nav> -->
 
-    <section *ngIf="loadedProject == false">
-      <div class="row justify-content-around">
-          <img class="loading" src="../../../assets/image/index.rotate-pie-preloader-gif.svg">
-      </div>
-    </section>
+    <app-loading *ngIf="!loadedProject"></app-loading>
     <section *ngIf="loadedProject == true">
       <h2>Project Title: {{project?.title}}</h2>
       <button *ngIf="readMore == false" (click)=onShowDetails() class="btn btn-outline-dark mb-3">Show Project Details</button>
@@ -266,7 +262,7 @@
 
     <!-- END EDIT TASK MODAL -->
 
-    <section id="users">
+    <section *ngIf="loadedProject" id="users">
       <h2>Manage Team</h2>
       <table class="table text-center ">
         <thead>
