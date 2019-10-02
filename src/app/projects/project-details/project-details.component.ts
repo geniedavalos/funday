@@ -104,9 +104,7 @@ export class ProjectDetailsComponent implements OnInit {
       this.projectService.addTask(this.project, task._id).subscribe(result => {
         console.log(result);
       });
-      for(let teamMember of task.teamMembers){
-        console.log("task._id = ", task._id)
-        console.log("teamMember = ", teamMember)
+      for (const teamMember of task.teamMembers) {
         this.employeeService.addTask(teamMember, task._id).subscribe(data => {
           console.log(data);
         })
@@ -116,7 +114,7 @@ export class ProjectDetailsComponent implements OnInit {
   }
 
 
-  //called inside the addTeam modal, should add the selected employee ids to the project teammates list
+  // called inside the addTeam modal, should add the selected employee ids to the project teammates list
   onAddTeamMembers() {
     for(let member of this.newMembers){
       this.projectService.addTeamMember(this.project, member).subscribe(result => {
@@ -142,8 +140,12 @@ export class ProjectDetailsComponent implements OnInit {
      * Loop through tasks to find all tasks with currently active ID included in the team
      */
     for (const task of this.tasks) {
-      if (task.teamMembers.includes(id)) {
-        assignedTasks.push(task._id);
+      if (task.teamMembers) {
+        for (const teamMember of task.teamMembers) {
+          if (teamMember._id === id) {
+            assignedTasks.push(task._id);
+          }
+        }
       }
     }
     console.log("In on remove from team, logging assigned tasks:", assignedTasks);

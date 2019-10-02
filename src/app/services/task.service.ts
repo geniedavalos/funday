@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { Task } from '../models/task';
-import {Note} from "../models/note";
+import {Note} from '../models/note';
 
 @Injectable({
   providedIn: 'root',
@@ -35,23 +35,25 @@ export class TaskService {
   }
 
   addTeamMember(task: Task, employeeID: string): Observable<Task> {
-    return this.http.put<Task>(`${this.base}/${task._id}/addTeamMember`, {employeeID})
+    return this.http.put<Task>(`${this.base}/${task._id}/addTeamMember`, {employeeID});
   }
 
   removeTeamMember(task: Task, employeeID: string): Observable<Task> {
-    return this.http.put<Task>(`${this.base}/${task._id}/removeTeamMember`, {employeeID})
+    return this.http.put<Task>(`${this.base}/${task._id}/removeTeamMember`, {employeeID});
   }
 
-  removeTeamMemberFromMultiple(tasks: string[], employeeID: string): Observable<Task> {
-    return this.http.put<Task>(`${this.base}/${employeeID}/removeMemberFromMultiple`, tasks);
+  removeTeamMemberFromMultiple(tasks: string[], employeeID: string) {
+    console.log('Inside removeTeamMemberFromMultiple', tasks, employeeID);
+    console.log(`${this.base}/removeMemberFromMultiple`);
+    this.http.put(`${this.base}/removeMemberFromMultiple`, {tasks});
   }
 
-  getEmployeeTasks(id: String): Observable<Task[]> {
-    return this.http.get<Task[]>(`${this.base}/getEmployeeTasks/${id}`)
+  getEmployeeTasks(id: string): Observable<Task[]> {
+    return this.http.get<Task[]>(`${this.base}/getEmployeeTasks/${id}`);
   }
 
-  addNote(id: string, newNote: Note) : Observable<any> {
-    console.log('task service ', newNote)
-    return this.http.put(`${this.base}/addNote/${id}`, newNote)
+  addNote(id: string, newNote: Note): Observable<any> {
+    console.log('task service ', newNote);
+    return this.http.put(`${this.base}/addNote/${id}`, newNote);
   }
 }

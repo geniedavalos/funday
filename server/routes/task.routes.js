@@ -12,6 +12,10 @@ router
   .put('/:id/addTeamMember', tasks.addTeamMember)
   .put('/:id/removeTeamMember', tasks.removeTeamMember)
   .get('/getEmployeeTasks/:id', tasks.getEmployeeTasks)
-  .put('/:eid/removeMemberFromMultiple', tasks.removeTeamMemberFromMultiple)
+  .put('/removeMemberFromMultiple', (req,res) => {
+    console.log('hello world you asshole');
+    console.log(req.body);
+  })
+  //.put('/removeMemberFromMultiple', tasks.removeTeamMemberFromMultiple)
 
 module.exports = router;

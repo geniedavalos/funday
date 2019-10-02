@@ -58,7 +58,6 @@ module.exports = {
     .catch(err => res.json(err))
   },
   addNote: (req, res) => {
-    console.log('adding note', req.body)
     Task.findOneAndUpdate({_id: req.params.id}, {$push : {notes:req.body}})
       .then(data => {
         res.json(data);
@@ -66,7 +65,9 @@ module.exports = {
       .catch(err => res.json(err))
   },
   removeTeamMemberFromMultiple: (req, res) => {
+    console.log("In removeTeamMemberFromMultiple");
     console.log(req.body);
-    console.log(req.params.eid);
+    console.log(req.params);
+    Task.findById(req.body.tasks[0]).then(data => res.json(data));
   }
 }
