@@ -1,0 +1,214 @@
+body, section {
+  margin: 2%;
+}
+
+nav {
+  padding: 2%;
+  margin: 2%;
+}
+
+.navbar-brand {
+  font-size: 1.8rem;
+}
+
+.nav-item {
+  font-size: 1.2rem;
+}
+
+#home:hover, #home:active {
+  color: purple;
+}
+
+#team:hover, #team:active {
+  color: rgb(20, 108, 143);
+}
+
+#cases:hover, #cases:active {
+  color: green;
+}
+
+.btn-outline-info {
+  padding: 5px 15px;
+}
+
+.green {
+  color: green;
+}
+
+.blue {
+  color: rgb(20, 108, 143);
+}
+
+.purple {
+  color: rgb(87, 20, 122);
+}
+
+.pink {
+  color: rgb(212, 37, 125);
+}
+
+.grey {
+  padding: 1%;
+  height: 30vh;
+  background-color: rgb(247, 243, 243);
+}
+
+.block {
+  display: block;
+  text-align: center;
+}
+
+.ss {
+  padding: 2%;
+  margin: 3%;
+}
+
+/* Fixed/sticky icon bar (vertically aligned 50% from the top of the screen) */
+.icon-bar {
+  position: fixed;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  z-index: 1;
+}
+
+.icon-bar a {
+  display: block;
+  text-align: center;
+  padding: 10px;
+  transition: all 0.3s ease;
+  color: white;
+  font-size: 20px;
+}
+
+.hire {
+  padding: 4rem 0.3rem;
+  margin: 1rem;
+  background-color: rgb(20, 108, 143);
+  color: white;
+  border-radius: 8px;
+}
+
+.guide {
+  padding: 4rem 0.3rem;
+  margin: 1rem;
+  background-color: rgb(87, 20, 122);
+  color: white;
+  border-radius: 8px;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.inner {
+  display: inline-block;
+}
+
+.notes {
+  min-height: 30vh;
+  width: 100%;
+  padding: 3%;
+  border: 1px solid black;
+  border-radius: 8px;
+  word-wrap: break-word;
+  overflow: scroll;
+}
+
+textarea {
+  width: 100%;
+  min-height: 50%;
+}
+
+/* Footer */
+footer {
+  padding: 2%;
+  margin: 2%;
+}
+
+.logo {
+  width: 20%;
+}
+
+.fa-coffee {
+  color: black;
+}
+
+.fa-heart {
+  color: rgb(158, 31, 31);
+}
+
+.social {
+  font-size: 1.5rem;
+}
+
+.social a {
+  color: rgb(73, 68, 68);
+  text-decoration: none;
+}
+
+.fa-facebook {
+  padding: 0px 20px;
+}
+
+#facebook:hover {
+  color: #3b5998;
+}
+
+.fa-youtube {
+  padding: 0px 20px;
+}
+
+#youtube:hover {
+  color: #c4320b;
+}
+
+.fa-twitter {
+  padding: 0px 20px;
+}
+
+#twitter:hover {
+  color: #00acee;
+}
+
+.fa-skype {
+  padding: 0px 20px;
+}
+
+#skype:hover {
+  color: #00aff0;
+}
+
+footer .map a {
+  color: rgb(73, 68, 68);
+  text-decoration: none;
+}
+
+.real-footer {
+  padding: 2%;
+}
+
+#purpleh:hover {
+  color: rgb(87, 20, 122);
+}
+
+#greenh:hover {
+  color: green;
+}
+
+#blueh:hover {
+  color: rgb(20, 108, 143);
+}
+
+.marketing {
+  font-weight: 700;
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+
+.detail-img {
+  border-radius: 8px;
+}

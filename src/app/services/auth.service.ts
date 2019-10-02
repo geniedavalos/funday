@@ -53,12 +53,14 @@ export class AuthService {
     }
     return this.http.post(`${this.base}/verify`, {token});
   }
+  /**
+   * Checks validity of current login token.
+   * @returns true if and only if the current login token is valid and non-expired.
+   */
   checkValidLogin() {
     if (!this.getDecodedAccessToken()) {
       return false;
     }
-    console.log(this.getDecodedAccessToken().exp, 'expires');
-    console.log(Math.round(Date.now() / 1000), 'now');
     if (this.getDecodedAccessToken().exp < Math.round(Date.now() / 1000)) {
       this.logout(localStorage.getItem('access_token'));
       localStorage.removeItem('access_token');
