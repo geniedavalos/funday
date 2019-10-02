@@ -9,6 +9,13 @@ module.exports = {
                                     .populate({path:'tasks', populate: {path: 'teamMembers'}})
                                     .populate('teamMembers')
                                     .populate('projectLead');
+                for (let project of projects){
+                    let sum = 0;
+                    for(let task of project.tasks){
+                    sum+=task.progress;
+                    }
+                    project.progress = Number.parseFloat((sum/project.tasks.length).toFixed(1));
+                }
             res.json(projects);
         }
         catch (err) {
@@ -20,8 +27,13 @@ module.exports = {
             .populate('teamMembers')
             .populate({path:'tasks', populate: {path: 'teamMembers'}})
             .populate('projectLead')
-            .then((data) => {
-                res.json(data)
+            .then((project) => {
+                let sum = 0;
+                for(let task of project.tasks){
+                sum+=task.progress;
+                }
+                project.progress = Number.parseFloat((sum/project.tasks.length).toFixed(1));
+                res.json(project)
             })
             .catch(err => res.json(err));
     },
@@ -86,9 +98,20 @@ module.exports = {
         .catch(err => res.json(err));
     },
     getManagedProjects: (req, res) => {
-        Project.find({'projectLead': req.params.id }).sort('dueDate')
-        .then(data => {
-            res.json(data);
+        Project.find({'projectLead': req.params.id })
+                                    .sort('dueDate')
+                                    .populate('tasks')
+                                    .populate('teamMembers')
+                                    .populate('projectLead')
+        .then(projects => {
+            for (let project of projects){
+                let sum = 0;
+                for(let task of project.tasks){
+                sum+=task.progress;
+                }
+                project.progress = Number.parseFloat((sum/project.tasks.length).toFixed(1));
+            }
+            res.json(projects);
         })
         .catch(err => res.json(err));
     }

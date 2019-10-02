@@ -6,7 +6,17 @@ module.exports = {
         try {
             const companies = await Company.find().sort('name')
             .populate('employees')
-            .populate('projects')
+            .populate({path:'projects', populate: {path: 'projectLead'}, populate: {path: 'tasks'}})
+        for(let company of companies){
+            console.log(company.name)
+            for (let project of company.projects){
+                let sum = 0;
+                for(let task of project.tasks){
+                sum+=task.progress;
+                }
+                project.progress = Number.parseFloat((sum/project.tasks.length).toFixed(1));
+            }
+        }
             res.json(companies);
         }
         catch (err) {
@@ -16,9 +26,17 @@ module.exports = {
     show: (req, res) => {
         Company.findById(req.params.id)
         .populate('employees')
-        .populate('projects')
-            .then((data) => {
-                res.json(data)
+        .populate({path:'projects', populate: {path: 'projectLead'}, populate: {path: 'tasks'}})
+            .then((company) => {
+                console.log(company.name)
+                for (let project of company.projects){
+                    let sum = 0;
+                    for(let task of project.tasks){
+                    sum+=task.progress;
+                    }
+                    project.progress = Number.parseFloat((sum/project.tasks.length).toFixed(1));
+                }
+                res.json(company)
             })
             .catch(err => res.json(err));
     },
