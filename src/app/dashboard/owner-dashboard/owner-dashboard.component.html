@@ -114,10 +114,10 @@
     <div *ngIf="projectsExpanded" class="overview">
       <div *ngFor="let project of projects" class="project mt-4">
         <h4 class="ml-4"><a [routerLink]="['/projects/', project._id]">{{project.title}}</a></h4>
-        <h5 class="ml-4">Lead: {{currentUser?.firstName}} {{currentUser?.lastName}}</h5>
+        <h5 class="ml-4">Lead: {{project.projectLead?.firstName}} {{project.projectLead?.lastName}}</h5>
         <h5 class="ml-4">Deadline: <span class="green">{{project.dueDate | date: 'mediumDate'}}</span></h5>
         <div class="progress mb-3 ml-4">
-          <div class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+          <div class="progress-bar progress-bar-striped bg-info" role="progressbar" [ngStyle]="{'width': project?.progress+'%'}" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">{{project.progress}}</div>
         </div>
       </div>
     </div>
