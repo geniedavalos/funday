@@ -15,10 +15,10 @@ export class EmployeeDashboardComponent implements OnInit, OnChanges {
   noteDescription: string;
   tasks: Task[];
   newNote: Note;
-  teamMembers: any[] = [];
+  teamMembers: Employee[] = [];
   @Input() currentUser: Employee;
   @Input() currentCompany: Company;
-  private id: any;
+  private id: string;
 
   constructor(
     private readonly authService: AuthService,
@@ -31,15 +31,13 @@ export class EmployeeDashboardComponent implements OnInit, OnChanges {
     this.newNote = new Note();
   }
   ngOnChanges(changes): void {
-    if (changes.currentUser.currentValue) {
+    if (changes.currentUser && changes.currentUser.currentValue) {
       this.id = this.currentUser['_id'];
-      console.log("id = ", this.id)
       this.getTeamMembers();
-      console.log("logging currentUser", this.currentUser)
-      this.getTasks(this.id)
+      this.getTasks(this.id);
     }
   }
-
+  // TODO: Complete note submission from employee dashboard.
   onSubmit() {
     console.log('Inside onSubmit()');
     console.log(this.noteDescription);
@@ -52,6 +50,7 @@ export class EmployeeDashboardComponent implements OnInit, OnChanges {
     })
 
   }
+  // TODO: Complete adding note
   onAddNote() {
     console.log('Inside onProgressUpdate()');
   }
@@ -65,17 +64,6 @@ export class EmployeeDashboardComponent implements OnInit, OnChanges {
           seenIDs[member['_id']] = 1;
         }
       }
-    }
-  }
-  logoutButton() {
-    const token = localStorage.getItem('access_token');
-    if (!token) {
-      this.router.navigateByUrl('/home');
-    } else {
-      this.authService.logout(token).subscribe(result => {
-        console.log('logoutButton result:', result);
-        this.router.navigateByUrl('/home');
-      });
     }
   }
 }

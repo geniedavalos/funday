@@ -138,7 +138,6 @@ export class OwnerDashboardComponent implements OnInit, OnChanges {
   addDepartment(form: NgForm) {
     const observable = this.companyService.addDepartment(this.currentCompany, this.newDepartment);
     observable.subscribe(data => {
-      console.log(data);
       this.departmentMembership[this.newDepartment] = 0;
       this.currentCompany = data;
       this.sortDepartments();
@@ -146,32 +145,21 @@ export class OwnerDashboardComponent implements OnInit, OnChanges {
   }
 
   onAdd() {
-    console.log('Inside onAdd() for teammembers');
-    console.log(this.newMembers);
-
     for (const member of this.newMembers) {
       const split = member.split('-');
       this.addedIds.push(split[0]);
       this.addedTeamMembers.push(split[1]);
     }
-    console.log('Ids are: ' + this.addedIds);
-    console.log('Names are: ' + this.addedTeamMembers);
   }
 
   onSubmit(form: NgForm) {
-    console.log(form);
     if (this.addedIds.length === 0 || this.addedIds === null) {
       this.addedIds = [];
     }
-    console.log('Inside onSubmit() for form');
-    console.log('Submitting: ' + this.newProject.title + ', ' + this.newProject.description + ', ' + this.newProject.dueDate);
-    console.log('project', this.newProject);
     this.newProject.projectLead = this.currentUser._id;
     this.newProject.teamMembers = this.addedIds;
     this.projectService.createProject(this.newProject).subscribe(result => {
-      console.log('creatd project, result:', result);
       this.companyService.addProject(this.currentCompany, result).subscribe(res => {
-        console.log('added project, result:', res);
         this.currentCompany = res;
         this.newProject = new Project();
         this.getProjects();
@@ -182,13 +170,12 @@ export class OwnerDashboardComponent implements OnInit, OnChanges {
   }
 
   makeManager(id){
-    this.employeeService.promoteToManager(id).subscribe(result =>{
-      console.log(result)
+    this.employeeService.promoteToManager(id).subscribe(result => {
       this.companyService.getCompany(this.currentCompany._id).subscribe(company => {
         this.currentCompany = company;
         this.getEmployees();
-      })
-    })
+      });
+    });
   }
 
   logoutButton() {
@@ -208,7 +195,7 @@ export class OwnerDashboardComponent implements OnInit, OnChanges {
     console.log('Id passed in is: ' + id);
     this.deleteItem = id;
   }
-
+  // TODO: Finish onDelete in owner dashboard
   onDelete() {
     console.log('Inside onDelete()');
     console.log('Deleting: ' + this.deleteItem);
@@ -220,7 +207,7 @@ export class OwnerDashboardComponent implements OnInit, OnChanges {
     console.log(employee);
     this.editItem = JSON.parse(JSON.stringify(employee));
   }
-
+  // TODO: Finish onEdit in owner dashboard
   onEdit() {
     console.log('Inside onEdit()');
     console.log(this.editItem._id);

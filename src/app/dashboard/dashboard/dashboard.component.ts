@@ -13,7 +13,7 @@ import { Company } from 'src/app/models/company';
 export class DashboardComponent implements OnInit {
   currentUser: Employee;
   currentCompany: Company;
-
+  finishedLoading: boolean;
   isOwner: boolean;
   isManager: boolean;
   constructor(
@@ -24,6 +24,7 @@ export class DashboardComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.finishedLoading = false;
     this.isOwner = false;
     this.isManager = false;
     this.getCurrentUser();
@@ -42,11 +43,11 @@ export class DashboardComponent implements OnInit {
         this.currentUser = result;
         this.isManager = decoded.isManager;
         this.isOwner = decoded.isOwner;
+        this.finishedLoading = true;
       });
       this.companyService.getCompany(decoded['cid']).subscribe(result => {
         if (result) {
           this.currentCompany = result;
-          console.log("IN DASHBOARD COMP.  LOGGING RESULT", result)
         }
       });
     }

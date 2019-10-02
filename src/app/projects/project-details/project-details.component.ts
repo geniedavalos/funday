@@ -77,12 +77,14 @@ export class ProjectDetailsComponent implements OnInit {
 
 
   //called inside the addTeam modal, should add the selected employee ids to the project teammates list
+  // TODO: Finish onAddTeam in Project Details
   onAddTeam() {
     console.log('Inside onAddTeam()');
   }
 
 
   //this is called byt the editprojectbutton inside the modal which should edit the project with the given information
+  // TODO: Finish onProjectEdit in Project Details
   onProjectEdit() {
     console.log('Inside onProjectEdit()');
   }
@@ -94,6 +96,7 @@ export class ProjectDetailsComponent implements OnInit {
   }
 
   //this is called by the delete button in the modal, and should go ahead with the task delete by this.deleteTaskId
+  // TODO: Finish onDelete in project details
   onDelete() {
     console.log('Inside onDelete()');
     console.log('Task to be deleted: ' + this.deleteTaskId);
