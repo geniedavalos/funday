@@ -1,5 +1,4 @@
-<!--<button (click)="logoutButton()">Logout</button>-->
-<!--<button (click)="verifyButton()">Verify</button>-->
+<app-loading *ngIf="!finishedLoading"></app-loading>
 <app-owner-dashboard *ngIf="finishedLoading && isOwner" [currentUser]="currentUser" [currentCompany]="currentCompany"></app-owner-dashboard>
 <app-manager-dashboard *ngIf="finishedLoading && isManager && !isOwner" [currentUser]="currentUser" [currentCompany]="currentCompany"></app-manager-dashboard>
 <app-employee-dashboard *ngIf="finishedLoading && !isManager && !isOwner" [currentUser]="currentUser" [currentCompany]="currentCompany"></app-employee-dashboard>

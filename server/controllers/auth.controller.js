@@ -57,6 +57,7 @@ module.exports = {
           Company.deleteOne(company);
           res.json(err);
         }
+        // TODO: Swap company owner from subdocument to reference ID.
         company.owner = owner;
         company.employees.push(owner);
         Company.findByIdAndUpdate(company._id, company)
@@ -80,7 +81,6 @@ module.exports = {
         req.body.password = hashed;
         Employee.create(req.body)
           .then(employee => {
-            console.log('*******************************************************' + employee);
             Company.findByIdAndUpdate(req.params.id, {$push : { employees : employee}})
               .then(async company => {
                 const login = await completeLogin(req, res, employee, company);
@@ -100,7 +100,7 @@ module.exports = {
       })
   },
   /**
-   * TODO: Performs JWT logout
+   * Performs JWT logout
    * @param {Request} req Request instance
    * @param {Response} res Response instance
    */
@@ -108,6 +108,9 @@ module.exports = {
     const invalidatedToken = await invalidateToken(req, res, req.body.token);
     res.json(invalidatedToken);
   },
+  /**
+   * Verifies the validity of a given token.
+   */
   verify: (req, res) => {
     verifyToken(req, res, req.body.token);
   }

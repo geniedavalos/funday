@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Location } from '@angular/common';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Task } from 'src/app/models';
 import { TaskService } from 'src/app/services';
@@ -14,55 +15,58 @@ import {Note} from "../../models/note";
 export class TaskDetailsComponent implements OnInit {
   private userId : string;
   private taskId: string;
-  private task: Task;
+  task: Task;
   updateProgress: number;
   newNote: Note;
-  testTask = {'testNumber':70};
-  private notes: Note[];
+  notes: Note[];
+  finishedLoading: boolean;
   constructor(
     private readonly authService : AuthService,
     private readonly taskService: TaskService,
     private readonly route: ActivatedRoute,
     private readonly noteService: NoteService,
-    private readonly router: Router
+    private readonly router: Router,
+    private _location: Location
   ) { }
 
   ngOnInit() {
-    console.log('Inside Ngoninit, testTask.testnumber =' + this.testTask.testNumber);
+    this.finishedLoading = false;
     this.newNote = new Note();
     this.updateProgress = 55;
     this.route.params.subscribe((params: Params) => {
-      console.log(params['taskID'])
+      console.log(params['taskID']);
       this.taskId = params['taskID'];
       this.getThisTask();
     });
-    this.userId = this.authService.getDecodedAccessToken().eid
+    this.userId = this.authService.getDecodedAccessToken().eid;
   }
   getThisTask() {
     this.taskService.getTask(this.taskId).subscribe(result => {
       this.task = result;
       this.notes = this.task['notes'];
-      console.log(this.task)
+      console.log(this.task);
       this.updateProgress = this.task.progress;
+      this.finishedLoading = true;
     });
   }
 
   onProgressUpdate() {
-    console.log('Inside onProgressUpdate()');
     this.task.progress = this.updateProgress;
     this.taskService.updateTask(this.task).subscribe(result => {
       console.log(result);
-    })
+    });
   }
 
   onAddNote() {
-    console.log("****************************",this.newNote)
     this.newNote['sender']=this.userId;
     this.noteService.createNote(this.newNote).subscribe(newNote =>{
       this.taskService.addNote(this.taskId, newNote).subscribe(result=>{
-        this.getThisTask()
-        this.newNote= new Note();
-      })
-    })
+        this.getThisTask();
+        this.newNote = new Note();
+      });
+    });
+  }
+  backClicked() {
+    this._location.back();
   }
 }

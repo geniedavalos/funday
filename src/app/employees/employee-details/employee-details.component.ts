@@ -9,11 +9,11 @@ import { EmployeeService } from 'src/app/services';
   styleUrls: ['./employee-details.component.css']
 })
 export class EmployeeDetailsComponent implements OnInit {
-  private id: string;
-  private employee: Employee;
-  private managedProjects: any[];
-  private assignedProjects: any;
-  private tasks: any[];
+  id: string;
+  employee: Employee;
+  managedProjects: any[];
+  assignedProjects: any;
+  tasks: any[];
   constructor(
     private readonly employeeService: EmployeeService,
     private readonly route: ActivatedRoute,

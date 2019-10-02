@@ -20,7 +20,7 @@ export class EmployeeNewComponent implements OnInit {
   employee = new Employee();
   newCompany: Company;
   companies: Company[];
-  private ConfirmPassword: string;
+  confirmPasswordText: string;
   private isMatch: boolean = false;
 
 
@@ -67,15 +67,12 @@ export class EmployeeNewComponent implements OnInit {
   }
 
   changeCompanyInput() {
-    console.log(this.companies);
-    console.log(this.isNewCompany);
     this.isNewCompany = (!this.isNewCompany);
-    console.log(this.isNewCompany);
 
   }
 
   MustMatch() {
-    if (this.employee.password === this.ConfirmPassword) {
+    if (this.employee.password === this.confirmPasswordText) {
       this.isMatch = true;
       return this.isMatch;
     }

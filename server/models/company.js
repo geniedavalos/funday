@@ -1,7 +1,6 @@
 const uniqueValidator = require('mongoose-unique-validator');
 const mongoose = require('mongoose');
 const Employee = require('./employee');
-const Project = require('./project');
 const CompanySchema = new mongoose.Schema({
     name: {
         type: String,
@@ -10,6 +9,8 @@ const CompanySchema = new mongoose.Schema({
         trim: true,
         unique: true
     },
+    // TODO: Swap owner field from subdocument to reference ID.
+    // owner: { type: mongoose.Schema.Types.ObjectId, ref : 'Employee' },
     owner: { type: Employee },
     departments: [String],
     employees: [ { type : mongoose.Schema.Types.ObjectId, ref : 'Employee' } ],

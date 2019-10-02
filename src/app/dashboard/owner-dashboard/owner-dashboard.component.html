@@ -50,7 +50,7 @@
             <td>{{department}}</td>
             <td>{{departmentMembership[department]}}</td>
             <td>
-              <button data-toggle='modal' data-target='#deleteItem' (click)='setDeleteItem(department)' title='Delete Department' class="btn btn-outline-danger mx-1"><i class="fa fa-window-close" aria-hidden="true"></i></button>
+              <button *ngIf="department !== 'Unassigned'" data-toggle='modal' data-target='#deleteItem' (click)='setDeleteItem(department)' title='Delete Department' class="btn btn-outline-danger mx-1"><i class="fa fa-window-close" aria-hidden="true"></i></button>
             </td>
           </tr>
         </tbody>

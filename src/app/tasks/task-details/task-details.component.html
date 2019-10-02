@@ -28,10 +28,13 @@
         </ul>
       </div>
     </nav> -->
-    <section>
-
-      <h2>{{task.title}} <span style="font-size: 1.2rem;">(Due: {{task.dueDate| date:"mediumDate"}})</span></h2>
-      <p class="border rounded">Task Details: {{task.description}}</p>
+    <app-loading *ngIf="!finishedLoading"></app-loading>
+    <section *ngIf="finishedLoading">
+      <div class="mx-2 row justify-content-between">
+        <h2 class="d-inline">{{task?.title}} <span style="font-size: 1.2rem;">(Due: {{task?.dueDate| date:"mediumDate"}})</span></h2>
+        <a (click)="backClicked()">Go Back</a>
+      </div>
+      <p class="border rounded">Task Details: {{task?.description}}</p>
       <div class="progress">
         <div class="progress-bar progress-bar-striped" role="progressbar" [ngStyle]="{'width': task?.progress+'%'}" aria-valuenow="10">{{task?.progress}}%
         </div>
@@ -74,13 +77,13 @@
 
     </section>
 
-    <section>
+    <section *ngIf="finishedLoading">
       <h2>Team Members</h2>
-      <span class='badge badge-info mx-1 px-2' *ngFor="let member of task.teamMembers" ><a class='text-white' [routerLink]="['/employee',member._id,'detail']">{{member.firstName}} {{member.lastName}}</a></span>
+      <span class='badge badge-info mx-1 px-2' *ngFor="let member of task?.teamMembers" ><a class='text-white' [routerLink]="['/employee',member._id,'detail']">{{member.firstName}} {{member.lastName}}</a></span>
 
     </section>
 
-    <section>
+    <section *ngIf="finishedLoading">
       <h2>Notes</h2>
       <div class="notes my-4 py-0 px-1">
         <p class="my-0" *ngFor="let note of notes">({{note.createdAt| date:"medium"}}) {{note.sender.firstName}} {{note.sender.lastName}} : {{note.content}} </p>

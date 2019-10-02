@@ -1,6 +1,5 @@
 const uniqueValidator = require('mongoose-unique-validator');
 const mongoose = require('mongoose');
-const Task = require('./task');
 const ProjectSchema = new mongoose.Schema({
     title: {
         type: String,
