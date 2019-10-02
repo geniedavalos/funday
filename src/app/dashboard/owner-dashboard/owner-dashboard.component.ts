@@ -143,12 +143,13 @@ export class OwnerDashboardComponent implements OnInit, OnChanges {
     });
   }
 
-  onAdd() {
+  onAdd(form: NgForm) {
     for (const member of this.newMembers) {
       const split = member.split('-');
       this.addedIds.push(split[0]);
       this.addedTeamMembers.push(split[1]);
     }
+    form.reset();
   }
 
   onSubmit(form: NgForm) {

@@ -260,14 +260,14 @@
                         </select>
                       </div>
 
-                      <form>
+                      <form #addMembers="ngForm">
                         <div class='form-group row col-9 mx-auto'>
                           <select multiple class='form-control mx-auto' id='teamNames' name='member' [(ngModel)]='newMembers'>
-                              <option *ngFor="let employee of employees" value="{{employee._id}}-{{employee.firstName}} {{employee.lastName}}">{{employee.firstName}} {{employee.lastName}}</option>
+                              <option *ngFor="let employee of employees" [disabled]="addedIds.includes(employee._id)" value="{{employee._id}}-{{employee.firstName}} {{employee.lastName}}">{{employee.firstName}} {{employee.lastName}}</option>
                           </select>
                         </div>
                         <div class='row'>
-                          <button (click)='onAdd()' class='btn btn-sm btn-success mt-3 mx-auto'>Add To Team</button>
+                          <button (click)='onAdd(addMembers)' class='btn btn-sm btn-success mt-3 mx-auto'>Add To Team</button>
                         </div>
                       </form>
                       <div class='addedMembers mt-3'>
