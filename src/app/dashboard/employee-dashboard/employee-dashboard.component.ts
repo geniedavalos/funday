@@ -32,6 +32,7 @@ export class EmployeeDashboardComponent implements OnInit, OnChanges {
   }
   ngOnChanges(changes): void {
     if (changes.currentUser && changes.currentUser.currentValue) {
+      console.log(this.currentUser)
       this.id = this.currentUser['_id'];
       this.getTeamMembers();
       this.getTasks(this.id);

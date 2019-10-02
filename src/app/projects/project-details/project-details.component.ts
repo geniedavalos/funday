@@ -55,12 +55,13 @@ export class ProjectDetailsComponent implements OnInit {
       console.log("Logging this.project",this.project);
       this.tasks = this.project.tasks;
       console.log("Logging this.tasks",this.tasks);
-      for(const task of this.tasks){
-        this.taskProgressArray.push(task.progress);
-      }
-      this.project.progress = Number.parseFloat(this.getAvg(this.taskProgressArray).toFixed(1));
+      // for(const task of this.tasks){
+      //   this.taskProgressArray.push(task.progress);
+      // }
+      // this.project.progress = Number.parseFloat(this.getAvg(this.taskProgressArray).toFixed(1));
       console.log("logging this.project.progress",this.project.progress)
       this.loadedProject = true;
+      console.log("logging type of progress", typeof this.project.progress)
     });
   }
 
@@ -165,6 +166,9 @@ export class ProjectDetailsComponent implements OnInit {
   onDeleteProject() {
     this.projectService.destroyProject(this.project._id).subscribe(data => {
       console.log(data)
+      this.companyService.removeProject(this.currentCompany, this.project._id).subscribe(result => {
+        console.log(result)
+      })
       this.router.navigateByUrl('/dashboard')
     })
   }

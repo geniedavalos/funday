@@ -36,8 +36,9 @@ export class ManagerDashboardComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes.currentCompany.currentValue) {
+    if (changes.currentCompany && changes.currentCompany.currentValue) {
       console.log(changes)
+      console.log('!*!*!*!*!*!*!*!*!*!*!*!', this.currentCompany);
       this.getProjects();
       this.getEmployees();
     }
