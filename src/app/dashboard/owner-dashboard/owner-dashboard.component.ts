@@ -114,7 +114,6 @@ export class OwnerDashboardComponent implements OnInit, OnChanges {
 
   editCompany(form: NgForm) {
     this.companyService.updateCompany(this.currentCompany).subscribe(result => {
-      console.log(result);
     });
   }
 
@@ -179,27 +178,17 @@ export class OwnerDashboardComponent implements OnInit, OnChanges {
   }
 
   setDeleteItem(id: string) {
-    console.log('Inside setDeleteItem()');
-    console.log('Id passed in is: ' + id);
     this.deleteItem = id;
   }
   // TODO: Finish onDelete in owner dashboard
   onDelete() {
-    console.log('Inside onDelete()');
-    console.log('Deleting: ' + this.deleteItem);
   }
 
   setEditEmployee(employee) {
-    console.log(this.currentCompany.departments);
-    console.log('Inside setEditEmployee()');
-    console.log(employee);
     this.editItem = JSON.parse(JSON.stringify(employee));
   }
   // TODO: Finish onEdit in owner dashboard
   onEdit() {
-    console.log('Inside onEdit()');
-    console.log(this.editItem._id);
-    console.log('Id to be editted: ' + this.editItem.firstName + this.editItem.lastName + this.editItem.email + this.editItem.department);
   }
 
 }

@@ -26,7 +26,6 @@ export class EmployeeService {
   }
 
   createEmployee(employee: Employee): Observable<Employee> {
-    console.log("In employee service", employee);
     return this.http.post<Employee>(this.base, employee);
   }
 
@@ -43,16 +42,10 @@ export class EmployeeService {
   }
 
   addProject(employeeID: string, projectID: string): Observable<any> {
-    console.log("Inside employee service addProject")
-    console.log("employee ID:",employeeID);
-    console.log("projectID: ", projectID)
     return this.http.put<any>(`${this.base}/${employeeID}/addProject`, {projectID});
   }
 
   addManagedProject(employeeID: string, projectID: string): Observable<any> {
-    console.log("Inside employee service addManagedProject")
-    console.log("employee ID:",employeeID);
-    console.log("projectID: ", projectID)
     return this.http.put<any>(`${this.base}/${employeeID}/addManagedProject`, {projectID});
   }
 

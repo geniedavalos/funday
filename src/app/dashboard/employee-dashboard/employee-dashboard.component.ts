@@ -32,7 +32,6 @@ export class EmployeeDashboardComponent implements OnInit, OnChanges {
   }
   ngOnChanges(changes): void {
     if (changes.currentUser && changes.currentUser.currentValue) {
-      console.log(this.currentUser)
       this.id = this.currentUser['_id'];
       this.getTeamMembers();
       this.getTasks(this.id);
@@ -40,20 +39,16 @@ export class EmployeeDashboardComponent implements OnInit, OnChanges {
   }
   // TODO: Complete note submission from employee dashboard.
   onSubmit() {
-    console.log('Inside onSubmit()');
-    console.log(this.noteDescription);
   }
 
   getTasks(id){
     this.taskService.getEmployeeTasks(id).subscribe(tasks => {
-      console.log('tasks = ', tasks)
       this.tasks = tasks;
-    })
+    });
 
   }
   // TODO: Complete adding note
   onAddNote() {
-    console.log('Inside onProgressUpdate()');
   }
 
   getTeamMembers(){

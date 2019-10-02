@@ -24,7 +24,6 @@ export class EmployeeLogInComponent implements OnInit {
   onSubmit(event: Event) {
     event.preventDefault();
     this.authService.login(this.employeeLogin).subscribe(result =>{
-      console.log("result = ", result)
       if(result['status'] == "success"){
         this.router.navigateByUrl('/dashboard')
       }

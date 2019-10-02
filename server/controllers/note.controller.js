@@ -13,12 +13,10 @@ module.exports = {
       .catch(err => res.json(err))
   },
   create: (req, res) => {
-    console.log("note controller ", req.body)
     var newNote = new Note();
     newNote.content = req.body.content;
     Employee.findOne({_id:req.body.sender})
       .then(data =>{
-        console.log('employee = ', data)
         newNote.sender={firstName: data.firstName, lastName : data.lastName}
         newNote.save()
                .then(data => res.json(data))

@@ -23,7 +23,6 @@ module.exports = {
             .populate('managedProjects')
             .populate({path:'assignedProjects', populate: {path: 'teamMembers'}})
             .then((data) => {
-              console.log(data)
                 res.json(data)
             })
             .catch(err => res.json(err));
@@ -35,11 +34,9 @@ module.exports = {
             employee.password = hashedPassword;
             employee.save()
             .then((newEmployee) => {
-                console.log("Logging new employee: ", newEmployee)
                 res.json(newEmployee);
             })
             .catch(err => {
-                console.log(err);
                 res.json(err)
             });
         })
@@ -70,12 +67,8 @@ module.exports = {
             })
     },
     addProject: (req, res) => {
-        console.log("Insider server addProject to assignedProjects");
-        console.log("logging req.params.id",req.params.id);
-        console.log("logging req.body",req.body);
         Employee.findOneAndUpdate({_id : req.params.id}, {$push : {assignedProjects : req.body.projectID}}, { new: true })
             .then((data) => {
-                console.log(data);
                 res.json(data);
             })
             .catch(err => {
@@ -83,12 +76,8 @@ module.exports = {
             })
     },
     addManagedProject: (req, res) => {
-        console.log("Insider server addManagedProject to managedProjects");
-        console.log("logging req.params.id",req.params.id);
-        console.log("logging req.body",req.body);
         Employee.findOneAndUpdate({_id : req.params.id}, {$push : {managedProjects : req.body.projectID}}, { new: true })
             .then((data) => {
-                console.log(data);
                 res.json(data);
             })
             .catch(err => {
@@ -98,7 +87,6 @@ module.exports = {
   PromoteToManager : (req, res) =>{
     Employee.findOneAndUpdate({_id : req.params.id}, {$set : {isManager : true}})
       .then((data) => {
-        console.log(data);
         res.json(data);
       })
       .catch(err => {

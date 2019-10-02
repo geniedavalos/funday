@@ -31,12 +31,10 @@ export class EmployeeDetailsComponent implements OnInit {
   }
   getEmployee(id) {
     this.employeeService.getEmployee(id).subscribe(result => {
-      console.log(result);
       this.employee = result;
       this.managedProjects = result.managedProjects;
       this.assignedProjects = result.assignedProjects;
       this.tasks = result['tasks'];
-      console.log(this.assignedProjects)
       this.finishedLoading = true;
     });
   }

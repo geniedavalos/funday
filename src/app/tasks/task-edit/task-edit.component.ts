@@ -25,7 +25,6 @@ export class TaskEditComponent implements OnInit {
   }
   getTask(id) {
     this.taskService.getTask(id).subscribe(result => {
-      console.log(result);
       this.task = result;
     });
   }

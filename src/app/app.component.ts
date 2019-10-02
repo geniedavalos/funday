@@ -19,19 +19,12 @@ export class AppComponent implements OnInit {
     this.loggedIn = this.authService.checkValidLogin();
     router.events.subscribe((event: Event) => {
       if (event instanceof NavigationStart) {
-        console.log('NavigationStart:', event);
         this.loggedIn = this.authService.checkValidLogin();
         if (!this.loggedIn && !this.publicRoutes.includes(event.url)) {
           router.navigateByUrl('/home');
         } else if (this.loggedIn && event.url === '/home') {
           router.navigateByUrl('/dashboard');
         }
-      }
-      if (event instanceof NavigationEnd) {
-        console.log('NavigationEnd:', event);
-      }
-      if (event instanceof NavigationError) {
-        console.log('NavigationError:', event);
       }
     });
   }

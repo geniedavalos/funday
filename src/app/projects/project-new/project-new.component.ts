@@ -29,10 +29,7 @@ export class ProjectNewComponent implements OnInit {
     event.preventDefault();
     this.projectService.createProject(this.project).subscribe(createdProject => {
       for(let teamMember of createdProject.teamMembers){
-        console.log("project._id = ", createdProject._id)
-        console.log("teamMember = ", teamMember)
         this.employeeService.addProject(teamMember, createdProject._id).subscribe(data => {
-          console.log(data);
         })
       }
       this.project = new Project();

@@ -20,7 +20,6 @@ export class TaskListComponent implements OnInit {
   }
   getTasks() {
     this.taskService.getTasks().subscribe(result => {
-      console.log(result);
       this.tasks = result;
     });
   }

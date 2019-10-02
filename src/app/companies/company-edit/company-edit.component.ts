@@ -32,7 +32,6 @@ export class CompanyEditComponent implements OnInit {
   }
   getCompany(id) {
     this.companyService.getCompany(id).subscribe(result => {
-      console.log(result);
       this.company = result;
     });
   }

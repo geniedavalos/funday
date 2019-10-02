@@ -25,7 +25,6 @@ export class ProjectEditComponent implements OnInit {
   }
   getProject(id) {
     this.projectService.getProject(id).subscribe(result => {
-      console.log(result);
       this.project = result;
     });
   }

@@ -25,7 +25,6 @@ export class EmployeeEditComponent implements OnInit {
   }
   getEmployee(id) {
     this.employeeService.getEmployee(id).subscribe(result => {
-      console.log(result);
       this.employee = result;
     });
   }

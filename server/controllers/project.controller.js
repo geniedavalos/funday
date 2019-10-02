@@ -44,11 +44,9 @@ module.exports = {
       req.body.dueDate += 'T12:00:00';
       Project.create(req.body)
         .then(data => {
-          console.log(data);
           res.json(data);
         })
         .catch(err => {
-          console.log(err);
           res.json(err);
         })
     },
@@ -66,7 +64,7 @@ module.exports = {
                     {$pull : {tasks : {$in : project.tasks}, managedProjects : project._id, assignedProjects: project._id}},
                     { multi: true })
                     .then(data => {
-                        console.log("Logging data after 'deleting' tasks", data)
+                      res.json(data);
                     });
                 res.json(project);
             })
@@ -101,7 +99,7 @@ module.exports = {
             Task.update({_id: {$in : project.tasks}},
                 {$pull : {teamMembers : req.body.employeeID}}, {multi : true})
                 .then(result => {
-                    console.log(result)
+                    res.json(result)
                 })
             res.json(data);
         })

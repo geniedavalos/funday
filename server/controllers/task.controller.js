@@ -17,16 +17,11 @@ module.exports = {
       .catch(err => res.json(err))
   },
   create: (req, res) => {
-    console.log(req.body)
-
-
     Task.create(req.body)
       .then(data => res.json(data))
       .catch(err => res.json(err))
   },
   update: (req, res) => {
-    console.log(req.body)
-    console.log(req.params.id)
     Task.findOneAndUpdate({ _id : req.params.id },  req.body, {new : true})
       .then(data =>res.json(data))
       .catch(err => res.json(err));
@@ -37,13 +32,12 @@ module.exports = {
         Employee.update({_id : {$in : task.teamMembers}},
           {$pull : {tasks: task._id}})
           .then(data => {
-            console.log("Logging data after removing one task.", data)
+            res.json(data);
           })
         res.json(task)})
       .catch(err => res.json(err))
   },
   addTeamMember: (req, res) => {
-    console.log("inside addTeamMember to Task method", req.body)
     Task.findOneAndUpdate({_id : req.params.id}, {$push : {teamMembers: req.body.employeeID}})
     .then(data => {
         res.json(data);
@@ -51,7 +45,6 @@ module.exports = {
     .catch(err => res.json(err));
   },
   removeTeamMember: (req, res) => {
-      console.log("insde removeTeamMmber from Task method", req.body)
       Task.findOneAndUpdate({_id : req.params.id}, {$pull : {teamMembers: req.body.employeeID}})
       .then(data => {
           res.json(data);
@@ -72,10 +65,4 @@ module.exports = {
       })
       .catch(err => res.json(err))
   },
-  removeTeamMemberFromMultiple: (req, res) => {
-    console.log("In removeTeamMemberFromMultiple");
-    console.log(req.body);
-    console.log(req.params);
-    res.json({response: 'hello world'});
-  }
 }

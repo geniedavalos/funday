@@ -42,7 +42,6 @@ export class ProjectDetailsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log(this.route)
     this.route.params.subscribe((params: Params) => {
       this.id = params['id'];
       this.getProject(this.id);
@@ -52,16 +51,12 @@ export class ProjectDetailsComponent implements OnInit {
   getProject(id: string) {
     this.projectService.getProject(id).subscribe(result => {
       this.project = result;
-      console.log("Logging this.project",this.project);
       this.tasks = this.project.tasks;
-      console.log("Logging this.tasks",this.tasks);
       // for(const task of this.tasks){
       //   this.taskProgressArray.push(task.progress);
       // }
       // this.project.progress = Number.parseFloat(this.getAvg(this.taskProgressArray).toFixed(1));
-      console.log("logging this.project.progress",this.project.progress)
       this.loadedProject = true;
-      console.log("logging type of progress", typeof this.project.progress)
     });
   }
 
@@ -82,7 +77,6 @@ export class ProjectDetailsComponent implements OnInit {
       this.companyService.getCompany(decoded['cid']).subscribe(result => {
         if (result) {
           this.currentCompany = result;
-          console.log("IN DASHBOARD COMP.  LOGGING RESULT", result)
           this.loadedUser = true;
         }
       });
@@ -99,14 +93,11 @@ export class ProjectDetailsComponent implements OnInit {
   }
 
   onTaskCreate(form: NgForm) {
-    console.log('Inside onTaskCreate()');
     this.taskService.createTask(this.newTask).subscribe(task => {
       this.projectService.addTask(this.project, task._id).subscribe(result => {
-        console.log(result);
       });
       for (const teamMember of task.teamMembers) {
         this.employeeService.addTask(teamMember, task._id).subscribe(data => {
-          console.log(data);
         })
       }
       this.getProject(this.id);
@@ -118,7 +109,6 @@ export class ProjectDetailsComponent implements OnInit {
   onAddTeamMembers() {
     for(let member of this.newMembers){
       this.projectService.addTeamMember(this.project, member).subscribe(result => {
-        console.log("added team member");
         this.getProject(this.id)
       })
     }
@@ -129,7 +119,6 @@ export class ProjectDetailsComponent implements OnInit {
    */
   onRemoveFromTeam(id: string){
     this.projectService.removeTeamMember(this.project, id).subscribe(result => {
-      console.log(result);
       this.getProject(this.id);
     });
   }
@@ -139,17 +128,15 @@ export class ProjectDetailsComponent implements OnInit {
     this.editProject = this.project;
   }
 
-  onEditProject(){
+  onEditProject() {
     this.projectService.updateProject(this.editProject).subscribe(data => {
-      console.log(data);
       this.getProject(this.id);
-    })
+    });
   }
 
   //this is called by the first delete button to set the deleteTask id of the task to be deleted
   onDeleteProject() {
     this.projectService.destroyProject(this.project._id).subscribe(data => {
-      console.log(data)
       this.companyService.removeProject(this.currentCompany, this.project._id).subscribe(result => {
         console.log(result)
       })
@@ -184,7 +171,6 @@ export class ProjectDetailsComponent implements OnInit {
 
   onEditTask(task: Task){
     this.taskService.updateTask(task).subscribe(data => {
-      console.log(data);
       this.getProject(this.id);
     })
   }

@@ -47,7 +47,6 @@ export class TaskService {
   }
 
   addNote(id: string, newNote: Note): Observable<any> {
-    console.log('task service ', newNote);
     return this.http.put(`${this.base}/addNote/${id}`, newNote);
   }
 }

@@ -16,7 +16,6 @@ module.exports = {
       .populate('assignedProjects')
       .populate({path:'tasks', populate: {path: 'teamMembers'}})
       .then(employee => {
-        console.log("employee = ",employee)
         if(employee!= null) {
           bcrypt.compare(req.body.password, employee.password)
             .then(isValid => {
@@ -28,7 +27,7 @@ module.exports = {
                   res.json(completeLogin(req, res, employee, company));
                 })
                 .catch(err => {
-                  console.log(err);
+                  res.json(err);
                 });
             })
             .catch(err => {

@@ -34,7 +34,6 @@ export class TaskDetailsComponent implements OnInit {
     this.newNote = new Note();
     this.updateProgress = 55;
     this.route.params.subscribe((params: Params) => {
-      console.log(params['taskID']);
       this.taskId = params['taskID'];
       this.getThisTask();
     });
@@ -44,7 +43,6 @@ export class TaskDetailsComponent implements OnInit {
     this.taskService.getTask(this.taskId).subscribe(result => {
       this.task = result;
       this.notes = this.task['notes'];
-      console.log(this.task);
       this.updateProgress = this.task.progress;
       this.finishedLoading = true;
     });
@@ -53,7 +51,6 @@ export class TaskDetailsComponent implements OnInit {
   onProgressUpdate() {
     this.task.progress = this.updateProgress;
     this.taskService.updateTask(this.task).subscribe(result => {
-      console.log(result);
     });
   }
 

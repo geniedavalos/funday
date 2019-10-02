@@ -37,19 +37,14 @@ export class ManagerDashboardComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes.currentCompany && changes.currentCompany.currentValue) {
-      console.log(changes)
-      console.log('!*!*!*!*!*!*!*!*!*!*!*!', this.currentCompany);
       this.getProjects();
       this.getEmployees();
     }
   }
 
   getProjects() {
-    console.log("logging current user:",this.currentUser);
     this.projectService.getManagedProjects(this.currentUser._id).subscribe(data => {
-      console.log("logging data from getManagedProjects",data)
       this.projects = data;
-      console.log("logging projects",this.projects)
       if(this.projects.length > 0){
         this.projects.sort((a, b) => {
           if (a.dueDate > b.dueDate) {
@@ -64,9 +59,7 @@ export class ManagerDashboardComponent implements OnInit, OnChanges {
   }
 
   getEmployees() {
-    console.log(this.currentCompany);
     this.employees = this.currentCompany.employees;
-    console.log("LOGGING EMPLOYEES!!!!!!!!!!!",this.employees)
     this.employees.sort((a, b) => {
       if (a.lastName.toUpperCase() > b.lastName.toUpperCase()) {
         return 1;
@@ -84,39 +77,27 @@ export class ManagerDashboardComponent implements OnInit, OnChanges {
   }
 
   onAdd() {
-    console.log('Inside onAdd() for teammembers');
-    console.log(this.newMembers);
-
     for (const member of this.newMembers) {
       const split = member.split('-');
       this.addedIds.push(split[0]);
       this.addedTeamMembers.push(split[1]);
     }
-    console.log('Ids are: ' + this.addedIds);
-    console.log('Names are: ' + this.addedTeamMembers);
   }
 
   onSubmit(form: NgForm) {
-    console.log(form);
     if (this.addedIds.length === 0 || this.addedIds === null) {
       this.addedIds = [];
     }
-    console.log('Inside onSubmit() for form');
-    console.log('Submitting: ' + this.newProject.title + ', ' + this.newProject.description + ', ' + this.newProject.dueDate);
-    console.log('project', this.newProject);
     this.newProject.projectLead = this.currentUser._id;
     this.newProject.teamMembers = this.addedIds;
     this.projectService.createProject(this.newProject).subscribe(createdProject => {
       this.employeeService.addManagedProject(this.currentUser._id, createdProject._id).subscribe(result => {
-        console.log(result);
+
       });
-      console.log("Logging createdProject", createdProject);
-      for(let teamMember of createdProject.teamMembers){
-        console.log("teamMember = ", teamMember)
+      for (const teamMember of createdProject.teamMembers) {
         this.employeeService.addProject(teamMember, createdProject._id).subscribe(data => {
-          console.log(data);
-        })
-      };
+        });
+      }
       this.companyService.addProject(this.currentCompany, createdProject).subscribe(res => {
         this.companyService.getCompany(this.currentCompany._id).subscribe(finalRes => {
           this.currentCompany = finalRes;
