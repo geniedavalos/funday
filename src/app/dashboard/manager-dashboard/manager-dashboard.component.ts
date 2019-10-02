@@ -94,10 +94,6 @@ export class ManagerDashboardComponent implements OnInit, OnChanges {
       this.employeeService.addManagedProject(this.currentUser._id, createdProject._id).subscribe(_result => {
 
       });
-      for (const teamMember of createdProject.teamMembers) {
-        this.employeeService.addProject(teamMember, createdProject._id).subscribe(data => {
-        });
-      }
       this.companyService.addProject(this.currentCompany, createdProject).subscribe(res => {
         this.companyService.getCompany(this.currentCompany._id).subscribe(finalRes => {
           this.currentCompany = finalRes;

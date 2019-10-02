@@ -44,8 +44,13 @@ module.exports = {
     create: (req, res) => {
       req.body.dueDate += 'T12:00:00';
       Project.create(req.body)
-        .then(data => {
-          res.json(data);
+        .then(project => {
+          Employee.update({_id: {$in : project.teamMembers}},
+            {$push : { assignedProjects : project._id }},
+            { multi: true })
+            .then(result => {
+              res.json(project);
+            })
         })
         .catch(err => {
           res.json(err);
@@ -95,13 +100,13 @@ module.exports = {
         .catch(err => res.json(err));
     },
     removeTeamMember: (req, res) => {
-        Project.findOneAndUpdate({_id : req.params.id}, 
+        Project.findOneAndUpdate({_id : req.params.id},
             {$pull : {teamMembers: req.body.employeeID}}, {new: true})
         .then(project => {
             Task.update({_id: {$in : project.tasks}},
                 {$pull : {teamMembers : req.body.employeeID}}, {multi : true})
                 .then(result => {
-                    Employee.findOneAndUpdate({_id: req.body.employeeID}, 
+                    Employee.findOneAndUpdate({_id: req.body.employeeID},
                         {$pull : {tasks : {$in : project.tasks}, assignedProjects : project._id} })
                         .then(employee => {
                             res.json(project);
