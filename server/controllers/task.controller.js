@@ -65,4 +65,8 @@ module.exports = {
       })
       .catch(err => res.json(err))
   },
+  removeTeamMemberFromMultiple: (req, res) => {
+    console.log(req.body);
+    console.log(req.params.eid);
+  }
 }

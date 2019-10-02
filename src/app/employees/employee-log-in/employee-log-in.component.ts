@@ -9,7 +9,7 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class EmployeeLogInComponent implements OnInit {
   employeeLogin : {email: string, password : string };
-  private errorMessage: string;
+  errorMessage: string;
 
   constructor(
     private readonly authService: AuthService,

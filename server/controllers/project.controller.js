@@ -87,7 +87,7 @@ module.exports = {
         .catch(err => res.json(err));
     },
     removeTeamMember: (req, res) => {
-        Project.findOneAndUpdate({_id : req.params.id}, {$pull : {teamMembers: req.body.employeeID}})
+        Project.findOneAndUpdate({_id : req.params.id}, {$pull : {teamMembers: req.body.employeeID}}, {new: true})
         .then(data => {
             res.json(data);
         })

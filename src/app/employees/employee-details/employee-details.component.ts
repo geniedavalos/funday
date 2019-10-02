@@ -14,6 +14,7 @@ export class EmployeeDetailsComponent implements OnInit {
   managedProjects: any[];
   assignedProjects: any;
   tasks: any[];
+  finishedLoading: boolean;
   constructor(
     private readonly employeeService: EmployeeService,
     private readonly route: ActivatedRoute,
@@ -21,6 +22,7 @@ export class EmployeeDetailsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.finishedLoading = false;
     this.employee = new Employee();
     this.route.params.subscribe((params: Params) => {
       this.id = params['id'];
@@ -35,6 +37,7 @@ export class EmployeeDetailsComponent implements OnInit {
       this.assignedProjects = result.assignedProjects;
       this.tasks = result['tasks'];
       console.log(this.assignedProjects)
+      this.finishedLoading = true;
     });
   }
 }
