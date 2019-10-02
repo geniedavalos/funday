@@ -6,7 +6,8 @@ module.exports = {
         try {
             const companies = await Company.find().sort('name')
             .populate('employees')
-            .populate({path:'projects', populate: {path: 'projectLead'}, populate: {path: 'tasks'}})
+            .populate({path:'projects', populate: {path: 'tasks'}})
+            .populate({path:'projects', populate: {path: 'projectLead'}})
         for(let company of companies){
             console.log(company.name)
             for (let project of company.projects){
@@ -26,7 +27,8 @@ module.exports = {
     show: (req, res) => {
         Company.findById(req.params.id)
         .populate('employees')
-        .populate({path:'projects', populate: {path: 'projectLead'}, populate: {path: 'tasks'}})
+        .populate({path:'projects', populate: {path: 'tasks'}})
+        .populate({path:'projects', populate: {path: 'projectLead'}})
             .then((company) => {
                 console.log(company.name)
                 for (let project of company.projects){
