@@ -4,6 +4,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { ProjectService, EmployeeService, CompanyService } from 'src/app/services';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { format } from 'path';
 
 @Component({
   selector: 'app-manager-dashboard',
@@ -76,12 +77,13 @@ export class ManagerDashboardComponent implements OnInit, OnChanges {
     });
   }
 
-  onAdd() {
+  onAdd(form: NgForm) {
     for (const member of this.newMembers) {
       const split = member.split('-');
       this.addedIds.push(split[0]);
       this.addedTeamMembers.push(split[1]);
     }
+    form.reset();
   }
 
   onSubmit(form: NgForm) {

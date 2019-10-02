@@ -6,9 +6,8 @@
       <h2>Manage Projects</h2>
       <div class="overview">
         <div *ngFor="let project of projects" class="project mt-4">
-          <h4><a [routerLink]="['/projects/', project?._id]">{{project?.title}}</a></h4>
-          <h5>Project Lead: {{currentUser?.firstName}} {{currentUser?.lastName}}</h5>
-          <h5>Project Deadline: (<span class="green">{{project.dueDate | date: 'mediumDate'}}</span>)</h5>
+          <h4 class="font-weight-normal"><a [routerLink]="['/projects/', project?._id]">{{project?.title}}</a></h4>
+          <h5 class="font-weight-normal">Project Deadline: (<span class="green">{{project.dueDate | date: 'mediumDate'}}</span>)</h5>
           <div class="progress mb-3">
             <div class="progress-bar  progress-bar-striped bg-info" role="progressbar" [ngStyle]="{'width': project?.progress+'%'}" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">{{project.progress}}%</div>
           </div>
@@ -109,14 +108,14 @@
                           </select>
                         </div>
 
-                        <form>
+                        <form #addMembers="ngForm">
                           <div class='form-group row col-9 mx-auto'>
                             <select multiple class='form-control mx-auto' id='teamNames' name='member' [(ngModel)]='newMembers'>
-                                <option *ngFor="let employee of employees" value="{{employee?._id}}-{{employee?.firstName}} {{employee?.lastName}}">{{employee.firstName}} {{employee.lastName}}</option>
+                                <option *ngFor="let employee of employees" [disabled]="addedIds.includes(employee._id)" value="{{employee?._id}}-{{employee?.firstName}} {{employee?.lastName}}">{{employee.firstName}} {{employee.lastName}}</option>
                             </select>
                           </div>
                           <div class='row'>
-                            <button (click)='onAdd()' class='btn btn-sm btn-success mt-3 mx-auto'>Add To Team</button>
+                            <button (click)='onAdd(addMembers)' class='btn btn-sm btn-success mt-3 mx-auto'>Add To Team</button>
                           </div>
                         </form>
                         <div class='addedMembers mt-3'>
