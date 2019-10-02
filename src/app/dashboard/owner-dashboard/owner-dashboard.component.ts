@@ -28,6 +28,8 @@ export class OwnerDashboardComponent implements OnInit, OnChanges {
   selectedDepartment: string;
   deleteItem: string;
   editItem: Employee;
+  deletingDepartment: boolean = false;
+  deletingEmployee: boolean = false;
 
   editingName = false;
 
@@ -183,18 +185,38 @@ export class OwnerDashboardComponent implements OnInit, OnChanges {
     });
   }
 
-  setDeleteItem(id: string) {
+  setDeleteItem(id: string, type: string) {
     this.deleteItem = id;
+    if(type == "department"){
+      this.deletingDepartment = true;
+      this.deletingEmployee = false;
+    }
+    if(type == "employee"){
+      this.deletingDepartment = false;
+      this.deletingEmployee = true;
+    }
   }
   // TODO: Finish onDelete in owner dashboard
-  onDelete() {
+
+  onDeleteEmployee(){
+    this.employeeService.destroyEmployee(this.deleteItem).subscribe(result => {
+      console.log(result);
+      this.deletingEmployee = false;
+    })
+  }
+
+  onDeleteDepartment(){
+    this.companyService.removeDepartment(this.currentCompany, this.deleteItem).subscribe(result => {
+      this.currentCompany = result;
+      this.deletingDepartment = false;
+    })
   }
 
   setEditEmployee(employee) {
     this.editItem = JSON.parse(JSON.stringify(employee));
   }
   // TODO: Finish onEdit in owner dashboard
-  onEdit() {
+  onEditEmployee() {
   }
 
 }

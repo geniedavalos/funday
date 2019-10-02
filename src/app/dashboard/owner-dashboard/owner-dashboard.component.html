@@ -31,7 +31,8 @@
               <p class='text-center'><strong>This action cannot be undone!</strong></p>
             </div>
             <div class="modal-footer justify-content-center">
-              <button type="button" data-dismiss='modal' (click)='onDelete()' class="btn btn-danger">Delete</button>
+              <button *ngIf="deletingDepartment" type="button" data-dismiss='modal' (click)='onDeleteDepartment()' class="btn btn-danger">Delete</button>
+              <button *ngIf="deletingEmployee" type="button" data-dismiss='modal' (click)='onDeleteEmployee()' class="btn btn-danger">Delete</button>
             </div>
         </div>
       </div>
@@ -50,7 +51,7 @@
             <td>{{department}}</td>
             <td>{{departmentMembership[department]}}</td>
             <td>
-              <button *ngIf="department !== 'Unassigned'" data-toggle='modal' data-target='#deleteItem' (click)='setDeleteItem(department)' title='Delete Department' class="btn btn-outline-danger mx-1"><i class="fa fa-window-close" aria-hidden="true"></i></button>
+              <button *ngIf="department !== 'Unassigned'" data-toggle='modal' data-target='#deleteItem' (click)="setDeleteItem(department, 'department')" title='Delete Department' class="btn btn-outline-danger mx-1"><i class="fa fa-window-close" aria-hidden="true"></i></button>
             </td>
           </tr>
         </tbody>
@@ -71,7 +72,6 @@
             <td>{{manager.firstName}} {{manager.lastName}}</td>
             <td>{{manager.managedProjects.length}}</td>
             <td>
-              <button data-toggle='modal' data-target='#deleteItem' (click)='setDeleteItem(manager._id)' title='Remove Manager' class="btn btn-outline-danger mx-1"><i class="fa fa-window-close" aria-hidden="true"></i></button>
               <a [routerLink]="['']" routerLinkActive="router-link-active" title='Manager Profile' class="btn btn-outline-info mx-1"><i class="fa fa-search" aria-hidden="true"></i></a>
             </td>
           </tr>
@@ -113,7 +113,7 @@
                 <a [routerLink]="['']" routerLinkActive="router-link-active" title='Employee Profile' class="btn btn-outline-info mx-1"><i class="fa fa-search" aria-hidden="true"></i></a>
                 <button *ngIf='member.isManager != true' (click)='makeManager(member._id)' title='Promote to Manager' class='btn btn-outline-primary mx-1'><i class="fa fa-handshake-o" aria-hidden="true"></i></button>
                 <button data-toggle='modal' data-target='#editEmployee' (click)='setEditEmployee(member)' class="btn btn-outline-success mx-1" title='Edit Employee'><i class="fa fa-pencil" aria-hidden="true"></i></button>
-                <button data-toggle='modal' data-target='#deleteItem' (click)='setDeleteItem(member._id)' title='Remove Employee' class="btn btn-outline-danger mx-1"><i class="fa fa-window-close" aria-hidden="true"></i></button>
+                <button data-toggle='modal' data-target='#deleteItem' (click)="setDeleteItem(member._id, 'employee')" title='Remove Employee' class="btn btn-outline-danger mx-1"><i class="fa fa-window-close" aria-hidden="true"></i></button>
               </td>
             </tr>
           </tbody>
