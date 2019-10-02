@@ -68,6 +68,6 @@ module.exports = {
     console.log("In removeTeamMemberFromMultiple");
     console.log(req.body);
     console.log(req.params);
-    Task.findById(req.body.tasks[0]).then(data => res.json(data));
+    res.json({response: 'hello world'});
   }
 }

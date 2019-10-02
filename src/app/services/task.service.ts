@@ -42,12 +42,6 @@ export class TaskService {
     return this.http.put<Task>(`${this.base}/${task._id}/removeTeamMember`, {employeeID});
   }
 
-  removeTeamMemberFromMultiple(tasks: string[], employeeID: string) {
-    console.log('Inside removeTeamMemberFromMultiple', tasks, employeeID);
-    console.log(`${this.base}/removeMemberFromMultiple`);
-    this.http.put(`${this.base}/removeMemberFromMultiple`, {tasks});
-  }
-
   getEmployeeTasks(id: string): Observable<Task[]> {
     return this.http.get<Task[]>(`${this.base}/getEmployeeTasks/${id}`);
   }

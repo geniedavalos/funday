@@ -132,24 +132,6 @@ export class ProjectDetailsComponent implements OnInit {
       console.log(result);
       this.getProject(this.id);
     });
-    /**
-     * List of assigned task IDs, to be passed to task service to remove from tasks.
-     */
-    const assignedTasks: string[] = [];
-    /**
-     * Loop through tasks to find all tasks with currently active ID included in the team
-     */
-    for (const task of this.tasks) {
-      if (task.teamMembers) {
-        for (const teamMember of task.teamMembers) {
-          if (teamMember._id === id) {
-            assignedTasks.push(task._id);
-          }
-        }
-      }
-    }
-    console.log("In on remove from team, logging assigned tasks:", assignedTasks);
-    this.taskService.removeTeamMemberFromMultiple(assignedTasks, id);
   }
 
   //this is called byt the editprojectbutton inside the modal which should edit the project with the given information
