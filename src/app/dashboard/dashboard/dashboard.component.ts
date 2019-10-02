@@ -45,8 +45,10 @@ export class DashboardComponent implements OnInit {
         this.isOwner = decoded.isOwner;
         this.finishedLoading = true;
       });
+      console.log(decoded);
       this.companyService.getCompany(decoded['cid']).subscribe(result => {
         if (result) {
+          console.log('%*%*%*%*%*%%*%*%*%*%*%%*%*%*', result);
           this.currentCompany = result;
         }
       });

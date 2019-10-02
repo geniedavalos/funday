@@ -1,5 +1,8 @@
 const mongoose = require('mongoose');
 const Project = mongoose.model('Project')
+const Employee = mongoose.model('Employee')
+const Company = mongoose.model('Company')
+
 module.exports = {
     index: async (_req, res) => {
         try {
@@ -58,8 +61,14 @@ module.exports = {
     },
     destroy: (req, res) => {
         Project.findOneAndDelete({ _id : req.params.id })
-            .then((data) => {
-                res.json(data);
+            .then((project) => {
+                Employee.update({_id: {$in : project.teamMembers}},
+                    {$pull : {tasks : {$in : project.tasks}, managedProjects : project._id, assignedProjects: project._id}},
+                    { multi: true })
+                    .then(data => {
+                        console.log("Loggind data after 'deleting' tasks", data)
+                    });
+                res.json(project);
             })
             .catch(err => {
                 res.json(err);

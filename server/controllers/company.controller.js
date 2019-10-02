@@ -30,14 +30,15 @@ module.exports = {
         .populate({path:'projects', populate: {path: 'tasks'}})
         .populate({path:'projects', populate: {path: 'projectLead'}})
             .then((company) => {
-                console.log(company.name)
-                for (let project of company.projects){
-                    let sum = 0;
-                    for(let task of project.tasks){
-                    sum+=task.progress;
+                console.log("logging company",company)
+                    for (let project of company.projects){
+                        let sum = 0;
+                        for(let task of project.tasks){
+                        sum+=task.progress;
+                        }
+                        project.progress = Number.parseFloat((sum/project.tasks.length).toFixed(1));
                     }
-                    project.progress = Number.parseFloat((sum/project.tasks.length).toFixed(1));
-                }
+                console.log(company)
                 res.json(company)
             })
             .catch(err => res.json(err));
@@ -93,5 +94,12 @@ module.exports = {
           res.json(data);
         })
         .catch(err => res.json(err));
-    }
+    },
+    removeProject: (req, res) => {
+        Company.findOneAndUpdate({_id : req.params.id}, {$pull : {projects: req.body.projectID}})
+        .then(data => {
+            res.json(data);
+        })
+        .catch(err => res.json(err));
+    },
 }
