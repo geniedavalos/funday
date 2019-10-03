@@ -1,367 +1,293 @@
-<!-- <body>
-  <div class="container">
-    <nav class="navbar navbar-expand-lg navbar-light bg-white">
-      <a class="navbar-brand" href="/index.html">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Twemoji_1f60e.svg/768px-Twemoji_1f60e.svg.png" width="30" height="30" class="d-inline-block align-top" alt="">
-        <strong> funday</strong><span>.com</span></a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+<app-loading *ngIf="!loadedProject"></app-loading>
+<section *ngIf="loadedProject == true">
+  <h2>Project Title: {{project?.title}}</h2>
+  <button *ngIf="readMore == false" (click)=onShowDetails() class="btn btn-outline-dark mb-3">Show Project Details</button>
+  <p *ngIf="readMore == true" class="border rounded">{{project.description}}</p>
+  <div class="progress">
+    <div class="progress-bar  progress-bar-striped bg-info" role="progressbar" [ngStyle]="{'width': project?.progress+'%'}" aria-valuenow="" aria-valuemin="0" aria-valuemax="100">{{project?.progress}}%</div>
+  </div>
+  <div class="mx-3 my-3 block">
+    <button type="button" class="btn btn-info" data-toggle="modal" (click)="populateEditProject()" data-target="#editProject">Edit This Project</button>
+    <button type="button" class="btn btn-danger ml-3" data-toggle="modal" data-target="#deleteProject">Delete Project</button>
+  </div>
 
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item">
-            <a class="nav-link" id="home" href="/index.html">Home</a>
-          </li>
-
-          <li class="nav-item">
-            <a class="nav-link" id="cases" href="/cases.html">Use Cases</a>
-          </li>
-
-          <li class="nav-item">
-            <a class="nav-link" id="team" href="/team.html">Our Team</a>
-          </li>
-
-          <li class="nav-item">
-            <div id="lrbtn"><a class="nav-link" id="start" routerLink='/dashboard'><button type="button" class="btn btn-sm btn-outline-info">Dashboard</button></a></div>
-          </li>
-        </ul>
-      </div>
-    </nav> -->
-
-    <app-loading *ngIf="!loadedProject"></app-loading>
-    <section *ngIf="loadedProject == true">
-      <h2>Project Title: {{project?.title}}</h2>
-      <button *ngIf="readMore == false" (click)=onShowDetails() class="btn btn-outline-dark mb-3">Show Project Details</button>
-      <p *ngIf="readMore == true" class="border rounded">{{project.description}}</p>
-      <div class="progress">
-        <div class="progress-bar  progress-bar-striped bg-info" role="progressbar" [ngStyle]="{'width': project?.progress+'%'}" aria-valuenow="" aria-valuemin="0" aria-valuemax="100">{{project?.progress}}%</div>
-      </div>
-      <div class="mx-3 my-3 block">
-        <button type="button" class="btn btn-info" data-toggle="modal" (click)="populateEditProject()" data-target="#editProject">Edit This Project</button>
-        <button type="button" class="btn btn-danger ml-3" data-toggle="modal" data-target="#deleteProject">Delete Project</button>
-      </div>
-
-      <div class="modal fade" id="editProject" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header text-center bg-info">
-                    <h3 class="modal-title w-100  my-auto text-white">Edit Project</h3>
-                    <button type="button" class="close text-white my-auto" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    </button>
+  <div class="modal fade" id="editProject" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header text-center bg-info">
+                <h3 class="modal-title w-100  my-auto text-white">Edit Project</h3>
+                <button type="button" class="close text-white my-auto" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+              <form>
+                <p class='text-center'><strong>Edit project details below</strong></p>
+                <div class='input-group mb-2 justify-content-center'>
+                  <div class='input-group-prepend'>
+                    <span class="input-group-text" id="basic-addon1"><i class="fa fa-terminal" aria-hidden="true"></i></span>
+                  </div>
+                  <input type='text' placeholder='Title' class='form-control col-7' name='title' [(ngModel)]='editProject.title'>
                 </div>
-                <div class="modal-body">
-                  <form>
-                    <p class='text-center'><strong>Edit project details below</strong></p>
-                    <div class='input-group mb-2 justify-content-center'>
-                      <div class='input-group-prepend'>
-                        <span class="input-group-text" id="basic-addon1"><i class="fa fa-terminal" aria-hidden="true"></i></span>
-                      </div>
-                      <input type='text' placeholder='Title' class='form-control col-7' name='title' [(ngModel)]='editProject.title'>
-                    </div>
 
-                    <div class='input-group mb-2 justify-content-center'>
-                      <div class='input-group-prepend'>
-                        <span class="input-group-text" id="basic-addon1"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></span>
-                      </div>
-                      <textarea class='form-control col-7' placeholder='Description' name='description' [(ngModel)]='editProject.description'></textarea>
-                    </div>
+                <div class='input-group mb-2 justify-content-center'>
+                  <div class='input-group-prepend'>
+                    <span class="input-group-text" id="basic-addon1"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></span>
+                  </div>
+                  <textarea class='form-control col-7' placeholder='Description' name='description' [(ngModel)]='editProject.description'></textarea>
+                </div>
 
-                    <div class='input-group mb-2 justify-content-center'>
-                      <div class='input-group-prepend'>
-                        <span class="input-group-text" id="basic-addon1"><i class="fa fa-calendar" aria-hidden="true"></i></span>
-                      </div>
-                      <input type='date' class='form-control col-7' name='date'[(ngModel)]='editProject.dueDate'>
-                    </div>
-                  </form>
+                <div class='input-group mb-2 justify-content-center'>
+                  <div class='input-group-prepend'>
+                    <span class="input-group-text" id="basic-addon1"><i class="fa fa-calendar" aria-hidden="true"></i></span>
+                  </div>
+                  <input type='date' class='form-control col-7' name='date'[(ngModel)]='editProject.dueDate'>
                 </div>
-                <div class="modal-footer justify-content-center">
-                  <button type="button" data-dismiss="modal" (click)='onEditProject()' class="btn btn-info">Edit</button>
-                </div>
+              </form>
+            </div>
+            <div class="modal-footer justify-content-center">
+              <button type="button" data-dismiss="modal" (click)='onEditProject()' class="btn btn-info">Edit</button>
             </div>
         </div>
     </div>
+</div>
 
-      <div class="modal fade" id="deleteProject" tabindex="-1" role="dialog" aria-hidden="true">
-          <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                  <div class="modal-header text-center bg-danger">
-                      <h3 class="modal-title w-100 my-auto text-white">Delete Project</h3>
-                      <button type="button" class="close text-white my-auto" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                      </button>
-                  </div>
-                  <div class="modal-body">
-                      <p class='text-center'><strong>This action cannot be undone!</strong></p>
-                      <p class='text-center'>Enter the project name below to permanently delete.</p>
-                      <form>
-                        <div class='input-group mb-2 justify-content-center'>
-                          <div class='input-group-prepend'>
-                            <span class="input-group-text text-danger" id="basic-addon1"><i class="fa fa-trash-o" aria-hidden="true"></i></span>
-                          </div>
-                          <input type='text' id="projectTitle" [(ngModel)]="projectTitle" placeholder='Project Name' class='form-control col-7' name='projectTitle'>
-                        </div>
-                      </form>
-                  </div>
-                  <div class="modal-footer justify-content-center">
-                      <button [disabled]="projectTitle != project?.title" type="button" (click)="onDeleteProject()" data-dismiss="modal" class="btn btn-danger">Delete</button>
-                  </div>
+  <div class="modal fade" id="deleteProject" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+          <div class="modal-content">
+              <div class="modal-header text-center bg-danger">
+                  <h3 class="modal-title w-100 my-auto text-white">Delete Project</h3>
+                  <button type="button" class="close text-white my-auto" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                  </button>
+              </div>
+              <div class="modal-body">
+                  <p class='text-center'><strong>This action cannot be undone!</strong></p>
+                  <p class='text-center'>Enter the project name below to permanently delete.</p>
+                  <form>
+                    <div class='input-group mb-2 justify-content-center'>
+                      <div class='input-group-prepend'>
+                        <span class="input-group-text text-danger" id="basic-addon1"><i class="fa fa-trash-o" aria-hidden="true"></i></span>
+                      </div>
+                      <input type='text' id="projectTitle" [(ngModel)]="projectTitle" placeholder='Project Name' class='form-control col-7' name='projectTitle'>
+                    </div>
+                  </form>
+              </div>
+              <div class="modal-footer justify-content-center">
+                  <button [disabled]="projectTitle != project?.title" type="button" (click)="onDeleteProject()" data-dismiss="modal" class="btn btn-danger">Delete</button>
               </div>
           </div>
       </div>
+  </div>
 
-      <table class="table mt-5 text-center ">
-        <thead>
-          <tr>
-            <th scope="col">Task</th>
-            <th scope="col">Progress</th>
-            <th scope="col">Due Date</th>
-            <th scope="col">Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let task of tasks">
-            <td><a [routerLink]="['tasks', task._id]" routerLinkActive="router-link-active" >{{task.title}}</a></td>
-            <td>
-              <div class="progress">
-                <div class="progress-bar  progress-bar-striped bg-info" role="progressbar" [ngStyle]="{'width': task.progress+'%'}" aria-valuenow="" aria-valuemin="0" aria-valuemax="100"></div>
-              </div>
-            </td>
-            <td>{{task?.dueDate | date: 'mediumDate'}}</td>
-            <td>
-                <button type='button' (click)='populateEditTask(task)' class='btn btn-outline-warning ml-3' data-toggle='modal' data-target='#editTask'><i class="fa fa-pencil" aria-hidden="true"></i></button>
+  <table class="table mt-5 text-center ">
+    <thead>
+      <tr>
+        <th scope="col">Task</th>
+        <th scope="col">Progress</th>
+        <th scope="col">Due Date</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let task of tasks">
+        <td><a [routerLink]="['tasks', task._id]" routerLinkActive="router-link-active" >{{task.title}}</a></td>
+        <td>
+          <div class="progress">
+            <div class="progress-bar  progress-bar-striped bg-info" role="progressbar" [ngStyle]="{'width': task.progress+'%'}" aria-valuenow="" aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+        </td>
+        <td>{{task?.dueDate | date: 'mediumDate'}}</td>
+        <td>
+            <button type='button' (click)='populateEditTask(task)' class='btn btn-outline-warning ml-3' data-toggle='modal' data-target='#editTask'><i class="fa fa-pencil" aria-hidden="true"></i></button>
 
-                <button type='button' (click)='setDeleteTaskID(task._id)' data-toggle='modal' data-target='#confirmDelete' class="btn btn-outline-danger ml-3"><i class="fa fa-trash" aria-hidden="true"></i></button>
+            <button type='button' (click)='setDeleteTaskID(task._id)' data-toggle='modal' data-target='#confirmDelete' class="btn btn-outline-danger ml-3"><i class="fa fa-trash" aria-hidden="true"></i></button>
 
-                <div class="modal fade" id="confirmDelete" tabindex="-1" role="dialog" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header bg-danger text-center">
-                              <h3 class="modal-title text-center my-auto w-100 text-white">Are You Sure?</h3>
-                              <button type="button" class="close my-auto text-white" data-dismiss="modal" aria-label="Close">
-                              <span aria-hidden="true">&times;</span>
-                              </button>
-                            </div>
-                            <div class="modal-body justify-content-center">
-                              <p class='text-center my-auto'><strong>This action cannot be undone!</strong></p>
-                            </div>
-                            <div class="modal-footer justify-content-center">
-                              <button data-dismiss="modal" (click)='onDeleteTask()' class='btn btn-danger text-white'>Delete</button>
-                            </div>
+            <div class="modal fade" id="confirmDelete" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header bg-danger text-center">
+                          <h3 class="modal-title text-center my-auto w-100 text-white">Are You Sure?</h3>
+                          <button type="button" class="close my-auto text-white" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body justify-content-center">
+                          <p class='text-center my-auto'><strong>This action cannot be undone!</strong></p>
+                        </div>
+                        <div class="modal-footer justify-content-center">
+                          <button data-dismiss="modal" (click)='onDeleteTask()' class='btn btn-danger text-white'>Delete</button>
                         </div>
                     </div>
                 </div>
+            </div>
 
-            </td>
-          </tr>
-        </tbody>
-      </table>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 
-      <div class="row text-center block my-4">
-        <div class="inline mt-3">
-            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addTask">Add Task</button>
-        </div>
-      </div>
-    </section>
+  <div class="row text-center block my-4">
+    <div class="inline mt-3">
+        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addTask">Add Task</button>
+    </div>
+  </div>
+</section>
 
-    <div class="modal fade" id="addTask" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header bg-success text-center">
-                  <h3 class="modal-title text-center my-auto w-100 text-white">Create A Task</h3>
-                  <button type="button" class="close my-auto text-white" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                    <p class='text-center'><strong>Enter a due date, title and description</strong></p>
-                    <form #taskForm='ngForm' name='newTaskForm'>
-                      <div class='input-group mb-2 justify-content-center'>
-                        <div class="input-group-prepend">
-                          <span class="input-group-text" id="basic-addon1"><i class="fa fa-calendar" aria-hidden="true"></i></span>
-                        </div>
-                        <input type='date' name='due' class='form-control col-7' [(ngModel)]='newTask.dueDate' min="{{today}}" max="{{lastDay}}">
-                      </div>
+<div class="modal fade" id="addTask" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-success text-center">
+              <h3 class="modal-title text-center my-auto w-100 text-white">Create A Task</h3>
+              <button type="button" class="close my-auto text-white" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <p class='text-center'><strong>Enter a due date, title and description</strong></p>
+                <form #taskForm='ngForm' name='newTaskForm'>
+                  <div class='input-group mb-2 justify-content-center'>
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="basic-addon1"><i class="fa fa-calendar" aria-hidden="true"></i></span>
+                    </div>
+                    <input type='date' name='due' class='form-control col-7' [(ngModel)]='newTask.dueDate' min="{{today}}" max="{{lastDay}}">
+                  </div>
 
-                      <div class='input-group mb-2 justify-content-center'>
-                        <div class='input-group-prepend'>
-                          <span class="input-group-text" id="basic-addon1"><i class="fa fa-terminal" aria-hidden="true"></i></span>
-                        </div>
-                        <input type='text' placeholder='Title' class='form-control col-7' name='title' [(ngModel)]='newTask.title'>
-                      </div>
-                      <div class='input-group mb-2 justify-content-center'>
-                        <div class="input-group-prepend">
-                          <span class="input-group-text" id="basic-addon1"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></span>
-                        </div>
-                        <textarea placeholder='Description' class='form-control col-7' name='description' [(ngModel)]='newTask.description'></textarea>
-                      </div>
+                  <div class='input-group mb-2 justify-content-center'>
+                    <div class='input-group-prepend'>
+                      <span class="input-group-text" id="basic-addon1"><i class="fa fa-terminal" aria-hidden="true"></i></span>
+                    </div>
+                    <input type='text' placeholder='Title' class='form-control col-7' name='title' [(ngModel)]='newTask.title'>
+                  </div>
+                  <div class='input-group mb-2 justify-content-center'>
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="basic-addon1"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></span>
+                    </div>
+                    <textarea placeholder='Description' class='form-control col-7' name='description' [(ngModel)]='newTask.description'></textarea>
+                  </div>
 
-                    <hr>
-                    <p class='text-center'><strong>Add Team Members</strong></p>
+                <hr>
+                <p class='text-center'><strong>Add Team Members</strong></p>
 
-                      <select multiple class='form-control col-8 mx-auto' name='taskTeam' [(ngModel)]='newTask.teamMembers'>
-                          <option *ngFor="let member of project?.teamMembers" value="{{member['_id']}}">{{member['firstName']}} {{member['lastName']}}</option>
-                      </select>
-                    </form>
-                </div>
-                <div class="modal-footer justify-content-center">
-                    <button data-dismiss="modal" (click)='onTaskCreate()' type="button" class="btn btn-success px-5">Add</button>
-                </div>
+                  <select multiple class='form-control col-8 mx-auto' name='taskTeam' [(ngModel)]='newTask.teamMembers'>
+                      <option *ngFor="let member of project?.teamMembers" value="{{member['_id']}}">{{member['firstName']}} {{member['lastName']}}</option>
+                  </select>
+                </form>
+            </div>
+            <div class="modal-footer justify-content-center">
+                <button data-dismiss="modal" (click)='onTaskCreate()' type="button" class="btn btn-success px-5">Add</button>
             </div>
         </div>
     </div>
+</div>
 
 <!-- BEGIN EDIT TASK MODAL -->
 
-    <div class="modal fade" id="editTask" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header bg-warning text-center">
-                  <h3 class="modal-title text-center my-auto w-100 text-white">Edit A Task</h3>
-                  <button type="button" class="close my-auto text-white" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                    <p class='text-center'><strong>Edit the due date, title and description</strong></p>
-                    <form #editTaskForm='ngForm' name='editTaskForm'>
-                      <div class='input-group mb-2 justify-content-center'>
-                        <div class="input-group-prepend">
-                          <span class="input-group-text" id="basic-addon1"><i class="fa fa-calendar" aria-hidden="true"></i></span>
-                        </div>
-                        <input type='date' name='due' class='form-control col-7' [ngModel]='editTask?.dueDate'>
-                      </div>
-
-                      <div class='input-group mb-2 justify-content-center'>
-                        <div class='input-group-prepend'>
-                          <span class="input-group-text" id="basic-addon1"><i class="fa fa-terminal" aria-hidden="true"></i></span>
-                        </div>
-                        <input type='text' placeholder='Title' class='form-control col-7' name='title' [ngModel]='editTask?.title'>
-                      </div>
-                      <div class='input-group mb-2 justify-content-center'>
-                        <div class="input-group-prepend">
-                          <span class="input-group-text" id="basic-addon1"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></span>
-                        </div>
-                        <textarea placeholder='Description' class='form-control col-7' name='description' [ngModel]='editTask?.description'></textarea>
-                      </div>
-                    </form>
-                </div>
-                <div class="modal-footer justify-content-center">
-                    <button data-dismiss="modal" (click)='onEditTask()' type="button" class="text-white btn btn-warning px-5">Edit</button>
-                </div>
+<div class="modal fade" id="editTask" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-warning text-center">
+              <h3 class="modal-title text-center my-auto w-100 text-white">Edit A Task</h3>
+              <button type="button" class="close my-auto text-white" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+              </button>
             </div>
-        </div>
-    </div>
-
-    <!-- END EDIT TASK MODAL -->
-
-    <section *ngIf="loadedProject" id="users">
-      <h2>Manage Team</h2>
-      <table class="table text-center ">
-        <thead>
-          <tr>
-            <th scope="col">Name</th>
-            <th scope="col">Department</th>
-            <th scope="col">Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor='let member of project?.teamMembers'>
-            <td>{{member['firstName']}} {{member['lastName']}}</td>
-            <td scope="row">{{member['department']}}</td>
-            <td><button (click)=onRemoveFromTeam(member._id)  class="btn btn-outline-danger mx-1"><i class="fa fa-ban" aria-hidden="true"></i></button>
-
-              <a [routerLink]="['/employees/', member._id]" routerLinkActive="router-link-active"  class="btn btn-outline-info mx-1"><i class="fa fa-search" aria-hidden="true"></i></a>
-
-            </td>
-          </tr>
-        </tbody>
-      </table>
-
-      <div class="row text-center block my-4">
-        <div class="inline">
-          <button type="button" class="btn btn-success inner  mx-3" data-toggle="modal" data-target="#addTeamMember">Add Team Members</button>
-        </div>
-      </div>
-
-      <div class="modal fade" id="addTeamMember" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header bg-success text-center">
-                    <h3 class="modal-title w-100 text-white my-auto">Add Team Members</h3>
-                    <button type="button" class="close text-white my-auto" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                  <p class='text-center'><strong>Select Team Members</strong></p>
+            <div class="modal-body">
+                <p class='text-center'><strong>Edit the due date, title and description</strong></p>
+                <form #editTaskForm='ngForm' name='editTaskForm'>
                   <div class='input-group mb-2 justify-content-center'>
                     <div class="input-group-prepend">
-                      <span class="input-group-text" id="basic-addon1"><i class="fa fa-building" aria-hidden="true"></i></span>
+                      <span class="input-group-text" id="basic-addon1"><i class="fa fa-calendar" aria-hidden="true"></i></span>
                     </div>
-                    <select [(ngModel)]='selectedDepartments' multiple class='form-control col-8' name='projectDept'>
-                        <option *ngFor="let department of currentCompany?.departments" value="{{department}}">{{department}}</option>
-                    </select>
+                    <input type='date' name='due' class='form-control col-7' [ngModel]='editTask?.dueDate'>
                   </div>
 
-                  <div class='form-group row col-10 mx-auto'>
-                    <select multiple class='form-control' id='teamNames' name='member' [(ngModel)]='newMembers'>
-                        <option *ngFor="let employee of currentCompany?.employees" [hidden]="!selectedDepartments.includes(employee.department)" [disabled]="teamIds.includes(employee._id)" value="{{employee?._id}}">{{employee.firstName}} {{employee.lastName}}</option>
-                    </select>
+                  <div class='input-group mb-2 justify-content-center'>
+                    <div class='input-group-prepend'>
+                      <span class="input-group-text" id="basic-addon1"><i class="fa fa-terminal" aria-hidden="true"></i></span>
+                    </div>
+                    <input type='text' placeholder='Title' class='form-control col-7' name='title' [ngModel]='editTask?.title'>
                   </div>
-                        <div class='addedMembers mt-3'>
-                          <span *ngFor='let member of addedTeamMembers' class='badge badge-success mx-1'>{{ member }}</span>
-                        </div>
-                </div>
-                <div class="modal-footer justify-content-center">
-                    <button (click)='onAddTeamMembers()' data-dismiss="modal" type="button" class="btn btn-success px-5">Add</button>
-                </div>
+                  <div class='input-group mb-2 justify-content-center'>
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="basic-addon1"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></span>
+                    </div>
+                    <textarea placeholder='Description' class='form-control col-7' name='description' [ngModel]='editTask?.description'></textarea>
+                  </div>
+                </form>
+            </div>
+            <div class="modal-footer justify-content-center">
+                <button data-dismiss="modal" (click)='onEditTask()' type="button" class="text-white btn btn-warning px-5">Edit</button>
             </div>
         </div>
     </div>
+</div>
 
-    </section>
+<!-- END EDIT TASK MODAL -->
 
-    <!-- <footer>
-      <div class="row map justify-content-center">
-        <div class="col-lg-4 col-sm-6">
-          <p><a [routerLink]="['/home']"><strong>Our product</strong></a></p>
-          <p><a [routerLink]="['/home']" id="purpleh">Product</a></p>
-          <p><a [routerLink]="['/home']" id="purpleh">Pricing</a></p>
+<section *ngIf="loadedProject" id="users">
+  <h2>Manage Team</h2>
+  <table class="table text-center ">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Department</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor='let member of project?.teamMembers'>
+        <td>{{member['firstName']}} {{member['lastName']}}</td>
+        <td scope="row">{{member['department']}}</td>
+        <td><button (click)=onRemoveFromTeam(member._id)  class="btn btn-outline-danger mx-1"><i class="fa fa-ban" aria-hidden="true"></i></button>
+
+          <a [routerLink]="['/employees/', member._id]" routerLinkActive="router-link-active"  class="btn btn-outline-info mx-1"><i class="fa fa-search" aria-hidden="true"></i></a>
+
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="row text-center block my-4">
+    <div class="inline">
+      <button type="button" class="btn btn-success inner  mx-3" data-toggle="modal" data-target="#addTeamMember">Add Team Members</button>
+    </div>
+  </div>
+
+  <div class="modal fade" id="addTeamMember" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-success text-center">
+                <h3 class="modal-title w-100 text-white my-auto">Add Team Members</h3>
+                <button type="button" class="close text-white my-auto" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+              <p class='text-center'><strong>Select Team Members</strong></p>
+              <div class='input-group mb-2 justify-content-center'>
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1"><i class="fa fa-building" aria-hidden="true"></i></span>
+                </div>
+                <select [(ngModel)]='selectedDepartments' multiple class='form-control col-8' name='projectDept'>
+                    <option *ngFor="let department of currentCompany?.departments" value="{{department}}">{{department}}</option>
+                </select>
+              </div>
+
+              <div class='form-group row col-10 mx-auto'>
+                <select multiple class='form-control' id='teamNames' name='member' [(ngModel)]='newMembers'>
+                    <option *ngFor="let employee of currentCompany?.employees" [hidden]="!selectedDepartments.includes(employee.department)" [disabled]="teamIds.includes(employee._id)" value="{{employee?._id}}">{{employee.firstName}} {{employee.lastName}}</option>
+                </select>
+              </div>
+                    <div class='addedMembers mt-3'>
+                      <span *ngFor='let member of addedTeamMembers' class='badge badge-success mx-1'>{{ member }}</span>
+                    </div>
+            </div>
+            <div class="modal-footer justify-content-center">
+                <button (click)='onAddTeamMembers()' data-dismiss="modal" type="button" class="btn btn-success px-5">Add</button>
+            </div>
         </div>
+    </div>
+</div>
 
-        <div class="col-lg-4 col-sm-6">
-          <p><a [routerLink]="['/information']"><strong>Use Cases</strong></a></p>
-          <p><a [routerLink]="['/information']" id="greenh">Product Management</a></p>
-          <p><a [routerLink]="['/information']" id="greenh">Sample Use Cases</a></p>
-        </div>
-
-        <div class="col-lg-4 col-sm-6">
-          <p><a [routerLink]="['/devTeam']"><Strong>Our Team</Strong></a></p>
-          <p><a [routerLink]="['/devTeam']" id="blueh">About Us</a></p>
-          <p><a [routerLink]="['/devTeam']" id="blueh">Contact Us</a></p>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-lg-6 col-sm-12 real-footer text-center">Made with <i class="fa fa-coffee" aria-hidden="true"></i> & <i class="fa fa-heart" aria-hidden="true"></i><br>
-          All Rights Reserved © funday.com</div>
-        <div class="col-lg-6 col-sm-12 real-footer justify-content-center">
-          <div class="row social justify-content-center">
-            <a href="https://www.facebook.com" id="facebook" class="fa fa-facebook" target="_blank"></a>
-            <a href="https://www.twitter.com" id="twitter" class="fa fa-twitter" target="_blank"></a>
-            <a href="https://www.youtube.com" id="youtube" class="fa fa-youtube" target="_blank"></a>
-            <a href="https://www.skype.com" id="skype" class="fa fa-skype" target="_blank"></a>
-          </div>
-        </div>
-      </div>
-    </footer> -->
-  <!-- </div>
-
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-</body>
-
-</html> -->
+</section>

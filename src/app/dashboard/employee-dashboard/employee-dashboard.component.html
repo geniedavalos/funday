@@ -1,84 +1,84 @@
-    <section>
-      <div class="welcome">
-        <h2 class="text-center">Welcome, {{currentUser?.firstName}}!</h2>
-      </div>
-    </section>
+<section>
+  <div class="welcome">
+    <h2 class="text-center">Welcome, {{currentUser?.firstName}}!</h2>
+  </div>
+</section>
 
-    <section id="projects">
-      <h2>My Tasks</h2>
-      <div *ngIf='currentUser?.tasks?.length == 0'><h5 class='text-center text-primary'>You currently don't have any tasks!</h5></div>
-      <table class="table text-center " *ngIf='currentUser?.tasks?.length > 0'>
-        <thead>
-          <tr>
-            <th scope="col">Task Name</th>
-            <th scope="col">Task Progress</th>
-            <th scope="col">Due Date</th>
-            <th scope="col">Add Notes</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let task of currentUser?.tasks">
-            <th scope="row"><a [routerLink]="['/tasks/', task._id]" routerLinkActive="router-link-active">{{task?.title}}</a></th>
-            <td>
-              <div class="progress">
-                <div class="progress-bar progress-bar-striped" role="progressbar" [ngStyle]="{'width': task.progress+'%'}" aria-valuenow="25">{{task.progress}}%</div>
-              </div>
-            </td>
-            <td>{{task.dueDate | date : "mediumDate" }}</td>
-            <td>
-              <button type="button" class="btn btn-info" data-toggle="modal" (click)="setTaskIdForNewNote(task._id)" data-target="#addNote"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+<section id="projects">
+  <h2>My Tasks</h2>
+  <div *ngIf='currentUser?.tasks?.length == 0'><h5 class='text-center text-primary'>You currently don't have any tasks!</h5></div>
+  <table class="table text-center " *ngIf='currentUser?.tasks?.length > 0'>
+    <thead>
+      <tr>
+        <th scope="col">Task Name</th>
+        <th scope="col">Task Progress</th>
+        <th scope="col">Due Date</th>
+        <th scope="col">Add Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let task of currentUser?.tasks">
+        <th scope="row"><a [routerLink]="['/tasks/', task._id]" routerLinkActive="router-link-active">{{task?.title}}</a></th>
+        <td>
+          <div class="progress">
+            <div class="progress-bar progress-bar-striped" role="progressbar" [ngStyle]="{'width': task.progress+'%'}" aria-valuenow="25">{{task.progress}}%</div>
+          </div>
+        </td>
+        <td>{{task.dueDate | date : "mediumDate" }}</td>
+        <td>
+          <button type="button" class="btn btn-info" data-toggle="modal" (click)="setTaskIdForNewNote(task._id)" data-target="#addNote"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 
-      <div class="modal fade" id="addNote" tabindex="-1" role="dialog" aria-hidden="true">
-          <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-              <div class="modal-header text-center bg-info">
-                <h3 class="modal-title w-100  my-auto text-white">Add New Notes</h3>
-                <button type="button" class="close text-white my-auto" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body">
+  <div class="modal fade" id="addNote" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header text-center bg-info">
+            <h3 class="modal-title w-100  my-auto text-white">Add New Notes</h3>
+            <button type="button" class="close text-white my-auto" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
 
-                <p class='text-center'><strong>Enter your new notes below</strong></p>
-                <div class='input-group mb-2 justify-content-center'>
-                  <div class='input-group-prepend'>
-                    <span class='input-group-text' id='basic-addon1'><i class="fa fa-pencil-square-o" aria-hidden="true"></i></span>
-                  </div>
-                  <textarea class='form-control col-8' name='note' [(ngModel)]='newNote.content'></textarea>
-                </div>
-
+            <p class='text-center'><strong>Enter your new notes below</strong></p>
+            <div class='input-group mb-2 justify-content-center'>
+              <div class='input-group-prepend'>
+                <span class='input-group-text' id='basic-addon1'><i class="fa fa-pencil-square-o" aria-hidden="true"></i></span>
               </div>
-              <div class="modal-footer justify-content-center">
-                  <button type="button" data-dismiss="modal" (click)='onAddNote()' class="btn btn-info">Add Note</button>
-              </div>
+              <textarea class='form-control col-8' name='note' [(ngModel)]='newNote.content'></textarea>
             </div>
+
+          </div>
+          <div class="modal-footer justify-content-center">
+              <button type="button" data-dismiss="modal" (click)='onAddNote()' class="btn btn-info">Add Note</button>
           </div>
         </div>
+      </div>
+    </div>
 
-    </section>
+</section>
 
 
-    <section id="users">
-      <h2>My Team</h2>
-      <div *ngIf='currentUser?.tasks?.length == 0'><h5 class='text-center text-primary'>You are currently not assigned to a team!</h5></div>
-      <table class="table text-center " *ngIf='teamMembers.length > 0'>
-        <thead>
-          <tr>
-            <th scope="col">Name</th>
-            <th scope="col">Department</th>
-            <th scope="col">Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let member of teamMembers">
-            <th scope="row">{{member.firstName}} {{member.lastName}}</th>
-            <td>{{member.department}}</td>
-            <td><button class="btn btn-outline-info">Message</button></td>
-          </tr>
-        </tbody>
-      </table>
-    </section>
+<section id="users">
+  <h2>My Team</h2>
+  <div *ngIf='currentUser?.tasks?.length == 0'><h5 class='text-center text-primary'>You are currently not assigned to a team!</h5></div>
+  <table class="table text-center " *ngIf='teamMembers.length > 0'>
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Department</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let member of teamMembers">
+        <th scope="row">{{member.firstName}} {{member.lastName}}</th>
+        <td>{{member.department}}</td>
+        <td><button class="btn btn-outline-info">Message</button></td>
+      </tr>
+    </tbody>
+  </table>
+</section>

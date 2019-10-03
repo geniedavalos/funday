@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router, Params } from '@angular/router';
-import { Project, Task, Employee, Company } from 'src/app/models';
 import { ProjectService, TaskService, EmployeeService, CompanyService } from 'src/app/services';
-import { NgForm } from '@angular/forms';
+import { Project, Task, Employee, Company } from 'src/app/models';
+import { ActivatedRoute, Router, Params } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
+import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-project-details',
@@ -11,29 +11,29 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./project-details.component.css']
 })
 export class ProjectDetailsComponent implements OnInit {
-  tasks: Task[];
-  id: string;
-  project: Project;
-  newTask = new Task();
-  editTask: Task;
-  populateEditId: string;
-  deleteTaskId: string;
-  newMembers: any;
-  editProject = new Project();
+  selectedDepartments: string[] = [];
   taskProgressArray: number[] = [];
-  projectTitle: string;
-  readMore: boolean = false;
-  currentUser: Employee;
-  currentCompany: Company;
-  isOwner: boolean;
-  isManager: boolean;
-  addedTeamMembers: any[];
   loadedProject: boolean = false;
   loadedUser: boolean = false;
-  selectedDepartments: string[] = [];
+  editProject = new Project();
+  readMore: boolean = false;
+  currentCompany: Company;
+  addedTeamMembers: any[];
+  populateEditId: string;
   teamIds: string[] = [];
-  today: string;
+  currentUser: Employee;
+  newTask = new Task();
+  deleteTaskId: string;
+  projectTitle: string;
+  isManager: boolean;
+  project: Project;
+  isOwner: boolean;
+  newMembers: any;
   lastDay: string;
+  editTask: Task;
+  tasks: Task[];
+  today: string;
+  id: string;
 
 
   constructor(
@@ -56,9 +56,12 @@ export class ProjectDetailsComponent implements OnInit {
   }
   getProject(id: string) {
     this.teamIds = [];
+    console.log(id);
     this.projectService.getProject(id).subscribe(result => {
+      console.log(result);
       this.project = result;
       this.tasks = this.project.tasks;
+      console.log(this.project);
       for(const employee of this.project.teamMembers){
         this.teamIds.push(employee['_id']);
       }
