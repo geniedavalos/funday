@@ -4,10 +4,13 @@ export class Project {
     _id: string;
     title: string;
     description: string;
-    dueDate: Date;
+    dueDate: any;
     isComplete: boolean;
     projectLead: string;
     teamMembers: string[];
     tasks: Task[];
     progress: number;
+    constructor() {
+      this.dueDate = new Date().toISOString().substr(0, 10);
+    }
 }

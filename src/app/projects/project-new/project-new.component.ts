@@ -18,6 +18,7 @@ export class ProjectNewComponent implements OnInit {
   addedIds: string[] = [];
   newMembers: any[] = [];
   selectedDepartments: string[] = [];
+  today: string;
 
   @Output()
   createProjectEmitter = new EventEmitter<Project>();
@@ -36,6 +37,7 @@ export class ProjectNewComponent implements OnInit {
 
   ngOnInit() {
     this.newProjectLead = (this.currentUser.isOwner) ? '' : this.currentUser._id;
+    this.today = new Date().toISOString().substr(0, 10);
   }
 
   onAdd(form: NgForm) {

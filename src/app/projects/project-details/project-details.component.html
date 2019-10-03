@@ -181,7 +181,7 @@
                         <div class="input-group-prepend">
                           <span class="input-group-text" id="basic-addon1"><i class="fa fa-calendar" aria-hidden="true"></i></span>
                         </div>
-                        <input type='date' name='due' class='form-control col-7' [(ngModel)]='newTask.dueDate'>
+                        <input type='date' name='due' class='form-control col-7' [(ngModel)]='newTask.dueDate' min="{{today}}" max="{{lastDay}}">
                       </div>
 
                       <div class='input-group mb-2 justify-content-center'>

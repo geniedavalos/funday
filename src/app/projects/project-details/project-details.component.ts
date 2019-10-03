@@ -32,6 +32,8 @@ export class ProjectDetailsComponent implements OnInit {
   loadedUser: boolean = false;
   selectedDepartments: string[] = [];
   teamIds: string[] = [];
+  today: string;
+  lastDay: string;
 
 
   constructor(
@@ -49,6 +51,7 @@ export class ProjectDetailsComponent implements OnInit {
       this.id = params['id'];
       this.getProject(this.id);
       this.getCurrentUser();
+      this.today = new Date().toISOString().substr(0, 10);
     });
   }
   getProject(id: string) {
@@ -59,6 +62,8 @@ export class ProjectDetailsComponent implements OnInit {
       for(const employee of this.project.teamMembers){
         this.teamIds.push(employee['_id']);
       }
+      console.log(this.project.dueDate);
+      this.lastDay = this.project.dueDate.substr(0, 10);
       this.loadedProject = true;
     });
   }

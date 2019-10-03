@@ -13,7 +13,7 @@
               <form #projectForm='ngForm' name='newProjectForm'>
                 <div class='input-group mb-2 justify-content-center'>
                   <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon1"><i class="fa fa-calendar" aria-hidden="true"></i></span>
+                    <span class="input-group-text"><i class="fa fa-calendar" aria-hidden="true"></i></span>
                   </div>
                   <input type='date'
                           class='form-control col-8'
@@ -21,6 +21,7 @@
                           [(ngModel)]='newProject.dueDate'
                           #dueDate="ngModel"
                           required
+                          min="{{today}}"
                   >
                 </div>
                 <small class="mt-0" *ngIf="(dueDate.touched || dueDate.dirty) && dueDate.errors" >
@@ -31,7 +32,7 @@
 
                 <div class='input-group mb-2 justify-content-center'>
                   <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon1"><i class="fa fa-terminal" aria-hidden="true"></i></span>
+                    <span class="input-group-text"><i class="fa fa-terminal" aria-hidden="true"></i></span>
                   </div>
                   <input type='text' class='form-control col-8' name='title' [(ngModel)]='newProject.title'
                           placeholder="Title"
@@ -53,7 +54,7 @@
 
                 <div class='input-group mb-2 justify-content-center'>
                   <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon1"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></span>
+                    <span class="input-group-text"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></span>
                   </div>
                   <textarea class='form-control col-8'
                           name='description'
@@ -80,16 +81,16 @@
                   <input *ngIf="!currentUser?.isOwner" type="hidden" [(ngModel)]="newProjectLead" name="newLead" value="currentUser._id">
                   <div *ngIf="currentUser?.isOwner" class='input-group mb-2 justify-content-center'>
                     <div class="input-group-prepend">
-                      <span class="input-group-text" id="basic-addon1"><i class="fa fa-user" aria-hidden="true"></i></span>
+                      <span class="input-group-text"><i class="fa fa-user" aria-hidden="true"></i></span>
                     </div>
                     <select [(ngModel)]="newProjectLead" name="newLead" class="form-control col-8">
-                        <option selected disabled hidden value="">--Select Project Lead--</option>
+                        <option class="text-muted" selected disabled hidden value="">--Select Project Lead--</option>
                         <option *ngFor="let manager of managers" value="{{manager?._id}}">{{manager.firstName}} {{manager.lastName}}</option>
                     </select>
                   </div>
                   <div class='input-group mb-2 justify-content-center'>
                     <div class="input-group-prepend">
-                      <span class="input-group-text" id="basic-addon1"><i class="fa fa-building" aria-hidden="true"></i></span>
+                      <span class="input-group-text"><i class="fa fa-building" aria-hidden="true"></i></span>
                     </div>
                     <select [(ngModel)]='selectedDepartments' multiple class='form-control col-8' name='projectDept'>
                         <option *ngFor="let department of currentCompany?.departments" value="{{department}}">{{department}}</option>
