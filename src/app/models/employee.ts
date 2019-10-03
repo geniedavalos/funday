@@ -5,6 +5,7 @@ export class Employee {
   email: string;
   password: string;
   isManager: boolean;
+  isOwner: boolean;
   department: string;
   managedProjects: string[];
   assignedProjects: string[];

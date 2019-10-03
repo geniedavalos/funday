@@ -17,7 +17,11 @@
           <button type="button" class="btn btn-primary mt-3 mx-auto" data-toggle="modal" data-target="#addProject">Add Project</button>
       </div>
 
-      <div class="modal fade" id="addProject" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Experimental: Modal Component-->
+    <app-project-new [currentUser]="currentUser" [currentCompany]="currentCompany" [managers]="managers" [employees]="employees" (createProjectEmitter)="createNewProject($event)"></app-project-new>
+    <!-- Modal Component End -->
+
+    <!-- <div class="modal fade" id="addProject" tabindex="-1" role="dialog" aria-hidden="true">
           <div class="modal-dialog modal-lg" role="document">
               <div class="modal-content">
                   <div class="modal-header text-center bg-primary">
@@ -125,7 +129,7 @@
                   </div>
               </div>
           </div>
-      </div>
+      </div> -->
     </section>
 
 

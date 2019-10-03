@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 
@@ -15,6 +15,7 @@ import { ThrowStmt } from '@angular/compiler';
 export class OwnerDashboardComponent implements OnInit, OnChanges {
   projects: Project[];
   newProject = new Project();
+  newProjectLead: string;
   employees: Employee[];
   addedTeamMembers: any [];
   addedIds: any [];
@@ -30,11 +31,14 @@ export class OwnerDashboardComponent implements OnInit, OnChanges {
   editItem: Employee;
   deletingDepartment: boolean = false;
   deletingEmployee: boolean = false;
+  companyLoaded: boolean = false;
 
   editingName = false;
 
   @Input() currentUser: Employee;
   @Input() currentCompany: Company;
+
+  @Output() createProjectEmitter = new EventEmitter<Project>();
 
   constructor(
     private readonly authService: AuthService,
@@ -55,6 +59,8 @@ export class OwnerDashboardComponent implements OnInit, OnChanges {
       this.getProjects();
       this.getEmployees();
       this.sortDepartments();
+      this.newProjectLead = this.currentUser._id;
+      this.companyLoaded = true;
     }
   }
 
@@ -137,15 +143,22 @@ export class OwnerDashboardComponent implements OnInit, OnChanges {
   }
 
   addDepartment(form: NgForm) {
+    this.companyLoaded = false;
     const observable = this.companyService.addDepartment(this.currentCompany, this.newDepartment);
     observable.subscribe(data => {
       this.departmentMembership[this.newDepartment] = 0;
       this.currentCompany = data;
       this.sortDepartments();
       this.getEmployees();
+      this.companyLoaded = true;
     });
   }
 
+  createNewProject(event) {
+    this.createProjectEmitter.emit(event);
+  }
+
+  /*
   onAdd(form: NgForm) {
     for (const member of this.newMembers) {
       const split = member.split('-');
@@ -155,7 +168,9 @@ export class OwnerDashboardComponent implements OnInit, OnChanges {
     form.reset();
   }
 
+
   onSubmit(form: NgForm) {
+    this.companyLoaded = false;
     if (this.addedIds.length === 0 || this.addedIds === null) {
       this.addedIds = [];
     }
@@ -172,10 +187,12 @@ export class OwnerDashboardComponent implements OnInit, OnChanges {
           this.getProjects();
           this.addedIds = [];
           this.addedTeamMembers = [];
+          this.companyLoaded = true;
         });
       });
     });
   }
+  */
 
   makeManager(id){
     this.employeeService.promoteToManager(id).subscribe(result => {

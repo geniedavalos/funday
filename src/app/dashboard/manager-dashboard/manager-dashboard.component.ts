@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
 import { Project, Employee, Company } from 'src/app/models';
 import { AuthService } from 'src/app/services/auth.service';
 import { ProjectService, EmployeeService, CompanyService } from 'src/app/services';
@@ -20,10 +20,12 @@ export class ManagerDashboardComponent implements OnInit, OnChanges {
   addedIds: any [];
   newMembers: any;
   random: string;
+  managers: Employee[] = [];
 
   @Input() currentUser: Employee;
   @Input() currentCompany: Company;
 
+  @Output() createProjectEmitter = new EventEmitter<Project>();
   constructor(
     private readonly authService: AuthService,
     private readonly companyService: CompanyService,
@@ -78,6 +80,11 @@ export class ManagerDashboardComponent implements OnInit, OnChanges {
     });
   }
 
+  createNewProject(event) {
+    this.createProjectEmitter.emit(event);
+  }
+
+  /*
   onAdd(form: NgForm) {
     for (const member of this.newMembers) {
       const split = member.split('-');
@@ -108,4 +115,5 @@ export class ManagerDashboardComponent implements OnInit, OnChanges {
       });
     });
   }
+  */
 }

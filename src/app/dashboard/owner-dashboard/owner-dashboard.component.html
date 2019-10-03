@@ -1,4 +1,5 @@
-  <section id="projects">
+  <app-loading *ngIf="!companyLoaded"></app-loading>
+  <section *ngIf="companyLoaded" id="projects">
     <div class="welcome">
 
       <h2 class="text-center">Welcome, {{currentUser?.firstName}}!</h2>
@@ -168,9 +169,11 @@
         </div>
       </div>
     </div>
-
+    <!-- Experimental: Modal Component-->
+    <app-project-new [currentUser]="currentUser" [currentCompany]="currentCompany" [managers]="managers" [employees]="employees" (createProjectEmitter)="createNewProject($event)"></app-project-new>
+    <!-- Modal Component End -->
     <!--Modal For Adding New Projects-->
-    <div class="modal fade" id="addProject" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- <div class="modal fade" id="addProject" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header text-center bg-primary">
@@ -253,14 +256,26 @@
                         <div class="input-group-prepend">
                           <span class="input-group-text" id="basic-addon1"><i class="fa fa-building" aria-hidden="true"></i></span>
                         </div>
+                        <select [(ngModel)]="newProjectLead" name="newLead" class="form-control col-8">
+                            <option selected disabled hidden value="{{currentUser?._id}}">--Select Project Lead--</option>
+                            <option *ngFor="let manager of managers" value="{{manager?._id}}">{{manager.firstName}} {{manager.lastName}}</option>
+                        </select>
+                      </div>
+                      <div class='input-group mb-2 justify-content-center'>
+                        <div class="input-group-prepend">
+                          <span class="input-group-text" id="basic-addon1"><i class="fa fa-building" aria-hidden="true"></i></span>
+                        </div>
                         <select [(ngModel)]='selectedDepartments' multiple class='form-control col-8' name='projectDept'>
                             <option *ngFor="let department of currentCompany?.departments" value="{{department}}">{{department}}</option>
                         </select>
                       </div>
 
                       <form #addMembers="ngForm">
-                        <div class='form-group row col-9 mx-auto'>
-                          <select multiple class='form-control mx-auto' id='teamNames' name='member' [(ngModel)]='newMembers'>
+                        <div class='input-group mb-2 justify-content-center'>
+                          <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fa fa-users" aria-hidden="true"></i></span>
+                          </div>
+                          <select multiple class='form-control col-8' id='teamNames' name='member' [(ngModel)]='newMembers'>
                               <option *ngFor="let employee of employees" [hidden]="!selectedDepartments.includes(employee.department)" [disabled]="addedIds.includes(employee._id)" value="{{employee._id}}-{{employee.firstName}} {{employee.lastName}}">{{employee.firstName}} {{employee.lastName}}</option>
                           </select>
                         </div>
@@ -278,7 +293,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
   </section>
 
   <!-- <footer>

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
-import { EmployeeService, CompanyService } from 'src/app/services';
-import { Employee } from 'src/app/models';
+import { EmployeeService, CompanyService, ProjectService } from 'src/app/services';
+import { Employee, Project } from 'src/app/models';
 import { Router } from '@angular/router';
 import { Company } from 'src/app/models/company';
 
@@ -20,6 +20,7 @@ export class DashboardComponent implements OnInit {
     private readonly authService: AuthService,
     private readonly employeeService: EmployeeService,
     private readonly companyService: CompanyService,
+    private readonly projectService: ProjectService,
     private readonly router: Router,
   ) { }
 
@@ -41,6 +42,7 @@ export class DashboardComponent implements OnInit {
           this.router.navigateByUrl('/home');
         }
         this.currentUser = result;
+        this.currentUser.isOwner = decoded.isOwner;
         this.isManager = decoded.isManager;
         this.isOwner = decoded.isOwner;
         this.finishedLoading = true;
@@ -51,5 +53,19 @@ export class DashboardComponent implements OnInit {
         }
       });
     }
+  }
+
+  createProject(project: Project) {
+    console.log("Console logging project from dashboard!", project);
+    this.projectService.createProject(project).subscribe(createdProject => {
+      this.employeeService.addManagedProject(project.projectLead, createdProject._id).subscribe(_result => {
+
+      });
+      this.companyService.addProject(this.currentCompany, createdProject).subscribe(_res => {
+        this.companyService.getCompany(this.currentCompany._id).subscribe(finalRes => {
+          this.currentCompany = finalRes;
+        });
+      });
+    });
   }
 }
