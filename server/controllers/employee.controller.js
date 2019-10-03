@@ -42,7 +42,7 @@ module.exports = {
         })
     },
     update: (req, res) => {
-        Employee.findOneAndUpdate({ _id : req.params.id }, { runValidators: true, context: 'query' }, req.body, { new: true })
+        Employee.findOneAndUpdate({ _id : req.params.id }, req.body, { new: true })
             .then((updatedEmployee) => {
                 res.json(updatedEmployee);
             })
@@ -84,7 +84,7 @@ module.exports = {
                 res.json(err);
             })
     },
-  PromoteToManager : (req, res) =>{
+  promoteToManager : (req, res) =>{
     Employee.findOneAndUpdate({_id : req.params.id}, {$set : {isManager : true}})
       .then((data) => {
         res.json(data);

@@ -94,8 +94,14 @@ module.exports = {
     },
     addTeamMember: (req, res) => {
         Project.findOneAndUpdate({_id : req.params.id}, {$push : {teamMembers: req.body.employeeID}}, {new: true})
-        .then(data => {
-            res.json(data);
+        .then(project => {
+            Employee.findByIdAndUpdate(req.body.employeeID, {$push : {assignedProjects : project._id}})
+            .then(() => {
+                res.json(project);
+            })
+            .catch(err => {
+                res.json(err);
+            })
         })
         .catch(err => res.json(err));
     },

@@ -15,6 +15,7 @@ export class ManagerDashboardComponent implements OnInit, OnChanges {
   projects: Project[];
   newProject = new Project();
   employees: Employee[];
+  selectedDepartments: string[] = [];
   addedTeamMembers: any [];
   addedIds: any [];
   newMembers: any;

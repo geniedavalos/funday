@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Params, Router, ActivatedRoute } from '@angular/router';
 import { Employee } from 'src/app/models';
 import { EmployeeService } from 'src/app/services';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-employee-details',
@@ -18,7 +19,8 @@ export class EmployeeDetailsComponent implements OnInit {
   constructor(
     private readonly employeeService: EmployeeService,
     private readonly route: ActivatedRoute,
-    private readonly router: Router
+    private readonly router: Router,
+    private readonly _location: Location,
   ) { }
 
   ngOnInit() {
@@ -37,5 +39,8 @@ export class EmployeeDetailsComponent implements OnInit {
       this.tasks = result['tasks'];
       this.finishedLoading = true;
     });
+  }
+  backClicked() {
+    this._location.back();
   }
 }

@@ -30,6 +30,9 @@ export class ProjectDetailsComponent implements OnInit {
   addedTeamMembers: any[];
   loadedProject: boolean = false;
   loadedUser: boolean = false;
+  selectedDepartments: string[] = [];
+  teamIds: string[] = [];
+
 
   constructor(
     private readonly employeeService: EmployeeService,
@@ -49,13 +52,13 @@ export class ProjectDetailsComponent implements OnInit {
     });
   }
   getProject(id: string) {
+    this.teamIds = [];
     this.projectService.getProject(id).subscribe(result => {
       this.project = result;
       this.tasks = this.project.tasks;
-      // for(const task of this.tasks){
-      //   this.taskProgressArray.push(task.progress);
-      // }
-      // this.project.progress = Number.parseFloat(this.getAvg(this.taskProgressArray).toFixed(1));
+      for(const employee of this.project.teamMembers){
+        this.teamIds.push(employee['_id']);
+      }
       this.loadedProject = true;
     });
   }
@@ -112,6 +115,7 @@ export class ProjectDetailsComponent implements OnInit {
         this.getProject(this.id)
       })
     }
+    this.newMembers = [];
   }
   /**
    * Removes a team member from a project, and removes them from all associated tasks.

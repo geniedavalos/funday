@@ -25,7 +25,7 @@ export class OwnerDashboardComponent implements OnInit, OnChanges {
   employeesExpanded = false;
   departmentMembership: any = {};
   managers: Employee[] = [];
-  selectedDepartment: string;
+  selectedDepartments: string[] = [];
   deleteItem: string;
   editItem: Employee;
   deletingDepartment: boolean = false;
@@ -142,6 +142,7 @@ export class OwnerDashboardComponent implements OnInit, OnChanges {
       this.departmentMembership[this.newDepartment] = 0;
       this.currentCompany = data;
       this.sortDepartments();
+      this.getEmployees();
     });
   }
 
@@ -206,9 +207,12 @@ export class OwnerDashboardComponent implements OnInit, OnChanges {
   }
 
   onDeleteDepartment(){
-    this.companyService.removeDepartment(this.currentCompany, this.deleteItem).subscribe(result => {
-      this.currentCompany = result;
+    this.companyService.removeDepartment(this.currentCompany, this.deleteItem).subscribe(_result => {
       this.deletingDepartment = false;
+      this.companyService.getCompany(this.currentCompany._id).subscribe(company => {
+        this.currentCompany = company;
+        this.getEmployees();
+      })
     })
   }
 
@@ -217,6 +221,12 @@ export class OwnerDashboardComponent implements OnInit, OnChanges {
   }
   // TODO: Finish onEdit in owner dashboard
   onEditEmployee() {
+    this.employeeService.updateEmployee(this.editItem).subscribe(employee => {
+      this.companyService.getCompany(this.currentCompany._id).subscribe(company => {
+        this.currentCompany = company;
+        this.getEmployees();
+      })
+    })
   }
 
 }

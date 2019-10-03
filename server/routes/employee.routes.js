@@ -9,7 +9,7 @@ router.get('/', employees.index)
     .delete('/:id', employees.destroy)
     .put('/:id/addTask', employees.addTask)
     .put('/:id/addProject', employees.addProject)
-    .get('/:id/promoteManager', employees.PromoteToManager)
+    .get('/:id/promoteManager', employees.promoteToManager)
     .put('/:id/addManagedProject', employees.addManagedProject)
 
 module.exports = router;

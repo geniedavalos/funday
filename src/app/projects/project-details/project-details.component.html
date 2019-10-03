@@ -245,12 +245,6 @@
                         </div>
                         <textarea placeholder='Description' class='form-control col-7' name='description' [ngModel]='editTask?.description'></textarea>
                       </div>
-                      <hr>
-                      <p class='text-center'><strong>Remove Team Members</strong></p>
-
-                        <select multiple class='form-control col-8 mx-auto' name='taskTeam' [ngModel]='editTask?.teamMembers'>
-                            <option *ngFor="let member of editTask?.teamMembers" value="{{member._id}}">{{member?.firstName}} {{member?.lastName}}</option>
-                        </select>
                     </form>
                 </div>
                 <div class="modal-footer justify-content-center">
@@ -306,16 +300,14 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text" id="basic-addon1"><i class="fa fa-building" aria-hidden="true"></i></span>
                     </div>
-                    <select class='form-control col-8' name='projectDept'>
-                        <option>Marketing</option>
-                        <option>PR</option>
-                        <option>Engineering</option>
+                    <select [(ngModel)]='selectedDepartments' multiple class='form-control col-8' name='projectDept'>
+                        <option *ngFor="let department of currentCompany?.departments" value="{{department}}">{{department}}</option>
                     </select>
                   </div>
 
                   <div class='form-group row col-10 mx-auto'>
                     <select multiple class='form-control' id='teamNames' name='member' [(ngModel)]='newMembers'>
-                        <option *ngFor="let employee of currentCompany?.employees" value="{{employee?._id}}">{{employee.firstName}} {{employee.lastName}}</option>
+                        <option *ngFor="let employee of currentCompany?.employees" [hidden]="!selectedDepartments.includes(employee.department)" [disabled]="teamIds.includes(employee._id)" value="{{employee?._id}}">{{employee.firstName}} {{employee.lastName}}</option>
                     </select>
                   </div>
                         <div class='addedMembers mt-3'>
@@ -323,7 +315,7 @@
                         </div>
                 </div>
                 <div class="modal-footer justify-content-center">
-                    <button (click)='onAddTeamMembers()' type="button" class="btn btn-success px-5">Add</button>
+                    <button (click)='onAddTeamMembers()' data-dismiss="modal" type="button" class="btn btn-success px-5">Add</button>
                 </div>
             </div>
         </div>

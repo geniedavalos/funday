@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
-const Company = mongoose.model('Company')
+const Company = mongoose.model('Company');
+const Employee = mongoose.model('Employee');
 
 module.exports = {
     index: async (_req, res) => {
@@ -104,7 +105,13 @@ module.exports = {
                                 { $pull : { departments : req.body.department }},
                                 { new: true })
           .then(company => {
-            res.json(company);
+              Employee.update({department : req.body.department}, {$set : {department: "Unassigned"}}, {multi:true})
+              .then(()=> {
+                  res.json(company);
+              })
+              .catch((err)=> {
+                  res.json(err);
+              })
           })
           .catch(err => {
             res.json(err);

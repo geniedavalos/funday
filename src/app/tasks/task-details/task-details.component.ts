@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-import { Task } from 'src/app/models';
-import { TaskService } from 'src/app/services';
+import { Task, Employee, Company } from 'src/app/models';
+import { TaskService, CompanyService, EmployeeService } from 'src/app/services';
 import {NoteService} from "../../services/note.service";
 import {AuthService} from "../../services/auth.service";
 import {Note} from "../../models/note";
@@ -13,14 +13,23 @@ import {Note} from "../../models/note";
   styleUrls: ['./task-details.component.css']
 })
 export class TaskDetailsComponent implements OnInit {
-  private userId : string;
-  private taskId: string;
+  userId : string;
+  taskId: string;
   task: Task;
   updateProgress: number;
   newNote: Note;
   notes: Note[];
   finishedLoading: boolean;
+  isManager: boolean = false;
+  employeesExpanded: boolean = false;
+  currentUser: Employee;
+  loadedUser: boolean = false;
+  currentCompany: Company;
+  isOwner: boolean = false;
+
   constructor(
+    private readonly companyService: CompanyService,
+    private readonly employeeService: EmployeeService,
     private readonly authService : AuthService,
     private readonly taskService: TaskService,
     private readonly route: ActivatedRoute,
@@ -31,6 +40,7 @@ export class TaskDetailsComponent implements OnInit {
 
   ngOnInit() {
     this.finishedLoading = false;
+    this.getCurrentUser();
     this.newNote = new Note();
     this.updateProgress = 55;
     this.route.params.subscribe((params: Params) => {
@@ -65,5 +75,39 @@ export class TaskDetailsComponent implements OnInit {
   }
   backClicked() {
     this._location.back();
+  }
+
+  getCurrentUser() {
+    const token = localStorage.getItem('access_token');
+    if (!token) {
+      this.router.navigateByUrl('/home');
+    } else {
+      const decoded = this.authService.getDecodedAccessToken(token);
+      this.employeeService.getEmployee(decoded['eid']).subscribe(result => {
+        if (!result) {
+          this.router.navigateByUrl('/home');
+        }
+        this.currentUser = result;
+        this.isManager = decoded.isManager;
+        this.isOwner = decoded.isOwner;
+      });
+      this.companyService.getCompany(decoded['cid']).subscribe(result => {
+        if (result) {
+          this.currentCompany = result;
+          this.loadedUser = true;
+        }
+      });
+    }
+  }
+
+  toggleEmployees() {
+    this.employeesExpanded = (!this.employeesExpanded);
+  }
+
+  onRemoveFromTeam(id: string){
+    this.taskService.removeTeamMember(this.task, id).subscribe(result => {
+      console.log(result);
+      this.getThisTask()
+    })
   }
 }

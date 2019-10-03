@@ -1,4 +1,7 @@
 <app-loading *ngIf="!finishedLoading"></app-loading>
+<div class="row justify-content-end">
+    <button class="btn btn-sm btn-outline-secondary" (click)="backClicked()">Go Back</button>
+</div>
 <section *ngIf="finishedLoading">
       <div class="introduction text-center">
         <h2>{{employee?.firstName}} {{employee?.lastName}}</h2>

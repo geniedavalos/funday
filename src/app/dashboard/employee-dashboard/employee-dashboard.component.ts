@@ -5,6 +5,7 @@ import {TaskService, ProjectService, EmployeeService, CompanyService} from 'src/
 import {Observable} from "rxjs";
 import { Note } from 'src/app/models/note';
 import {AuthService} from "../../services/auth.service";
+import { NoteService } from 'src/app/services/note.service';
 
 @Component({
   selector: 'app-employee-dashboard',
@@ -19,6 +20,7 @@ export class EmployeeDashboardComponent implements OnInit, OnChanges {
   @Input() currentUser: Employee;
   @Input() currentCompany: Company;
   private id: string;
+  newNoteTaskId: string;
 
   constructor(
     private readonly authService: AuthService,
@@ -26,6 +28,7 @@ export class EmployeeDashboardComponent implements OnInit, OnChanges {
     private readonly projectService: ProjectService,
     private readonly router: Router,
     private readonly taskService: TaskService,
+    private readonly noteService: NoteService,
   ) { }
   ngOnInit() {
     this.newNote = new Note();
@@ -47,11 +50,10 @@ export class EmployeeDashboardComponent implements OnInit, OnChanges {
     });
 
   }
-  // TODO: Complete adding note
-  onAddNote() {
-  }
 
   getTeamMembers(){
+    console.log(this.currentUser);
+    console.log("GETTING TEAM MEMBERS");
     const seenIDs = {};
     for(const project of this.currentUser.assignedProjects){
       for(const member of project['teamMembers']){
@@ -61,5 +63,19 @@ export class EmployeeDashboardComponent implements OnInit, OnChanges {
         }
       }
     }
+  }
+  setTaskIdForNewNote(id: string){
+    this.newNoteTaskId = id;
+  }
+
+  onAddNote(){
+    this.newNote['sender']=this.currentUser._id;
+    console.log(this.newNote)
+    this.noteService.createNote(this.newNote).subscribe(note => {
+      console.log(note)
+      this.taskService.addNote(this.newNoteTaskId, note).subscribe(result => {
+        console.log(result);
+      })
+    })
   }
 }

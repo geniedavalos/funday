@@ -163,7 +163,7 @@
                 </div>
             </div>
             <div class="modal-footer justify-content-center">
-              <button type="button" data-dismiss='modal' (click)='onEdit()' class="btn btn-sm btn-success px-3">Edit</button>
+              <button type="button" data-dismiss='modal' (click)='onEditEmployee()' class="btn btn-sm btn-success px-3">Edit</button>
             </div>
         </div>
       </div>
@@ -253,17 +253,15 @@
                         <div class="input-group-prepend">
                           <span class="input-group-text" id="basic-addon1"><i class="fa fa-building" aria-hidden="true"></i></span>
                         </div>
-                        <select class='form-control col-8' name='projectDept'>
-                            <option value="">All Departments</option>
-                            <option value="Unassigned">Unassigned</option>
-                            <option *ngFor="let department of currentCompany?.departments" [hidden]="department === 'Unassigned'" value="{{department}}">{{department}}</option>
+                        <select [(ngModel)]='selectedDepartments' multiple class='form-control col-8' name='projectDept'>
+                            <option *ngFor="let department of currentCompany?.departments" value="{{department}}">{{department}}</option>
                         </select>
                       </div>
 
                       <form #addMembers="ngForm">
                         <div class='form-group row col-9 mx-auto'>
                           <select multiple class='form-control mx-auto' id='teamNames' name='member' [(ngModel)]='newMembers'>
-                              <option *ngFor="let employee of employees" [disabled]="addedIds.includes(employee._id)" value="{{employee._id}}-{{employee.firstName}} {{employee.lastName}}">{{employee.firstName}} {{employee.lastName}}</option>
+                              <option *ngFor="let employee of employees" [hidden]="!selectedDepartments.includes(employee.department)" [disabled]="addedIds.includes(employee._id)" value="{{employee._id}}-{{employee.firstName}} {{employee.lastName}}">{{employee.firstName}} {{employee.lastName}}</option>
                           </select>
                         </div>
                         <div class='row'>
