@@ -4,7 +4,6 @@ import { AuthService } from 'src/app/services/auth.service';
 import { ProjectService, EmployeeService, CompanyService } from 'src/app/services';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { format } from 'path';
 
 @Component({
   selector: 'app-manager-dashboard',
