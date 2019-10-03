@@ -143,14 +143,12 @@ export class OwnerDashboardComponent implements OnInit, OnChanges {
   }
 
   addDepartment(form: NgForm) {
-    this.companyLoaded = false;
     const observable = this.companyService.addDepartment(this.currentCompany, this.newDepartment);
     observable.subscribe(data => {
       this.departmentMembership[this.newDepartment] = 0;
       this.currentCompany = data;
       this.sortDepartments();
       this.getEmployees();
-      this.companyLoaded = true;
     });
   }
 

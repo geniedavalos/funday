@@ -65,6 +65,7 @@ export class ProjectNewComponent implements OnInit {
     this.createProjectEmitter.emit(this.newProject);
     form.reset();
     this.newProject = new Project();
+    this.newProject.dueDate = this.today;
     this.addedIds = [];
     this.addedTeamMembers = [];
     this.newProjectLead = (this.currentUser.isOwner) ? '' : this.currentUser._id;
