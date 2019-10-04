@@ -22,6 +22,7 @@ module.exports = {
             .populate({path:'tasks', populate: {path: 'teamMembers'}})
             .populate('managedProjects')
             .populate({path:'assignedProjects', populate: {path: 'teamMembers'}})
+            .populate({path:'assignedProjects', populate: {path: 'tasks'}})
             .then((data) => {
                 res.json(data)
             })

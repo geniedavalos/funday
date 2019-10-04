@@ -3,37 +3,79 @@
     <button class="btn btn-sm btn-outline-secondary" (click)="backClicked()">Go Back</button>
 </div>
 <section *ngIf="finishedLoading">
-      <div class="introduction text-center">
-        <h2>{{employee?.firstName}} {{employee?.lastName}}</h2>
-        <h3>{{employee?.email}}</h3>
-        <h4>Assigned Project : {{assignedProjects?.title}}</h4>
-        <button class='btn btn-sm btn-primary'>Promote</button>
+      <h1 class="mb-3">{{employee?.firstName}} {{employee?.lastName}}</h1>
+      <div class="row">
+          <div class="col-2"><h5 class="font-weight-normal">Department: </h5></div>
+          <div class="col-2"><h5 class="font-weight-normal">{{employee?.department}}</h5></div>
       </div>
+      <div class="row">
+          <div class="col-2"><h5 class="font-weight-normal">Email:</h5></div>
+          <div class="col-2"><h5 class="font-weight-normal">{{employee?.email}}</h5></div>
+      </div>
+      <div class="row mb-5">
+          <div class="col-2"><h5 class="font-weight-normal">Status:</h5></div>
+          <div *ngIf="employee.isManager" class="col-2"><h5 class="font-weight-normal">Manager</h5></div>
+          <div *ngIf="!employee.isManager" class="col-2"><h5 class="font-weight-normal">Employee</h5></div>
+      </div>
+      <ng-container *ngIf="isOwner || isManager">
+      <h4>Assigned Projects:</h4>
       <div class='projectInfo' *ngFor='let project of assignedProjects'>
-        <h3>{{project.title}}</h3>
-        <table class="table mt-5 text-center " >
-            <thead>
-              <tr>
-                <th scope="col">Task</th>
-                <th scope="col">Progress</th>
-                <th scope="col">Due Date</th>
-                <th scope="col">Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let task of tasks">
-                <td><a href="#">{{task.title}}</a></td>
-                <td>
-                  <div class="progress">
-                    <div class="progress-bar  progress-bar-striped bg-info" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-                </td>
-                <td>{{task.dueDate}}</td>
-                <td>
-                  <a routerLink="['/tasks', task._id]" title='Task Details' class="btn btn-outline-info mx-1"><i class="fa fa-search" aria-hidden="true"></i></a>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+        <h3 class="font-weight-normal">{{project.title}}</h3>
+        <div class="progress">
+          <div class="progress-bar  progress-bar-striped bg-info" role="progressbar" [ngStyle]="{'width': project?.progress+'%'}" aria-valuenow="" aria-valuemin="0" aria-valuemax="100">{{project?.progress}}%</div>
+        </div>
+        <table class="table mt-2 text-center">
+          <thead>
+            <tr>
+              <th scope="col">Task</th>
+              <th scope="col">Progress</th>
+              <th scope="col">Due Date</th>
+              <th scope="col">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let task of project.tasks">
+              <ng-container *ngIf="task.teamMembers.includes(employee._id)">
+              <td><a [routerLink]="['/tasks/', task._id]" routerLinkActive="router-link-active">{{task.title}}</a></td>
+              <td>
+                <div class="progress">
+                    <div class="progress-bar  progress-bar-striped bg-info" role="progressbar" [ngStyle]="{'width': task?.progress+'%'}" aria-valuenow="" aria-valuemin="0" aria-valuemax="100">{{task?.progress}}%</div>                </div>
+              </td>
+              <td>{{task.dueDate | date:"mediumDate"}}</td>
+              <td>
+                <a [routerLink]="['/tasks', task._id]" title='Task Details' class="btn btn-outline-info mx-1"><i class="fa fa-search" aria-hidden="true"></i></a>
+              </td>
+            </ng-container>
+            </tr>
+          </tbody>
+        </table>
       </div>
+      </ng-container>
+      <ng-container class="mt-5" *ngIf="!isManager">
+        <h3>Assigned Tasks:</h3>
+          <table class="table mt-2 text-center">
+              <thead>
+                <tr>
+                  <th scope="col">Task</th>
+                  <th scope="col">Progress</th>
+                  <th scope="col">Due Date</th>
+                  <th scope="col">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let task of employee.tasks">
+                  <td><a [routerLink]="['/tasks/', task._id]" routerLinkActive="router-link-active">{{task.title}}</a></td>
+                  <td>
+                    <div class="progress">
+                        <div class="progress-bar  progress-bar-striped bg-info" role="progressbar" [ngStyle]="{'width': task?.progress+'%'}" aria-valuenow="" aria-valuemin="0" aria-valuemax="100">{{task?.progress}}%</div>                </div>
+                  </td>
+                  <td>{{task.dueDate | date:"mediumDate"}}</td>
+                  <td>
+                    <a [routerLink]="['/tasks', task._id]" title='Task Details' class="btn btn-outline-info mx-1"><i class="fa fa-search" aria-hidden="true"></i></a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+      </ng-container>
+      <button *ngIf="isOwner && !employee.isManager" (click)="makeManager()" class='btn btn-sm btn-primary'>Promote To Manager</button>
     </section>

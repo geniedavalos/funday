@@ -49,7 +49,7 @@
 
     <section *ngIf="finishedLoading">
       <h2>Team Members</h2>
-      <span class='badge badge-info mx-1 px-2' *ngFor="let member of task?.teamMembers" ><a class='text-white' [routerLink]="['/employee',member._id,'detail']">{{member.firstName}} {{member.lastName}}</a></span>
+      <span class='badge badge-info mx-1 px-2' *ngFor="let member of task?.teamMembers" ><a class='text-white' [routerLink]="['/employees',member._id]">{{member.firstName}} {{member.lastName}}</a></span>
 
     </section>
 
