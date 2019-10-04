@@ -68,7 +68,7 @@
           <td>{{manager.firstName}} {{manager.lastName}}</td>
           <td>{{manager.managedProjects.length}}</td>
           <td>
-            <a [routerLink]="['/employees', manager._id]" routerLinkActive="router-link-active" title='Manager Profile' class="btn btn-outline-info mx-1"><i class="fa fa-search" aria-hidden="true"></i></a>
+            <a [routerLink]="['/employees/', manager._id]" routerLinkActive="router-link-active" title='Manager Profile' class="btn btn-outline-info mx-1"><i class="fa fa-search" aria-hidden="true"></i></a>
           </td>
         </tr>
       </tbody>
@@ -105,7 +105,7 @@
             <td>{{member['firstName']}} {{member['lastName']}}</td>
             <td scope="row">{{member['department']}}</td>
             <td>
-              <a [routerLink]="['']" routerLinkActive="router-link-active" title='Employee Profile' class="btn btn-outline-info mx-1"><i class="fa fa-search" aria-hidden="true"></i></a>
+              <a [routerLink]="['/employees/', member._id]" routerLinkActive="router-link-active" title='Employee Profile' class="btn btn-outline-info mx-1"><i class="fa fa-search" aria-hidden="true"></i></a>
               <button *ngIf='member.isManager != true' (click)='makeManager(member._id)' title='Promote to Manager' class='btn btn-outline-primary mx-1'><i class="fa fa-handshake-o" aria-hidden="true"></i></button>
               <button data-toggle='modal' data-target='#editEmployee' (click)='setEditEmployee(member)' class="btn btn-outline-success mx-1" title='Edit Employee'><i class="fa fa-pencil" aria-hidden="true"></i></button>
               <button data-toggle='modal' data-target='#deleteItem' (click)="setDeleteItem(member._id, 'employee')" title='Remove Employee' class="btn btn-outline-danger mx-1"><i class="fa fa-window-close" aria-hidden="true"></i></button>
