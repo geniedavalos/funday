@@ -55,7 +55,7 @@
 
     <section *ngIf="finishedLoading">
       <h2>Notes</h2>
-      <div class="notes my-4 py-0 px-1">
+      <div class="notes my-2 py-0 px-1">
         <p class="my-0" *ngFor="let note of notes">({{note.createdAt| date:"medium"}}) {{note.sender.firstName}} {{note.sender.lastName}} : {{note.content}} </p>
 
       </div>
@@ -67,9 +67,9 @@
       </div>
 
     </section>
-    <h4 *ngIf="isManager" (click)="toggleEmployees()">Manage Employees <i *ngIf="!employeesExpanded" class="fa fa-chevron-down" aria-hidden="true"></i><i *ngIf="employeesExpanded" class="fa fa-chevron-up" aria-hidden="true"></i></h4>
+    <h2 *ngIf="isManager" (click)="toggleEmployees()" class="ml-4">Manage Employees <i *ngIf="!employeesExpanded" class="fa fa-chevron-down" aria-hidden="true"></i><i *ngIf="employeesExpanded" class="fa fa-chevron-up" aria-hidden="true"></i></h2>
     <section *ngIf="employeesExpanded" id="users">
-        <h2>Manage Team</h2>
+        <h4 class="ml-4">Manage Team</h4>
         <table class="table text-center ">
           <thead>
             <tr>
