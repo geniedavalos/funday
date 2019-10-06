@@ -1,8 +1,8 @@
 <app-loading *ngIf="!loadedProject"></app-loading>
 <section *ngIf="loadedProject == true">
-  <h2>Project Title: {{project?.title}}</h2>
+  <h2>{{project?.title}}</h2>
   <button *ngIf="readMore == false" (click)=onShowDetails() class="btn btn-outline-dark mb-3">Show Project Details</button>
-  <p *ngIf="readMore == true" class="border rounded">{{project.description}}</p>
+  <p *ngIf="readMore == true" class="border rounded pl-3">Project Details: {{project.description}}</p>
   <div class="progress">
     <div class="progress-bar  progress-bar-striped bg-info" role="progressbar" [ngStyle]="{'width': project?.progress+'%'}" aria-valuenow="" aria-valuemin="0" aria-valuemax="100">{{project?.progress}}%</div>
   </div>

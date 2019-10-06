@@ -1,10 +1,14 @@
 <app-loading *ngIf="!finishedLoading"></app-loading>
-<div class="row justify-content-end">
-    <button class="btn btn-sm btn-outline-secondary" (click)="backClicked()">Go Back</button>
-</div>
+
+
+
 <section *ngIf="finishedLoading">
+    <!-- <div class="container">
+        <button class="btn btn-sm btn-outline-secondary" (click)="backClicked()">Go Back</button>
+    </div> -->
       <h1 class="mb-3">{{employee?.firstName}} {{employee?.lastName}}</h1>
-      <div class="row">
+      <div class="container">
+        <div class="row">
           <div class="col-2"><h5 class="font-weight-normal">Department: </h5></div>
           <div class="col-2"><h5 class="font-weight-normal">{{employee?.department}}</h5></div>
       </div>
@@ -17,6 +21,11 @@
           <div *ngIf="employee.isManager" class="col-2"><h5 class="font-weight-normal">Manager</h5></div>
           <div *ngIf="!employee.isManager" class="col-2"><h5 class="font-weight-normal">Employee</h5></div>
       </div>
+
+
+
+      </div>
+
       <ng-container *ngIf="isOwner || isManager">
       <h4>Assigned Projects:</h4>
       <div class='projectInfo' *ngFor='let project of assignedProjects'>

@@ -1,10 +1,10 @@
 <app-loading *ngIf="!finishedLoading"></app-loading>
     <section *ngIf="finishedLoading">
-      <div class="mx-2 row justify-content-between">
+      <div class="mx-0 row justify-content-between">
         <h2 class="d-inline">{{task?.title}} <span style="font-size: 1.2rem;">(Due: {{task?.dueDate| date:"mediumDate"}})</span></h2>
-        <button class="btn btn-sm btn-outline-secondary" (click)="backClicked()">Go Back</button>
+        <!-- <button class="btn btn-sm btn-outline-secondary" (click)="backClicked()">Go Back</button> -->
       </div>
-      <p class="border rounded">Task Details: {{task?.description}}</p>
+      <p class="border rounded pl-2">Task Details: {{task?.description}}</p>
       <div class="progress">
         <div class="progress-bar progress-bar-striped" role="progressbar" [ngStyle]="{'width': task?.progress+'%'}" aria-valuenow="10">{{task?.progress}}%
         </div>
@@ -83,9 +83,9 @@
               <td>{{member['firstName']}} {{member['lastName']}}</td>
               <td scope="row">{{member['department']}}</td>
               <td><button (click)=onRemoveFromTeam(member._id)  class="btn btn-outline-danger mx-1"><i class="fa fa-ban" aria-hidden="true"></i></button>
-  
+
                 <a [routerLink]="['/employees/', member._id]" routerLinkActive="router-link-active"  class="btn btn-outline-info mx-1"><i class="fa fa-search" aria-hidden="true"></i></a>
-  
+
               </td>
             </tr>
           </tbody>
