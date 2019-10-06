@@ -1,27 +1,16 @@
-# Funday
+## Funday
+![Platform](https://img.shields.io/badge/MongoDB-green) ![Platform](https://img.shields.io/badge/express.js-black) ![Platform](https://img.shields.io/badge/Angular-red) ![Platform](https://img.shields.io/badge/node.js-green)  
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.3.
+## Description
+A web app inspired by Monday.com that allows users to manage projects and tasks. Front-end built with Angular, css, html, JavaScript. Authentication service built with JSON Web Token (JWT). Server built with Express.js & Node.js. Database built using MongoDB, storing user, company, project, and task data and the relationships between them.
+![Landing](/desc_img/1.png)
+![Developer](/desc_img/3.png)
+![Dashboard](/desc_img/4.png)
+![Project](/desc_img/5.png)
+![Task](/desc_img/6.png)
 
-## Development server
+## Get Started
+funday.com has been built with MongoDB, Express.js, Angular, Node.js.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+## Roadmap
+* Add a security layer.
